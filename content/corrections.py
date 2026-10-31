@@ -599,3 +599,307 @@ drop(S, "Quel Avenger peut courir à la vitesse de la lumière et joue de la gui
 fix(S, "Quel est le résultat du claquement de doigts de Tony Stark dans Endgame ?",
     a=["Il ramène la moitié de l'univers", "Il réduit Thanos et son armée en poussière", "Il détruit les Gemmes", "Il emprisonne Thanos"], c=1,
     fb="Les disparus ont été ramenés par le claquement de Hulk. Celui de Tony réduit Thanos et toute son armée en poussière, au prix de sa vie.")
+
+
+# ---------------------------------------------------------------- Game of Thrones
+S = 'got'
+drop(S, "Quelle est la devise non-officielle des Lannister ?")                  # réponse dans la question
+fix(S, "Qui siège sur le Trône de Fer à la fin de la série ?", q="Qui devient roi à la fin de la série ?",
+    fb="Bran Stark est désigné roi lors du conseil final. Le Trône de Fer, lui, a été fondu par Drogon.")
+fix(S, "Qui dit 'Valar Morghulis' à Arya pour la première fois ?",
+    fb="Jaqen H'ghar apprend à Arya les mots « Valar Morghulis » (« Tous les hommes doivent mourir ») et lui confie une pièce de fer pour le retrouver à Braavos.")
+drop(S, "Comment s'appelle la grande muraille de glace au nord ?")             # réponse dans la question
+fix(S, "Comment s'appelle l'épée d'Arya Stark ?", a=["Aiguille", "Piquenette", "Épine", "Briseur de glace"], c=0)
+fix(S, "Quel est le nom de l'épée en acier valyrien de Jon Snow ?", a=["Aiguille", "Grand-Griffe", "Glace", "Crépuscule"], c=1,
+    fb="Grand-Griffe (Longclaw) est une épée en acier valyrien au pommeau en tête de loup, offerte à Jon par le Lord Commandant Mormont.")
+drop(S, "Quel objet en acier valyrien Jon Snow utilise pour tuer les Marcheurs Blancs ?")   # doublon
+fix(S, "Comment Robb Stark meurt-il dans la série ?",
+    fb="Robb Stark est assassiné aux Noces Pourpres, organisées par Walder Frey avec Roose Bolton, en violation des lois sacrées de l'hospitalité.")
+fix(S, "Quel personnage est surnommé 'Petite Finger' (Littlefinger) ?", q="Quel personnage est surnommé Littlefinger ?")
+drop(S, "Qui est Varys dans la série ?")                                         # doublon
+fix(S, "Quelle est la langue construite des Dothraki dans la série ?", q="D'où vient la langue dothrakie parlée dans la série ?")
+fix(S, "Qui est la Main du Roi en titre au début de la série ?", q="Quelle Main du Roi meurt juste avant le début de la série ?")
+drop(S, "Qui est la déesse principale adorée dans le culte du Seigneur de Lumière ?")    # réponse dans la question
+drop(S, "Comment s'appelle la chaîne de montagnes séparant la Vallée d'Arryn ?")       # réponse dans la question
+drop(S, "Qui est Qyburn, le médecin de Cersei ?")
+drop(S, "Comment s'appelle la langue internationale créée par les Valyrians ?")
+fix(S, "Comment s'appelle la Garde personnelle de Daenerys, guerrières d'élite ?",
+    q="Comment s'appellent les soldats eunuques que Daenerys libère et qui choisissent de la servir ?",
+    a=["Les Dothrakis", "Les Immaculés", "Les Puînés", "Les Fils de la Harpie"], c=1)
+drop(S, "Comment s'appelle le fils de Ned Stark qui reste et découvre les secrets du passé ?")  # réponse dans la question
+fix(S, "Comment s'appelle Theon Greyjoy après sa capture et torture par les Bolton ?",
+    a=["L'Esclave", "L'Écorché", "Schlingue", "Greyjoy le Brisé"], c=2,
+    fb="Ramsay Bolton brise Theon jusqu'à ce qu'il réponde au nom de Schlingue (Reek en version originale).")
+drop(S, "Quelle est la coutume de la Nuit des Noces aux Noces Pourpres (mariage de Joffrey) ?")
+drop(S, "Qui est Ramsay Bolton et quelle est sa réputation ?")                 # réponse dans la question
+drop(S, "Quelle est la maison qui gouverne Harrenhal, château maudit le plus grand de Westeros ?")
+drop(S, "Quel est le nom de l'épée en Valyrien de Tyrion Lannister ?")
+drop(S, "Comment s'appelle la compagne de Tormund le Sauvage ?")
+drop(S, "Quel est le nom de l'arbalète utilisée par Tyrion pour tuer son père ?")
+fix(S, "Quel est le prénom de la fille de Ned Stark qui épouse Tyrion ?", a=["Arya", "Sansa", "Myrcella", "Margaery"], c=1)
+fix(S, "Comment s'appelle la technique d'escrime syrio que pratique Arya ?",
+    q="Comment s'appelle le style d'escrime braavien que Syrio Forel enseigne à Arya ?",
+    a=["La danse de l'eau", "La danse des dragons", "La voie de la lame", "Le pas du serpent"], c=0,
+    fb="La danse de l'eau est le style d'escrime de Braavos, fluide et rapide. Syrio Forel, ancien Premier Épée de Braavos, l'enseigne à Arya.")
+drop(S, "Quel est le vrai prénom du Grand Mestre Pycelle ?")
+drop(S, "Comment s'appelle la saison courte qui choque les fans par son rythme accéléré ?")
+
+
+# ---------------------------------------------------------------- Vikings
+S = 'vikings'
+fix(S, "Comment s'appelle le fils de Ragnar né avec des os fragiles ?", a=["Ubbe", "Hvitserk", "Sigurd", "Ivar le Désossé"], c=3,
+    fb="Ivar le Désossé est né avec une maladie des os. Malgré son handicap, il devient l'un des plus redoutables stratèges vikings.")
+fix(S, "Comment s'appelle la méthode d'exécution rituelle des Vikings ?",
+    fb="L'aigle de sang est un supplice rituel où l'on brise les côtes de la victime pour en tirer les poumons. Dans la série, c'est le sort que les fils de Ragnar réservent au roi Aella.")
+fix(S, "Comment s'appelle la Grande Armée vikinge venue venger Ragnar ?",
+    a=["L'Armée du Nord", "La Flotte des Vengeurs", "La Grande Armée païenne", "La Horde des Lothbrok"], c=2,
+    fb="La Grande Armée païenne (Great Heathen Army) envahit l'Angleterre en 865, comme le rapportent les chroniques anglo-saxonnes.")
+fix(S, "Qui tue Ragnar en le jetant dans un puits de serpents ?",
+    fb="Le roi Aella de Northumbrie fait jeter Ragnar dans une fosse aux serpents, ce qui pousse ses fils à lever la Grande Armée païenne pour le venger.")
+fix(S, "Comment s'appelle la ville principale des Vikings dans la série ?",
+    fb="Kattegat est la ville où vivent Ragnar et les siens. Elle porte le nom du détroit qui sépare le Danemark de la Suède.")
+drop(S, "Quel est le nom du parlement/assemblée viking ?")                    # Thing et Althing : deux réponses justes
+drop(S, "Quel roi norvégien historique tente d'unifier la Scandinavie dans la série ?")   # doublon
+fix(S, "Quel est le nom de la ville fondée par Rollo en France ?", q="Quelle ville devient la capitale du duché de Rollo ?",
+    fb="Rouen devient la capitale de la Normandie, cédée à Rollo par le roi franc Charles le Simple en 911.")
+fix(S, "Qui est le fils Alfred qui deviendra Alfred le Grand ?",
+    q="Dans la série, qui est le vrai père d'Alfred, le futur Alfred le Grand ?",
+    a=["Ecbert", "Athelstan", "Ragnar", "Æthelwulf"], c=1,
+    fb="Dans la série, Alfred est le fils de Judith et du moine Athelstan, même s'il est élevé comme le fils d'Æthelwulf.")
+fix(S, "Comment s'appelle la première colonie permanente en Amérique du Nord par des Vikings ?",
+    q="Comment les Vikings appelaient-ils la terre d'Amérique du Nord découverte par Leif Erikson ?",
+    fb="Le Vinland désigne la côte nord-américaine atteinte par Leif Erikson vers l'an 1000. Le site de L'Anse aux Meadows, à Terre-Neuve, en garde la trace.")
+drop(S, "Quel est le destin de Floki à la fin de la série ?")
+drop(S, "Comment s'appelle la pratique guerrière des guerriers en transe d'Odin ?")
+fix(S, "Quel est le type de navire de guerre viking emblématique ?", a=["La caravelle", "Le drakkar", "Le knarr", "La galère"], c=1)
+drop(S, "Quel est le destin de Ragnar selon la série ?")                      # doublon
+drop(S, "Quel destin Ragnar choisit-il pour lui-même selon les prédictions dans la série ?")
+drop(S, "Qui est le vrai fils biologique d'Aslaug qui hérite de pouvoirs de voyance ?")
+drop(S, "Comment s'appelle le compagnon de Ragnar, le forgeron, dans les premières saisons ?")  # doublon
+fix(S, "Quel est le nom du chef des Anglais qui baptise Rollo et devient son beau-père ?",
+    q="Quel roi franc offre sa fille Gisla et des terres à Rollo ?")
+drop(S, "Quelle est la signification du mot 'viking' en vieux norrois ?")      # étymologie débattue
+drop(S, "Comment s'appellent les 9 mondes de la cosmologie nordique reliés par Yggdrasil ?")
+drop(S, "Quel dieu nordique est associé à la magie Seidr ?")                    # surtout Freyja
+drop(S, "Quel est le nom du fils de Ragnar qui devient roi de Kiev selon la série ?")  # faux
+drop(S, "Quel personnage de la série Vikings incarne le frère d'Ivar ?")
+drop(S, "Comment s'appelle la salle d'Odin où les Einherjar s'entraînent ?")   # doublon
+drop(S, "Quel est le nom du personnage de la série qui devient le premier viking chrétien ?")
+drop(S, "Quel est l'équivalent des Einherjar dans la mythologie nordique ?")
+drop(S, "Comment Ragnar recrute-t-il ses guerriers dans la série ?")
+drop(S, "Quel est le nom de l'expédition légendaire de Björn vers la Méditerranée ?")
+
+
+# ---------------------------------------------------------------- Stranger Things
+S = 'strangerthings'
+drop(S, "Quel est le prénom de la jeune fille aux pouvoirs dans Stranger Things ?")
+fix(S, "Comment s'appelle la dimension sombre et parallèle ?",
+    a=["La Zone sombre", "La Dimension X", "Le Monde à l'envers", "La Zone rouge"], c=2,
+    fb="Le Monde à l'envers (The Upside Down) est une dimension parallèle obscure, copie déformée de Hawkins, envahie de créatures.")
+drop(S, "Comment s'appelle le surnom de l'Upside Down utilisé par les enfants ?")   # doublon
+drop(S, "Comment s'appelle la mère de Will Byers ?")                               # réponse dans la question
+fix(S, "Quel est le prénom du meilleur ami de Mike Wheeler, fan de science-fiction ?",
+    fb="Dustin Henderson, toujours coiffé de sa casquette, est le scientifique enthousiaste de la bande. Son amitié avec Steve est l'une des plus touchantes de la série.")
+drop(S, "Comment s'appelle le laboratoire secret sous la ville de Hawkins ?")      # réponse dans la question
+fix(S, "Comment s'appelle la grosse créature à tentacules de la saison 2 ?",
+    a=["Le Démogorgon", "Le Démochien", "Le Flagelleur mental", "Vecna"], c=2,
+    fb="Le Flagelleur mental (Mind Flayer), nommé d'après un monstre de Donjons et Dragons, est l'entité géante qui prend possession de Will en saison 2.")
+fix(S, "Qui est Billy Hargrove et quel est son rôle ?",
+    a=["Le demi-frère de Max, possédé par le Flagelleur mental", "Le chef des Soviétiques", "Un agent du laboratoire", "Le petit ami d'Eleven"], c=0,
+    fb="Billy est le demi-frère, par alliance, de Max. Possédé par le Flagelleur mental en saison 3, il finit par se sacrifier pour sauver Eleven.")
+fix(S, "Comment s'appellent les créatures comme des chiens à 6 pattes de l'Envers ?",
+    q="Comment s'appellent les créatures canines du Monde à l'envers apparues en saison 2 ?",
+    fb="Les démochiens (Demodogs) sont des créatures du Monde à l'envers. Dustin en recueille un tout petit, qu'il appelle Dart.")
+drop(S, "Qui est le personnage 'interdimensionnel' que Dustin renomme ?")         # doublon
+fix(S, "Quel est le grand antagoniste de la saison 4 aux pouvoirs humains ?",
+    fb="Vecna, de son vrai nom Henry Creel, est le tout premier sujet de Brenner. Il a massacré les autres enfants du laboratoire.")
+drop(S, "Quel personnage sauve Max de Vecna grâce à la musique en saison 4 ?")    # toute la bande est présente
+drop(S, "Quelle est la règle que Max et ses amis utilisent pour combattre Vecna ?")
+drop(S, "Comment s'appelle le club de D&D du lycée de Hawkins en saison 4 ?")     # réponse dans la question
+drop(S, "Qui est Erica, la sœur de Lucas ?")
+drop(S, "Quel film de Spielberg influence le plus clairement la série ?")
+drop(S, "Qui est Robin Buckley dans la série ?")
+drop(S, "Quelle est la couleur visuelle de l'Envers dans la série ?")
+fix(S, "Quelle réplique d'Eleven est l'une des plus mémorables de la série ?",
+    a=["Joyce, je ne me sens pas bien", "Dustin, arrête", "Mike, je t'aime", "Les amis ne mentent pas"], c=3,
+    fb="« Les amis ne mentent pas » (Friends don't lie) est la règle d'or d'Eleven, qu'elle répète à la bande dès la saison 1.")
+fix(S, "Qui est la mère biologique d'Eleven ?",
+    fb="Terry Ives est la mère biologique d'Eleven. Elle participait à des expériences du programme MK-Ultra quand elle était étudiante.")
+drop(S, "Quelle saison de Stranger Things est la plus longue (épisodes de +1h30) ?")
+fix(S, "Quel personnage de D&D donne son nom à l'antagoniste de la saison 4 ?", a=["Une liche", "Vecna", "Le Flagelleur mental", "Le Tyrannoeil"], c=1)
+drop(S, "Comment les habitants de Hawkins nomment-ils l'ouverture dimensionnelle vers la dimension parallèle obscure ?")
+drop(S, "Comment s'appelle la professeure Madame de Strangerthings qui surveille Eleven au labo ?")
+drop(S, "Quelle réplique Dustin dit-il souvent avec enthousiasme pour exprimer son amour de la science ?")
+drop(S, "Quel film d'horreur de Stephen King est cité par Max en saison 4 ?")
+drop(S, "Quel est le prénom du petit ami de Mike Wheeler dans les saisons récentes ?")
+drop(S, "Comment s'appelle la ville de l'Indiana dont les événements de la série sont inspirés ?")
+drop(S, "Quel est l'âge d'Eleven (Millie Bobby Brown) lors de la saison 1 en 2016 ?")
+drop(S, "Quel jeu vidéo d'arcade est présent dans le Starcourt Mall en saison 3 ?")
+drop(S, "Quel est le prénom du père d'Eleven (son père biologique) ?")
+drop(S, "Quelle couleur a le Mind Flayer dans sa forme physique en saison 3 ?")
+fix(S, "Quel est le nom de la fille de couleur rouge qui aide le groupe dans les saisons récentes ?",
+    q="Quelle nouvelle venue aux cheveux roux rejoint la bande en saison 2 ?")
+drop(S, "Quel est le nom du manager du magasin au Starcourt Mall où Steve et Robin travaillent ?")   # Keith tient le vidéoclub
+drop(S, "Combien de saisons Stranger Things compte-t-elle (annoncées) ?")         # dépassé
+drop(S, "Quel personnage du groupe possède des dreadlocks et est grand ?")
+fix(S, "Quelle marque de céréales Eleven mange en grande quantité dans la saison 1 ?",
+    q="Quelle nourriture Eleven adore-t-elle dans la saison 1 ?",
+    a=["Des Lucky Charms", "Des gaufres Eggo", "Des Corn Flakes", "Des Froot Loops"], c=1,
+    fb="Les gaufres Eggo sont la gourmandise préférée d'Eleven, au point de devenir l'un des symboles de la série.")
+drop(S, "Quel est le prénom du fils de Billy qui est empoisonné par le Mind Flayer ?")
+drop(S, "Quelle série de science-fiction des années 1980 à propos d'un alien est regardée par les personnages dans la série ?")
+drop(S, "Comment Eddie Munson décrit-il Metallica dans la saison 4 ?")
+drop(S, "Quel est le lien entre Will Byers et l'Envers selon la théorie des fans ?")
+drop(S, "Quel film est regardé par les enfants au cinéma drive-in dans la saison 1 ?")
+fix(S, "Comment s'appelle le petit ami geek et gentil de Joyce qui joue un rôle important dans la saison 2 ?",
+    fb="Bob Newby (Sean Astin), le petit ami de Joyce en saison 2, aide le groupe à s'échapper du laboratoire et meurt en héros.")
+
+
+# ---------------------------------------------------------------- Breaking Bad
+S = 'breakingbad'
+fix(S, "Quel est le nom de l'avocat véreux qui aide Walter et Jesse ?", a=["Bob Odenkirk", "Mike Ehrmantraut", "Howard Hamlin", "Saul Goodman"], c=3)
+fix(S, "Comment s'appelle le restaurant-façade du baron de la drogue ennemi de Walter ?",
+    q="Quelle chaîne de restaurants sert de façade à Gus Fring ?",
+    a=["Los Pollos Hermanos", "Lavandería Brillante", "A1A Car Wash", "Vamonos Pest"], c=0)
+drop(S, "Comment Hank découvre-t-il finalement l'identité d'Heisenberg ?")       # doublon
+fix(S, "Quelle est la dernière réplique marquante de Walter White ?",
+    q="Quel aveu Walter fait-il enfin à Skyler dans le dernier épisode ?",
+    a=["Je suis Heisenberg", "Je l'ai fait pour moi", "Je suis désolé", "C'est moi le danger"], c=1,
+    fb="« Je l'ai fait pour moi. J'aimais ça. J'étais doué. » Walter admet enfin avoir agi par orgueil, et non pour sa famille.")
+fix(S, "Comment s'appelle le film suite à Breaking Bad ?", a=["Better Call Saul", "Jesse", "El Camino", "Heisenberg"], c=2)
+drop(S, "Quel est le cartel mexicain ennemi de Gus Fring ?")                     # réponse dans la question, réponse discutable
+drop(S, "Quel est le pays où se déroule Breaking Bad ?")                          # doublon
+drop(S, "Dans quel état américain se déroule entièrement Breaking Bad ?")         # doublon
+drop(S, "Comment s'appelle l'organisation de Walter qui se développe en saison 5 ?")
+drop(S, "Quelle université Walter White a-t-il cofondée avant de la quitter ?")   # doublon, et ce n'est pas une université
+fix(S, "Comment Hector Salamanca communique-t-il depuis son fauteuil roulant ?",
+    a=["En claquant des doigts", "Avec une clochette", "Avec une tablette", "En clignant des yeux"], c=1,
+    fb="Hector Salamanca, paralysé, communique en faisant sonner une clochette. Ce détail joue un rôle décisif dans la mort de Gus Fring.")
+drop(S, "Quel objet Todd vole lors du vol du train en saison 5 ?")
+drop(S, "Comment Gus Fring cache-t-il sa double vie ?")
+drop(S, "Quelle drogue Jesse consomme-t-il principalement ?")                     # il consomme aussi de l'héroïne
+drop(S, "Qui est la compagne d'Andrea, mère du petit Brock ?")
+fix(S, "Quel est le résultat final de l'empire Heisenberg ?",
+    fb="Walter revient à Albuquerque, élimine le gang de Jack, libère Jesse et meurt de ses blessures dans le laboratoire des néonazis.")
+drop(S, "Quelle est la phrase symbolique de Walter concernant son cancer à la fin de la série ?")
+drop(S, "Quel est le surnom de l'informateur de la DEA qui permet d'arrêter Tuco ?")
+fix(S, "Comment Walter tue-t-il Emilio lors de leur première rencontre ?",
+    a=["À coups de bâton", "Avec un pistolet", "Avec du gaz phosphine", "Avec de l'acide"], c=2,
+    fb="Pendant la cuisson dans le camping-car, Walter jette du phosphore rouge dans l'eau bouillante. Le gaz phosphine qui se dégage tue Emilio.")
+fix(S, "Quel est le vrai nom de 'Heisenberg' dans le contexte chimique ?",
+    q="À quel scientifique le pseudonyme de Walter fait-il référence ?")
+fix(S, "Quel acteur joue Gus Fring dans Breaking Bad ?",
+    fb="Giancarlo Esposito incarne Gustavo Fring avec une froideur magistrale. Il reprend le rôle dans Better Call Saul.")
+fix(S, "Quel est le prénom du frère cadet de Jesse Pinkman mentionné dans la série ?",
+    a=["Jesse Jr.", "Brock", "Todd", "Jake"], c=3,
+    fb="Jake est le petit frère de Jesse, un élève modèle que ses parents préfèrent à leur aîné.")
+fix(S, "Comment Jesse échappe-t-il au camp de Jack à la fin de la série ?",
+    a=["Il s'échappe à pied", "Il est libéré par la police", "Il fuit au volant de la voiture de Todd", "Il se cache dans un camion"], c=2,
+    fb="Après la fusillade, Walter libère Jesse, qui s'enfuit en hurlant au volant de la voiture de Todd, la fameuse El Camino.")
+drop(S, "Quel est le montant exact que Walter remet à Hank depuis son RV de cuisson ?")
+drop(S, "Comment s'appelle l'émission de TV que Saul Goodman anime dans Better Call Saul ?")
+drop(S, "Quel est le nom du distributeur de la meth de Walter à Phoenix ?")
+fix(S, "Comment Walter empoisonne-t-il Lydia à la fin de la série ?",
+    a=["Avec du cyanure dans son café", "Avec de la ricine dans sa stévia", "En contaminant ses médicaments", "Par injection"], c=1,
+    fb="Walter met de la ricine dans la stévia que Lydia verse dans son thé, lors de leur dernier rendez-vous.")
+drop(S, "Quel personnage dit 'Si tu essaies de me planter, je te tue' à Jesse ?")
+drop(S, "Comment se nomme la méthylamine que Walter utilise — où la vole-t-il en saison 5 ?")   # doublon
+fix(S, "Comment se nomme la chaîne de pizzerias que Walter utilise brièvement comme couverture ?",
+    q="Quelle entreprise de désinsectisation sert de couverture à Walter, Jesse et Mike en saison 5 ?",
+    a=["Pizza Palace", "Vamonos Pest", "Pollos del Norte", "A1A Car Wash"], c=1)
+fix(S, "Quel personnage récurrent est tué par Todd lors du vol de train ?", q="Qui Todd abat-il juste après le vol du train ?")
+drop(S, "Quel est le surnom que Mike utilise pour désigner Walter ?")
+drop(S, "Quel est l'objet que Walter met symboliquement dans la poubelle avant de cuisiner pour la première fois ?")
+drop(S, "Comment Walter justifie-t-il sa décision de cuisiner à sa femme Skyler au début ?")
+drop(S, "Quel est le prénom du beau-frère de Walter que Hank blesse accidentellement ?")
+fix(S, "Qui est le 'fournisseur' de Saul Goodman pour les faux papiers ?",
+    fb="Ed Galbraith, officiellement réparateur d'aspirateurs, organise des disparitions complètes avec une nouvelle identité.")
+drop(S, "Comment Walter fait-il croire à Hank qu'il n'est pas Heisenberg lors de leur confrontation finale ?")
+drop(S, "Quel est le nom de la célèbre pizzeria que Walter lance sur le toit dans la série ?")
+
+
+# ---------------------------------------------------------------- Histoire
+S = 'histoire'
+fix(S, "Quel roi de France construit le château de Versailles ?",
+    q="Quel roi de France fait de Versailles sa résidence principale en 1682 ?")
+fix(S, "Quel accord secret partage le Proche-Orient entre France et Angleterre après la WW1 ?",
+    q="Quel accord secret de 1916 prévoit le partage du Proche-Orient entre la France et le Royaume-Uni ?",
+    fb="Les accords Sykes-Picot (1916), négociés pendant la Première Guerre mondiale, partagent en zones d'influence les territoires de l'Empire ottoman.")
+fix(S, "Quelle bataille historique oppose les Grecs aux Perses en -480 ?",
+    q="Quelle bataille navale de -480 voit la flotte grecque vaincre la flotte perse ?",
+    fb="À Salamine, en -480, la flotte grecque menée par Thémistocle anéantit la flotte perse. La même année, les Spartiates de Léonidas étaient tombés aux Thermopyles.")
+fix(S, "En quelle année la Révolution Américaine aboutit-elle à l'indépendance des États-Unis ?",
+    q="En quelle année la Déclaration d'indépendance des États-Unis est-elle signée ?")
+fix(S, "Qui est Olympe de Gouges et quel est son apport à la Révolution ?",
+    fb="Olympe de Gouges rédige la Déclaration des droits de la femme et de la citoyenne en 1791. Elle est guillotinée en 1793, sous la Terreur.")
+drop(S, "Quelle guerre civile espagnole préfigure la Seconde Guerre Mondiale ?")   # réponse dans la question
+drop(S, "En quelle année la France participe-t-elle à la première Guerre du Golfe ?")  # troupes engagées dès 1990
+fix(S, "Quel était le nom de l'État allemand pro-nazi installé après la défaite de 1940 ?",
+    q="Quel est le nom officiel du régime installé à Vichy en 1940 ?",
+    a=["Le Reich de Vichy", "L'État français", "La IIIe République", "Le Gouvernement provisoire"], c=1,
+    fb="L'État français, dit régime de Vichy, est dirigé par le maréchal Pétain de 1940 à 1944 et collabore avec l'Allemagne nazie.")
+
+
+# ---------------------------------------------------------------- Culture générale
+S = 'culture'
+drop(S, "Quel philosophe grec est à l'origine de la méthode dialectique ?")       # Socrate aussi
+fix(S, "Quelle planète possède le plus grand nombre de lunes connues (2024) ?",
+    q="Quelle planète possède le plus grand nombre de lunes connues ?",
+    fb="Saturne détient le record : en 2025, on lui connaît plus de 270 lunes, loin devant Jupiter.")
+drop(S, "Quel pays possède le plus grand nombre de langues officielles au monde ?")   # la Bolivie en reconnaît 37
+fix(S, "Qui a fondé l'entreprise Apple Computer avec Steve Jobs en 1976 ?",
+    a=["Bill Gates", "Steve Wozniak", "Steve Ballmer", "Tim Cook"], c=1)
+drop(S, "Quel est le roman de Dostoïevski considéré comme son chef-d'œuvre ?")   # subjectif
+fix(S, "Quel est le nombre de côtés d'un dodécaèdre régulier ?", q="Combien de faces possède un dodécaèdre régulier ?")
+fix(S, "Quel est le plus petit continent du monde ?",
+    fb="L'Australie est le plus petit continent, avec environ 7,7 millions de km².")
+fix(S, "Quel est le nom du chef-d'œuvre de Shakespeare basé sur un roi danois légendaire ?",
+    q="Quelle pièce de Shakespeare s'inspire de la légende du prince danois Amleth ?")
+
+
+# ---------------------------------------------------------------- Sport
+S = 'sport'
+drop(S, "Combien de buts Pelé a-t-il marqués en carrière officielle ?")         # décompte contesté
+fix(S, "Qui remporte le Ballon d'Or 2023 et la Coupe du Monde 2022 ?",
+    fb="Lionel Messi remporte la Coupe du monde 2022 puis le Ballon d'Or 2023, le huitième de sa carrière.")
+drop(S, "Qui est surnommé 'Air Jordan' ?")                                       # réponse dans la question
+drop(S, "Quel coureur cycliste a le plus de victoires légitimes au Tour de France ?")   # quatre coureurs à égalité
+drop(S, "Combien de points vaut un ace au tennis (service direct) ?")
+drop(S, "Quel pays a co-inventé le basketball selon l'histoire officielle ?")
+fix(S, "Quel est le score maximal possible dans une manche au bowling ?", q="Quel est le score parfait au bowling ?",
+    fb="300 points est le score parfait au bowling : douze strikes consécutifs sur une partie de dix carreaux.")
+fix(S, "Quel pays a remporté le plus de titres en Rugby World Cup ?",
+    q="Quel pays a remporté le plus de Coupes du monde de rugby ?",
+    a=["Australie", "Angleterre", "Afrique du Sud", "Nouvelle-Zélande"], c=2,
+    fb="L'Afrique du Sud détient le record avec 4 titres (1995, 2007, 2019 et 2023), devant la Nouvelle-Zélande (1987, 2011, 2015).")
+fix(S, "Quel est le nom du stade où se joue la finale du championnat d'Angleterre de football ?",
+    q="Dans quel stade se joue la finale de la FA Cup ?")
+drop(S, "Quelle est la longueur d'un terrain de football standard (FIFA) ?")    # réponse dans la question, ambiguë
+fix(S, "En combien de temps Usain Bolt court-il le 200m (record du monde) ?",
+    fb="Usain Bolt court le 200 m en 19,19 s à Berlin, en 2009. Ce record du monde tient toujours.")
+drop(S, "Quel est le terme pour un coup parfait dans un match de tennis de table (ping-pong) ?")   # doublon
+fix(S, "Quel est le trophée le plus prestigieux au hockey sur glace ?",
+    fb="La Coupe Stanley, créée en 1893, est le plus ancien trophée du sport professionnel nord-américain. Elle récompense le champion de la LNH depuis 1926.")
+drop(S, "Quel pays a remporté le plus d'or aux JO d'été en 2024 (Paris) ?")     # Chine et États-Unis à égalité (40)
+drop(S, "Quel est le sport pratiqué sur un terrain appelé 'court' ?")
+drop(S, "Quel sprinter français détient le record d'Europe du 100m ?")          # réponse fausse
+drop(S, "Quel est le terme pour un but marqué contre son propre camp ?")        # réponse dans la question
+fix(S, "Quel athlète détient le record du monde du 400m haies masculin établi à 45,94s en 2021 ?",
+    fb="Karsten Warholm (Norvège) court le 400 m haies en 45,94 s en finale des JO de Tokyo 2021, effaçant de 76 centièmes son propre record.")
+fix(S, "Quel est le nom de la compétition de tennis opposant les équipes nationales féminines ?",
+    a=["Billie Jean King Cup", "Coupe Hopman", "Coupe Davis féminine", "Laver Cup"], c=0)
+fix(S, "Quel pays a gagné le plus de médailles d'or en natation aux JO de 2024 ?",
+    fb="Les États-Unis remportent 8 titres en natation à Paris 2024, juste devant l'Australie (7).")
+drop(S, "Quel athlète jamaïcain détient le record du 100m en dessous des 10 secondes depuis 1988 ?")
+fix(S, "Quel est le terme pour un but marqué avec la tête au football ?",
+    q="Comment appelle-t-on un tir effectué avec la tête au football ?",
+    a=["Une tête", "Un retourné", "Une volée", "Un lob"], c=0,
+    fb="On parle simplement d'une tête : le joueur frappe le ballon du front, souvent sur un centre ou un corner.")
+fix(S, "Combien d'équipes participent à la phase de groupes d'une Coupe du Monde FIFA ?",
+    q="Combien d'équipes participent à la Coupe du monde 2026 ?",
+    fb="La Coupe du monde 2026, organisée aux États-Unis, au Canada et au Mexique, est la première à 48 équipes, contre 32 depuis 1998.")
+drop(S, "Quel est le record du monde du 1500m masculin ?")                       # explication fausse, doublon
+fix(S, "Qui remporte la Formule 1 le plus de fois en championnat des constructeurs ?",
+    fb="Ferrari détient le record des titres constructeurs, avec 16 couronnes.")
+drop(S, "Quel est le record du saut à la perche masculin ?")                     # battu régulièrement par Duplantis
+drop(S, "Quel boxeur heavyweight est surnommé 'Iron Mike' ?")                    # réponse dans la question
