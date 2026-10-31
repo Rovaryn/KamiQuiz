@@ -903,3 +903,176 @@ fix(S, "Qui remporte la Formule 1 le plus de fois en championnat des constructeu
     fb="Ferrari détient le record des titres constructeurs, avec 16 couronnes.")
 drop(S, "Quel est le record du saut à la perche masculin ?")                     # battu régulièrement par Duplantis
 drop(S, "Quel boxeur heavyweight est surnommé 'Iron Mike' ?")                    # réponse dans la question
+
+
+# ---------------------------------------------------------------- Pokémon
+S = 'pokemon'
+drop(S, "Quel est le Pokémon de départ le plus populaire selon les sondages officiels ?")
+fix(S, "Quel oiseau légendaire de type Glace est l'un des trois légendaires de Kanto ?",
+    a=["Électhor", "Artikodin", "Sulfura", "Mewtwo"], c=1,
+    fb="Artikodin est l'oiseau légendaire de type Glace de Kanto, aux côtés d'Électhor (Électrik) et de Sulfura (Feu).")
+fix(S, "Comment s'appelle le professeur Pokémon de la région de Kanto ?",
+    fb="Le Professeur Chen (Professor Oak en anglais) remet au joueur son premier Pokémon et le Pokédex.")
+drop(S, "Quel est le nom du rival du joueur dans Pokémon Rouge/Bleu/Jaune ?")     # il s'appelle Régis en VF
+drop(S, "Quel est le Pokémon rival (antagoniste gentil) de Sacha dans l'animé classique ?")   # Régis, pas Pierre
+drop(S, "Quel Pokémon dit uniquement son propre nom dans l'animé ?")
+fix(S, "Quel Pokémon de type Psy de la Gen 1 génère des murs invisibles en mimant leurs formes ?",
+    a=["Abra", "Kadabra", "Ectoplasma", "M. Mime"], c=3,
+    fb="M. Mime crée des murs invisibles en les mimant. De type Psy en première génération, il devient Psy/Fée à partir de Pokémon X et Y.")
+drop(S, "Quel est le type faible au type Électrik ?")                            # le Sol y est immunisé
+drop(S, "Comment s'appelle la transformation de combat temporaire de Pikachu dans l'animé récent ?")
+fix(S, "Quel est le seul Pokémon de type Dragon/Vol dans la génération 1 ?",
+    fb="Dracolosse est le seul Pokémon Dragon/Vol de la première génération. Minidraco et Draco sont de type Dragon pur, Ptéra est Roche/Vol.")
+drop(S, "Comment s'appelle la technique d'échange de Pokémon permettant d'évoluer certains Pokémon ?")
+drop(S, "Quel est le Pokémon le plus difficile à attraper dans Pokémon Rouge/Bleu selon les joueurs ?")
+drop(S, "Comment s'appelle l'attaque la plus puissante de type Normal (150 puissance) ?")
+drop(S, "Quel est le Pokémon champion des 8 arènes dans la région de Johto ?")
+fix(S, "Quel Pokémon est impossible d'obtenir légitimement dans la génération 1 sans code Missingno ?",
+    q="Quel Pokémon de la première génération ne peut pas être obtenu normalement dans les jeux ?")
+fix(S, "Comment s'appelle le type fort contre presque tous les types dans Gen 1 (buggy) ?",
+    q="Quel type dominait la première génération, notamment à cause d'un bug ?",
+    a=["Psy", "Spectre", "Dragon", "Poison"], c=0,
+    fb="Le type Psy écrasait la première génération : à cause d'un bug, les attaques Spectre n'avaient aucun effet sur lui. Le problème a été corrigé en deuxième génération.")
+fix(S, "Quel Pokémon à trois têtes est l'évolution de Doduo au niveau 31 ?",
+    a=["Ptéra", "Ronflex", "Dodrio", "Évoli"], c=2,
+    fb="Doduo, l'oiseau à deux têtes, évolue au niveau 31 en Dodrio, qui en a trois. Il est de type Normal/Vol.")
+drop(S, "Quelle est la région la plus récente dans les jeux Pokémon principaux (à ce jour) ?")
+drop(S, "Quel est le Pokémon le plus populaire selon les sondages globaux officiels de Game Freak ?")
+drop(S, "Comment s'appelle le type ultra-faible au type Acier dans Gen 2+ ?")
+fix(S, "Comment s'appelle l'attaque de type Fantôme signature de Gengar ?",
+    q="Quelle attaque de type Spectre est emblématique d'Ectoplasma ?",
+    a=["Ball'Ombre", "Vampirisme", "Jackpot", "Tranche-Nuit"], c=0,
+    fb="Ball'Ombre (Shadow Ball) est l'attaque Spectre emblématique d'Ectoplasma. Tranche-Nuit, elle, est une attaque de type Ténèbres.")
+drop(S, "Quel Pokémon est la forme éveillée de Ronflex (Snorlax) dans les combats ?")
+drop(S, "Quel est le seul Pokémon à ne pas avoir d'attaque dans Gen 1 ?")
+drop(S, "Quelle est la signature de l'attaque Méga-Poing par rapport au Poing-Meteor ?")
+fix(S, "Quel est le Pokémon numéro 150 du Pokédex de Kanto ?", a=["Mewtwo", "Mew", "Léviator", "Dracolosse"], c=0)
+fix(S, "Quel type de Pokémon est immunisé aux dégâts de terrain Électrik ?", q="Quel type est immunisé contre les attaques de type Électrik ?")
+fix(S, "Comment s'appelle le quatrième champion de la Ligue Pokémon (Elite 4) dans Gen 1 ?",
+    q="Qui est le quatrième membre du Conseil 4 de Kanto ?", a=["Agatha", "Aldo", "Olga", "Peter"], c=3,
+    fb="Peter (Lance en anglais), dresseur de Pokémon Dragon, est le dernier membre du Conseil 4, juste avant le Maître de la Ligue.")
+fix(S, "Quel Pokémon est surnommé 'Pokémon Renard' et possède 9 queues ?",
+    a=["Feunard", "Goupix", "Arcanin", "Galopa"], c=0,
+    fb="Feunard, l'évolution de Goupix, possède neuf queues. Selon le Pokédex, quiconque tire l'une d'elles est maudit pour mille ans.")
+fix(S, "Quel est le Pokémon de type Eau/Psy le plus utilisé compétitivement en Gen 1 ?",
+    a=["Psykokwak", "Staross", "Tentacruel", "Akwakwak"], c=1,
+    fb="Staross, de type Eau/Psy, était l'un des Pokémon les plus redoutables de la première génération grâce à sa vitesse et à ses attaques variées.")
+drop(S, "Quelle est l'évolution de Noeunoeuf (Togepi) ?")
+fix(S, "Quel Pokémon légendaire est le gardien des rêves dans la mythologie Pokémon ?",
+    fb="Cresselia apporte des rêves paisibles. Son rival, Darkrai, plonge ceux qui dorment près de lui dans des cauchemars sans fin.")
+fix(S, "Comment s'appelle la première version de Pokémon sur Nintendo Switch ?",
+    q="Quel est le premier jeu Pokémon de la série principale sur Nintendo Switch ?")
+drop(S, "Quel Pokémon de type Fée était Type Normal dans la Gen 1 ?")              # Mélodelfe aussi
+drop(S, "Quel est l'ultime évolution de Salamèche en version Mega dans Gen 6 ?")
+drop(S, "Comment s'appelle la mécanique de capture qui utilise l'état de statut ?")
+fix(S, "Quelle est l'évolution de type Fée d'Évoli introduite en Gen 6 ?",
+    a=["Givrali", "Phyllali", "Nymphali", "Mentali"], c=2,
+    fb="Nymphali (Sylveon en anglais) est l'évolution de type Fée d'Évoli, apparue dans Pokémon X et Y.")
+fix(S, "Quel est le Pokémon légendaire de Gen 3 qui exauce les vœux une fois tous les mille ans ?",
+    fb="Jirachi, de type Acier/Psy, ne s'éveille que sept jours tous les mille ans, et exauce alors les vœux.")
+fix(S, "Quelle est la série spin-off Pokémon d'aventure tactique sur Nintendo 64 et GameCube ?",
+    q="Quel jeu Pokémon sur GameCube propose une aventure dans la région d'Orre ?",
+    a=["Pokémon Snap", "Pokémon Stadium", "Pokémon Colosseum", "Pokémon Puzzle League"], c=2,
+    fb="Pokémon Colosseum (2003) emmène le joueur dans la région d'Orre, où il doit purifier des Pokémon Obscurs.")
+drop(S, "Comment s'appelle la récompense en objets donnée après certaines captures rares ?")
+drop(S, "Quel Pokémon est une évolution récente de Noctali (Umbreon) absente de Gen 1 ?")
+drop(S, "Quel est le Pokémon Normal qui peut se transformer en tout autre Pokémon ?")   # doublon
+drop(S, "Comment s'appelle l'attaque Eau/Glace signature de Glace marine en compétitif ?")
+
+
+# ---------------------------------------------------------------- Demon Slayer
+S = 'demonslayer'
+fix(S, "Comment s'appelle l'organisation qui combat les démons ?",
+    a=["L'Ordre des Pourfendeurs", "Les Douze Lunes", "Le Corps des Pourfendeurs", "La Guilde des Chasseurs"], c=2)
+fix(S, "Quelle est la faiblesse universelle de tous les démons ?",
+    fb="La lumière du soleil réduit les démons en cendres. Les sabres Nichirin et le poison de glycine peuvent aussi les blesser ou les affaiblir.")
+fix(S, "Comment s'appelle le sabre spécial des Pourfendeurs qui change de couleur ?",
+    a=["Le sabre du Soleil", "Le sabre Nichirin", "Le sabre Kizuki", "Le sabre de glycine"], c=1)
+fix(S, "De quelle couleur devient la lame de Tanjiro après son éveil ?",
+    fb="La lame de Tanjiro devient noire, une couleur rarissime. On dit que les porteurs d'une lame noire ne deviennent jamais Piliers.")
+drop(S, "Qu'est-ce que la Concentration Totale Permanente ?")                     # réponse dans la question
+drop(S, "Qui est Yoriichi Tsugikuni dans l'histoire du Corps des Pourfendeurs ?")   # doublon
+fix(S, "Comment s'appelle le village où les Piliers partent s'entraîner en saison 3 ?",
+    q="Où Tanjiro se rend-il pour faire réparer son sabre, en saison 3 ?")
+fix(S, "Quelle est la Forme Ultime (13e forme) de la Respiration du Soleil ?",
+    q="En quoi consiste la treizième forme de la Respiration du Soleil ?",
+    a=["Une seule frappe chargée", "L'enchaînement en boucle des douze premières formes", "Un souffle de feu", "Une danse répétée treize fois"], c=1,
+    fb="La treizième forme consiste à enchaîner sans fin les douze premières formes. Yoriichi l'a conçue pour frapper tous les organes vitaux de Muzan.")
+drop(S, "Quelle est la technique finale de Tanjiro contre Muzan dans la bataille finale ?")   # explication fausse
+fix(S, "Qu'est-ce qui distingue le sang de Nezuko parmi tous les démons ?", q="Qu'a de particulier le sang de Nezuko ?")
+drop(S, "Quel démon est la Lune Inférieure 1 qui piège dans des rêves dans le Mugen Train ?")  # doublon
+fix(S, "Qui entraîne Tanjiro, Inosuke et Zenitsu dans l'arc du Quartier des Plaisirs ?",
+    q="Quel Pilier emmène Tanjiro, Inosuke et Zenitsu dans le Quartier des plaisirs ?")
+fix(S, "Quel Art de la Respiration utilise le Pilier des Roches, Gyomei Himejima ?",
+    a=["Respiration de la Pierre", "Respiration de la Brume", "Respiration du Son", "Respiration des Ténèbres"], c=0)
+drop(S, "Comment s'appelle la technique de respiration du Pilier de la Pierre Gyomei ?")   # doublon
+drop(S, "Quel est le pouvoir particulier des yeux de Kanao Tsuyuri ?")              # réponse dans la question
+fix(S, "Combien de saisons de l'anime Demon Slayer ont été diffusées à ce jour ?",
+    q="Combien de saisons de la série animée Demon Slayer ont été diffusées avant la trilogie de films du Château de l'Infini ?",
+    fb="La série compte quatre saisons, jusqu'à l'arc de l'entraînement des Piliers. La suite est adaptée au cinéma, en trois films consacrés au Château de l'Infini.")
+drop(S, "Quel est le nom du frère aîné de Kokushibo (Tamis Supérieur Un) qui était un Pourfendeur légendaire ?")  # Yoriichi est le cadet
+drop(S, "Quel est le poison que Shinobu Kocho a accumulé dans son corps pendant des années ?")
+drop(S, "Quel est le premier démon que Tanjiro doit tuer dans la série ?")
+drop(S, "Quel pouvoir Tanjiro utilise-t-il pour voir les faiblesses de ses ennemis ?")   # doublon
+fix(S, "Quelle technique Muichiro Tokito déverrouille-t-il en retrouvant ses souvenirs ?",
+    fb="En retrouvant ses souvenirs face à Gyokko, Muichiro voit apparaître sa Marque de Pourfendeur, et sa puissance décuple.")
+drop(S, "Quel est l'effet du sang de Muzan sur les autres démons ?")
+drop(S, "Quel est le nom de l'épée que Yoriichi a forgée avec un minerai spécial contre Muzan ?")
+drop(S, "Quelle est la particularité de l'arc en saison 4 concernant les Piliers ?")
+drop(S, "Quel personnage devient Pilier de la Flamme après la mort de Rengoku ?")
+fix(S, "Quel est le nom du démon qui garde le château de Natagumo Mountain ?", q="Quel démon règne sur le mont Natagumo ?")
+drop(S, "Quel démon est surnommé 'Tamis Supérieur Deux' parmi les Douze Lunes de Muzan ?")
+drop(S, "Comment Inosuke Hashibira a-t-il acquis ses deux sabres dentelés ?")        # il les ébrèche à coups de pierre
+drop(S, "Quel est le vrai nom de Muzan Kibutsuji dans son identité humaine ?")
+drop(S, "Quelle capacité unique possède Nezuko après sa transformation partielle en démon supérieur ?")   # doublon
+
+
+# ---------------------------------------------------------------- Dragon Ball
+S = 'dragonball'
+fix(S, "Quel est le nom de la planète d'origine des Saiyajins ?", a=["Namek", "Yardrat", "Végéta", "Kaioshin"], c=2)
+fix(S, "Qui représente l'Univers 11 dans le Tournoi du Pouvoir ?",
+    q="Quel combattant de l'Univers 11 pousse Goku à atteindre l'Ultra Instinct ?")
+drop(S, "Qui entraîne Trunks du futur dans Dragon Ball Super ?")
+drop(S, "Comment s'appelle la forme intermédiaire de Végéta entre Great Ape et SSJ4 dans GT ?")   # trois réponses identiques
+drop(S, "Quel est le premier ennemi extraterrestre que Goku affronte officiellement dans DBZ ?")  # doublon
+drop(S, "Quel est le nom du plan final de Cell qui consiste à s'autodétruire ?")
+fix(S, "Qui crée les Dragon Balls de la Terre ?", a=["Shenron lui-même", "Kami", "Bulma", "Piccolo"], c=1)
+fix(S, "Quel est le nom du fils de Gohan et Videl ?", q="Comment s'appelle la fille de Gohan et Videl ?")
+fix(S, "Quel est le symbole sur la cape de Goku au début de Dragon Ball ?",
+    q="Quel symbole Goku porte-t-il sur son kimono quand il s'entraîne chez Tortue Géniale ?",
+    fb="Le kanji « Kame » (la tortue) désigne l'école de Tortue Géniale, chez qui Goku et Krilin s'entraînent.")
+fix(S, "Quel démon contrôle l'enfer dans l'univers Dragon Ball ?",
+    q="Qui juge les âmes des morts dans l'autre monde ?", a=["Le Roi Enma", "King Cold", "Babidi", "Dabra"], c=0,
+    fb="Le Roi Enma juge les âmes des morts et décide de leur destination. C'est lui qui laisse Goku emprunter le Chemin du Serpent après sa mort face à Raditz.")
+drop(S, "Quel démon mange les âmes et détient les enfers dans l'univers DBZ ?")          # doublon
+drop(S, "Quel personnage entraîne Goku et Krilin chez Muten Roshi ?")
+drop(S, "Comment Cell Jr. sont-ils créés lors des Cell Games ?")
+drop(S, "Quel est le nom de la planète du Roi Kaio où Goku s'entraîne dans l'autre monde ?")    # deux réponses identiques
+drop(S, "Quel est l'effet principal du Fruit de l'Arbre du Pouvoir dans le film DBZ ?")
+drop(S, "Quel est le vrai nom de la technique de téléportation de Goku ?")                 # doublon
+fix(S, "Comment s'appelle le fils de Goku et Chi-Chi né dans la saga Boo ?",
+    q="Comment s'appelle le deuxième fils de Goku et Chi-Chi ?",
+    fb="Goten naît après la saga Cell et apparaît dans la saga Boo. Il ressemble trait pour trait à son père enfant.")
+fix(S, "Quel est le nom de l'attaque d'Embryon de Végéta, la boule d'énergie bleue ?",
+    q="Quelle attaque de Végéta consiste à lancer une énorme boule d'énergie d'une seule main ?")
+drop(S, "Qui est le Roi Kaio et quel est son rôle dans l'univers ?")
+drop(S, "Quel personnage féminin est la seule guerrière Saiyajin connue de haut rang dans DBS ?")
+fix(S, "Comment s'appelle le père de Végéta ?",
+    q="Qui règne sur la planète des Saiyajins avant sa destruction ?", a=["Freezer", "Nappa", "Le Roi Végéta", "Paragus"], c=2,
+    fb="Le Roi Végéta, père du prince Végéta, règne sur les Saiyajins jusqu'à ce que Freezer le tue et détruise leur planète.")
+drop(S, "Qui est le premier ennemi que Gohan bat seul dans Dragon Ball Z ?")
+drop(S, "Comment se nomme la grande sphère d'énergie vitale que Goku concentre en la demandant à tous ?")   # doublon
+drop(S, "Combien de Dragon Balls namekiennes permettent de formuler des vœux ?")           # doublon
+drop(S, "Combien de temps Goku court-il sur la Route Snake pour atteindre le Roi Kaio ?")
+drop(S, "Comment s'appelle la fusion danse que Goten et Trunks apprennent ?")
+fix(S, "Qui est la mère de Bra, la fille de Végéta ?",
+    fb="Bra est la fille de Végéta et Bulma. Elle naît après la défaite de Boo.")
+drop(S, "Quel est le nom de l'attaque finale utilisée par Gohan en SSJ2 contre Cell ?")     # doublon
+drop(S, "Quel est le niveau de combat de Freezer en forme finale selon les données officielles ?")
+drop(S, "Quelle transformation Trunks du futur atteint-il seul dans sa timeline ?")
+drop(S, "Qui entraîne Goten et Trunks dans la Chambre d'Esprit pour créer Gotenks ?")
+drop(S, "Combien de transformations Super Saiyajin existent dans Dragon Ball Super (hors GT) ?")
+fix(S, "Quelle est la première transformation de Végéta lors du combat contre Goku sur Terre ?",
+    fb="Végéta crée lui-même une lune artificielle pour se changer en singe géant (Oozaru). Yajirobe finit par lui trancher la queue.")
+fix(S, "Quel humain de Dragon Ball Z possède un troisième œil et maîtrise des techniques de Ki ultra-concentré ?",
+    fb="Ten Shin Han, ancien élève de l'école de la Grue, maîtrise des techniques redoutables comme le Kikoho.")
