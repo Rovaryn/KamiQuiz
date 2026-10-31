@@ -2838,3 +2838,13 @@ drop(S, "Quel est le paradoxe central de Tommy Shelby comme personnage ?")
 drop(S, "Quel est le genre de la série Peaky Blinders ?")
 drop(S, "Quelle est la progression de statut social des Shelby de la saison 1 à la fin ?")
 drop(S, "Quel est le lien entre Peaky Blinders et le mouvement ouvrier de l'époque ?")
+
+
+# ---------------------------------------------------------------- Retouches (31 octobre 2026)
+drop('aot', "Quel est le nom du Titan que porte Annie Leonhart ?")                    # doublon
+drop('aot', "Quelle est la durée de vie d'un porteur de Titan de puissance ?")       # doublon de la Malédiction d'Ymir
+fix('fmab', "Quel est le Quirk défensif de Greed, l'homuncule de la Convoitise ?",
+    q="Quelle est la capacité défensive de Greed, l'homuncule de la Convoitise ?")
+fix('fairytail', "Quel est le nom de la monture de Natsu ?",
+    q="Comment s'appelle le chat bleu qui accompagne Natsu ?")
+drop('fairytail', "Quel est le nom du livre dans lequel vit Natsu ?")
