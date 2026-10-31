@@ -1,50 +1,31 @@
-# KamiQuiz v2 — déploiement et validation AdSense
+# KamiQuiz — mise en ligne et validation AdSense
 
-## Ce que contient ce dossier
+## Comment le site est publié
 
-- `dist/` : le site prêt à mettre en ligne (c'est le seul dossier à déployer).
-- `data/questions.src.json` : ta banque d'origine, jamais modifiée.
-- `data/questions.json` : la banque nettoyée, utilisée par le site.
-- `content/series.py` : textes de présentation des 42 séries.
-- `content/guides/*.md` : les 10 guides.
-- `static/` : CSS, JavaScript, polices et images.
-- `build.py` : régénère tout `dist/` en une commande.
-- `tools/` : nettoyage des questions, images, vérifications automatiques.
+Le code vit sur GitHub (`Rovaryn/KamiQuiz`). Le projet Cloudflare Pages `kamiquiz-site` est relié au dépôt et sert kamiquiz.com et www.kamiquiz.com. Réglages de construction : commande `python3 build.py`, dossier de sortie `dist`, variable `PYTHON_VERSION=3.12`.
 
-## Modifier le site plus tard
+Chaque modification passe par une pull request. La tâche GitHub « Vérifications » génère le site, lance `check_site.py` et les tests dans un vrai navigateur ; Cloudflare publie en parallèle un aperçu de la pull request à une adresse en `.pages.dev`. Quand les vérifications sont vertes et que l'aperçu convient, on fusionne : le site se met à jour tout seul en une à deux minutes.
 
-1. Ajouter ou corriger des questions dans `data/questions.src.json`.
-2. `python3 tools/clean_data.py` (nettoyage), puis `python3 build.py` (génération).
-3. `python3 tools/check_site.py` pour vérifier liens, JSON-LD, sitemap et redirections.
-4. Redéployer le contenu de `dist/`.
+La tâche « Reconstruction quotidienne » appelle chaque nuit le deploy hook enregistré dans le secret GitHub `CF_DEPLOY_HOOK`, pour publier les contenus datés (voir `PUBLICATION.md`). Si le hook est recréé dans Cloudflare, mettre à jour ce secret.
 
-## Mise en ligne sur Cloudflare Pages
+L'ancien projet Cloudflare `kamiquiz` (déploiement par zip, sans lien avec GitHub) peut être supprimé une fois le nouveau stable depuis quelques semaines.
 
-1. Dashboard Cloudflare, Workers & Pages, projet KamiQuiz, Create deployment.
-2. Déposer **le contenu** du dossier `dist/` (index.html doit être à la racine du dépôt, pas dans un sous-dossier).
-3. Un déploiement remplace l'intégralité du site : les anciens fichiers (naruto.html, quiz.html, consent.js…) disparaissent, et le fichier `_redirects` renvoie leurs anciennes adresses vers les nouvelles en 301.
-4. Vérifier après déploiement : `kamiquiz.com/naruto.html` doit rediriger vers `kamiquiz.com/quiz/naruto/`, et une adresse inventée doit afficher la page 404 du site.
+## Travailler en local
 
-## AdSense : les réglages à faire dans la console
+`python3 build.py` génère le site à la date du jour, `python3 build.py --date 2026-11-16` tel qu'il sera à cette date. Ensuite `python3 tools/check_site.py` (0 erreur attendue), puis `cd dist && python3 -m http.server 8765` dans un terminal et `python3 tools/browser_test.py` dans un autre (`ÉCHECS : 0` attendu).
 
-1. **Confidentialité et messages** : créer un message « Réglementations européennes » (CMP certifiée de Google), l'associer à kamiquiz.com et le publier. Le site n'a plus de bannière maison : c'est ce message qui gère le consentement en Europe, au Royaume-Uni et en Suisse.
-2. **Annonces, Par site** : activer les annonces automatiques pour kamiquiz.com.
-3. Ne relancer la demande d'examen qu'après l'indexation (voir ci-dessous).
+## AdSense : réglages dans la console
 
-## Search Console : faire indexer le nouveau site
+Dans « Confidentialité et messages », le message « Réglementations européennes » (CMP certifiée de Google) gère le consentement en Europe, au Royaume-Uni et en Suisse ; le site n'a pas de bandeau maison. Dans « Annonces », les annonces automatiques sont activées pour kamiquiz.com. Ne redemander un examen qu'en suivant les critères de `PUBLICATION.md`.
 
-1. Soumettre à nouveau `https://kamiquiz.com/sitemap.xml` (59 adresses).
-2. Demander l'indexation de l'accueil, de `/quiz/`, de `/guides/` et de 5 à 7 pages séries populaires.
-3. Attendre que la rubrique Pages affiche au moins 30 pages indexées avant de demander un nouvel examen AdSense.
+## Search Console
+
+Le sitemap est `https://kamiquiz.com/sitemap.xml`. Après chaque nouveauté, coller l'adresse de la page dans la barre du haut et demander l'indexation.
 
 ## Classement mondial
 
-Le site utilise le même Worker et le même format de score qu'avant. Seule nouveauté : les parties « Tout mélanger » envoient `series: "mix"`. Si le Worker filtre les séries autorisées, ajouter `mix` à sa liste.
+Le Worker `polished-haze-58ed` reçoit les scores (`POST /api/score`). Les parties « Tout mélanger » envoient `series: "mix"`.
 
-## Publication programmée
+## Réseaux sociaux
 
-Les séries et les guides ont une date (`date=` dans `content/series.py`, `date:` en tête de chaque guide). `python3 build.py --date 2026-11-16` génère le site tel qu'il doit être à cette date : seuls les contenus datés jusqu'à ce jour sont publiés, et les « Nouveaux univers » de l'accueil se mettent à jour seuls. Les zips prêts à déployer sont dans `releases/`, et le calendrier dans `PUBLICATION.md`.
-
-## Kit réseaux sociaux
-
-`python3 tools/make_social.py` régénère les visuels et les vidéos de `social/` à partir de la banque de questions. Les conseils de diffusion sont dans `social/PROMOTION.md`.
+`python3 tools/make_social.py` (visuels et vidéos courtes), `tools/make_long_videos.py` (vidéos de plus d'une minute) et `tools/make_voiced_videos.py` (vidéos narrées) écrivent dans `social/`, qui n'est pas suivi par Git. Les conseils de diffusion sont dans `docs/PROMOTION.md`.

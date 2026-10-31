@@ -95,14 +95,18 @@ with sync_playwright() as p:
 
     print('Nouveaux univers')
     for slug, key, n in [('frieren', 'frieren', 58), ('chainsaw-man', 'chainsawman', 54), ('spy-x-family', 'spyfamily', 54)]:
+        if not Path(f'dist/data/{key}.json').exists():
+            print(f'  · {slug} : pas encore publié à cette date, ignoré')
+            continue
         page.goto(f'{BASE}/quiz/{slug}/')
         check(page.locator('.qitem').count() == n, f'{slug} : {n} questions de révision')
         page.goto(f'{BASE}/jouer/?s={key}&m=libre')
         page.wait_for_selector('#s-play:not([hidden])', timeout=5000)
         played = play_through(page, 30)
         check(page.is_visible('#s-result') and played == 20, f'{slug} : partie complète')
-    page.goto(BASE + '/quiz/frieren/')
-    page.screenshot(path=str(SHOTS / 'frieren-desktop.png'))
+    if Path('dist/data/frieren.json').exists():
+        page.goto(BASE + '/quiz/frieren/')
+        page.screenshot(path=str(SHOTS / 'frieren-desktop.png'))
 
     print('Jeu : survie')
     page.goto(f'{BASE}/jouer/?s=geo&m=survie')
@@ -166,6 +170,19 @@ with sync_playwright() as p:
     page.goto(BASE + '/confidentialite/')
     check(page.locator('[data-privacy-choices]').count() == 1, 'bouton de choix de confidentialité présent')
 
+    print('Lien Letsdle')
+    page.goto(BASE + '/')
+    ext = page.locator('#nav a.nav-ext')
+    check(ext.count() == 1 and ext.get_attribute('href') == 'https://letsdle.com/' and ext.get_attribute('target') == '_blank',
+          'menu : lien « Plus de jeux » vers Letsdle, nouvel onglet')
+    for w in (1366, 1024, 800):
+        page.set_viewport_size({'width': w, 'height': 900})
+        tops = page.evaluate("[...document.querySelectorAll('#nav a')].map(a => Math.round(a.getBoundingClientRect().top))")
+        sw = page.evaluate('document.documentElement.scrollWidth')
+        check(len(set(tops)) == 1 and sw <= w, f'menu sur une seule ligne à {w}px')
+        page.screenshot(path=str(SHOTS / f'header-{w}.png'), clip={'x': 0, 'y': 0, 'width': w, 'height': 80})
+    page.set_viewport_size({'width': 1366, 'height': 900})
+
     print('Kamidle')
     import json as _j
     D = _j.loads(Path('dist/data/dle.json').read_text(encoding='utf-8'))
@@ -228,6 +245,7 @@ with sync_playwright() as p:
     mp.goto(BASE + '/')
     mp.click('.menu-btn')
     check(mp.is_visible('#nav a[href="/guides/"]'), 'le menu mobile s\'ouvre')
+    check(mp.is_visible('#nav a.nav-ext'), 'menu mobile : lien Letsdle visible')
     b.close()
 
 print()

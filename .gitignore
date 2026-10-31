@@ -9,3 +9,4 @@ tools/voix/
 __pycache__/
 *.pyc
 .DS_Store
+captures/

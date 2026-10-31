@@ -119,6 +119,9 @@ def head(title, desc, path, jsonld=None, robots='index, follow', og_type='websit
 
 
 CUR = ' aria-current="page"'
+LETSDLE = 'https://letsdle.com/'
+LETSDLE_NAV = (f'<a class="nav-ext" href="{LETSDLE}" target="_blank" rel="noopener" '
+               'title="Letsdle, d\'autres petits jeux quotidiens (nouvel onglet)">Plus de jeux<span aria-hidden="true"> ↗</span></a>')
 OK_CLS = ' class="ok"'
 NAV = [('/quiz/', 'Tous les quiz'), ('/dle/', 'Kamidle'), ('/guides/', 'Guides'), ('/a-propos/', 'À propos')]
 
@@ -130,7 +133,7 @@ def header(current=''):
   <div class="wrap">
     <a class="brand" href="/" aria-label="KamiQuiz, accueil">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">{links}<a class="nav-cta" href="/jouer/">Jouer</a></nav>
+    <nav class="nav" id="nav" aria-label="Navigation principale">{links}{LETSDLE_NAV}<a class="nav-cta" href="/jouer/">Jouer</a></nav>
   </div>
 </header>
 <main id="contenu">
@@ -149,7 +152,7 @@ def footer(scripts=('/assets/js/site.js',)):
         <p style="margin-top:14px;max-width:34ch">Des quiz gratuits sur les animés, les séries, les films, les jeux vidéo et la culture générale. Sans inscription.</p>
       </div>
       <div><h2>Quiz</h2><ul>{cats}</ul></div>
-      <div><h2>KamiQuiz</h2><ul><li><a href="/dle/">Kamidle, jeux du jour</a></li><li><a href="/guides/">Guides</a></li><li><a href="/a-propos/">À propos</a></li><li><a href="/contact/">Contact</a></li><li><a href="/jouer/">Quiz tout mélangé</a></li></ul></div>
+      <div><h2>KamiQuiz</h2><ul><li><a href="/dle/">Kamidle, jeux du jour</a></li><li><a href="/guides/">Guides</a></li><li><a href="/a-propos/">À propos</a></li><li><a href="/contact/">Contact</a></li><li><a href="/jouer/">Quiz tout mélangé</a></li><li><a href="{LETSDLE}" target="_blank" rel="noopener">Plus de jeux sur Letsdle ↗</a></li></ul></div>
       <div><h2>Informations</h2><ul><li><a href="/confidentialite/">Confidentialité et cookies</a></li><li><a href="/conditions/">Conditions d'utilisation</a></li><li><a href="/sitemap.xml">Plan du site</a></li></ul></div>
     </div>
     <p class="foot-note">© 2026 KamiQuiz. KamiQuiz est un site indépendant, sans lien avec les ayants droit des œuvres citées. Les noms des œuvres appartiennent à leurs propriétaires respectifs.</p>
@@ -702,6 +705,8 @@ def build_dle():
       <p>À la fin de chaque partie, le bouton « Partager » copie une grille de carrés colorés qui montre ton parcours sans révéler la réponse. Colle-la sur Discord, X ou dans ton groupe de discussion.</p>
       <h2 class="h2" style="margin-top:32px">Entraînement illimité</h2>
       <p>Une fois l'énigme du jour terminée, le mode entraînement te propose des parties au hasard, autant que tu veux. Elles ne comptent pas dans tes statistiques.</p>
+      <h2 class="h2" style="margin-top:32px">Encore envie de jouer ?</h2>
+      <p>Letsdle, un site ami, rassemble d'autres petits jeux à une partie par jour : quiz sur les films d'animation, associations de mots, géographie et plateformes piégées. <a href="{LETSDLE}" target="_blank" rel="noopener">Découvrir Letsdle</a>.</p>
     </article>
   </div>
 </div>

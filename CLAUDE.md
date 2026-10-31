@@ -35,6 +35,12 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
 - `data/questions.src.json` : banque d'origine, **ne jamais modifier** ; `tools/clean_data.py` produit `data/questions.json`.
 - `static/` : CSS, JS (`site.js`, `quiz.js`, `dle.js`), polices auto-hébergées, images.
 - `tools/` : vérifications, images, kit réseaux sociaux, vidéos (longues et narrées).
+- `docs/` : documents de travail que les scripts ne touchent pas (promotion…).
+- `.github/workflows/` : « Vérifications » sur chaque pull request, « Reconstruction quotidienne » chaque nuit.
+
+## Liens partenaires
+
+Le menu et le pied de page renvoient vers Letsdle (https://letsdle.com/), le site d'un ami de Nano : lien simple, non payé, ouvert dans un nouvel onglet.
 
 ## Commandes
 

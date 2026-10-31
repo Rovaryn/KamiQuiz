@@ -89,6 +89,8 @@ p { margin: 0 0 1em; }
 }
 .nav a:hover { color: var(--paper); background: var(--ink-3); }
 .nav a[aria-current="page"] { color: var(--gold); background: rgba(212, 168, 67, .1); }
+.nav a.nav-ext { color: var(--gold); }
+.nav a.nav-ext:hover { color: var(--gold-2); }
 .nav-cta {
   background: var(--gold) !important;
   color: var(--gold-ink) !important;
@@ -96,6 +98,9 @@ p { margin: 0 0 1em; }
 }
 .nav-cta:hover { background: var(--gold-2) !important; }
 .menu-btn { display: none; margin-left: auto; background: none; border: 1px solid var(--line-2); border-radius: var(--r-s); padding: 6px 10px; cursor: pointer; }
+@media (max-width: 1020px) and (min-width: 761px) {
+  .nav a { padding: 8px 9px; font-size: .86rem; }
+}
 @media (max-width: 760px) {
   .menu-btn { display: block; }
   .nav {

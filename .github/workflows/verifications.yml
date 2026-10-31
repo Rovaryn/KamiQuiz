@@ -1,0 +1,36 @@
+# Vérifie chaque pull request avant fusion : génération du site, contrôle des pages et tests dans un vrai navigateur.
+name: Vérifications
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Générer le site
+        run: python3 build.py
+      - name: Contrôle des pages (liens, JSON-LD, sitemap, AdSense)
+        run: python3 tools/check_site.py
+      - name: Installer le navigateur de test
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Tests dans le navigateur
+        run: |
+          (cd dist && python3 -m http.server 8765 >/dev/null 2>&1 &)
+          sleep 2
+          python3 tools/browser_test.py captures
+      - name: Garder les captures d'écran
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: captures
+          path: captures/
+          retention-days: 14
