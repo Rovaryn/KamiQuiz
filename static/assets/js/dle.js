@@ -1,4 +1,4 @@
-/* KamiQuiz — Kamidle : personnage, pouvoir, emoji et univers du jour */
+/* KamiQuiz — Kamidle : personnage, pouvoir, emoji, univers et mot mystère du jour */
 (function () {
   'use strict';
   var esc = KQ.esc, store = KQ.store;
@@ -6,10 +6,12 @@
     personnage: { label: 'Personnage', ico: '🎯', max: 0 },
     pouvoir: { label: 'Pouvoir', ico: '⚡', max: 6 },
     emoji: { label: 'Emoji', ico: '😶', max: 6 },
-    univers: { label: 'Univers', ico: '🌍', max: 6 }
+    univers: { label: 'Univers', ico: '🌍', max: 6 },
+    mot: { label: 'Mot mystère', ico: '🔤', max: 6 }
   };
   var GENRE = { M: 'Masculin', F: 'Féminin', N: 'Aucun' };
-  var COLS = ['Univers', 'Genre', 'Espèce', 'Rôle', 'Style'];
+  var COLS = ['Univers', 'Catégorie', 'Genre', 'Espèce', 'Rôle', 'Style', 'Âge', 'Cheveux', 'Année'];
+  var KB = ['AZERTYUIOP', 'QSDFGHJKLM', '<WXCVBN>'];
 
   /* ---------- dates : le jeu change à minuit, heure locale ---------- */
   function iso(d) {
@@ -35,6 +37,7 @@
         d.byId = {};
         d.chars.forEach(function (c) { d.byId[c.id] = c; });
         d.ukeys = Object.keys(d.univers);
+        d.mkeys = Object.keys(d.mots || {});
         return d;
       });
     }
@@ -42,13 +45,18 @@
   }
 
   /* La cible du jour : calendrier fixe, avec repli si le contenu n'est pas encore publié sur ce déploiement */
-  function targetFor(data, mode, idx) {
-    var list = data.sched[mode];
-    var pool = mode === 'univers' ? data.ukeys : data.chars.filter(function (c) {
+  function poolFor(data, mode) {
+    if (mode === 'univers') return data.ukeys;
+    if (mode === 'mot') return data.mkeys;
+    return data.chars.filter(function (c) {
       return mode === 'pouvoir' ? c.p : mode === 'emoji' ? c.emo.length >= 2 : true;
     }).map(function (c) { return c.id; });
+  }
+  function targetFor(data, mode, idx) {
+    var list = data.sched[mode];
+    var pool = poolFor(data, mode);
     var id = list[idx % list.length];
-    var ok = mode === 'univers' ? data.univers[id] : data.byId[id];
+    var ok = mode === 'univers' ? data.univers[id] : mode === 'mot' ? data.mots[id] : data.byId[id];
     if (ok && pool.indexOf(id) >= 0) return id;
     return pool[(idx * 7919) % pool.length];
   }
@@ -103,7 +111,7 @@
     });
     var sum = document.querySelector('[data-dle-summary]');
     if (sum) {
-      sum.textContent = done === total ? 'Les quatre énigmes du jour sont terminées. Rendez-vous demain à minuit !'
+      sum.textContent = done === total ? 'Toutes les énigmes du jour sont terminées. Rendez-vous demain à minuit !'
         : done ? done + ' énigme' + (done > 1 ? 's' : '') + ' sur ' + total + ' terminée' + (done > 1 ? 's' : '') + " aujourd'hui."
         : '';
     }
@@ -134,15 +142,13 @@
       yEl.innerHTML = "Réponse d'hier : <b>" + esc(nameOf(yid)) + '</b>';
     }
 
-    function nameOf(id) { return MODE === 'univers' ? data.series[id].n : data.byId[id].name; }
-    function serieOf(id) { return MODE === 'univers' ? id : data.byId[id].u; }
+    function nameOf(id) { return MODE === 'univers' ? data.series[id].n : MODE === 'mot' ? id : data.byId[id].name; }
+    function serieOf(id) { return MODE === 'univers' ? id : MODE === 'mot' ? null : data.byId[id].u; }
 
     function newGame(isPractice) {
       practice = isPractice;
       if (practice) {
-        var pool = MODE === 'univers' ? data.ukeys : data.chars.filter(function (c) {
-          return MODE === 'pouvoir' ? c.p : MODE === 'emoji' ? c.emo.length >= 2 : true;
-        }).map(function (c) { return c.id; });
+        var pool = poolFor(data, MODE);
         var t;
         do { t = pool[Math.floor(Math.random() * pool.length)]; } while (pool.length > 1 && t === target);
         target = t;
@@ -152,12 +158,15 @@
         state = store.get(stateKey(MODE, today), null);
         if (!state || state.t !== target) state = { t: target, guesses: [], done: false, win: false };
       }
+      cur = '';
       render();
     }
     function save() { if (!practice) store.set(stateKey(MODE, today), state); }
 
     /* ----- rendu ----- */
+    var cur = '', justPlayed = false;
     function render() {
+      if (MODE === 'mot') return renderMot();
       var n = state.guesses.length;
       var head = '<div class="dle-top"><strong>' + (practice ? 'Entraînement' : 'Kamidle n°' + (idx + 1)) + '</strong>' +
         '<span>' + CONF.ico + ' ' + CONF.label + (CONF.max ? ' · ' + Math.min(n, CONF.max) + '/' + CONF.max : (n ? ' · ' + n + ' essai' + (n > 1 ? 's' : '') : '')) + '</span></div>';
@@ -313,17 +322,27 @@
     /* ----- historique des essais ----- */
     function cmpPerso(g, t) {
       var su = data.series[g.u], tu = data.series[t.u];
-      function setCmp(a, b) {
+      function setCmp(a, b, near) {
         var same = a.length === b.length && a.every(function (x) { return b.indexOf(x) >= 0; });
         if (same) return 'ok';
-        return a.some(function (x) { return b.indexOf(x) >= 0; }) ? 'near' : 'no';
+        if (a.some(function (x) { return b.indexOf(x) >= 0; })) return 'near';
+        if (near && a.some(function (x) {
+          return near.some(function (grp) { return grp.indexOf(x) >= 0 && b.some(function (y) { return grp.indexOf(y) >= 0; }); });
+        })) return 'near';
+        return 'no';
       }
+      function arrow(a, b) { return a === b ? '' : (b > a ? '↑' : '↓'); }
+      var ai = data.ages.indexOf(g.a), at = data.ages.indexOf(t.a);
       return [
-        [su.n, g.u === t.u ? 'ok' : su.c === tu.c ? 'near' : 'no'],
+        [su.n, g.u === t.u ? 'ok' : 'no'],
+        [data.cats[su.c], su.c === tu.c ? 'ok' : 'no'],
         [GENRE[g.g], g.g === t.g ? 'ok' : 'no'],
         [g.e.join(', '), setCmp(g.e, t.e)],
         [g.r, g.r === t.r ? 'ok' : 'no'],
-        [g.s.join(', '), setCmp(g.s, t.s)]
+        [g.s.join(', '), setCmp(g.s, t.s)],
+        [g.a, ai === at ? 'ok' : 'no', arrow(ai, at)],
+        [g.h.join(', '), setCmp(g.h, t.h, data.hairNear)],
+        [String(g.y), g.y === t.y ? 'ok' : 'no', arrow(g.y, t.y)]
       ];
     }
 
@@ -335,7 +354,8 @@
         var rows = list.map(function (id) {
           var g = data.byId[id];
           var cells = cmpPerso(g, t).map(function (c, i) {
-            return '<td class="c-' + c[1] + '" data-label="' + COLS[i] + '">' + esc(c[0]) + '</td>';
+            return '<td class="c-' + c[1] + '" data-label="' + COLS[i] + '">' + esc(c[0]) +
+              (c[2] ? ' <span class="dle-arrow" aria-label="' + (c[2] === '↑' ? 'la cible est au-dessus' : 'la cible est en dessous') + '">' + c[2] + '</span>' : '') + '</td>';
           }).join('');
           return '<tr><th scope="row" class="' + (id === target ? 'c-ok' : '') + '">' + esc(g.name) + '</th>' + cells + '</tr>';
         }).join('');
@@ -369,6 +389,10 @@
         });
         if (rows.length > 8) { lines = lines.concat(rows.slice(0, 3)); lines.push('⋯ ' + (rows.length - 6) + ' de plus'); lines = lines.concat(rows.slice(-3)); }
         else lines = lines.concat(rows);
+      } else if (MODE === 'mot') {
+        lines.push((state.win ? n : 'X') + '/' + CONF.max + ' · ' + target.length + ' lettres');
+        var emm = { ok: '🟩', near: '🟨', no: '⬛' };
+        state.guesses.forEach(function (gw) { lines.push(scoreWord(gw, target).map(function (x) { return emm[x]; }).join('')); });
       } else {
         lines.push(state.guesses.map(function (id) { return id === target ? '🟩' : '🟥'; }).join('') +
           (state.win ? ' ' + n + '/' + CONF.max : ' X/' + CONF.max));
@@ -379,13 +403,13 @@
 
     function renderEnd() {
       var box = root.querySelector('#dle-end');
-      var sid = serieOf(target), s = data.series[sid];
+      var sid = serieOf(target), s = sid ? data.series[sid] : null;
       var n = state.guesses.length;
       var st = practice ? null : store.get(statsKey(MODE), null);
       var html = '<div class="dle-result ' + (state.win ? 'win' : 'lose') + '">' +
         '<p class="dle-verdict">' + (state.win ? (n === 1 ? 'Du premier coup ! ' : 'Bien joué ! ') + 'C\'était' : 'Perdu… C\'était') + '</p>' +
         '<p class="dle-answer">' + esc(nameOf(target)) + '</p>' +
-        (MODE !== 'univers' ? '<p class="muted">' + esc(s.n) + '</p>' : '') +
+        (MODE === 'mot' ? '<p class="dle-def">' + esc(data.mots[target]) + '</p>' : MODE !== 'univers' ? '<p class="muted">' + esc(s.n) + '</p>' : '') +
         (state.win ? '<p>Trouvé en <b>' + n + '</b> essai' + (n > 1 ? 's' : '') + '.</p>' : '');
       if (st) {
         html += '<div class="dle-stats"><div><b>' + st.played + '</b><small>parties</small></div><div><b>' + (st.played ? Math.round(st.wins * 100 / st.played) : 0) + ' %</b><small>réussite</small></div>' +
@@ -394,7 +418,7 @@
       }
       html += '<div class="btn-row" style="justify-content:center">' +
         (practice ? '' : '<button class="btn btn-gold" type="button" data-act="share">Partager mon résultat</button>') +
-        '<a class="btn" href="/quiz/' + s.s + '/">Quiz ' + esc(s.n) + '</a>' +
+        (s ? '<a class="btn" href="/quiz/' + s.s + '/">Quiz ' + esc(s.n) + '</a>' : '') +
         '<button class="btn" type="button" data-act="practice">' + (practice ? 'Encore une' : 'Entraînement illimité') + '</button>' +
         (practice ? '<button class="btn" type="button" data-act="daily">Revenir à l\'énigme du jour</button>' : '') +
         '</div>';
@@ -409,7 +433,7 @@
             return '<a href="/dle/' + m + '/">' + MODES[m].ico + ' ' + MODES[m].label + '</a>';
           }).join(' · ') + '</p>';
         } else {
-          html += '<p class="dle-more">Les quatre énigmes du jour sont terminées. Tu mérites ton rang de Kami.</p>';
+          html += '<p class="dle-more">Toutes les énigmes du jour sont terminées. Tu mérites ton rang de Kami.</p>';
         }
       }
       html += '</div>';
@@ -453,6 +477,96 @@
       }
       upd();
       timer = setInterval(upd, 1000);
+    }
+
+    /* ----- Mot mystère ----- */
+    var dict = null;
+    if (MODE === 'mot') {
+      fetch('/data/mots.txt').then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
+        dict = new Set(t.split('\n'));
+      }).catch(function () { dict = null; });
+    }
+    function scoreWord(gw, tw) {
+      var res = [], left = {}, i;
+      for (i = 0; i < tw.length; i++) {
+        if (gw[i] === tw[i]) res[i] = 'ok';
+        else left[tw[i]] = (left[tw[i]] || 0) + 1;
+      }
+      for (i = 0; i < tw.length; i++) {
+        if (res[i]) continue;
+        if (left[gw[i]]) { res[i] = 'near'; left[gw[i]]--; } else res[i] = 'no';
+      }
+      return res;
+    }
+    function keyStates() {
+      var rank = { no: 1, near: 2, ok: 3 }, st = {};
+      state.guesses.forEach(function (gw) {
+        scoreWord(gw, target).forEach(function (r, i) {
+          if (!st[gw[i]] || rank[r] > rank[st[gw[i]]]) st[gw[i]] = r;
+        });
+      });
+      return st;
+    }
+    function renderMot() {
+      var L = target.length, n = state.guesses.length, w = wrongCount();
+      var head = '<div class="dle-top"><strong>' + (practice ? 'Entraînement' : 'Kamidle n°' + (idx + 1)) + '</strong>' +
+        '<span>' + CONF.ico + ' ' + CONF.label + ' · ' + Math.min(n, CONF.max) + '/' + CONF.max + '</span></div>';
+      var rows = '';
+      for (var r = 0; r < CONF.max; r++) {
+        var gw = state.guesses[r], sc = gw ? scoreWord(gw, target) : null;
+        var isCur = !gw && r === n && !state.done;
+        rows += '<div class="dle-row' + (gw && r === n - 1 && justPlayed ? ' is-new' : '') + (isCur ? ' is-cur' : '') + '" style="--n:' + L + '">';
+        for (var i = 0; i < L; i++) {
+          var ch = gw ? gw[i] : isCur ? (cur[i] || '') : '';
+          rows += '<span class="dle-tile' + (sc ? ' c-' + sc[i] : ch ? ' filled' : '') + '" style="--i:' + i + '">' + esc(ch) + '</span>';
+        }
+        rows += '</div>';
+      }
+      var hints = '<div class="dle-hints" style="margin-top:18px">' +
+        hint(w >= 3, 'Première lettre', target.charAt(0), 3 - w) + hint(w >= 5, 'Définition', data.mots[target], 5 - w) + '</div>';
+      var kb = '';
+      if (!state.done) {
+        var ks = keyStates();
+        kb = '<div class="dle-kb" role="group" aria-label="Clavier">' + KB.map(function (line) {
+          return '<div>' + line.split('').map(function (k) {
+            if (k === '<') return '<button type="button" class="dle-key wide" data-key="Backspace" aria-label="Effacer">⌫</button>';
+            if (k === '>') return '<button type="button" class="dle-key wide" data-key="Enter">Valider</button>';
+            return '<button type="button" class="dle-key' + (ks[k] ? ' c-' + ks[k] : '') + '" data-key="' + k + '">' + k + '</button>';
+          }).join('') + '</div>';
+        }).join('') + '</div>';
+      }
+      root.innerHTML = head + '<div class="dle-clue"><p class="dle-ask">Trouve le mot du jour : <b>' + L + ' lettres</b></p>' +
+        '<div class="dle-board">' + rows + '</div>' + hints + '</div>' + kb + '<div class="dle-end" id="dle-end"></div>';
+      justPlayed = false;
+      if (state.done) renderEnd();
+    }
+    function motKey(k) {
+      if (MODE !== 'mot' || state.done) return;
+      var L = target.length;
+      if (k === 'Backspace') { cur = cur.slice(0, -1); renderMot(); return; }
+      if (k === 'Enter') {
+        if (cur.length < L) { KQ.toast('Le mot fait ' + L + ' lettres.'); return; }
+        if (!dict) { KQ.toast('Chargement du dictionnaire, réessaie dans une seconde.'); return; }
+        if (!dict.has(cur) && !data.mots[cur]) { KQ.toast('« ' + cur + ' » n\'est pas dans notre dictionnaire.'); return; }
+        if (state.guesses.indexOf(cur) >= 0) { KQ.toast('Tu as déjà essayé ce mot.'); return; }
+        var gw = cur; cur = ''; justPlayed = true;
+        guess(gw);
+        return;
+      }
+      if (/^[A-Z]$/.test(k) && cur.length < L) { cur += k; renderMot(); }
+    }
+    if (MODE === 'mot') {
+      document.addEventListener('keydown', function (ev) {
+        if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+        var k = ev.key;
+        if (k === 'Enter' || k === 'Backspace') { ev.preventDefault(); motKey(k); return; }
+        var up = k.length === 1 ? k.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() : '';
+        if (/^[A-Z]$/.test(up)) motKey(up);
+      });
+      root.addEventListener('click', function (ev) {
+        var b = ev.target.closest('[data-key]');
+        if (b) motKey(b.getAttribute('data-key'));
+      });
     }
 
     newGame(false);

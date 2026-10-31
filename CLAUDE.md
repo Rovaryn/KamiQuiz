@@ -31,7 +31,10 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
 - `content/series.py` : métadonnées des 45 séries (avec `date` de publication pour les nouvelles).
 - `content/guides/*.md` : guides, avec `date:` en tête.
 - `content/new_series.py` : questions des séries ajoutées récemment.
-- `content/dle.py` : données du Kamidle (personnages, pouvoirs, emojis, univers).
+- `content/dle.py` : données du Kamidle (personnages, pouvoirs, emojis, univers, mots, âges, cheveux, années).
+  Le calendrier part de l'ordre figé `SCHED_V1` : ne jamais le modifier, sinon les énigmes passées et du jour changent.
+  Pour retirer un personnage, le supprimer de `CHARS` (il est remplacé seul les jours où il tombait) ; un nouveau va en fin de file.
+- `data/mots-fr.txt` : dictionnaire des essais du Mot mystère (licence MIT, voir `data/mots-fr.LICENSE.txt`).
 - `data/questions.src.json` : banque d'origine, **ne jamais modifier** ; `tools/clean_data.py` produit `data/questions.json`.
 - `static/` : CSS, JS (`site.js`, `quiz.js`, `dle.js`), polices auto-hébergées, images.
 - `tools/` : vérifications, images, kit réseaux sociaux, vidéos (longues et narrées).

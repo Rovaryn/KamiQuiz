@@ -337,7 +337,7 @@ def build_home():
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2 class="h2">Kamidle, les jeux du jour</h2></div><p>Quatre énigmes par jour, les mêmes pour tout le monde. Trouve-les, garde ta série et partage ton résultat.</p></div>
+    <div class="section-head"><div><h2 class="h2">Kamidle, les jeux du jour</h2></div><p>Cinq énigmes par jour, les mêmes pour tout le monde. Trouve-les, garde ta série et partage ton résultat.</p></div>
     <div class="dle-modes">{dle_cards()}</div>
   </div>
 </section>
@@ -601,13 +601,15 @@ DLE_START = '2026-10-27'          # Kamidle n°1
 DLE_DAYS = 800                    # calendrier calculé d'avance, identique dans tous les déploiements
 DLE_INFO = {
     'personnage': ('Devine le personnage du jour',
-                   "Propose un personnage : chaque essai indique ce qu'il partage avec la cible (univers, genre, espèce, rôle, style de combat). Essais illimités, deux indices se débloquent en route."),
+                   "Propose un personnage : chaque essai indique ce qu'il partage avec la cible (univers, catégorie, genre, espèce, rôle, style, âge, cheveux et année de sortie). Essais illimités, deux indices se débloquent en route."),
     'pouvoir': ('Devine le pouvoir du jour',
                 "Un pouvoir ou une technique est décrit sans le moindre nom. À toi de trouver son propriétaire en six essais. Chaque erreur débloque un indice."),
     'emoji': ('Devine le personnage en emojis',
               "Un personnage est résumé en quelques emojis. Le premier est offert, chaque erreur en dévoile un nouveau. Six essais."),
     'univers': ("Devine l'univers du jour",
                 "Cinq indices, du plus vague au plus précis, décrivent un animé, une série, une saga ou un jeu. Trouve-le avec le moins d'indices possible."),
+    'mot': ('Le Mot mystère du jour',
+            "Un mot tiré de l'univers des animés, des séries et des jeux vidéo. Six essais : chaque lettre bien placée s'affiche en vert, chaque lettre présente mais mal placée en jaune."),
 }
 
 
@@ -617,33 +619,56 @@ def dle_avail():
 
 
 def dle_schedule():
+    """Calendrier fixe : même résultat quel que soit le jour de génération.
+
+    Les pools partent de l'ordre figé DLE.SCHED_V1 ; un personnage retiré n'est plus tiré,
+    un personnage ajouté vient en fin de file. Le Mot mystère a son propre tirage, fait après
+    les autres jeux pour ne rien changer à leur calendrier.
+    """
     import random
     avail = dle_avail()
+    live = {c['id']: c for c in DLE.CHARS}
+    v1_ids = {r[0] for r in DLE.SCHED_V1}
+    extra = [c for c in DLE.CHARS if c['id'] not in v1_ids]
     start = datetime.date.fromisoformat(DLE_START)
+    NEVER = '9999-12-31'
     pools = {
-        'personnage': [(c['id'], c['u']) for c in DLE.CHARS],
-        'pouvoir': [(c['id'], c['u']) for c in DLE.CHARS if c['p']],
-        'emoji': [(c['id'], c['u']) for c in DLE.CHARS if len(c['emo']) >= 2],
+        'personnage': [(i, u) for i, u, _, _ in DLE.SCHED_V1],
+        'pouvoir': [(i, u) for i, u, has_p, _ in DLE.SCHED_V1 if has_p],
+        'emoji': [(i, u) for i, u, _, n in DLE.SCHED_V1 if n >= 2],
         'univers': [(k, k) for k in DLE.UNIVERS],
+        'mot': [(m, None) for m, _ in DLE.MOTS],
     }
     queues = {}
     for m, pool in pools.items():
         q = list(pool)
         random.Random('kamidle-' + m).shuffle(q)
+        if m == 'personnage':
+            q += [(c['id'], c['u']) for c in extra]
+        elif m == 'pouvoir':
+            q += [(c['id'], c['u']) for c in extra if c['p']]
+        elif m == 'emoji':
+            q += [(c['id'], c['u']) for c in extra if len(c['emo']) >= 2]
         queues[m] = q
+
+    def ok_date(m, iid, u, day):
+        # Les personnages retirés comptent encore ici : le tirage reste identique à l'original,
+        # puis on les remplace un par un plus bas.
+        return m == 'mot' or avail.get(u, NEVER) <= day
+
     sched = {m: [] for m in pools}
     prev_u = {m: None for m in pools}
     for d in range(DLE_DAYS):
         day = (start + datetime.timedelta(days=d)).isoformat()
         used = set()
-        for m in ('univers', 'personnage', 'pouvoir', 'emoji'):
+        for m in ('univers', 'personnage', 'pouvoir', 'emoji', 'mot'):
             q = queues[m]
             pick = None
             for strict in (True, False):
                 for i, (iid, u) in enumerate(q):
-                    if avail[u] > day:
+                    if not ok_date(m, iid, u, day):
                         continue
-                    if strict and (u == prev_u[m] or (m != 'univers' and iid in used)):
+                    if strict and m != 'mot' and (u == prev_u[m] or (m != 'univers' and iid in used)):
                         continue
                     pick = i
                     break
@@ -654,6 +679,27 @@ def dle_schedule():
             sched[m].append(iid)
             used.add(iid)
             prev_u[m] = u
+
+    # Remplacement des personnages retirés, jour par jour, sans toucher aux autres jours.
+    for m in ('personnage', 'pouvoir', 'emoji'):
+        ok = [c['id'] for c in DLE.CHARS
+              if (m != 'pouvoir' or c['p']) and (m != 'emoji' or len(c['emo']) >= 2)]
+        random.Random('kamidle-remplacement-' + m).shuffle(ok)
+        k = 0
+        for d, iid in enumerate(sched[m]):
+            if iid in live:
+                continue
+            day = (start + datetime.timedelta(days=d)).isoformat()
+            others = {sched[o][d] for o in ('personnage', 'pouvoir', 'emoji') if o != m}
+            recent = set(sched[m][max(0, d - 60):d + 60])
+            for _ in range(len(ok)):
+                cand = ok[k % len(ok)]
+                k += 1
+                if avail[live[cand]['u']] <= day and cand not in others and cand not in recent:
+                    sched[m][d] = cand
+                    break
+            else:
+                sched[m][d] = next(c for c in ok if avail[live[c]['u']] <= day)
     return sched
 
 
@@ -674,8 +720,21 @@ def build_dle():
         'series': series,
         'chars': chars,
         'univers': {k: v for k, v in DLE.UNIVERS.items() if k in keys},
+        'mots': {m: d for m, d in DLE.MOTS},
+        'ages': DLE.AGES,
+        'hairNear': [sorted(g) for g in DLE.HAIR_NEAR],
         'sched': dle_schedule(),
     }
+    # Liste des mots acceptés pour le Mot mystère : dictionnaire (licence MIT, voir data/mots-fr.LICENSE.txt)
+    # + mots du jeu + noms d'univers et de personnages d'un seul mot
+    valid = set((ROOT / 'data' / 'mots-fr.txt').read_text(encoding='utf-8').split())
+    valid |= {m for m, _ in DLE.MOTS}
+    for c in chars:
+        for part in re.split(r'[^A-Za-zÀ-ÿ]+', c['name'] + ' ' + ' '.join(c['alias'])):
+            w = ''.join(ch for ch in __import__('unicodedata').normalize('NFD', part) if ch.isalpha() and ord(ch) < 128).upper()
+            if 5 <= len(w) <= 8:
+                valid.add(w)
+    (DIST / 'data' / 'mots.txt').write_text('\n'.join(sorted(valid)), encoding='utf-8')
     (DIST / 'data' / 'dle.json').write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     n_chars, n_pow = len(chars), sum(1 for c in chars if c['p'])
     n_univ = len(data['univers'])
@@ -686,7 +745,7 @@ def build_dle():
   <div class="page-head">
     {crumbs_html(crumbs)}
     <h1 class="h1">Kamidle, les jeux du jour</h1>
-    <p class="lede">Quatre énigmes chaque jour, les mêmes pour tous les joueurs : un personnage, un pouvoir, des emojis et un univers à deviner.</p>
+    <p class="lede">Cinq énigmes chaque jour, les mêmes pour tous les joueurs : un personnage, un pouvoir, des emojis, un univers et un mot mystère à deviner.</p>
   </div>
   <div class="dle-modes" style="margin-top:32px">{dle_cards()}</div>
   <p class="dle-summary" data-dle-summary></p>
@@ -694,7 +753,7 @@ def build_dle():
     <article class="prose">
       <h2 class="h2">Comment ça marche</h2>
       <p>Le Kamidle s'inspire des jeux en « -dle » nés avec Wordle : une énigme par jour, identique pour tout le monde, qui change à minuit (heure de ton appareil). Tu as le temps de réfléchir, de revenir plus tard dans la journée, et de comparer ton résultat avec tes amis le soir.</p>
-      <p>Les quatre jeux puisent dans les mêmes univers que nos quiz : {n_chars} personnages, {n_pow} pouvoirs décrits sans les nommer et {n_univ} univers résumés en cinq indices. Une fois l'énigme trouvée, tu peux enchaîner sur le quiz complet de la série pour vérifier que tu la connais vraiment.</p>
+      <p>Les jeux puisent dans les mêmes univers que nos quiz : {n_chars} personnages, {n_pow} pouvoirs décrits sans les nommer, {n_univ} univers résumés en cinq indices et {len(DLE.MOTS)} mots du vocabulaire des animés, des séries et des jeux vidéo, chacun accompagné de sa définition. Une fois l'énigme trouvée, tu peux enchaîner sur le quiz complet de la série pour vérifier que tu la connais vraiment.</p>
       <h2 class="h2" style="margin-top:32px">Ta série de victoires</h2>
       <p>Chaque jeu garde ta série de jours gagnés d'affilée et ton record. Ces statistiques restent sur ton appareil : pas de compte, pas d'inscription. Si tu changes de navigateur, tu repars de zéro.</p>
     </article>
@@ -713,7 +772,7 @@ def build_dle():
 '''
     ld = [crumbs_ld(crumbs)]
     write('/dle/', head('Kamidle — devine le personnage, le pouvoir et l\'univers du jour | KamiQuiz',
-                        f'Quatre jeux du jour gratuits sur les animés, séries, films et jeux vidéo : devine le personnage, le pouvoir, les emojis et l\'univers du jour. {n_chars} personnages, sans inscription.',
+                        f'Cinq jeux du jour gratuits sur les animés, séries, films et jeux vidéo : devine le personnage, le pouvoir, les emojis, l\'univers et le mot du jour. {n_chars} personnages, sans inscription.',
                         '/dle/', ld) + header('/dle/') + body + footer(('/assets/js/site.js', '/assets/js/dle.js')))
     page('/dle/', '0.9', 'daily')
 
@@ -724,10 +783,18 @@ def build_dle():
         crumbs = [('Accueil', '/'), ('Kamidle', '/dle/'), (label, f'/dle/{m}/')]
         legend = ''
         if m == 'personnage':
+            years = ', '.join(f'{e(BY_KEY[k]["name"])} {y}' + (f' ({DLE.YEAR_NOTES[k]})' if k in DLE.YEAR_NOTES else '')
+                              for k, y in sorted(DLE.YEARS.items(), key=lambda kv: (kv[1], kv[0])) if k in BY_KEY)
             legend = f'''<h2 class="h2">Lire les indices</h2>
-      <p><span class="dle-sw ok"></span> Vert : identique à la cible. <span class="dle-sw near"></span> Jaune : en partie juste (une espèce ou un style en commun, ou un univers de la même famille). <span class="dle-sw no"></span> Rouge : aucun point commun.</p>
+      <p><span class="dle-sw ok"></span> Vert : identique à la cible. <span class="dle-sw near"></span> Jaune : en partie juste (une espèce, un style ou une couleur de cheveux en commun, ou une couleur proche comme noir et brun). <span class="dle-sw no"></span> Rouge : aucun point commun. Pour l'âge et l'année, la flèche indique si la cible est plus âgée (↑) ou plus jeune (↓), plus récente (↑) ou plus ancienne (↓).</p>
       <p>Le <b>rôle</b> décrit la place du personnage dans l'histoire : protagoniste, allié, rival, mentor, antagoniste ou neutre. Le <b>style</b> décrit sa façon principale de combattre :</p>
-      <ul class="dle-legend">{legend_styles}</ul>'''
+      <ul class="dle-legend">{legend_styles}</ul>
+      <p>L'<b>âge</b> est l'âge réel du personnage pendant l'essentiel de l'histoire, pas son apparence : enfant (12 ans ou moins), ado (13 à 19 ans), adulte (20 à 59 ans), âgé (60 ans et plus) ou sans âge (immortels, espèces à très longue vie, créatures et animaux). Les <b>cheveux</b> sont ceux de son look le plus connu ; « aucun » veut dire chauve, casqué, ou couvert de fourrure.</p>
+      <p>L'<b>année</b> est celle du début de l'œuvre originale : premier tome, premier épisode, premier film ou premier jeu. {years}.</p>'''
+        elif m == 'mot':
+            legend = f'''<h2 class="h2">Règles</h2>
+      <p>Le mot du jour compte entre cinq et huit lettres, sans accent. Tape un mot de la bonne longueur au clavier ou avec les touches à l'écran, puis valide. <span class="dle-sw ok"></span> Vert : la lettre est à la bonne place. <span class="dle-sw near"></span> Jaune : la lettre est dans le mot, mais ailleurs. <span class="dle-sw no"></span> Gris : la lettre n'y est pas.</p>
+      <p>Les essais doivent être de vrais mots français, ou des termes de l'univers des animés et des jeux vidéo. Le mot à trouver vient toujours de cet univers, et sa définition s'affiche à la fin de la partie.</p>'''
         others = ''.join(f'<a class="chip" href="/dle/{m2}/">{i2} {l2}</a>' for m2, l2, i2, _ in DLE.MODES if m2 != m)
         body = f'''<div class="wrap">
   <div class="page-head">

@@ -187,7 +187,7 @@ with sync_playwright() as p:
     import json as _j
     D = _j.loads(Path('dist/data/dle.json').read_text(encoding='utf-8'))
     page.goto(BASE + '/dle/')
-    check(page.locator('[data-dle-card]').count() == 4, 'hub Kamidle : 4 jeux')
+    check(page.locator('[data-dle-card]').count() == 5, 'hub Kamidle : 5 jeux')
     page.screenshot(path=str(SHOTS / 'dle-hub.png'), full_page=True)
     for mode in ('personnage', 'pouvoir', 'emoji', 'univers'):
         page.goto(f'{BASE}/dle/{mode}/')
@@ -206,6 +206,14 @@ with sync_playwright() as p:
             page.keyboard.press('Enter')
         if mode == 'personnage':
             check(page.locator('.dle-table tbody tr').count() == 2, 'personnage : 2 lignes de comparaison')
+            check(page.locator('.dle-table tbody tr >> nth=0').locator('td').count() == 9, 'personnage : 9 critères par essai')
+            check(page.locator('.dle-table thead th').count() == 10, 'personnage : en-têtes Âge, Cheveux, Année…')
+            yt = next(c['y'] for c in D['chars'] if c['id'] == tid)
+            for w in wrong:
+                yw = next(c['y'] for c in D['chars'] if c['name'] == w)
+                cell = page.locator('.dle-table tbody tr', has_text=w).locator('td[data-label="Année"]').inner_text()
+                expect = '' if yw == yt else ('↑' if yt > yw else '↓')
+                check(expect in cell and (expect or '↑' not in cell and '↓' not in cell), f'personnage : flèche de l\'année juste pour {w} ({cell.strip()})')
             page.screenshot(path=str(SHOTS / 'dle-personnage.png'), full_page=True)
         else:
             check(page.locator('.dle-guesses li').count() == 2, f'{mode} : 2 essais affichés')
@@ -225,9 +233,53 @@ with sync_playwright() as p:
         check(page.is_hidden('#dle-in'), f'{mode} : la partie du jour reste terminée après rechargement')
         page.click('[data-act=practice]')
         check(page.is_visible('#dle-in') and 'Entraînement' in page.inner_text('.dle-top'), f'{mode} : entraînement lancé')
+    print('Mot mystère')
+    page.goto(BASE + '/dle/mot/')
+    page.wait_for_selector('.dle-board')
+    tw = page.evaluate("""() => fetch('/data/dle.json').then(r=>r.json()).then(d=>{
+        const p=d.start.split('-'), n=new Date();
+        const i=Math.max(0,Math.round((Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())-Date.UTC(+p[0],+p[1]-1,+p[2]))/864e5));
+        return d.sched.mot[i % d.sched.mot.length];})""")
+    L = len(tw)
+    check(page.locator('.dle-row').count() == 6 and page.locator('.dle-row >> nth=0').locator('.dle-tile').count() == L, f'mot : grille 6 × {L}')
+    page.wait_for_timeout(800)   # dictionnaire chargé
+    page.keyboard.type('Z' * L)
+    page.keyboard.press('Enter')
+    check(page.locator('.dle-row .c-no, .dle-row .c-ok').count() == 0, 'mot : un mot inventé est refusé')
+    for _ in range(L):
+        page.keyboard.press('Backspace')
+    other = next(m for m in D['mots'] if len(m) == L and m != tw)
+    for ch in other:
+        page.click(f'.dle-key[data-key="{ch}"]')
+    page.click('.dle-key[data-key="Enter"]')
+    tiles = page.locator('.dle-row >> nth=0').locator('.dle-tile')
+    got = [tiles.nth(i).get_attribute('class').split('c-')[-1] for i in range(L)]
+    def wordle(g, t):
+        res, left = [None] * len(t), {}
+        for i, (a, b) in enumerate(zip(g, t)):
+            if a == b: res[i] = 'ok'
+            else: left[b] = left.get(b, 0) + 1
+        for i, a in enumerate(g):
+            if res[i]: continue
+            if left.get(a): res[i] = 'near'; left[a] -= 1
+            else: res[i] = 'no'
+        return res
+    check(got == wordle(other, tw), f'mot : couleurs justes pour {other} contre {tw}')
+    page.screenshot(path=str(SHOTS / 'dle-mot.png'), full_page=True)
+    page.keyboard.type(tw.lower())
+    page.keyboard.press('Enter')
+    page.wait_for_selector('.dle-result.win', timeout=3000)
+    check(tw in page.inner_text('.dle-answer') and len(page.inner_text('.dle-def')) > 10, f'mot : victoire sur {tw}, définition affichée')
+    page.screenshot(path=str(SHOTS / 'dle-mot-fin.png'), full_page=True)
+    page.reload()
+    page.wait_for_selector('.dle-result.win')
+    check(page.locator('.dle-kb').count() == 0, 'mot : partie du jour terminée après rechargement')
+    page.click('[data-act=practice]')
+    check(page.locator('.dle-kb').count() == 1 and 'Entraînement' in page.inner_text('.dle-top'), 'mot : entraînement lancé')
+
     page.goto(BASE + '/dle/')
-    check(page.locator('.dle-card.is-won').count() == 4, 'hub : les 4 jeux marqués trouvés')
-    check('quatre' in page.inner_text('[data-dle-summary]'), 'hub : message de fin de journée')
+    check(page.locator('.dle-card.is-won').count() == 5, 'hub : les 5 jeux marqués trouvés')
+    check('Toutes' in page.inner_text('[data-dle-summary]'), 'hub : message de fin de journée')
 
     check(not console_errors, 'aucune erreur JavaScript' + (f' ({console_errors[:3]})' if console_errors else ''))
 
@@ -236,7 +288,7 @@ with sync_playwright() as p:
     m.route('**/pagead2.googlesyndication.com/**', block_external)
     m.route('**/*.workers.dev/**', block_external)
     mp = m.new_page()
-    for path, name in [('/dle/personnage/', 'dle-mobile'), ('/', 'home-mobile'), ('/quiz/naruto/', 'serie-mobile'), ('/jouer/?s=naruto&m=libre', 'play-mobile'), ('/quiz/', 'index-mobile')]:
+    for path, name in [('/dle/mot/', 'dle-mot-mobile'), ('/dle/personnage/', 'dle-mobile'), ('/', 'home-mobile'), ('/quiz/naruto/', 'serie-mobile'), ('/jouer/?s=naruto&m=libre', 'play-mobile'), ('/quiz/', 'index-mobile')]:
         mp.goto(BASE + path)
         mp.wait_for_timeout(600)
         sw = mp.evaluate('document.documentElement.scrollWidth')
