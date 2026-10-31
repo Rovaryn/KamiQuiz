@@ -1076,3 +1076,991 @@ fix(S, "Quelle est la première transformation de Végéta lors du combat contre
     fb="Végéta crée lui-même une lune artificielle pour se changer en singe géant (Oozaru). Yajirobe finit par lui trancher la queue.")
 fix(S, "Quel humain de Dragon Ball Z possède un troisième œil et maîtrise des techniques de Ki ultra-concentré ?",
     fb="Ten Shin Han, ancien élève de l'école de la Grue, maîtrise des techniques redoutables comme le Kikoho.")
+
+
+# ---------------------------------------------------------------- L'Attaque des Titans
+S = 'aot'
+fix(S, "Quel Titan détruit le mur Maria au début de la série ?",
+    q="Quel Titan apparaît au-dessus du mur et défonce la porte de Shiganshina au début de la série ?",
+    fb="Le Titan Colossal surgit au-dessus du mur et brise la porte d'un coup de pied. On apprendra plus tard qu'il s'agit de Bertolt Hoover, infiltré parmi les recrues.")
+fix(S, "Qui est Zeke Yeager et quel Titan porte-t-il ?",
+    fb="Zeke Yeager est le demi-frère d'Eren, fils de Grisha et de Dina Fritz. Porteur du Titan Bête et guerrier de Marley, il possède le sang royal.")
+drop(S, "Comment Eren active-t-il le Titan Fondateur malgré sa lignée non royale ?")          # doublon
+drop(S, "Comment Eren active-t-il le Titan Fondateur sans sang royal initialement ?")         # doublon
+fix(S, "Comment Eren parvient-il à déclencher le Titan Fondateur pour la première fois lors de Shiganshina ?",
+    q="Comment Eren déclenche-t-il le pouvoir du Titan Fondateur pour la première fois, à la fin de la saison 2 ?",
+    fb="En frappant la main du Titan Souriant, devenu Titan pur, Eren entre en contact avec Dina Fritz, de sang royal. Ce contact lui permet un bref instant de commander les Titans.")
+fix(S, "Pourquoi Sasha Blouse est-elle surnommée 'la fille à la pomme de terre' ?",
+    q="Que fait Sasha Blouse devant l'instructeur Shadis lors du premier jour d'entraînement ?",
+    a=["Elle mange une pomme de terre", "Elle s'endort debout", "Elle se met à chanter", "Elle s'enfuit en courant"], c=0)
+drop(S, "Pourquoi Sasha Blouse mange-t-elle une pomme de terre pendant les exercices militaires ?")
+fix(S, "Quel est le vrai Titan que porte Historia Reiss dans sa famille ?",
+    q="Quel Titan possédait Frieda Reiss, la demi-sœur d'Historia ?",
+    a=["Titan Fondateur", "Titan Féminin", "Titan Assaillant", "Titan Bête"], c=0)
+drop(S, "Quel Titan de Puissance porte Pieck Finger ?")
+drop(S, "Quelle est la capacité distinctive du Titan Char (Pieck Finger) comparé aux autres Titans de Puissance ?")
+drop(S, "Quel est le vrai lien entre Levi Ackermann et Kenny Ackermann ?")
+drop(S, "Quel est le nom de l'organisation secrète qui détient le vrai pouvoir royal ?")
+drop(S, "Quel est le résultat de la coalition finale contre le Grondement d'Eren ?")
+drop(S, "Quelle est la hauteur des murs protégeant l'humanité dans AOT ?")
+drop(S, "Quel est le nom du camp d'entraînement où Eren et ses amis deviennent soldats ?")
+drop(S, "Quelle institution entraîne les soldats à Paradis avant qu'ils choisissent leur corps ?")
+fix(S, "Qui est la première Titanomane humaine de l'histoire selon la légende ?",
+    q="Qui est la première humaine à avoir obtenu le pouvoir des Titans ?",
+    fb="Ymir Fritz est la première à obtenir le pouvoir des Titans, il y a environ 2000 ans. Selon la légende, elle aurait passé un pacte avec le « diable de la Terre ».")
+drop(S, "Comment le clan Ackermann accède-t-il à ses capacités surhumaines ?")
+drop(S, "Quel est le nom du plan kamikaze d'Erwin lors de la bataille de Shiganshina ?")
+drop(S, "Quelle technique permet aux soldats de cibler la nuque des Titans ?")
+fix(S, "Quelle technique les soldats utilisent-ils pour tuer un Titan ?",
+    fb="Le seul moyen de tuer un Titan est de lui trancher la nuque, là où se trouve son point vital. L'équipement tridimensionnel permet d'atteindre cette zone.")
+drop(S, "Quel est le rang militaire de Levi dans le Corps d'Exploration ?")
+drop(S, "Quelle est la Malédiction de Ymir qui limite les porteurs de Titans ?")
+drop(S, "Quel Titan de Puissance Ymir (l'étudiante) possède-t-elle ?")
+fix(S, "Quel Titan de Puissance Ymir l'étudiante possède-t-elle et comment l'a-t-elle obtenu ?",
+    fb="Ymir, alors Titan pur, a dévoré Marcel Galliard, un guerrier de Marley, et hérité ainsi du Titan Mâchoire. Ce Titan est petit mais très agile.")
+drop(S, "Comment s'appelle la mesure qui interdit aux civils de quitter les villes vers l'extérieur ?")
+fix(S, "Quel ennemi est capable de transformer les Eldiens de Paradis en Titans d'un cri ?",
+    a=["Eren Yeager (Titan Fondateur)", "Zeke Yeager (Titan Bête)", "Pieck Finger", "Reiner Braun"], c=1,
+    fb="Zeke Yeager, de sang royal, peut transformer d'un cri en Titans purs les Eldiens qui ont ingéré son liquide céphalo-rachidien.")
+drop(S, "Quelle nation fictive inspirée du Japon cherche à exploiter les ressources de Paradis ?")
+fix(S, "Quel pays fictif est l'équivalent du Japon dans l'univers AOT ?",
+    fb="Hizuru est une nation inspirée du Japon. Le clan Azumabito, dont descend Mikasa par sa mère, représente ses intérêts.")
+drop(S, "Quel est le prénom du père de Mikasa dont on apprend l'histoire tragique ?")
+drop(S, "Quel est le plan final d'Eren déclenché dans l'arc final ?")
+drop(S, "Que fait Armin pour sauver ses amis lors de l'attaque de Trost en saison 1 ?")
+drop(S, "Quel démon selon la légende a donné son pouvoir à Ymir Fritz il y a 2000 ans ?")
+fix(S, "Quel personnage féminin du Corps d'Exploration est passionnée par l'étude des Titans ?",
+    q="Quel membre du Corps d'exploration est passionné par l'étude des Titans ?",
+    fb="Hange Zoë étudie les Titans avec une passion débordante et fait des découvertes essentielles sur leur nature. Hange devient plus tard commandant du Corps d'exploration.")
+drop(S, "Comment s'appellent les deux frères qui ont fondé leur propre groupe après Marley ?")
+drop(S, "Quel est le résultat du combat d'Armin contre Bertolt (Titan Colossal) à Shiganshina ?")
+drop(S, "Comment Levi survit-il à l'explosion de la grenade Thunder Spear ?")
+drop(S, "Quel district est détruit en premier lors de l'invasion initiale ?")
+fix(S, "Qu'est-ce que la Résistance Eldienne qui s'oppose à Marley ?",
+    fb="Les Restaurationnistes d'Eldia sont des Eldiens du continent, vivant notamment à Liberio, qui rêvent de libérer leur peuple. Grisha Yeager en faisait partie avant d'être capturé et envoyé sur Paradis.")
+fix(S, "Qui succède à Erwin Smith comme commandant du Corps d'Exploration ?",
+    fb="Après la mort d'Erwin, Hange Zoë prend la tête du Corps d'exploration.")
+drop(S, "Quel est le plan de Zeke pour mettre fin à la malédiction des Eldiens ?")
+fix(S, "Comment la Titanomanie se transmet-elle d'un porteur à l'autre ?",
+    q="Comment un Titan de Puissance passe-t-il d'un porteur à l'autre ?")
+drop(S, "Quel pays de l'arc final possède des chars et dirigeables militaires avancés ?")
+fix(S, "Que révèle l'histoire de Ymir Fritz sur l'origine des pouvoirs des Titans ?",
+    a=["Elle était une déesse", "Elle est entrée en contact avec une mystérieuse créature au creux d'un arbre géant", "Elle l'a volé à un dieu", "Elle a créé les Titans pour se venger"], c=1,
+    fb="Ymir Fritz, esclave poursuivie, tombe au creux d'un arbre géant où une étrange créature fusionne avec elle. À sa mort, le roi Fritz force ses filles à manger son corps pour perpétuer le pouvoir.")
+fix(S, "Comment Historia devient-elle officiellement reine de Paradis ?",
+    a=["Par héritage automatique", "Elle est couronnée après le coup d'État du Corps d'exploration", "Par vote populaire", "Eren la force à régner"], c=1,
+    fb="Après le renversement du faux roi par le Corps d'exploration, Historia, héritière de la famille Reiss, est couronnée reine.")
+fix(S, "Quel est le nom de la forteresse Marleyenne la plus redoutable à l'est du continent ?",
+    q="Quelle forteresse de l'Alliance du Moyen-Orient Marley assiège-t-elle au début de la saison 4 ?",
+    a=["Fort Slava", "Fort Reiss", "Fort Salta", "Fort Liberio"], c=0,
+    fb="Le fort Slava est la place forte de l'Alliance du Moyen-Orient. Marley ne la prend qu'en engageant ses Titans, ce qui convainc ses dirigeants que leur avantage militaire touche à sa fin.")
+drop(S, "Quel est le prénom de la petite fille qui court dans les mémoires d'Eren et représente l'avenir ?")
+
+
+# ---------------------------------------------------------------- My Hero Academia
+S = 'mha'
+fix(S, "Qui est le héros numéro 1 au début de la série ?", a=["Endeavor", "Hawks", "Edgeshot", "All Might"], c=3,
+    fb="All Might (Toshinori Yagi) est le héros numéro 1 du Japon et le « Symbole de la Paix ». Il doit se retirer après avoir épuisé ses forces contre All For One.")
+fix(S, "Dans quelle école Deku est-il inscrit ?",
+    fb="U.A. (Yuei) est l'école de héros la plus prestigieuse du Japon. Deku y entre en section Héros, dans la classe 1-A.")
+fix(S, "Quel est le Quirk de Shota Aizawa (Eraserhead) ?",
+    fb="Erasure (Effacement) annule le Quirk de la personne qu'Aizawa fixe du regard. L'effet cesse dès qu'il cligne des yeux.")
+drop(S, "Quel est le Quirk d'Ochaco Uraraka ?")                 # doublons
+drop(S, "Comment s'appelle le Quirk d'Ochaco Uraraka ?")
+drop(S, "Quel est le rang le plus élevé dans le classement des héros de la Hero Association ?")   # One Punch Man
+drop(S, "Quel héros de Rang S a une puissance psychique de niveau S et est numéro 2 ?")            # One Punch Man
+drop(S, "Quel héros de Rang S de MHA utilise la technique Nejire Wave et est l'une des Big Three de U.A. ?")
+drop(S, "Comment Deku déclenche-t-il involontairement Blackwhip lors du tournament ?")
+fix(S, "Quel est le nom de l'attaque finale d'Izuku Midoriya utilisant tous ses membres ?",
+    q="Quelle attaque All Might utilise-t-il pour vaincre All For One à Kamino ?",
+    a=["100% Detroit Smash", "Texas Smash", "United States of Smash", "Delaware Smash"], c=2,
+    fb="United States of Smash est le dernier coup d'All Might, porté à Kamino pour vaincre All For One. Ce combat épuise définitivement ses forces.")
+fix(S, "Quel examen donne aux lycéens le droit d'agir en héros dans des situations réelles ?",
+    q="Quel examen Bakugo et Todoroki ratent-ils lors de la saison 3 ?",
+    a=["L'examen d'entrée de U.A.", "L'examen de licence provisoire", "L'examen de fin de semestre", "Le Festival sportif"], c=1,
+    fb="Bakugo et Todoroki échouent à l'examen de licence provisoire de héros, à cause de leur comportement. Ils doivent suivre des cours de rattrapage pour l'obtenir.")
+drop(S, "Quel est le premier vrai combat héroïque de Deku contre un villain ?")
+drop(S, "Quel est le premier combat héroïque réel de Deku face à une vraie menace ?")
+drop(S, "Quel est le lien entre Midoriya et le 9ème porteur de One For All ?")
+fix(S, "Quel héros enseigne à Deku à utiliser One For All à 5% puis 8% ?",
+    q="Quel héros apprend à Deku à répartir One For All dans tout son corps ?",
+    fb="Gran Torino, l'ancien professeur d'All Might, apprend à Deku à répartir une petite part de One For All dans tout son corps pour ne plus se briser les membres.")
+drop(S, "Quel est le vrai nom d'Eraserhead ?")
+drop(S, "Quel est le nom du Quirk de Mr. Compress, qui lui permet de miniaturiser tout ce qu'il touche ?")
+drop(S, "Quel Quirk de Kirishima lui permet de durcir son corps comme du roc ?")
+drop(S, "Quel est le Quirk d'Eijiro Kirishima (Red Riot) ?")
+drop(S, "Combien de membres compte la classe 1-A de U.A. ?")
+fix(S, "Combien d'étudiants composent la classe 1-A de U.A. ?",
+    fb="La classe 1-A compte 20 élèves, chacun doté d'un Quirk différent.")
+fix(S, "Qui sont les créateurs de All For One et One For All selon l'histoire ?",
+    q="Quel lien unit All For One et le premier porteur de One For All ?",
+    a=["Ce sont deux frères", "Ce sont un père et son fils", "Ils étaient camarades d'école", "Aucun lien"], c=0,
+    fb="Le premier porteur, Yoichi, est le petit frère d'All For One. Celui-ci lui a imposé un Quirk de stockage de puissance, qui a fusionné avec le Quirk de transmission caché de Yoichi pour donner One For All.")
+drop(S, "Quel est le nombre de Quirks hérités dans One For All que Deku peut éventuellement utiliser ?")
+drop(S, "Quel nombre maximum de porteurs One For All peut théoriquement utiliser en même temps ?")
+drop(S, "Quel héros Pro enseigne aux étudiants lors du stage de travail avec Endeavor ?")
+fix(S, "Qui forme le groupe de vilains qui attaque le camp d'entraînement en saison 3 ?",
+    q="Quel groupe attaque le camp d'été de la classe 1-A pour enlever Bakugo ?",
+    a=["Shigaraki seul", "L'Avant-garde de la Ligue (Vanguard Action Squad)", "Overhaul et ses yakuzas", "Les élèves de Shiketsu"], c=1)
+drop(S, "Comment s'appelle la devise de Gran Torino pour apprendre à Deku à distribuer OFA ?")
+drop(S, "Comment s'appelle le mouvement de combat que Deku invente en mélangeant Blackwhip et ses coups ?")
+fix(S, "Quel est le nom du groupe terroriste de Re-Destro dans MHA ?",
+    a=["Meta Liberation Army", "Hero Killers", "Quirk Freedom Front", "Shie Hassaikai"], c=0,
+    fb="La Meta Liberation Army de Re-Destro prône la liberté totale d'utiliser les Quirks. Vaincue par la Ligue des Vilains, elle fusionne avec elle pour former le Paranormal Liberation Front.")
+drop(S, "Quel est le vrai nom civil d'All Might, révélé progressivement à Midoriya ?")
+fix(S, "Qui est le premier villain majeur de la saison 1 à attaquer les étudiants ?",
+    fb="Tomura Shigaraki mène l'attaque de l'USJ en saison 1 avec Kurogiri et le Nomu. Son but est de tuer All Might.")
+drop(S, "Quel est le lien entre Dabi et la famille Todoroki ?")
+fix(S, "Comment s'appelle la technique de Todoroki qui combines les deux côtés de son Quirk ?",
+    q="Comment s'appelle la technique de Todoroki qui combine la glace et le feu ?")
+drop(S, "Qui est le premier ennemi que Deku bat en utilisant son Quirk sans se casser un membre ?")
+fix(S, "Quel événement déclenche la transformation de Shigaraki en super-vilain ?",
+    fb="Enfant, Tenko Shimura voit son Quirk s'éveiller et désintègre sa famille. All For One le recueille ensuite et nourrit sa haine des héros.")
+fix(S, "Quel est le nom complet de l'association qui finance les héros dans MHA ?",
+    q="Quel organisme gouvernemental encadre les héros professionnels et a formé Hawks depuis l'enfance ?",
+    a=["La Hero Association", "Le Registre des héros", "La Commission de sécurité publique des héros", "Le Bureau national des héros"], c=2,
+    fb="La Commission de sécurité publique des héros encadre les héros professionnels. On découvre qu'elle a élevé et formé Hawks dès l'enfance pour en faire un agent.")
+fix(S, "Quel Quirk permet à Mirko (Rumi Usagiyama) de sauter et frapper comme un lapin ?",
+    fb="Rabbit donne à Mirko les capacités d'un lapin, dont des sauts et des coups de pied dévastateurs. Elle est la 5e héroïne du classement et préfère combattre seule.")
+fix(S, "Comment s'appelle l'arc où la Yakuza Shie Hassaikai kidnappe Eri ?",
+    q="Dans quel arc Deku et Mirio affrontent-ils Overhaul pour sauver Eri ?",
+    a=["Arc du camp d'été", "Arc Shie Hassaikai", "Arc de l'USJ", "Arc du Festival sportif"], c=1)
+drop(S, "Quel est le pourcentage de OFA que Deku utilise pour la première fois sans se blesser ?")
+fix(S, "Quel villain de la Ligue peut dupliquer n'importe qui mais souffre de dissociation identitaire ?",
+    fb="Twice (Jin Bubaigawara) peut créer des doubles de n'importe qui. Hanté par un passé où ses propres clones se sont entretués, il doute sans cesse d'être l'original. Il est tué par Hawks.")
+fix(S, "Quel est le nom de la reine des Nomu créée par All For One comme arme ultime ?",
+    q="Comment appelle-t-on les Nomu évolués, capables de réfléchir et de parler, comme Hood ?",
+    a=["Nomu Suprêmes", "High-End Nomu", "Gigantomachia", "Nomu Alpha"], c=1)
+fix(S, "Quel est l'arc de la saison 6 MHA impliquant une guerre massive entre héros et villains ?",
+    fb="La guerre du Paranormal Liberation Front ouvre la saison 6 : les héros attaquent à la fois la base du Front et l'hôpital de Jaku, où Shigaraki est en train d'être modifié.")
+drop(S, "Quel est le Quirk hérité que Deku maîtrise en 2ème (après Blackwhip) ?")
+
+
+# ---------------------------------------------------------------- Fullmetal Alchemist Brotherhood
+S = 'fmab'
+fix(S, "Quel est le principe fondamental de l'alchimie dans FMA Brotherhood ?",
+    a=["Plus tu donnes, plus tu reçois", "Pour obtenir, il faut sacrifier quelque chose de valeur égale", "L'alchimie est sans limites", "Le sang est la monnaie de l'alchimie"], c=1)
+fix(S, "Comment s'appelle l'alchimiste frère aîné des Elric ?", q="Lequel des frères Elric est l'aîné ?",
+    fb="Edward Elric est l'aîné et l'Alchimiste d'État surnommé FullMetal. Il perd une jambe puis un bras lors de la transmutation humaine ratée et déteste qu'on le traite de petit.")
+fix(S, "Qui est le Père des Homuncules dans FMA Brotherhood ?",
+    fb="Le Père est né à Xerxès, il y a plus de 400 ans, du sang de Hohenheim dans un flacon. Son objectif est d'absorber « Dieu » en sacrifiant la population d'Amestris.")
+fix(S, "Comment s'appelle la prothèse mécanique d'Edward ?",
+    fb="L'automail est une prothèse mécanique reliée aux nerfs. C'est Winry Rockbell qui fabrique et entretient celles d'Edward.")
+fix(S, "Qui est Winry Rockbell dans la série ?",
+    a=["La sœur des Elric", "La mécanicienne automail des Elric", "Une Alchimiste d'État", "La sœur de Roy Mustang"], c=1,
+    fb="Winry Rockbell est l'amie d'enfance des Elric et leur mécanicienne. Petite-fille de Pinako Rockbell, elle fabrique et répare les automails d'Edward.")
+drop(S, "Quel pays oriental possède une alchimie appelée Alkahestrie focalisée sur le Ki ?")
+drop(S, "Quel homonyme désigne la technique qui transmute les blessures et maladies ?")
+drop(S, "Comment s'appelle la technique que les Namekiens de Xing utilisent pour guérir les corps ?")
+fix(S, "Qui est Ling Yao dans la série ?",
+    a=["Un Alchimiste d'État de Xing", "Un prince de Xing venu chercher l'immortalité", "Le chef de la police de Central", "Un espion ishvalan"], c=1)
+fix(S, "Quel est le sacrifice final d'Edward pour ramener le corps d'Alphonse ?",
+    fb="Edward renonce à sa propre Porte de la Vérité, et donc à l'alchimie pour toujours, afin de ramener son frère, corps et âme.")
+drop(S, "Quel est le sacrifice final d'Edward pour ramener Al ?")
+fix(S, "Quelle est la particularité de Van Hohenheim, le père des Elric ?",
+    fb="Van Hohenheim porte en lui des centaines de milliers d'âmes de Xerxès. Il ne vieillit pas et peut pratiquer l'alchimie sans cercle.")
+fix(S, "Quel homuncule représente la Luxure ?",
+    fb="Lust peut allonger ses ongles en lames tranchantes. Roy Mustang la tue après avoir cautérisé sa propre blessure avec ses flammes.")
+fix(S, "Qui est Scar et pourquoi tue-t-il des Alchimistes d'État ?",
+    fb="Scar est un survivant ishvalan. Son bras droit porte les tatouages alchimiques de son frère défunt, et il s'en sert pour tuer les Alchimistes d'État, responsables du massacre de son peuple.")
+drop(S, "Comment Mustang combat-il Pride sans ses gants dans le combat final ?")
+drop(S, "Comment Alphonse parvient-il à regagner son corps à la fin ?")      # faux : c'est Edward qui renonce à l'alchimie
+drop(S, "Comment Al retrouve-t-il finalement son corps original ?")
+drop(S, "Quel est l'équivalent échange payé par Alphonse pour récupérer son corps à la fin ?")
+drop(S, "Comment Ed appelle-t-il Roy Mustang pour le charrier ?")
+drop(S, "Comment Ed appelle-t-il souvent Mustang pour le provoquer ?")
+drop(S, "Comment Ed surnomme-t-il Roy Mustang pour le charrier en permanence ?")
+fix(S, "Quel est le prix que Edward a payé lors de la transmutation humaine ratée ?",
+    q="Quels membres Edward perd-il en tentant de ressusciter sa mère ?",
+    fb="Edward perd sa jambe gauche lors de la transmutation, puis sacrifie son bras droit pour fixer l'âme d'Alphonse dans une armure.")
+drop(S, "Quel est le prix payé par Edward lors de la transmutation humaine ?")
+drop(S, "Qui est l'alchimiste surnommée 'Izumi Curtis' et quel est son rôle ?")
+drop(S, "Quel nom porte l'homuncule de la Convoitise ?")
+drop(S, "Quelle est la technique défensive de Greed ?")
+drop(S, "Quelle est la capacité défensive ultime de Greed dans FMA Brotherhood ?")
+drop(S, "Quel est le vrai nom de l'homuncule Greed et dans quel corps évolue-t-il en saison 2 ?")
+drop(S, "Qui est le général Armstrong qui dirige Fort Briggs ?")
+drop(S, "Qui est le général qui dirige Fort Briggs, la forteresse du nord d'Amestris ?")
+fix(S, "Quel général féminin dirige Fort Briggs dans le nord d'Amestris ?",
+    fb="Olivier Mira Armstrong, sœur aînée d'Alex, commande la forteresse de Briggs d'une main de fer. Pour elle, seuls les forts survivent.")
+drop(S, "Quelle ville est sacrifiée dans le plan du Père pour créer le Cercle National ?")
+drop(S, "Quelle ville est sacrifiée par le Père il y a 400 ans pour créer le premier Cercle de Transmutation ?")
+fix(S, "Comment s'appelle la grande ville sacrifiée par le Père il y a 400 ans pour créer la première Pierre ?",
+    fb="Il y a environ 400 ans, le Père manipule le roi de Xerxès pour tracer un immense cercle de transmutation qui sacrifie tout le peuple. Seuls lui et Hohenheim y survivent.")
+drop(S, "Quel est le Quirk de Riza Hawkeye dans l'alchimie ?")
+drop(S, "Comment s'appelle le tatouage alchimique sur le dos de Riza Hawkeye ?")
+fix(S, "Quel est le symbole alchimique tatoué dans le dos de Riza Hawkeye ?",
+    q="Que porte Riza Hawkeye tatoué dans son dos ?",
+    fb="Le dos de Riza porte les recherches de son père, Berthold Hawkeye, sur l'alchimie des flammes. Elle demandera plus tard à Mustang de brûler ce tatouage pour que personne d'autre ne s'en serve.")
+drop(S, "Comment la Pierre Philosophale permet-elle de contourner la Loi d'Équivalent Échange ?")
+fix(S, "Quel est le nom de l'homuncule de la Paresse qui creuse des tunnels sous Amestris ?",
+    fb="Sloth, l'homuncule de la Paresse, creuse pendant des années l'immense tunnel qui dessine le cercle de transmutation national sous Amestris.")
+fix(S, "Comment Riza Hawkeye protège-t-elle Mustang dans la bataille finale contre le Père ?",
+    fb="Rendu aveugle par la transmutation humaine forcée, Mustang ne voit plus. Riza lui indique la position de l'ennemi pour qu'il puisse viser avec ses flammes.")
+fix(S, "Quel est le Quirk alchimique particulier de Kimblee l'Alchimiste Cramoisi ?",
+    q="Quelle est l'alchimie particulière de Solf J. Kimblee, l'Alchimiste Écarlate ?",
+    fb="Kimblee transmute ce qu'il touche en explosif, y compris le corps de ses victimes. Son goût pour la destruction en fait l'un des personnages les plus inquiétants de la série.")
+drop(S, "Comment Alphonse découvre-t-il qu'il est une Pierre Philosophale vivante ?")
+fix(S, "Comment s'appelle la grand-mère de Winry, experte en automail et soignante à Resembool ?",
+    q="Comment s'appelle la grand-mère de Winry, mécanicienne d'automail à Resembool ?",
+    fb="Pinako Rockbell est la grand-mère de Winry et une mécanicienne d'automail réputée. C'est elle qui pose les premières prothèses d'Edward.")
+drop(S, "Quel est le vrai buts des Alchimistes d'État selon la révélation finale ?")
+fix(S, "Comment Scar parvient-il à blesser les Alchimistes d'État malgré leurs défenses ?",
+    q="Quel est le pouvoir du bras droit de Scar ?",
+    a=["Il crée des flammes", "Il décompose la matière qu'il touche", "Il absorbe l'alchimie adverse", "Il pétrifie ses ennemis"], c=1,
+    fb="Le bras droit de Scar, tatoué par son frère, décompose la matière au toucher. Il s'en sert pour tuer ses victimes d'un seul geste.")
+drop(S, "Quelle technique alchimique Scar développe-t-il en combinant ses deux bras ?")
+fix(S, "Que se passe-t-il quand Mustang tue Envy ?",
+    q="Comment finit Envy après avoir été vaincu par Mustang ?",
+    a=["Mustang le laisse partir", "Il se donne la mort après qu'Edward a compris sa jalousie envers les humains", "Il est absorbé par le Père", "Il s'enfuit dans un autre corps"], c=1,
+    fb="Réduit à sa forme minuscule, Envy est démasqué par Edward : il envie les humains. Humilié, il pleure puis met fin à ses jours.")
+drop(S, "Quelle est la relation finale entre Ling Yao et Greed à la fin de la série ?")
+drop(S, "Comment s'appelle la manifestation de Pride quand il utilise ses ombres ?")
+drop(S, "Quelle décision morale déchirante Roy Mustang doit-il prendre lors de la montée vers le Père ?")
+fix(S, "Que tente de créer Edward et Alphonse lors de leur transmutation humaine ratée ?",
+    q="Qui Edward et Alphonse tentent-ils de ressusciter par la transmutation humaine ?",
+    a=["Leur père Hohenheim", "Leur mère Trisha", "Leur maîtresse Izumi", "Leur grand-mère"], c=1,
+    fb="Les frères tentent de ressusciter leur mère, Trisha. La transmutation échoue : Edward perd une jambe, Alphonse son corps entier, et ils n'obtiennent qu'une créature informe.")
+drop(S, "Pourquoi les Alchimistes d'État sont-ils surnommés Chiens de l'État ?")
+fix(S, "Quel est le résultat de la confrontation finale entre Edward et le Père ?",
+    a=["Le Père s'échappe", "Vaincu par Edward, le Père est emporté par la Vérité derrière sa Porte", "Alphonse sacrifie sa vie", "Mustang tue le Père"], c=1,
+    fb="Affaibli, le Père est battu à mains nues par Edward. La Vérité l'attire alors derrière sa propre Porte, lui qui voulait dépasser Dieu.")
+fix(S, "Quel alchimiste d'État est surnommé le Bras Fort de Briggs ?",
+    q="Quel Alchimiste d'État est surnommé l'Alchimiste au Bras puissant ?",
+    fb="Alex Louis Armstrong est l'Alchimiste au Bras puissant. Ses techniques se transmettent dans la famille Armstrong depuis des générations.")
+fix(S, "Quel est le crime commis par le Dr Marcoh que Scar finit par pardonner ?",
+    q="Quel lourd secret le docteur Marcoh porte-t-il ?",
+    fb="Pendant la guerre d'Ishval, le docteur Marcoh a fabriqué des Pierres philosophales sur ordre de l'armée. Rongé par la culpabilité, il a fui et vit caché.")
+
+
+# ---------------------------------------------------------------- Jujutsu Kaisen
+S = 'jjk'
+fix(S, "Qui est Ryomen Sukuna ?",
+    fb="Ryomen Sukuna est un sorcier de l'ère Heian, il y a plus de mille ans, si redoutable qu'on l'appelle le Roi des Fléaux. Ses vingt doigts sont devenus des objets maudits indestructibles.")
+fix(S, "Qui est Kenjaku et quel est son Quirk ?", q="Qui est Kenjaku ?",
+    fb="Kenjaku est un sorcier millénaire qui change de corps en y transplantant son cerveau. Il occupe le corps de Suguru Geto et a jadis occupé celui de la mère de Yuji.")
+fix(S, "Quel est le Quirk de Mahito ?", q="Quelle est la technique de Mahito ?")
+fix(S, "Qu'est-ce que le Black Flash dans JJK ?",
+    fb="Le Black Flash survient quand l'énergie maudite frappe moins d'un millionième de seconde après le coup physique. L'espace se déforme et la puissance du coup est élevée à 2,5.")
+drop(S, "Qu'est-ce que le Black Flash et quel effet a-t-il sur la puissance ?")
+fix(S, "Qui est Toji Fushiguro et quel est son lien avec Megumi ?",
+    fb="Toji Fushiguro est le père de Megumi. Né sans énergie maudite à cause d'une Restriction céleste, il a un corps surhumain. Ce tueur à gages avait promis de céder Megumi au clan Zenin.")
+fix(S, "Quel est le Quirk de Nobara Kugisaki ?", q="Quelle est la technique de Nobara Kugisaki ?")
+drop(S, "Comment s'appelle la technique de Gojo basée sur l'infini ?")
+fix(S, "Quel est le nom de la technique de Gojo qui rend ses attaques infinies à l'approche ?",
+    q="Comment s'appelle la barrière invisible de Gojo qui ralentit sans fin tout ce qui l'approche ?",
+    fb="L'Infini est une application de la technique Limitless : tout ce qui s'approche de Gojo ralentit sans jamais l'atteindre.")
+drop(S, "Comment Yuji devient-il capable de blesser les malédictions sans Sukuna ?")
+fix(S, "Quel sont les Vingt Doigts de Sukuna ?", q="Que sont les vingt doigts de Sukuna ?",
+    fb="Les vingt doigts de Sukuna sont des objets maudits indestructibles qui contiennent chacun une partie de sa puissance. Yuji doit tous les avaler avant d'être exécuté.")
+drop(S, "Quel est le nom du lycée Jujutsu de Tokyo ?")
+drop(S, "Quelle technique Todo enseigne-t-il à Yuji ?")
+fix(S, "Comment s'appelle la technique d'Aoi Todo qui échange les positions ?",
+    fb="Boogie Woogie permet à Todo d'échanger la position de deux cibles en frappant dans ses mains. Avec Yuji, il s'en sert pour déstabiliser Hanami puis Mahito.")
+drop(S, "Qu'est-ce que le Culling Game institué par Kenjaku ?")
+drop(S, "Quel est le vrai objectif de Kenjaku avec le Culling Game ?")
+fix(S, "Quel est le Culling Game lancé par Kenjaku dans l'arc final ?",
+    q="Qu'est-ce que le Culling Game lancé par Kenjaku ?",
+    fb="Le Culling Game enferme des sorciers éveillés et des sorciers anciens réincarnés dans des colonies où ils doivent s'affronter selon des règles strictes.")
+drop(S, "Quel est le grade de Yuji Itadori selon la Hero Association de JJK ?")
+drop(S, "Comment Yuji est-il officiellement classé dans le monde du Jujutsu au début ?")
+drop(S, "Quel grade Yuji Itadori reçoit-il officiellement de l'Association Jujutsu ?")
+drop(S, "Comment s'appelle la technique héréditaire de Naoya Zenin qui divise ses mouvements en 24 frames ?")
+fix(S, "Qui a fondé le Tokyo Metropolitan Curse Technical College ?",
+    q="Qui dirige l'école d'exorcisme de Tokyo au début de la série ?",
+    fb="Masamichi Yaga dirige l'école de Tokyo. Il fabrique des cadavres maudits, des poupées animées, dont Panda est la plus aboutie.")
+drop(S, "Quel est le domaine le plus puissant connu dans l'histoire du Jujutsu ?")
+drop(S, "Quel est le nom de la technique ultime utilisée par Sukuna lors de la bataille finale ?")
+drop(S, "Quel personnage de JJK utilise une lance comme arme principale ?")
+fix(S, "Quelle est la caractéristique du Domaine 'Coffin of the Iron Mountain' de Choso ?",
+    q="À qui appartient l'Extension du territoire « Cercueil de la Montagne de Fer » ?",
+    a=["Choso", "Jogo", "Hanami", "Mahito"], c=1,
+    fb="Le Cercueil de la Montagne de Fer est le territoire de Jogo, le fléau volcanique. Il enferme sa cible dans un monde de lave d'une chaleur insoutenable.")
+drop(S, "Qui enseigne à Yuji à maintenir son âme stable face à Sukuna ?")
+fix(S, "Qui est Yuki Tsukumo et quel est son rôle dans l'histoire ?",
+    a=["Une ancienne élève de Tokyo devenue professeure", "Une sorcière de grade spécial qui cherche à faire disparaître les fléaux", "Une membre du conseil des anciens", "La mère de Megumi"], c=1,
+    fb="Yuki Tsukumo est l'une des rares sorcières de grade spécial. Plutôt que d'exorciser les fléaux un par un, elle cherche un moyen d'en supprimer la source.")
+drop(S, "Quelle est la différence entre un esprit maudit naturel et un outil maudit ?")
+fix(S, "Qu'est-ce qu'un Outil Maudit (Cursed Tool) dans JJK ?",
+    a=["Un sabre vivant", "Un objet imprégné d'énergie maudite", "Un objet possédé par un esprit", "Une arme volée à un sorcier"], c=1)
+drop(S, "Quel clan JJK est l'équivalent aristocratique d'une des 'trois familles' ?")
+drop(S, "Quel Clan JJK spécialisé dans la manipulation du sang est l'un des Trois Familles ?")
+drop(S, "Comment Yuji résiste-t-il aux prises de contrôle de Sukuna ?")
+fix(S, "Quel est le Domaine d'Expansion de Megumi Fushiguro ?",
+    fb="Le Jardin des Ombres Chimères est l'Extension du territoire de Megumi : il y répand ses ombres et multiplie ses shikigami. Au début, ce territoire reste inachevé.")
+drop(S, "Quel est le nom du Domaine de Megumi qui invoque toutes ses ombres simultanément ?")
+drop(S, "Quel est le Domaine d'Expansion de Megumi Fushiguro dont l'invocation détruit les alentours ?")
+drop(S, "Quel est le Quirk de Nanami Kento qui force les probabilités ?")
+drop(S, "Qu'est-ce que le système de classement 4 à Grade Spécial en JJK ?")
+fix(S, "Quel est le Quirk de Hiromi Higuruma, avocat devenu sorcier ?",
+    q="Quelle est la technique de Hiromi Higuruma, avocat devenu sorcier ?",
+    fb="Deadly Sentencing ouvre un tribunal où la cible est jugée. Si elle est déclarée coupable, Higuruma peut lui retirer sa technique, voire la condamner à mort avec son glaive d'exécuteur.")
+fix(S, "Comment Sukuna prend-il le contrôle total du corps de Yuji lors de l'Incident de Shibuya ?",
+    a=["Yuji s'endort", "On lui fait avaler dix doigts pendant qu'il est inconscient", "Sukuna brise un sceau", "Mahito l'aide"], c=1,
+    fb="À Shibuya, deux disciples de Geto font avaler dix doigts à Yuji, inconscient. Sukuna se réveille alors et prend le contrôle de son corps.")
+fix(S, "Qui est Panda parmi les personnages de JJK et quelle est sa nature ?",
+    a=["Un humain qui se transforme", "Un cadavre maudit créé par le directeur Yaga", "Un vrai panda", "Un shikigami"], c=1,
+    fb="Panda est un cadavre maudit doté d'une conscience, créé par Masamichi Yaga. Il possède trois noyaux, dont un de gorille, qui lui offrent plusieurs formes de combat.")
+drop(S, "Quelle est la relation entre Choso et Yuji Itadori selon la révélation ?")
+fix(S, "Qui est Choso et quel est son lien biologique avec Yuji Itadori ?",
+    fb="Choso est un des Neuf Rouleaux de la mort, né d'une femme et d'un fléau, avec Kenjaku pour père. Yuji est né de Kenjaku dans le corps de sa mère : ils sont donc demi-frères.")
+fix(S, "Comment Gojo est-il finalement libéré de la Prison Realm ?",
+    a=["Il s'en échappe seul", "Grâce à la technique d'Angel (Hana Kurusu)", "Il ne sera jamais libéré", "Par une technique de Todo"], c=1,
+    fb="La technique d'Angel, habitant le corps de Hana Kurusu, peut annuler les autres techniques. Elle sert à ouvrir la Prison Realm et à libérer Gojo.")
+fix(S, "Qui est Hakari Kinji et quelle est sa technique de jeu ?",
+    fb="Kinji Hakari est un élève de troisième année de Tokyo, suspendu. Sa technique fonctionne comme une machine de pachinko : au jackpot, il dispose d'une énergie maudite illimitée et se régénère automatiquement pendant un peu plus de quatre minutes.")
+fix(S, "Pourquoi la mort de Nanami est-elle particulièrement marquante dans la série ?",
+    a=["Il était le personnage principal", "Ses derniers mots confient la suite à Yuji avant que Mahito l'achève", "Il trahit ses alliés", "Il meurt en héros contre Sukuna"], c=1,
+    fb="Grièvement brûlé à Shibuya, Nanami voit Yuji arriver et lui dit simplement que c'est à lui de jouer désormais. Mahito l'achève sous les yeux de Yuji.")
+fix(S, "Qui est Maki Zenin et pourquoi est-elle exceptionnelle malgré l'absence d'énergie maudite ?",
+    a=["Elle utilise des sorts", "Une Restriction céleste lui donne un corps surhumain", "Elle vole l'énergie des autres", "Elle est un shikigami"], c=1,
+    fb="Maki est née avec une Restriction céleste : presque pas d'énergie maudite, mais un corps hors norme. Après la mort de sa sœur Mai, sa restriction devient totale et elle atteint le niveau de Toji.")
+fix(S, "Quel est le nom de la technique de Yuji qui ressemble au Black Flash répété ?",
+    q="Comment s'appelle le coup de Yuji dont l'énergie maudite frappe juste après l'impact physique ?")
+fix(S, "Pourquoi Gojo est-il considéré comme l'homme le plus puissant ?",
+    a=["Il est immortel", "Ses Six Yeux et la technique Limitless", "Il a vaincu Sukuna", "Il a mangé des doigts de Sukuna"], c=1)
+fix(S, "Quel est l'impact de l'Incident de Shibuya sur le statut de sorcier de Gojo ?",
+    a=["Il monte en grade", "Il est déclaré complice et banni du monde du Jujutsu", "Il prend la tête du conseil", "Il n'y a pas d'impact"], c=1,
+    fb="Après Shibuya, les dirigeants du monde du Jujutsu désignent Gojo comme complice de l'incident, le bannissent et interdisent sa libération.")
+fix(S, "Que représente Mahoraga parmi les 10 Shikigami de Megumi ?",
+    fb="Mahoraga, le Général divin, est le shikigami le plus puissant des Dix Ombres. Aucun utilisateur de cette technique n'a jamais réussi à le dompter, et il s'adapte à toute attaque.")
+drop(S, "Quel est le nom de la technique qui permet à Yuji de voir les âmes des victimes de Mahito ?")
+fix(S, "Quel clan JJK est réputé pour sa technique des dix ombres ?",
+    fb="Les Dix Ombres sont une technique héréditaire du clan Zenin. Megumi, fils de Toji, en a hérité.")
+drop(S, "Comment s'appelle le principal disciple de Gojo parmi les étudiants de Tokyo ?")
+drop(S, "Quel événement catastrophique déclenche l'Arc de Shibuya ?")
+drop(S, "Pourquoi Yuji est-il difficile à tuer malgré sa condamnation ?")
+drop(S, "Quelle est la conséquence d'un pacte (serment) rompu dans JJK ?")
+fix(S, "Qui est Suguru Geto et quel est son lien avec Gojo dans leur passé ?",
+    fb="Suguru Geto était le meilleur ami de Gojo à l'école. Dégoûté par les humains ordinaires, il bascule après avoir massacré un village et devient un ennemi des sorciers.")
+drop(S, "Quel est l'effet de la Prison Realm sur ceux qui y sont enfermés ?")
+drop(S, "Comment s'appelle le shikigami le plus puissant de Megumi qui détruit tout, y compris son invocateur ?")
+
+
+# ---------------------------------------------------------------- One Punch Man
+S = 'onepunchman'
+fix(S, "Comment s'appelle l'organisation qui classe et emploie les héros ?",
+    fb="La Hero Association recrute, classe et envoie les héros professionnels. Elle a été fondée par le milliardaire Agoni après que son petit-fils a été sauvé par un homme chauve : Saitama.")
+fix(S, "Quel est le vrai statut de King, soi-disant 'héros le plus fort' ?",
+    a=["Il est réellement le plus fort", "Sa réputation est accidentelle : Saitama gagnait à sa place", "Il est un espion", "C'est un robot"], c=1)
+fix(S, "Quel alien venu de l'espace cherchait un adversaire à sa hauteur ?",
+    fb="Lord Boros parcourt l'univers à la recherche d'un adversaire digne de lui. Malgré son Meteoric Burst, Saitama le terrasse d'un Poing Sérieux.")
+drop(S, "Quel est le phénomène qui survient quand Saitama frappe vraiment sérieusement ?")
+drop(S, "Quel est le vrai nom de Saitama selon l'Association des Héros ?")
+fix(S, "Qui est Garou et quelle est son idéologie ?",
+    a=["Un héros qui aime les monstres", "Le Chasseur de héros, qui veut devenir le monstre absolu", "Un disciple de Saitama", "Un alien destructeur"], c=1,
+    fb="Garou, le Chasseur de héros, est l'ancien disciple de Bang. Par sympathie pour les « méchants » des histoires, il veut devenir le monstre absolu et terrasser les héros.")
+drop(S, "Quel est le niveau de menace attribué à Boros, l'alien du Vaisseau Sombre ?")
+drop(S, "Quelle est la véritable puissance derrière la force de Mumen Rider, le héros sans capacités ?")
+drop(S, "Quelle est la population de City Z, ville de résidence de Saitama ?")
+fix(S, "Dans quelle ville vit Saitama ?", a=["Ville Z", "Ville A", "Ville O", "Ville M"], c=0)
+drop(S, "Comment Garou évolue-t-il physiquement lors de ses combats ?")
+drop(S, "Quel est le phénomène qui rend Garou si difficile à battre même pour des héros puissants ?")
+fix(S, "Comment Garou évolue-t-il au fil de ses combats dans la Monster Association ?",
+    fb="Garou progresse à chaque combat : son corps se transforme peu à peu, il guérit plus vite et devient plus fort à chaque épreuve.")
+drop(S, "Quel est le créateur du Dr. Genus et de sa Maison de l'Évolution ?")
+drop(S, "Pourquoi Saitama n'arrive-t-il pas à monter en rang rapidement ?")
+drop(S, "Quel est le nom du groupe de monstres qui attaque la Hero Association ?")
+drop(S, "Quel est le nom de la organisation d'assasins que Garou affronte lors de son arc ?")
+fix(S, "Quel héros de Rang S est un ancien prisonnier capable de libérer ses ailes angéliques ?",
+    q="Quel héros de rang S purge une peine de prison entre deux missions ?",
+    fb="Puri-Puri Prisoner, 17e du rang S, sort de prison quand on a besoin de lui. Il combat avec une force brute impressionnante et son « Angel Style ».")
+drop(S, "Quel est le héros qui garde toujours un territoire spécifique en quadrupède ?")
+drop(S, "Quel scientifique de Rang S dirige le Meta Liberation Army ?")          # My Hero Academia
+drop(S, "Pourquoi Child Emperor est-il en Rang S malgré son jeune âge ?")
+fix(S, "Comment Child Emperor combat-il malgré son jeune âge ?",
+    a=["Par la magie", "Par des gadgets et inventions technologiques", "Par sa puissance psychique", "Par un clone robotique"], c=1)
+drop(S, "Quel est le nom de la technique de Bang avec ses bras aquatiques ?")
+fix(S, "Quelle est la relation entre Bang et Garou au début de la série ?",
+    a=["Ils sont ennemis jurés", "Garou était le disciple de Bang avant d'être expulsé", "Bang est le père de Garou", "Ils ne se connaissent pas"], c=1,
+    fb="Garou était le disciple de Bang, expulsé du dojo après avoir blessé les autres élèves. Bang culpabilise de ne pas avoir su le remettre dans le droit chemin.")
+drop(S, "Qui est Bang (Silver Fang) et quel lien a-t-il avec Garou ?")
+drop(S, "Comment Atomic Samurai combat-il ses ennemis ?")
+drop(S, "Quel monstre de Rang Dragon est le premier à vraiment menacer Saitama ?")
+drop(S, "Quelle est la citation la plus connue de Saitama sur son entraînement ?")
+drop(S, "Comment Genos se bat-il en l'absence de bras fonctionnels ?")
+drop(S, "Comment s'appelle l'attaque finale de Metal Bat contre un monstre Dragon ?")
+drop(S, "Quel héros de Rang S peut créer des obstacles géants avec son corps ?")
+fix(S, "Quel héros de Rang S possède une défense de cristal capable de tout bloquer ?",
+    q="Quel héros de rang S est réputé pour son corps d'une dureté extrême ?",
+    fb="Superalloy Darkshine possède un corps d'une dureté hors du commun et une force colossale. Il fait partie des héros les plus puissants du rang S.")
+fix(S, "Pourquoi Saitama décide-t-il de devenir héros au début de son histoire ?",
+    a=["Pour la gloire", "Pour sauver le monde", "Juste pour le plaisir, comme passe-temps", "Pour venger sa famille"], c=2,
+    fb="Saitama se présente lui-même comme « un héros pour le plaisir ». Cette motivation toute simple contraste avec les grands discours des autres héros.")
+drop(S, "Quel est le classement actuel de Saitama en rang B après quelques aventures ?")
+drop(S, "Quel héros de Rang S est l'unique humain ordinaire parmi eux selon les fans ?")
+drop(S, "Quel est le vrai niveau de puissance de King quand il se bat réellement ?")
+fix(S, "Quel est le signal sonore qui terrorise les monstres selon la légende de King ?",
+    q="Comment appelle-t-on le bruit du cœur de King qui terrifie ses adversaires ?",
+    a=["Le King Roar", "Le King Beat", "Le King Engine", "Le King Drum"], c=2,
+    fb="Le « King Engine » est le battement de cœur de King, si fort quand il a peur que ses adversaires le prennent pour le signe d'une puissance terrible.")
+drop(S, "Comment la Hero Association réagit-elle après les pertes lors de l'attaque de la Monster Association ?")
+drop(S, "Quel ennemi de la Monster Association possède des pouvoirs solaires cosmiques ?")
+drop(S, "Comment Fubuki maintient-elle son rang B numéro 1 malgré une puissance inférieure à sa sœur ?")
+drop(S, "Comment Drive Knight, héros Rang S, différencie-t-il ses formes de combat ?")
+drop(S, "Comment Saitama se sent-il quand il rencontre finalement quelqu'un qui lui résiste (Boros) ?")
+drop(S, "Quel est l'unique combat où Saitama ressent quelque chose qui ressemble à de l'excitation ?")
+drop(S, "Quel héros de Rang A affronte régulièrement Saitama pour tenter de le battre ?")
+drop(S, "Quel monstre de la Monster Association peut modifier son échelle et se fondre dans les ombres ?")
+drop(S, "Comment la Hero Association classe-t-elle les héros et qui vote pour les promotions ?")
+drop(S, "Quelle est la faiblesse majeure de Genos dans les combats prolongés ?")
+drop(S, "Qu'est-ce qui distingue l'arc Garou de tous les autres arcs de One Punch Man ?")
+fix(S, "Quel héros de Rang S est célèbre pour ses cheveux noirs et son amour du combat brutal ?",
+    q="Quel héros de rang S se bat avec une batte de baseball en métal ?")
+drop(S, "Quelle est la limite de temps de la transformation Serious de Saitama selon la série ?")
+fix(S, "Quel est le rang de Genos dans la Hero Association au début de la série ?",
+    q="Dans quelle classe Genos est-il placé dès son examen d'entrée à la Hero Association ?",
+    a=["Classe C", "Classe S", "Classe B", "Classe A"], c=1,
+    fb="Genos est directement placé en classe S grâce à ses capacités de cyborg, alors que Saitama démarre tout en bas de la classe C.")
+drop(S, "Quel est l'effet de la victoire de Saitama sur son moral et sa vie quotidienne ?")
+drop(S, "Quel est le nom de la ville où Child Emperor est le héros attitré selon son profil ?")
+fix(S, "Comment Saitama est-il officiellement recruté dans la Hero Association ?",
+    a=["Par audition spéciale", "Par un examen avec une épreuve physique et une épreuve écrite", "Recommandé par Genos", "Il crée sa propre association"], c=1,
+    fb="Saitama obtient la note maximale à l'épreuve physique, mais son résultat à l'épreuve écrite est si faible qu'il démarre en classe C.")
+
+
+# ---------------------------------------------------------------- Bleach
+S = 'bleach'
+drop(S, "Comment s'appelle le monde des Soul Reapers ?")
+drop(S, "Comment nomme-t-on le chef suprême commandant l'ensemble des 13 divisions des Soul Reapers dans Bleach ?")
+fix(S, "Quel est le nom de la puissance cachée d'Ichigo liée à sa nature de Hollow ?",
+    q="Que fait apparaître Ichigo sur son visage pour libérer sa puissance de Hollow ?",
+    a=["Un bandeau", "Un masque de Hollow", "Un casque de Quincy", "Une cagoule"], c=1,
+    fb="Ichigo peut faire surgir un masque de Hollow qui décuple sa puissance. Il doit d'abord apprendre à dompter le Hollow qui vit en lui.")
+drop(S, "Qu'est-ce que l'Hogyoku créé par Urahara et Aizen indépendamment ?")
+fix(S, "Quel est le lien entre Sosuke Aizen et Kisuke Urahara dans la création de l'Hogyoku ?",
+    a=["Aizen l'a volé à Urahara", "Chacun a créé le sien, puis Aizen a réuni les deux", "Urahara a aidé Aizen", "Aizen l'a créé seul"], c=1,
+    fb="Urahara et Aizen ont chacun créé un Hogyoku. Urahara avait caché le sien dans l'âme de Rukia ; Aizen le lui arrache et le réunit au sien.")
+drop(S, "Quel est le nom du groupe de Soul Reapers qui ont acquis des pouvoirs de Hollow ?")
+fix(S, "Quel est le nom du groupe de Soul Reapers avec des pouvoirs de Hollow ?",
+    fb="Les Vizards sont d'anciens capitaines et lieutenants transformés par les expériences d'Aizen. Bannis par la Soul Society, ils portent des masques de Hollow.")
+fix(S, "Quel est le Zanpakuto de l'ancien Capitaine Jushiro Ukitake ?",
+    fb="Sogyo no Kotowari, le sabre double d'Ukitake, absorbe les attaques ennemies et les renvoie.")
+drop(S, "Quel est l'arc final de Bleach connu sous son acronyme ?")
+drop(S, "Quel est le nom de l'arc final de Bleach animé en haute qualité ?")
+fix(S, "Qui est Yhwach et quelle est sa relation avec le Roi des Âmes ?", q="Qui est Yhwach ?")
+drop(S, "Qui est Yhwach et quel est son lien avec le Roi des Âmes ?")
+drop(S, "Comment Ichigo perd-il ses pouvoirs après avoir vaincu Aizen ?")
+fix(S, "Quel personnage est le maître mystérieux d'Ichigo qui le guide ?",
+    fb="Kisuke Urahara, ancien capitaine de la 12e division exilé de la Soul Society, tient une petite boutique à Karakura. C'est lui qui entraîne Ichigo avant son départ pour la Soul Society.")
+drop(S, "Comment s'appelle la capacité d'un Soul Reaper de percevoir les esprits et créatures spirituelles ?")
+drop(S, "Comment s'appelle la technique de sonification qui paralyse les cibles ?")
+drop(S, "Quel Soul Reaper est surnommé 'le dieu de la mort' parmi ses pairs ?")
+fix(S, "Quel capitaine de la Division 11 aime le combat plus que tout et combat sans Shikai délibérément ?",
+    q="Quel capitaine de la 11e division ne vit que pour le combat ?",
+    fb="Kenpachi Zaraki adore se battre. Il porte un cache-œil qui absorbe son énergie spirituelle pour rendre les combats plus longs et plus amusants.")
+fix(S, "Quel est le Zanpakuto de Kenpachi Zaraki et sa particularité ?",
+    a=["Il n'a pas de Zanpakuto", "Nozarashi, dont il n'apprend le nom que très tard", "Zenpachi", "Yachiru"], c=1,
+    fb="Kenpachi a combattu des siècles sans connaître le nom de son sabre. Pendant la Guerre sanglante de mille ans, il entend enfin son nom, Nozarashi, et libère son Shikai puis son Bankai.")
+drop(S, "Quelle est la véritable forme du Zanpakuto d'Ichigo révélée dans le TYBW ?")
+fix(S, "Quelle est la forme finale de Zangetsu révélée dans le TYBW ?",
+    fb="Après avoir découvert ses origines, Ichigo fait reforger son sabre : il obtient deux lames, une grande et une petite, à l'image de sa double nature.")
+fix(S, "Qui est le Roi des Âmes protégé par Soul Society ?",
+    a=["Yamamoto", "Yhwach", "Une entité scellée dans le Palais royal", "Le premier Soul Reaper"], c=2)
+drop(S, "Comment Ichigo récupère ses pouvoirs après les avoir perdus face à Aizen ?")
+drop(S, "Qui est Orihime Inoue et quelle est sa capacité ?")
+drop(S, "Quel est le numéro de l'Espada la plus puissante dans l'armée d'Aizen ?")
+drop(S, "Qu'est-ce que la Finalisation (Resurección) des Arrancar ?")
+fix(S, "Quel est le nom de la prison dimensionnelle où les Soul Reapers rebelles sont enfermés ?",
+    q="Comment s'appelle la prison souterraine où sont enfermés les pires criminels de la Soul Society ?",
+    fb="Muken est le niveau le plus profond de la prison souterraine de la Soul Society. Aizen y est condamné à 20 000 ans d'emprisonnement.")
+drop(S, "Comment s'appelle la technique permettant aux Soul Reapers de se déplacer à vitesse extrême ?")
+fix(S, "Comment s'appelle la technique d'accélération qui rend les Soul Reapers quasi-invisibles à l'oeil nu ?",
+    q="Comment s'appelle la technique de déplacement ultrarapide des Soul Reapers ?",
+    fb="Le Shunpo permet aux Soul Reapers de se déplacer si vite qu'ils semblent disparaître. Yoruichi en est la grande spécialiste.")
+drop(S, "Quel est le Bankai d'Ichigo après la maîtrise de son Hollow intérieur ?")
+fix(S, "Comment Kisuke Urahara piège-t-il finalement Aizen ?",
+    a=["En le battant au combat", "Grâce à un sceau caché dans ses attaques qui s'active quand Aizen s'affaiblit", "En le tuant", "En lui volant l'Hogyoku"], c=1,
+    fb="Pendant leur combat, Urahara glisse un sceau dans le corps d'Aizen. Quand celui-ci est affaibli par Ichigo, le sceau s'active et l'immobilise.")
+drop(S, "Quel est le vrai pouvoir de Chad (Yasutora Sado) découvert progressivement ?")
+fix(S, "Quelle est la particularité du Zanpakuto de Gin Ichimaru ?",
+    q="Quelle est la particularité du Bankai de Gin Ichimaru ?",
+    a=["Il contrôle la glace", "Sa lame peut s'allonger jusqu'à 13 km", "Il crache du feu", "Il contrôle les ombres"], c=1,
+    fb="Kamishini no Yari, le Bankai de Gin, s'allonge jusqu'à 13 kilomètres à une vitesse foudroyante. Gin cache en plus un poison capable de détruire les cellules.")
+fix(S, "Quel est le nom des gardes du corps d'Aizen qui protègent Hueco Mundo ?",
+    q="Comment appelle-t-on les subordonnés personnels de chaque Espada ?",
+    fb="Les Fracción sont les serviteurs attitrés d'un Espada. Ils se distinguent des Números, les Arrancar de rang inférieur.")
+drop(S, "Comment s'appelle la forme fusionnée de Hollow et Soul Reaper qu'Ichigo atteint ?")
+drop(S, "Quel est le rang du 13ème Escadron dans la hiérarchie de Soul Society ?")
+fix(S, "Qu'est-ce que le Blut Vene et Blut Arterie des Quincy ?",
+    fb="Le Blut Vene renforce la défense en faisant circuler l'énergie spirituelle dans les veines, le Blut Arterie renforce l'attaque. Un Quincy ne peut pas utiliser les deux en même temps.")
+drop(S, "Qui est Sosuke Aizen et quel est son Zanpakuto spécial ?")
+fix(S, "Quel Arrancar est la 4ème Espada et possède un pouvoir de régénération ?",
+    fb="Ulquiorra Cifer est le 4e Espada. Il se régénère presque instantanément et sa Resurrección, Murciélago, possède une seconde étape unique parmi les Espada.")
+
+
+# ---------------------------------------------------------------- Minecraft
+S = 'minecraft'
+fix(S, "Quel bloc est le plus solide disponible en survie normale (résistance aux explosions) ?",
+    q="Quel bloc courant résiste aux explosions de TNT et de Creeper ?",
+    a=["Bloc de fer", "Obsidienne", "Bloc de diamant", "Pierre taillée"], c=1,
+    fb="L'obsidienne fait partie des blocs les plus résistants aux explosions que l'on peut obtenir en survie. Elle sert aussi à construire les portails du Nether.")
+fix(S, "Quelle gemme est plus rare que le diamant depuis la version 1.16 ?",
+    q="Quel matériau, introduit en 1.16, surpasse le diamant pour les outils et les armures ?",
+    a=["Rubis", "Émeraude", "Améthyste", "Netherite"], c=3,
+    fb="La netherite s'obtient à partir de débris antiques trouvés dans le Nether depuis la 1.16. L'équipement en netherite est le meilleur du jeu et résiste au feu et à la lave.")
+fix(S, "Comment s'appelle la dimension souterraine avec des portails de lave et des Ghasts ?",
+    q="Comment s'appelle la dimension infernale peuplée de Ghasts et de Piglins ?")
+fix(S, "Quel mob drop des Rails d'Alimentation lors d'un craft ?",
+    q="Avec quoi fabrique-t-on des rails de propulsion ?",
+    a=["Or, bâtons et redstone", "Fer et bâtons seulement", "Diamant et redstone", "Cuivre et bâtons"], c=0)
+drop(S, "Quel est le nom du biome extrêmement rare en forme de champignon ?")
+drop(S, "Quel est le boss du Nether dans Minecraft ?")
+fix(S, "Quel boss de Minecraft est invoqué en plaçant 3 crânes de Squelette du Nether sur de la Soulsand en forme de T ?",
+    q="Quel boss invoque-t-on en posant trois crânes de Wither squelette sur du sable des âmes disposé en T ?",
+    fb="Le Wither s'invoque avec quatre blocs de sable des âmes en T surmontés de trois crânes de Wither squelette. Vaincu, il laisse une étoile du Nether, qui sert à fabriquer une balise.")
+fix(S, "Quel item unique est obtenu en tuant l'Ender Dragon ?",
+    fb="L'œuf de dragon apparaît au sommet du portail de sortie après la première victoire sur l'Ender Dragon. Il est purement décoratif.")
+drop(S, "Quel est le nom du boss des Donjons Anciens dans l'Overworld deep underground ?")
+drop(S, "Combien de types de bois différents existent dans la version actuelle de Minecraft ?")
+fix(S, "Quel est le nom du village sous-marin protégé par des Guardians ?",
+    q="Comment s'appelle la structure sous-marine protégée par des Gardiens ?",
+    fb="Le monument océanique est une structure en prismarine gardée par des Gardiens et trois Gardiens anciens. Huit blocs d'or sont cachés en son cœur.")
+fix(S, "Quelle plante est nécessaire pour créer une potion de soin (Healing II) ?",
+    q="Quel ingrédient sert à préparer une potion de soin ?",
+    a=["Fougère", "Pastèque scintillante", "Pissenlit", "Canne à sucre"], c=1,
+    fb="La pastèque scintillante, fabriquée avec une tranche de pastèque et huit pépites d'or, est l'ingrédient de la potion de soin instantané.")
+drop(S, "Quel est le nombre maximum de mobs qui peuvent spawner dans une zone donnée avant que le spawn soit bloqué ?")
+drop(S, "Quel mob est passif mais peut pousser le joueur hors des falaises ?")
+drop(S, "Quelle est la profondeur minimale à laquelle les diamants peuvent être trouvés ?")
+fix(S, "Quelle est la profondeur où les diamants spawent le plus fréquemment depuis la version 1.18 ?",
+    q="À quelle hauteur conseille-t-on souvent de miner pour trouver des diamants depuis la 1.18 ?",
+    a=["Y=12", "Y=40", "Y=-58", "Y=64"], c=2,
+    fb="Depuis la 1.18, les diamants sont plus fréquents tout en bas du monde. Miner vers Y=-58 permet d'en trouver beaucoup tout en restant au-dessus de la bedrock.")
+fix(S, "Comment s'appelle le boss sous-marin gardant les Monuments Aquatiques ?",
+    fb="Le Gardien ancien protège les monuments océaniques : il y en a trois par monument. Il inflige la Fatigue de minage, qui ralentit énormément le minage.")
+drop(S, "Quel bloc émet de la lumière et peut être placé sous l'eau ?")
+fix(S, "Quel bloc produit de la lumière même sous l'eau et se craft avec du prismarine ?",
+    a=["Torche", "Lanterne", "Lanterne aquatique", "Pierre lumineuse"], c=2,
+    fb="La lanterne aquatique se fabrique avec des éclats et des cristaux de prismarine, que l'on trouve dans les monuments océaniques. Elle éclaire au niveau maximal, même sous l'eau.")
+fix(S, "Quel matériau est nécessaire pour fabriquer une Élytre de réparation ?",
+    q="Avec quel objet répare-t-on des élytres sur une enclume ?",
+    a=["Plumes de poulet", "Toile d'araignée", "Membranes de phantom", "Cuir"], c=2,
+    fb="Les élytres s'usent en vol et se réparent sur une enclume avec des membranes de phantom. Les phantoms apparaissent la nuit quand le joueur n'a pas dormi depuis plusieurs jours.")
+fix(S, "Quel matériau est nécessaire pour fabriquer un lit dans Minecraft ?",
+    a=["Laine et planches", "Laine et ficelle", "Planches et plumes", "Laine et fer"], c=0)
+drop(S, "Comment créer un lit dans Minecraft ?")
+fix(S, "Quel est le temps d'un cycle jour-nuit dans Minecraft ?",
+    fb="Un cycle complet dure 20 minutes réelles : environ 10 minutes de jour, 7 minutes de nuit, et un lever et un coucher de soleil d'une minute et demie chacun.")
+drop(S, "Comment appelle-t-on l'arme la plus puissante contre les mobs avec une portée à distance ?")
+fix(S, "Comment récupère-t-on des expériences (XP) dans Minecraft ?",
+    a=["En dormant", "En tuant des mobs, en minant certains minerais ou en cuisinant", "En construisant uniquement", "En regardant le ciel"], c=1)
+fix(S, "Quel est l'enchantement permettant aux outils de ne pas perdre de durabilité ?",
+    q="Quel enchantement réduit l'usure des outils ?",
+    fb="Solidité (Unbreaking) donne une chance que l'outil ne s'use pas à chaque utilisation. Raccommodage (Mending) répare l'objet avec l'expérience ramassée.")
+fix(S, "Quel biome du Nether est violet/cramoisi et rempli de champignons géants ?",
+    q="Quel biome du Nether, rouge cramoisi, est rempli de champignons géants ?")
+fix(S, "Quel objet permet de localiser des structures spéciales dans Minecraft ?",
+    a=["Boussole", "Carte vide", "Carte d'exploration", "Longue-vue"], c=2,
+    fb="Les cartes d'exploration, vendues par les villageois cartographes contre des émeraudes, indiquent l'emplacement de structures comme les monuments océaniques ou les manoirs.")
+drop(S, "Comment créer une ferme automatique de Creeper pour obtenir de la poudre à canon ?")
+drop(S, "Quelle est la profondeur maximale d'un puits de mine automatique (bedrock) ?")
+drop(S, "Comment s'appelle le système de transport rapide utilisant des rails et des wagonnets ?")
+drop(S, "Quel est le biome le plus froid de Minecraft avec des pics de glace ?")
+fix(S, "Quel mob neutre attaque si on brise son alvéole ou si on porte une citrouille ?",
+    q="Quel mob neutre attaque en groupe si on casse sa ruche sans l'avoir enfumée ?",
+    fb="Les abeilles, arrivées en 1.15, attaquent et empoisonnent si on casse leur ruche. Un feu de camp placé dessous les calme et permet de récolter le miel sans risque.")
+fix(S, "Quel est l'enchantement permettant de collecter plus de blocs en minant (exemple: diamants) ?",
+    fb="Fortune III peut donner jusqu'à quatre diamants par minerai. À l'inverse, Toucher de soie récupère le minerai intact.")
+drop(S, "Quel est le premier biome à avoir ses propres variants de villages spécifiques ?")
+fix(S, "Comment créer du Netherite pour améliorer ses armures et outils en diamant ?",
+    a=["Miner directement de la netherite", "Fondre des débris antiques puis combiner 4 fragments avec 4 lingots d'or", "Fouiller les coffres du Nether", "L'acheter aux villageois"], c=1,
+    fb="Les débris antiques fondus donnent des fragments de netherite. Quatre fragments et quatre lingots d'or forment un lingot, qui améliore l'équipement en diamant sur une table de forgeron.")
+fix(S, "Quel mob rose du Nether dans Minecraft peut marcher sur la lave mais est ralenti et endommagé par l'eau ou la pluie ?",
+    q="Quel mob du Nether marche sur la lave et peut être chevauché avec une selle ?",
+    fb="L'arpenteur (Strider) se déplace sur la lave. Avec une selle et un champignon biscornu au bout d'une canne, le joueur peut le chevaucher pour traverser les lacs de lave.")
+fix(S, "Quel mob produit de la soie qui sert à créer des fils et des arcs ?",
+    q="Quel mob lâche de la ficelle, utile pour fabriquer des arcs ?",
+    a=["Araignée", "Chauve-souris", "Poulpe", "Slime"], c=0,
+    fb="Les araignées lâchent de la ficelle, qui sert à fabriquer des arcs, des cannes à pêche et des fils de détente.")
+drop(S, "Qu'est-ce qu'une Seed connue parmi les plus célèbres du speedrunning Minecraft ?")
+drop(S, "Quel type de Village génère des villageois Cartographes utiles pour l'exploration ?")
+fix(S, "Quel animal Minecraft peut être dressé avec des poissons crus pour devenir un compagnon ?",
+    a=["Renard", "Chat", "Loutre", "Pingouin"], c=1,
+    fb="Les chats errants des villages s'apprivoisent avec du poisson cru. Ils font fuir les Creepers, ce qui en fait de précieux gardiens.")
+drop(S, "Quel est le nom du boss final de la dimension End dans Minecraft ?")
+fix(S, "Quel effet est appliqué au joueur quand il entre dans un Village Maudit (Bad Omen) ?",
+    q="Quel effet de statut déclenche un raid quand le joueur entre dans un village ?",
+    a=["Poison", "Mauvais présage", "Lenteur", "Malchance"], c=1,
+    fb="Un joueur sous Mauvais présage qui entre dans un village déclenche un raid : des vagues de pillards, de ravageurs et d'évocateurs attaquent.")
+fix(S, "Dans quels emplacements de la dimension End les Élytra peuvent-elles être trouvées ?",
+    fb="Les élytres se trouvent dans les navires de l'End amarrés à certaines cités de l'End, défendues par des Shulkers. Il n'y en a qu'une paire par navire.")
+drop(S, "Combien de types de biomes existent approximativement dans Minecraft Java actuel ?")
+
+
+# ---------------------------------------------------------------- GTA
+S = 'gta'
+fix(S, "Quel est le braquage final de l'histoire de GTA V ?",
+    fb="Le braquage de l'Union Depository est le grand final : Michael, Trevor et Franklin s'attaquent à la réserve d'or de Los Santos, avec une approche discrète ou une approche frontale.")
+fix(S, "Quel personnage vient du monde des affaires et de l'immobilier (semi-retraité du crime) ?",
+    q="Quel protagoniste, ancien braqueur, vit retiré sous une fausse identité ?",
+    fb="Michael De Santa vit sous une fausse identité avec sa famille à Rockford Hills, grâce à un accord avec le FIB. Sa rencontre avec Franklin le ramène au crime.")
+drop(S, "Quel est le nom de l'agence gouvernementale secrète qui kidnappe Michael dans GTA V ?")
+drop(S, "Quel véhicule iconique de Rockstar est présent dans GTA V comme référence à GTA San Andreas ?")
+fix(S, "Quel est le nom de la prison de Blaine County dans GTA V ?",
+    fb="Le pénitencier de Bolingbroke est la grande prison de Blaine County. Dans GTA Online, le braquage « Évasion de prison » consiste à en faire sortir un détenu.")
+fix(S, "Quelle compagnie de taxi peut être appelée par le joueur dans GTA V ?",
+    fb="Downtown Cab Co. est la compagnie de taxis de Los Santos. Franklin peut même la racheter, et le joueur peut appeler un taxi depuis son téléphone.")
+fix(S, "Quel est le nom du grand magasin de luxe sur la Vinewood Boulevard dans GTA V ?",
+    q="Quelle boutique de vêtements haut de gamme de GTA V s'inspire des boutiques de Rodeo Drive ?")
+drop(S, "Comment s'appelle la société de braquage que les trois protagonistes forment ?")
+drop(S, "Quel est le braquage GTA Online le plus difficile et le plus lucratif ?")
+fix(S, "Quel est le nom du personnage antagoniste principal de la Trésorerie de l'État dans GTA V ?",
+    q="Quel agent corrompu du FIB fait chanter les protagonistes de GTA V ?")
+drop(S, "Quel criminel californien a servi d'inspiration pour le personnage de Trevor Philips ?")
+drop(S, "Quelle action en jeu permet à Franklin d'utiliser sa capacité spéciale ?")
+drop(S, "Quel est le prix de base d'une propriété Executive dans GTA Online ?")
+drop(S, "Quel personnage de GTA V peut effectuer des échanges de corps en Yoga (capacité de rêve) ?")
+fix(S, "Quelle activité légale permet à Michael de se détendre dans GTA V ?",
+    a=["La pêche", "Le golf", "Le bowling", "La chasse"], c=1,
+    fb="Michael, passionné de golf, peut jouer au club de golf de Los Santos. Il pratique aussi le yoga et le tennis.")
+drop(S, "Comment s'appelle l'assistant IA du téléphone dans GTA V ?")
+drop(S, "Quel est le réseau social fictif utilisé par les personnages dans GTA V ?")
+drop(S, "Quel sport de combat Trevor peut-il pratiquer en jeu dans GTA V ?")
+drop(S, "Comment s'appelle le jeu de simulation de stock-car dans GTA V accessible en ligne ?")
+fix(S, "Quel est le nom de la chaîne fast food présente partout dans Los Santos ?",
+    q="Quelle chaîne de fast-food de GTA V est spécialisée dans le poulet ?")
+fix(S, "Quel est le nom de l'aéroport principal de Los Santos ?",
+    fb="L'aéroport international de Los Santos s'inspire de celui de Los Angeles. On y trouve l'école de pilotage où les personnages peuvent améliorer leurs compétences.")
+drop(S, "Comment Trevor obtient-il son hélicoptère dans GTA V ?")
+fix(S, "Comment s'appelle la base militaire secrète dans les montagnes de GTA V ?",
+    q="Comment s'appelle la base militaire de l'armée dans GTA V ?",
+    fb="Fort Zancudo abrite des avions de chasse, des chars et des hélicoptères militaires. Y pénétrer déclenche immédiatement un avis de recherche élevé.")
+drop(S, "Quel est le montant que Michael reçoit en protection du FIB au début de la campagne ?")
+drop(S, "Comment s'appelle la moto de gangsters que Michael peut conduire lors d'une mission ?")
+drop(S, "Quel est le type de fichiers qu'on vole dans le braquage Bureau Raid de GTA V ?")
+fix(S, "Combien de niveaux de recherche (étoiles) existe-t-il dans GTA V ?",
+    fb="L'avis de recherche va de 1 à 5 étoiles. Plus il y a d'étoiles, plus les forces de l'ordre envoient de patrouilles, d'hélicoptères et d'unités d'élite.")
+drop(S, "Quel crime en ligne dans GTA Online permet de voler des voitures de luxe pour les exporter ?")
+drop(S, "Quelle île du nord-est de Los Santos possède un port industriel dans GTA V ?")
+drop(S, "Comment s'appelle le quartier de gangsters Ballas dans GTA V ?")
+drop(S, "Quelle est la capacité spéciale de Michael permettant de ralentir le temps ?")
+drop(S, "Quelle est la capacité spéciale de Trevor dans GTA V ?")
+fix(S, "Quelle capacité spéciale Trevor peut-il activer pour devenir temporairement invincible ?",
+    q="Quelle est la capacité spéciale de Trevor dans GTA V ?",
+    a=["Le ralenti en voiture", "Une rage qui augmente les dégâts infligés et réduit ceux reçus", "Il n'en a pas", "La vision nocturne"], c=1,
+    fb="La capacité de Trevor est une rage furieuse : pendant quelques secondes, il inflige plus de dégâts et en reçoit moins.")
+fix(S, "Quel est le résultat de l'option A de la fin de GTA V ?",
+    a=["Franklin tue Trevor", "Franklin tue Michael", "Trevor s'échappe", "Tous survivent"], c=0,
+    fb="Dans l'option A, Franklin suit la demande du FIB et élimine Trevor. Dans l'option B, il tue Michael pour Devin Weston. L'option C, où tous survivent, est considérée comme la fin officielle.")
+drop(S, "Quelle mission implique Franklin de voler une voiture pour Simeon dans les premières missions ?")
+drop(S, "Quelle carte GTA représente quelle réalité géographique de Los Angeles ?")
+drop(S, "Quel est le nom de la boîte de nuit de Trevor dans GTA V ?")
+drop(S, "Quel est le nom du club de strip-tease que les joueurs peuvent acheter dans GTA V ?")
+fix(S, "Combien y a-t-il de missions principales dans la campagne de GTA V ?",
+    fb="La campagne de GTA V compte 69 missions principales, auxquelles s'ajoutent de nombreuses missions secondaires et activités.")
+drop(S, "Quel est le symbole du jeu sur l'écran de démarrage de GTA V ?")
+fix(S, "Comment s'appelle le système de réputation dans GTA Online qui détermine les avantages ?",
+    q="Comment s'appellent les points d'expérience qui font monter le niveau dans GTA Online ?",
+    a=["Les GTA$", "Les RP", "La Street Cred", "Les Fame Points"], c=1)
+drop(S, "Comment s'appelle la ville côtière accessible par pont depuis Los Santos dans GTA V ?")
+drop(S, "Quel est le prix de base d'un appartement de luxe dans GTA Online au lancement en 2013 ?")
+drop(S, "Quel est le bâtiment le plus visible de Los Santos avec son dôme d'or ?")
+drop(S, "Comment s'appelle le système de vol de données dans le Braquage Pac Standard GTA Online ?")
+drop(S, "Quelle musique célèbre accompagne la scène d'ouverture de GTA V en 1987 ?")
+fix(S, "Quel est le braquage optionnel de la campagne principale GTA V impliquant une bijouterie ?",
+    q="Quel est le premier braquage de la campagne de GTA V ?",
+    a=["The Paleto Score", "Le braquage de la bijouterie (Jewel Store Job)", "Le casse de l'Union Depository", "Le braquage de la Fleeca"], c=1,
+    fb="Le premier braquage vise la bijouterie Vangelico. Le joueur choisit une approche discrète, avec du gaz et des déguisements, ou une approche armée.")
+drop(S, "Quelle activité de plein air Franklin peut-il pratiquer dans les collines de Vinewood Hills ?")
+drop(S, "Quel est le plus grand véhicule disponible dans GTA V Online (transport de marchandises) ?")
+drop(S, "Comment s'appelle le système de classement des joueurs dans GTA Online ?")
+
+
+# ---------------------------------------------------------------- Zelda
+S = 'zelda'
+fix(S, "Quel jeu Zelda se déroule sur l'île Koholint et met Link face à son réveil ?",
+    q="Quel jeu Zelda se déroule sur l'île Koholint ?",
+    a=["Oracle of Ages", "Link's Awakening", "Phantom Hourglass", "Majora's Mask"], c=1)
+drop(S, "Quel jeu Zelda se déroule sur une île et voir Link réveiller le Poisson du Vent ?")
+drop(S, "Quel est le donjon final emblématique des jeux Zelda 3D ?")
+fix(S, "Quel est l'animal compagnon de Link dans Twilight Princess ?",
+    q="En quel animal Link se transforme-t-il dans Twilight Princess ?",
+    a=["Un renard", "Un oiseau", "Un loup", "Un cheval"], c=2)
+drop(S, "Quel jeu Zelda se déroule dans les Terres du Crépuscule et implique une louve ?")
+fix(S, "Quel personnage est la forme féminine de Sheik dans Ocarina of Time ?",
+    q="Qui se cache derrière Sheik dans Ocarina of Time ?",
+    a=["Navi", "Impa", "La princesse Zelda", "Une vraie Sheikah"], c=2)
+drop(S, "Quel est le nom de l'elfe des bois qui guide Link dans Ocarina of Time ?")
+fix(S, "Quel temple est le premier donjon de The Legend of Zelda: Ocarina of Time ?",
+    q="Quel est le premier donjon de Ocarina of Time ?",
+    a=["Le Temple de l'Eau", "Le Temple du Feu", "L'intérieur de l'Arbre Mojo", "Le Temple de l'Ombre"], c=2,
+    fb="Le premier donjon se trouve à l'intérieur de l'Arbre Mojo, le gardien de la forêt. Link y affronte la reine Gohma et obtient l'Émeraude Kokiri.")
+drop(S, "Quelle est la signification du motif de la Triforce (triangle triple) dans la mythologie Zelda ?")
+drop(S, "Quel instrument Link joue-t-il dans Majora's Mask pour contrôler le temps ?")
+drop(S, "Quel est le nom de l'instrument que Link joue pour progresser dans Majora's Mask ?")
+fix(S, "Quel est le sanctuaire/boss final de Breath of the Wild ?",
+    q="Où se trouve le combat final de Breath of the Wild ?",
+    a=["Au Temple du Temps", "Au château d'Hyrule", "Au mont Lanayru", "Dans le désert Gerudo"], c=1,
+    fb="Le Fléau Ganon est retenu depuis 100 ans dans le château d'Hyrule par Zelda. Link l'y affronte, puis termine le combat dans la plaine contre sa forme de bête.")
+fix(S, "Quel est le nom du peuple de l'eau qui habite le Lac Hylia dans OoT ?",
+    q="Quel peuple aquatique vit dans le Domaine Zora ?")
+fix(S, "Quel objet de Breath of the Wild permet à Link de scanner l'environnement ?",
+    q="Quel appareil Link utilise-t-il dans Breath of the Wild pour activer ses pouvoirs ?",
+    a=["Une longue-vue", "La tablette Sheikah", "Le Monocle de Vérité", "Une loupe"], c=1)
+drop(S, "Quel power-up Zelda donne à Link des gantelets pour soulever des objets très lourds ?")
+fix(S, "Comment s'appelle le masque final de Majora's Mask que possède Skull Kid ?",
+    fb="Le masque de Majora est un objet maléfique utilisé jadis dans des rituels et scellé à cause de sa puissance. Il possède Skull Kid et attire la Lune vers Termina.")
+fix(S, "Quel est l'ennemi récurrent aux yeux rouges qui vole l'attention de Link dans les galeries ?",
+    q="Quel ennemi récurrent avale Link pour lui voler son bouclier ?")
+fix(S, "Comment s'appelle l'araignée géante boss récurrente dans la série Zelda ?",
+    fb="Gohma est un boss récurrent depuis le premier jeu. Dans Ocarina of Time, elle garde le premier donjon et se combat en visant son œil unique.")
+fix(S, "Quel est le nom du désert habité par les Gerudo dans Ocarina of Time ?",
+    a=["Désert de Ganon", "Désert du Temps", "Désert Gerudo", "Désert de Lanayru"], c=2)
+drop(S, "Comment s'appelle l'objet magique de Link permettant de viser avec précision dans Wind Waker ?")
+fix(S, "Quel donjon de The Legend of Zelda: OoT est universellement reconnu comme le plus difficile ?",
+    q="Quel donjon d'Ocarina of Time est célèbre pour être le plus redouté des joueurs ?",
+    a=["Le Temple de l'Eau", "Le Temple de l'Ombre", "Le Temple de l'Esprit", "La Caverne de Glace"], c=0)
+drop(S, "Quel est le nom des pieuvres géantes qui gardent les donjons d'eau dans les jeux Zelda 3D ?")
+fix(S, "Quel objet emblématique permet à Link de voler dans The Legend of Zelda: Skyward Sword ?",
+    q="Sur quoi Link vole-t-il dans Skyward Sword ?",
+    a=["Une cape magique", "Une épée céleste", "Un grand oiseau, le Célestrier", "Des ailes de Roc"], c=2,
+    fb="Chaque habitant de Celesbourg possède un Célestrier, un grand oiseau qui lui sert de monture volante. Celui de Link est d'un rouge rare.")
+fix(S, "Quel est le nom de la terre des ombres dans Twilight Princess ?",
+    q="Comment s'appelle le monde parallèle d'où vient Midna ?",
+    a=["Le Monde des Ténèbres", "Le Royaume des Ombres", "Le Royaume du Crépuscule", "Le Monde Miroir"], c=2)
+fix(S, "Comment s'appelle le méchant original créé spécifiquement pour Majora's Mask ?",
+    q="Qui est l'antagoniste principal de Majora's Mask ?",
+    a=["Vaati", "Skull Kid, possédé par un masque", "Ganondorf déguisé", "Zant"], c=1)
+fix(S, "Quel est le nom de la technique de combat au sabre dans Skyward Sword basée sur les mouvements réels ?",
+    fb="En levant la manette vers le ciel, Link charge son épée d'énergie et peut lancer un rayon : c'est le Skyward Strike, rendu possible par le Wii MotionPlus.")
+fix(S, "Quelle est la signification du titre 'The Legend of Zelda' — qui est Zelda exactement ?",
+    q="Qui est Zelda dans la série The Legend of Zelda ?",
+    a=["Le héros principal", "La princesse d'Hyrule", "La mère de Link", "La fée de Link"], c=1)
+drop(S, "Quel jeu Zelda sur DS permet de jouer à plusieurs sur un seul cartouche ?")
+fix(S, "Quel est le boss final de Wind Waker et sous quelle forme apparaît Ganon ?",
+    q="Comment se termine le combat final de The Wind Waker ?",
+    a=["Ganon sous sa forme de bête", "Link plante l'épée dans le front de Ganondorf, qui se change en pierre", "Ganon s'enfuit", "Zelda scelle Ganon dans un miroir"], c=1,
+    fb="Pendant que la mer engloutit Hyrule, Link plante la Master Sword dans le front de Ganondorf, qui se pétrifie.")
+fix(S, "Comment Link voyage-t-il entre les îles dans The Wind Waker ?",
+    a=["En nageant", "Sur un bateau qui parle, le Lion Rouge", "Par téléportation", "Sur le dos d'un oiseau"], c=1,
+    fb="Link navigue sur le Lion Rouge, un bateau qui parle. On découvre qu'il s'agit en réalité du roi d'Hyrule. La baguette Wind Waker permet de contrôler le vent.")
+fix(S, "Quel temple Zelda dans Ocarina of Time utilise le temps comme mécanique principale ?",
+    q="Où Link trouve-t-il la Master Sword dans Ocarina of Time ?",
+    a=["Au Temple du Temps", "Au Temple de la Forêt", "Au Temple de l'Ombre", "Au Temple de l'Esprit"], c=0,
+    fb="Link retire la Master Sword de son socle au Temple du Temps et se réveille sept ans plus tard. En la replaçant, il retourne dans le passé.")
+drop(S, "Quel est le nom du peuple des arbres natifs de la forêt dans Ocarina of Time ?")
+fix(S, "Comment s'appelle l'attaque de rotation légendaire de Link utilisée dans presque tous les jeux Zelda ?",
+    fb="L'attaque tourbillon permet à Link de frapper tout autour de lui en tournant sur lui-même après avoir chargé son épée. Elle est devenue un classique de la série depuis A Link to the Past.")
+drop(S, "Dans Breath of the Wild, comment Link revient-il à la vie après des morts normales ?")
+fix(S, "Quelle est la forme finale de Ganon dans A Link to the Past, Wind Waker et Ocarina of Time ?",
+    q="Sous quelle apparence Ganon se montre-t-il à la fin d'A Link to the Past et d'Ocarina of Time ?",
+    a=["Toujours une forme humaine", "Une bête géante à tête de sanglier", "Un dragon", "Une ombre"], c=1,
+    fb="Ganon, la forme bestiale de Ganondorf, est un monstre colossal à tête de sanglier armé d'un trident ou de lames.")
+fix(S, "Quel est le nom de l'île centrale de la mer dans The Wind Waker ?",
+    q="Quelle île marchande de The Wind Waker abrite boutiques et salle des ventes ?",
+    fb="L'île Mercantile (Windfall) est le grand port marchand de The Wind Waker, avec ses boutiques, sa salle des ventes et ses nombreux habitants. L'île natale de Link est l'île de l'Aurore.")
+drop(S, "Quel objet de navigation Link utilise-t-il dans Phantom Hourglass et Spirit Tracks ?")
+drop(S, "Comment s'appelle le voleur de chapeau que Link doit pourchasser à Kakariko dans OoT adulte ?")
+fix(S, "Quel est le premier temple que Link complète dans Breath of the Wild pour obtenir ses capacités ?",
+    q="Où Link obtient-il ses premiers pouvoirs dans Breath of the Wild ?",
+    a=["Dans la Créature divine Vah Medoh", "Dans les sanctuaires du Plateau du Prélude", "Au Temple du Temps", "À la cité Gerudo"], c=1,
+    fb="Sur le Plateau du Prélude, Link explore quatre sanctuaires qui lui donnent ses premiers pouvoirs : magnétisme, stase, cryogénie et bombes.")
+fix(S, "Quel est le donjon final de The Legend of Zelda: A Link to the Past (SNES) ?",
+    a=["Le Roc de la Tortue", "La Pyramide du Pouvoir", "La tour de Ganon", "Le Palais des Ténèbres"], c=2,
+    fb="La tour de Ganon, au sommet de la montagne du Monde des Ténèbres, est le dernier donjon. Link y bat Agahnim, avant d'affronter Ganon dans la Pyramide.")
+fix(S, "Comment s'appelle la déesse qui veille sur Hyrule et dont le nom est donné à la princesse ?",
+    q="Quelle déesse s'est réincarnée en princesse Zelda, d'après Skyward Sword ?",
+    fb="Skyward Sword révèle que la déesse Hylia s'est réincarnée en mortelle, Zelda, pour aider le héros à vaincre le Néant.")
+drop(S, "Quel est le nom de l'arc-en-ciel visible depuis le sommet de Hyrule Castle dans OoT enfant ?")
+fix(S, "Quel village de BotW est spécialisé dans l'équipement et la culture Gerudo ?",
+    q="Dans quelle ville de Breath of the Wild Link doit-il se déguiser pour entrer ?",
+    a=["Cocorico", "Le Domaine Zora", "Écurie du Bois", "La cité Gerudo"], c=3)
+fix(S, "Quel est le nom du Sage de l'Eau dans Ocarina of Time ?",
+    fb="Ruto, princesse des Zoras, devient la Sage de l'Eau. Depuis que Link l'a sauvée dans le ventre de Jabu-Jabu, elle le considère comme son fiancé.")
+fix(S, "Quel objet de Skyward Sword permet à Link de voir les lignes de courant spirituel ?",
+    q="Quelle capacité de son épée aide Link à localiser des objets ou des personnes dans Skyward Sword ?",
+    a=["Le saut céleste", "La radiesthésie", "Le Monocle de Vérité", "La Vision du héros"], c=1,
+    fb="Grâce à la radiesthésie, Link pointe son épée et suit un signal qui le guide vers l'objet ou la personne recherchée.")
+
+
+# ---------------------------------------------------------------- Valorant
+S = 'valorant'
+drop(S, "Quel est le nom de l'arme qui one-shot à la tête à n'importe quelle distance dans Valorant ?")
+drop(S, "Quel agent Valorant est le plus populaire pour les débutants grâce à sa facilité ?")
+fix(S, "Quelle est la classe d'agents spécialisés dans les éclairages et info ?",
+    q="Quelle classe d'agents est spécialisée dans la collecte d'informations ?",
+    fb="Les Initiateurs récoltent des informations et ouvrent les sites, comme Sova avec sa flèche de reconnaissance, Breach avec ses ondes sismiques ou Fade avec ses traqueurs.")
+drop(S, "Quel est le nom de la première carte de Valorant (map de base) ?")
+fix(S, "Quelle map Valorant est la seule à avoir 3 sites de bombe ?",
+    q="Quelles cartes de Valorant possèdent trois sites de Spike ?",
+    a=["Bind et Ascent", "Haven et Lotus", "Split et Icebox", "Pearl et Breeze"], c=1,
+    fb="Haven, inspirée du Bhoutan, et Lotus, inspirée de l'Inde, comptent trois sites (A, B et C), ce qui oblige la défense à se répartir davantage.")
+fix(S, "Quel agent peut se rendre invisible temporairement ?", c=3,
+    fb="Avec son ultime, Dimensional Drift, Yoru passe dans une autre dimension où il devient invisible et invulnérable pour aller chercher des informations.")
+fix(S, "Quel est le rang maximum dans le système classé Valorant ?",
+    fb="Radiant est le rang le plus élevé. Il est réservé aux meilleurs joueurs de chaque région, classés dans un tableau public.")
+drop(S, "Quelle mécanique permet à certains agents de 'peek' sans prendre de dégâts complets ?")
+drop(S, "Quel agent peut créer des copies de lui-même pour tromper les ennemis ?")
+drop(S, "Quel agent peut lancer un clone de lui-même pour décevoir les ennemis ?")
+drop(S, "Quel agent peut créer un leurre de lui-même pour tromper les ennemis ?")
+fix(S, "Quelle est la cadence de tir de base pour viser précisément dans Valorant ?",
+    q="Que faut-il faire pour tirer avec précision dans Valorant ?",
+    a=["Sprinter en tirant", "Toujours se déplacer", "S'arrêter avant de tirer", "Sauter en tirant"], c=2)
+drop(S, "Comment s'appelle le premier agent Sentinel à avoir une mécanique de résurrection ?")
+drop(S, "Quel agent crée une barrière de soin pour son équipe ?")
+drop(S, "Quel agent Controller crée des fumées qui bloquent la vision sur de grandes distances ?")
+drop(S, "Quel agent Valorant peut créer des murs de fumée sur sa carte personnelle ?")
+drop(S, "Quelle map Valorant a été retirée et remplacée plusieurs fois ?")
+drop(S, "Quel est le nombre de rounds maximum dans une partie classée de Valorant ?")
+fix(S, "Quel agent Dueliste de Valorant est originaire des Philippines et utilise l'électricité ?",
+    fb="Neon est une Duelliste philippine qui manie l'électricité : sprint, murs électriques et rafales d'éclairs avec son ultime, Overdrive.")
+drop(S, "Quel est le nom de l'organisation antagoniste dans le lore de Valorant ?")
+drop(S, "Quelle organisation fictive est opposée à VALORANT Protocol dans le lore ?")
+drop(S, "Comment s'appelle le système de progression des armes dans Valorant ?")
+drop(S, "Quel agent peut placer une tourelle automatique pour couvrir les angles ?")
+drop(S, "Quelle est la puissance de la Classic (pistolet gratuit au début de chaque round) ?")
+drop(S, "Quel est le temps maximum d'un round standard dans Valorant ?")
+fix(S, "Quel agent peut se soigner après avoir tué des ennemis ?",
+    fb="Reyna se nourrit de l'âme de ses victimes : après un élimination, elle peut se soigner (Devour) ou devenir brièvement intouchable (Dismiss).")
+fix(S, "Quel est le nombre de cartes disponibles dans le pool compétitif au lancement de Valorant ?",
+    q="Combien de cartes étaient jouables au lancement de Valorant en juin 2020 ?", c=0,
+    fb="Au lancement, quatre cartes étaient disponibles : Bind, Haven, Split et Ascent. Icebox est arrivée quelques mois plus tard.")
+drop(S, "Comment s'appelle la capacité passive de Killjoy qui révèle les ennemis proches de ses gadgets ?")
+drop(S, "Comment s'appelle la première saison compétitive officielle de Valorant ?")
+drop(S, "Quel est le terme pour désigner un joueur qui n'achète pas d'arme pour économiser pour le round suivant ?")
+drop(S, "Quel est le nom de la technique où un joueur reste accroupi pour réduire sa hitbox et surprendre ?")
+fix(S, "Combien de rounds faut-il gagner pour remporter une partie classée de Valorant ?",
+    fb="La première équipe à 13 rounds l'emporte. Les équipes changent de côté après 12 rounds, et des prolongations sont jouées en cas d'égalité 12-12.")
+fix(S, "Quel agent peut détruire les utilitaires ennemis avec ses ondes sismiques ?",
+    q="Quel Initiateur suédois lance des ondes sismiques à travers les murs ?",
+    fb="Breach, l'Initiateur suédois, envoie ses charges à travers les murs pour aveugler, étourdir et repousser les défenseurs.")
+fix(S, "Quel agent peut neutraliser temporairement les capacités ennemies avec une grenade ?",
+    q="Quel agent peut empêcher les ennemis d'utiliser leurs capacités avec une lame lancée ?",
+    fb="KAY/O est un robot Initiateur. Sa lame ZERO/POINT supprime les capacités des ennemis touchés, et pendant son ultime ses alliés peuvent le relever s'il tombe.")
+drop(S, "Quel est l'impact d'un 'eco round' bien joué sur l'économie de l'équipe adverse ?")
+drop(S, "Quel est le nom de la technique offensive où l'équipe attaque un seul site avec tout le monde ?")
+drop(S, "Quel personnage de Valorant est la première à avoir une représentation non-binaire officiellement ?")
+drop(S, "Quel est le résultat quand deux joueurs se tirent dessus simultanément à la tête dans Valorant ?")
+fix(S, "Quel agent Controller peut se téléporter à travers ses propres fumées ?",
+    q="Quel Contrôleur peut se téléporter n'importe où sur la carte avec son ultime ?",
+    fb="Avec son ultime, From the Shadows, Omen peut se téléporter n'importe où sur la carte. Sa compétence Shrouded Step permet aussi de courtes téléportations.")
+drop(S, "Quel agent Valorant peut traverser les murs grâce à sa technique Paranoia ?")
+fix(S, "Quel est le nom de la map Valorant avec une piscine au centre et deux niveaux verticaux ?",
+    q="Quelle carte de Valorant se déroule dans l'Arctique ?",
+    fb="Icebox se déroule dans une base arctique, avec deux sites, des tyroliennes et beaucoup de verticalité.")
+fix(S, "Comment s'appelle la ressource virtuelle qui permet d'acheter des armes et capacités en début de round ?",
+    a=["L'or", "Les crédits", "Les jetons", "Les points"], c=1)
+fix(S, "Quel est le rôle principal du personnage Cypher dans une équipe Valorant ?",
+    fb="Cypher est une Sentinelle marocaine spécialiste de la surveillance : fils-pièges, caméra espion et cages. Son ultime révèle les ennemis à partir d'un cadavre.")
+drop(S, "Quel est l'agent Dueliste le plus populaire en ranked Valorant selon les statistiques 2024 ?")
+drop(S, "Comment s'appelle le mécanisme permettant d'acheter des armes pour ses coéquipiers ?")
+fix(S, "Quel agent possède une capacité qui lui permet de voir à travers les murs via des empreintes ?",
+    q="Quelle Initiatrice turque traque ses ennemis grâce à des créatures cauchemardesques ?",
+    fb="Fade, Initiatrice turque, envoie des traqueurs qui suivent les ennemis et peut révéler leur position avec Haunt. Son ultime, Nightfall, affaiblit tous ceux qu'il touche.")
+
+
+# ---------------------------------------------------------------- EA Sports FC
+S = 'eafc'
+fix(S, "Pourquoi EA Sports a renommé 'FIFA' en 'EA Sports FC' en 2023 ?",
+    fb="Après 30 ans de partenariat, EA et la FIFA ne se sont pas entendues sur le prix du nom : la FIFA demanderait environ un milliard de dollars. EA a gardé ses licences de ligues, de clubs et de joueurs.")
+fix(S, "Quel mode narratif avec le personnage Alex Hunter a été introduit dans FIFA 17 ?",
+    fb="The Journey, le mode histoire de FIFA 17 à FIFA 19, suivait la carrière d'Alex Hunter.")
+fix(S, "Quel joueur est sur la couverture de EA Sports FC 25 ?", c=3,
+    fb="Jude Bellingham, milieu du Real Madrid et de l'Angleterre, est l'athlète de couverture d'EA Sports FC 25.")
+drop(S, "Que signifie FUT dans EA Sports FC ?")
+fix(S, "Comment s'appelle la monnaie gratuite gagnée en jouant dans FUT ?",
+    fb="Les Pièces FUT se gagnent en jouant des matchs, en vendant des joueurs ou en relevant des défis. Elles servent à acheter des joueurs sur le Marché des transferts.")
+drop(S, "Comment s'appelle l'indicateur de Chimie affiché sur chaque joueur dans l'interface FUT ?")
+fix(S, "Qu'est-ce qu'une carte EDSM dans FUT ?",
+    a=["Une édition spéciale de mi-saison", "Une carte de l'Équipe de la semaine, pour les joueurs les plus performants de la semaine", "Un échange de cartes entre amis", "Une carte de légende"], c=1,
+    fb="Chaque semaine, EA publie l'Équipe de la semaine (EDSM) : les joueurs les plus performants dans la réalité reçoivent une carte améliorée, disponible pendant une semaine dans les packs.")
+drop(S, "Comment fonctionne le système de 'Évolutions' dans FC 25 pour améliorer les joueurs ?")
+drop(S, "Comment s'appelle le mode solo FUT où on affronte des équipes gérées par l'IA ?")
+drop(S, "Comment s'appelle la progression de Division Rivals de la moins bonne à la meilleure ?")
+drop(S, "Quel est le format d'une équipe FUT en termes de joueurs ?")
+fix(S, "Quel mode permet de créer son joueur et suivre sa carrière de A-League jusqu'aux sommets ?",
+    q="Quel mode permet de créer son propre joueur et de suivre sa carrière ?")
+fix(S, "Quelle est la note maximale possible pour un joueur dans EA Sports FC ?",
+    fb="La note maximale est de 99. Seules quelques cartes spéciales l'atteignent, comme certaines Icônes ou cartes de l'Équipe de l'année.")
+drop(S, "Quelle équipe nationale est généralement la mieux notée dans EA Sports FC 25 ?")
+fix(S, "Comment s'appelle la ligue française dans EA Sports FC ?",
+    q="Quel championnat porte le nom d'EA Sports depuis 2023 ?",
+    a=["La Ligue 1", "La Premier League", "La Liga espagnole (LALIGA EA SPORTS)", "La Serie A"], c=2,
+    fb="Depuis la saison 2023-2024, EA Sports est le sponsor-titre du championnat d'Espagne, appelé LALIGA EA SPORTS.")
+drop(S, "Quelle grande ligue n'est PAS intégralement sous licence dans EA Sports FC ?")
+fix(S, "Quel club espagnol a le plus de joueurs bien notés dans EA Sports FC 25 ?",
+    fb="Le Real Madrid est l'un des clubs les mieux notés d'EA Sports FC 25, avec Mbappé, Vinícius Jr., Bellingham et un effectif très profond.")
+fix(S, "Pourquoi certains clubs de EA Sports FC ont-ils des noms ou maillots génériques ?",
+    fb="Quand un club n'a pas d'accord de licence avec EA, il apparaît sous un nom modifié avec un maillot et un logo génériques.")
+fix(S, "Pourquoi les packs FUT sont-ils controversés selon les régulateurs de plusieurs pays ?",
+    fb="Les packs fonctionnent comme des loot boxes : on paie sans savoir ce qu'on obtient. La Belgique a par exemple interdit les packs payants, et EA affiche désormais les probabilités d'obtention.")
+fix(S, "Quelle est la différence entre le 'Transfert Direct' et les 'Enchères' dans le Marché FUT ?",
+    q="Sur le Marché des transferts FUT, que permet l'Achat immédiat ?",
+    a=["Rien de particulier", "Acheter tout de suite au prix fixé par le vendeur", "Acheter uniquement des joueurs rares", "Recevoir un joueur gratuitement"], c=1,
+    fb="L'Achat immédiat permet d'acquérir une carte sur-le-champ au prix choisi par le vendeur. Les enchères, elles, peuvent revenir moins cher mais demandent d'attendre la fin du chrono.")
+drop(S, "Pourquoi EA Sports a-t-elle renommé FIFA en EA Sports FC ?")
+drop(S, "Quelle récompense hebdomadaire récompense les meilleurs joueurs FUT ?")
+drop(S, "Quel joueur a eu la note de 99 dans FC 25 (note maximale) ?")
+drop(S, "Quel mode permet de jouer des matchs avec des règles spéciales et des règles modifiées ?")
+drop(S, "Quel est le meilleur club selon EA FC en termes de note globale pour FC 25 ?")
+drop(S, "Qu'est-ce qu'un Icon dans FUT ?")
+drop(S, "Quel mode de jeu permet de créer un joueur personnalisé pour évoluer en club en ligne ?")
+drop(S, "Quel est le nom du mode de jeu en ligne où 11 joueurs humains forment une équipe ?")
+drop(S, "Quel pays a le plus de ligues sous licence dans EA Sports FC ?")
+drop(S, "Quel était le nom du jeu avant qu'EA rompe avec la FIFA ?")
+drop(S, "Quel mode de jeu permet de jouer des matchs avec une équipe historique sans acheter de cartes ?")
+fix(S, "Qu'est-ce qu'une carte 'In Form' (IF) dans FUT ?",
+    fb="Les cartes In Form sont les cartes améliorées de l'Équipe de la semaine (EDSM), attribuées chaque semaine aux joueurs les plus performants dans la réalité.")
+drop(S, "Quel est le nom du mode narratif d'EA FC avec une histoire de personnage fictif ?")
+drop(S, "Quel est le nom du mode de jeu narratif qui suivait Alex Hunter dans FIFA 17-19 ?")
+drop(S, "Quelle ligue a le plus de clubs disponibles en intégralité dans EA Sports FC ?")
+drop(S, "Quel est le mécanisme 'Chimie' dans FUT et à quoi sert-il ?")
+drop(S, "Comment s'appelle le système de chimie dans FUT qui lie les joueurs par club et nationalité ?")
+drop(S, "Quel trophée récompense le meilleur joueur du monde dans EA Sports FC selon le vote de la communauté ?")
+drop(S, "Quelle note globale correspond généralement au seuil 'méta' dans FUT compétitif ?")
+drop(S, "Quel est le nom de la monnaie virtuelle premium dans EA Sports FC ?")
+drop(S, "Quel est le mode de jeu rapide 5 contre 5 inspiré du football de rue ?")
+drop(S, "Quel est le mode de jeu EA FC permettant de jouer sur des terrains urbains en équipes de 3 ?")
+drop(S, "Quelle est la position de jeu de Kylian Mbappé dans EA Sports FC ?")
+drop(S, "Quel est le nom du mode de jeu narratif solo d'EA FC inspiré de la Coupe du Monde ?")
+drop(S, "Quel est l'équivalent FUT d'un match de championnat compétitif en ligne ?")
+drop(S, "Comment s'appelle la version EA Sports de la Premier League dans le jeu ?")
+drop(S, "Quel est le système d'amélioration des cartes joueurs dans FUT basé sur les performances réelles ?")
+drop(S, "Quelle ligue nationale a le plus de supporters dans EA Sports FC ?")
+drop(S, "Quel est l'équivalent FUT de la Ligue des Champions en termes de mode de tournoi ?")
+drop(S, "Quel joueur a eu la note la plus haute de l'histoire de la franchise FIFA/EAFC ?")
+drop(S, "Quel est le nom de la mise à jour hebdomadaire des effectifs dans EA Sports FC ?")
+drop(S, "Dans quel mode peut-on créer et gérer sa propre académie de jeunes joueurs ?")
+drop(S, "Quel pays a la meilleure note globale d'équipe nationale dans EA Sports FC 25 ?")
+drop(S, "Quel pays possède l'équipe nationale avec la meilleure note globale dans EA Sports FC 25 ?")
+drop(S, "Quel est le type de carte FUT spéciale émise lors de la Coupe du Monde ou Euro ?")
+drop(S, "Quelle est la compétition officielle de EA Sports FC au niveau pro mondial ?")
+drop(S, "Quel élément graphique distingue les cartes Icons (Légendes) dans FUT ?")
+drop(S, "Quel est le nom de l'événement FUT de mi-saison avec des cartes améliorées aléatoires ?")
+drop(S, "Quel type de contrat consomme-t-on quand un joueur joue des matchs dans FUT ?")
+drop(S, "Quel est le plafond de chimie par joueur dans EA Sports FC 25 ?")
+drop(S, "Quel est le mode permettant de jouer des matchs en changeant les règles comme gravité réduite ?")
+drop(S, "Quel est l'indice utilisé pour mesurer la popularité d'un joueur dans FUT selon sa demande sur le marché ?")
+drop(S, "Quel est le mode permettant de jouer avec de vraies règles de club et des titres de saison ?")
+drop(S, "Quel joueur a remporté le Ballon d'Or le plus de fois dans la réalité, influençant sa note Icon ?")
+fix(S, "Qu'est-ce qu'un DCE (Défi Création d'Équipe) dans FUT ?",
+    q="Que faut-il faire pour réussir un DCE dans FUT ?",
+    a=["Gagner un match en ligne", "Soumettre une équipe qui respecte des critères précis", "Ouvrir un pack", "Marquer un but précis"], c=1,
+    fb="Un DCE (Défi de création d'équipe) demande de soumettre des joueurs qui respectent des critères (note minimale, Chimie, nationalité…) en échange de packs ou de cartes.")
+drop(S, "Quel est le nom de la compétition en ligne où les meilleurs joueurs FUT s'affrontent le week-end ?")
+drop(S, "Comment s'appelle la compétition en ligne hebdomadaire où les meilleurs joueurs FUT s'affrontent ?")
+drop(S, "Quel est le maximum de cartes qu'une équipe FUT peut contenir dans le club virtuel ?")
+drop(S, "Combien de joueurs maximum peut contenir le Club FUT d'un joueur ?")
+drop(S, "Quelle récompense reçoit le joueur FUT qui atteint le rang Elite en FUT Champions ?")
+drop(S, "Comment s'appelle le système de statistiques qui mesure la performance d'un joueur en match réel pour EA FC ?")
+drop(S, "Quel type de carte FUT est obtenu uniquement en accomplissant des Objectives (objectifs) ?")
+fix(S, "Comment les joueurs peuvent-ils améliorer les statistiques d'un joueur spécifique dans FUT ?",
+    a=["Avec les styles de Chimie", "Par l'entraînement", "C'est impossible", "Uniquement avec les DCE"], c=0,
+    fb="Les styles de Chimie s'appliquent à un joueur et renforcent certaines statistiques, comme Hunter pour la vitesse et le tir, ou Anchor pour la défense et le physique.")
+drop(S, "Comment s'appelle le processus de vente d'un joueur FUT au marché de transfert ?")
+drop(S, "Quelle est la différence entre un joueur 5 étoiles de faible foot et un joueur 4 étoiles ?")
+drop(S, "Comment EA Sports FC récompense-t-il les joueurs qui connectent leur compte EA chaque jour ?")
+drop(S, "Quel est le nom de la fonctionnalité permettant de tester une équipe FUT avant de l'acheter ?")
+drop(S, "Quel mode de EA Sports FC utilise la technologie de scan facial de vrais joueurs ?")
+drop(S, "Quelle est la saison avec le plus grand nombre de nouveaux agents spéciaux EA FC ?")
+drop(S, "Quel est le nom du bug légendaire dans les vieux FIFA où les gardiens passaient la balle dans leur propre but ?")
+drop(S, "Comment s'appelle la notation de performance hebdomadaire qui déclenche une carte spéciale ?")
+drop(S, "Quel est le format de base d'une équipe FUT en termes de nombre de joueurs ?")
+drop(S, "Quel est le Quirk le plus important dans FUT pour les ailiers rapides ?")
+drop(S, "Qu'est-ce qu'un 'Pack' dans FUT et quelle est la controverse autour d'eux ?")
+drop(S, "Quel est le terme pour un joueur dont la valeur en FUT marché est très élevée due à de rares statistiques ?")
+drop(S, "Quelle nouvelle fonctionnalité EA FC 25 a-t-elle introduite permettant aux joueurs d'évoluer leurs cartes ?")
+drop(S, "Quel est le nom de la ligue française dans EA Sports FC ?")
+drop(S, "Quel est le rang maximum de Division Rivals dans EA Sports FC ?")
+drop(S, "Quel club de football a été renommé dans EA Sports FC suite à un changement de sponsor ?")
