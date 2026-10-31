@@ -98,6 +98,11 @@ def load_new_series():
 
 
 def main():
+    import sys
+    sys.path.insert(0, str(ROOT / 'content'))
+    from corrections import FIX as CORR_ALL
+    global CORR, used_fix
+    CORR, used_fix = CORR_ALL, set()
     src = json.loads(SRC.read_text(encoding='utf-8'))
     for key, serie in load_new_series().items():
         assert key not in src, key
@@ -124,6 +129,21 @@ def main():
         pool = [q for q in pool if q.get('q', '').strip() not in DROP]
         for _ in range(before_drop - len(pool)):
             report['retirees_manuellement'].append(slug)
+
+        # Relecture : corrections et retraits (content/corrections.py)
+        fixes = CORR.get(slug, {})
+        corrected = []
+        for q in pool:
+            key = q.get('q', '').strip()
+            if key in fixes:
+                used_fix.add((slug, key))
+                if fixes[key] is None:
+                    report['retirees_relecture'].append(f'{slug}: {key[:90]}')
+                    continue
+                q = {**q, **fixes[key]}
+                report['corrigees_relecture'].append(f'{slug}: {key[:90]}')
+            corrected.append(q)
+        pool = corrected
 
         for q in pool:
             if q.get('q', '').strip() in REWORD:
@@ -209,6 +229,9 @@ def main():
             'q': valid,
         }
 
+    unused = [(s_, k) for s_, d in CORR.items() for k in d if (s_, k) not in used_fix]
+    if unused:
+        raise SystemExit('Corrections sans question correspondante (texte à vérifier) :\n' + '\n'.join(f'  {s_}: {k}' for s_, k in unused))
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding='utf-8')
     total = sum(len(s['q']) for s in out.values())
