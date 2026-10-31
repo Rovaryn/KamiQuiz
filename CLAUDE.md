@@ -36,6 +36,8 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
   Pour retirer un personnage, le supprimer de `CHARS` (il est remplacé seul les jours où il tombait) ; un nouveau va en fin de file.
 - `data/mots-fr.txt` : dictionnaire des essais du Mot mystère (licence MIT, voir `data/mots-fr.LICENSE.txt`).
 - `data/questions.src.json` : banque d'origine, **ne jamais modifier** ; `tools/clean_data.py` produit `data/questions.json`.
+- `content/corrections.py` : corrections et retraits de questions de la banque (relecture d'octobre 2026, `fix()` / `drop()`).
+- `content/extra_questions.py` : nouvelles questions vérifiées ajoutées aux séries existantes (bonne réponse écrite en premier, mélangée ensuite).
 - `static/` : CSS, JS (`site.js`, `quiz.js`, `dle.js`), polices auto-hébergées, images.
 - `tools/` : vérifications, images, kit réseaux sociaux, vidéos (longues et narrées).
 - `docs/` : documents de travail que les scripts ne touchent pas (promotion…).
