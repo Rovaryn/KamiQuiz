@@ -2064,3 +2064,553 @@ drop(S, "Quelle nouvelle fonctionnalité EA FC 25 a-t-elle introduite permettant
 drop(S, "Quel est le nom de la ligue française dans EA Sports FC ?")
 drop(S, "Quel est le rang maximum de Division Rivals dans EA Sports FC ?")
 drop(S, "Quel club de football a été renommé dans EA Sports FC suite à un changement de sponsor ?")
+
+
+# ---------------------------------------------------------------- Mario
+S = 'mario'
+fix(S, "Comment s'appelle la princesse que Mario sauve le plus souvent ?",
+    a=["Princesse Daisy", "Princesse Harmonie", "Princesse Peach", "Princesse Zelda"], c=2)
+fix(S, "Quel est le nom complet du villain principal de la saga Mario ?",
+    q="Quel est le principal ennemi de Mario ?", a=["King Boo", "Bowser", "Wario", "Kamek"], c=1,
+    fb="Bowser, le roi des Koopas, est une immense tortue à épines qui crache du feu. Il enlève Peach depuis Super Mario Bros. en 1985.")
+fix(S, "Quel power-up rend Mario invincible temporairement ?",
+    a=["Méga Champignon", "Super Étoile", "Fleur de feu", "Champignon doré"], c=1,
+    fb="La Super Étoile rend Mario invincible pendant quelques secondes : il clignote de toutes les couleurs et élimine les ennemis au contact, sur une musique très reconnaissable.")
+drop(S, "Quel est le power-up qui donne à Mario une étoile d'invincibilité dorée temporaire ?")
+fix(S, "Quel est le nom de la planète-île centrale dans Super Mario Galaxy ?",
+    q="Comment s'appelle la base d'Harmonie (Rosalina) dans Super Mario Galaxy ?",
+    a=["La Grande Étoile", "Le Cœur galactique", "L'Observatoire de la comète", "La Station Galaxy"], c=2,
+    fb="L'Observatoire de la comète est la base d'Harmonie et des Lumas. Mario s'y rend entre deux galaxies.")
+drop(S, "Quel est le nom de la galaxie centrale de Super Mario Galaxy ?")
+drop(S, "Comment s'appelle la base cosmique de Rosalina dans Super Mario Galaxy 1 ?")
+drop(S, "Quel mode de jeu emblématique de Mario Kart permet à 4 joueurs de jouer en même écran ?")
+fix(S, "Quel jeu Mario est le plus vendu de tous les temps ?",
+    fb="Mario Kart 8 Deluxe, sur Switch, dépasse les 60 millions d'exemplaires vendus : c'est le jeu Mario le plus vendu.")
+fix(S, "Quel est le nom de la tortue mount emblématique de Mario depuis 1990 ?",
+    q="Quel dinosaure sert de monture à Mario depuis Super Mario World ?")
+drop(S, "Quel item permet à une tortue Koopa de glisser à grande vitesse dans les niveaux ?")
+drop(S, "Dans quel jeu Mario peut-il lancer des caps et capturer des ennemis ?")
+drop(S, "Quel est le nom du chapeau vivant de Mario dans Super Mario Odyssey ?")
+fix(S, "Comment s'appelle le crabe géant boss récurrent de la série Mario ?",
+    q="Comment s'appelle le fils de Bowser, apparu dans Super Mario Sunshine ?")
+fix(S, "Quel power-up Super Mario donne-t-il à Mario une cape et la capacité de voler ?",
+    q="Quel objet donne une cape à Mario dans Super Mario World ?",
+    a=["Une Super Feuille", "Une Plume", "Une Étoile", "Un Super Champignon"], c=1,
+    fb="Dans Super Mario World, la Plume donne à Mario une cape qui lui permet de planer et de voler après avoir pris de l'élan.")
+drop(S, "Comment s'appelle le mode où deux joueurs partagent l'écran dans New Super Mario Bros. Wii ?")
+fix(S, "Quel est le nom de la forteresse principale de Bowser dans Super Mario World ?",
+    q="Comment s'appelle la zone finale de Super Mario World ?")
+fix(S, "Combien d'étoiles doit-on collecter pour affronter Bowser la première fois dans Super Mario 64 ?",
+    a=["8", "10", "12", "15"], c=0,
+    fb="Il faut 8 étoiles pour ouvrir la porte qui mène au premier combat contre Bowser. Le combat final en demande 70, et le jeu en compte 120.")
+drop(S, "Quel est le son iconique entendu quand Mario prend un champignon ?")
+drop(S, "Comment s'appelle le son iconique joué quand Mario reçoit un power-up mushroom ?")
+drop(S, "Quel son est associé à la mort de Mario dans presque tous les jeux ?")
+drop(S, "Comment s'appelle l'effet sonore joué quand Mario tombe dans un trou sans fond ?")
+drop(S, "Quel est le nom de la mégastructure finale à détruire dans Super Mario Odyssey ?")
+drop(S, "Comment s'appelle le royaume où Mario doit retrouver Peach dans Super Mario Odyssey ?")
+drop(S, "Quel est le nom de la galaxie finale dans Super Mario Galaxy ?")
+fix(S, "Quel power-up dans Super Mario 3D World transforme Mario en Félin ?",
+    q="Quel costume la Super Clochette donne-t-elle à Mario dans Super Mario 3D World ?",
+    a=["Mario Tanuki", "Mario Chat", "Mario Abeille", "Mario Boomerang"], c=1)
+drop(S, "Quel est le monde final du jeu original Super Mario Bros. sur NES ?")
+fix(S, "Quel est le power-up qui permet à Mario de lancer des boules de glace dans certains jeux ?",
+    fb="Dans New Super Mario Bros. Wii, la Fleur de glace permet de lancer des boules qui gèlent les ennemis. Les blocs de glace obtenus peuvent ensuite être ramassés et lancés.")
+fix(S, "Quel est le nom de la femme Koopa dans les jeux Mario RPG et Paper Mario ?",
+    q="Comment s'appelle la vieille Magikoopa conseillère de Bowser dans Paper Mario ?",
+    fb="Kammy Koopa est une vieille Magikoopa au service de Bowser dans Paper Mario. Elle ne doit pas être confondue avec Kamek, autre sorcier de Bowser.")
+drop(S, "Quel jeu Mario introduit l'énergie de vie (avec des cœurs) au lieu de simples tailles ?")
+fix(S, "Quel est le nom du joueur de tennis rival de Mario dans Mario Tennis ?",
+    q="Quel personnage a été créé pour Mario Tennis sur Nintendo 64 ?",
+    a=["Waluigi", "Wario", "Daisy", "Harmonie"], c=0,
+    fb="Waluigi est apparu pour la première fois dans Mario Tennis sur Nintendo 64, en 2000, comme partenaire de Wario.")
+drop(S, "Quel personnage est la principale rivale de Mario dans le jeu d'arcade Donkey Kong original ?")
+fix(S, "Comment s'appelle la femme-journaliste que Mario sauve dans Donkey Kong original ?",
+    q="Qui Mario doit-il sauver dans le Donkey Kong original de 1981 ?")
+drop(S, "Quel est le nom des niveaux bonus cachés dans les jeux Mario qui donnent des champignons 1-Up ?")
+fix(S, "Quel est le nom de l'ennemi à carapace verte que Mario peut glisser comme projectile ?",
+    fb="Le Koopa Troopa se cache dans sa carapace quand Mario lui saute dessus. Mario peut alors la lancer : la verte file tout droit et rebondit contre les murs.")
+fix(S, "Comment s'appelle le champignon qui fait rétrécir Mario dans certains jeux ?",
+    q="Quel faux champignon, apparu dans Super Mario Bros. : The Lost Levels, blesse Mario ?",
+    fb="Le Champignon poison ressemble à un Super Champignon, mais il blesse Mario au lieu de le faire grandir.")
+drop(S, "Dans quel jeu Mario peut-on jouer un niveau de chaque monde dans un ordre libre ?")
+drop(S, "Quel est le type d'ennemi qui vole un objet de Mario puis le lui revend ?")
+drop(S, "Quel est le thème musical de la carte du monde dans Super Mario Bros. 3 ?")
+fix(S, "Comment s'appelle le château que Mario doit escalader à la fin de chaque monde dans SMB3 ?",
+    q="Où Mario affronte-t-il les Koopalings à la fin de chaque monde dans Super Mario Bros. 3 ?",
+    a=["Dans un château Koopa", "À bord d'un bateau volant", "Dans une forteresse sous-marine", "Au sommet d'une tour"], c=1,
+    fb="À la fin de chaque monde, Mario monte à bord d'un bateau volant pour affronter le Koopaling qui a volé le sceptre du roi.")
+drop(S, "Quel est le record mondial de vitesse actuel pour finir Super Mario Bros. sans glitch (Any%) ?")
+drop(S, "Quel est le record du monde speedrun de Super Mario Bros. (any%) en 2024 ?")
+fix(S, "Dans Mario Kart, quel est l'objet qui permet de voler le premier rang à l'adversaire de tête ?",
+    q="Dans Mario Kart, quel objet vise directement le joueur en tête ?",
+    a=["La carapace bleue", "Le Bill Balle", "L'éclair", "La banane"], c=0,
+    fb="La carapace à épines bleue fonce sur le joueur en tête de course. Elle est devenue le symbole des retournements de situation entre amis.")
+fix(S, "Quel est le nom du niveau de glace emblématique de Super Mario Bros. 3 ?",
+    q="Quel monde de Super Mario Bros. 3 est entièrement glacé ?",
+    a=["Ice Land", "Sky Land", "Water Land", "Pipe Land"], c=0)
+fix(S, "Comment se nomme l'oiseau rouge géant compagnon de Yoshi dans Yoshi's Island ?",
+    q="Quel oiseau transporte bébé Mario au début de Yoshi's Island ?",
+    a=["Birdo", "Un Paratroopa", "Kamek", "La cigogne"], c=3)
+drop(S, "Quel est le nom du système de navigation dans Super Mario Galaxy ?")
+fix(S, "Quel objet Mario lance-t-il dans DK original pour éviter les tonneaux ?",
+    q="Quel objet permet à Mario de détruire les tonneaux dans le Donkey Kong original ?",
+    fb="Dans Donkey Kong (1981), le marteau permet à Mario de briser les tonneaux. Mais tant qu'il le tient, il ne peut plus sauter.")
+drop(S, "Quel jeu Mario introduit pour la première fois des niveaux à défilement vertical ?")
+drop(S, "Quel est le nom de la rivière de lave que Mario doit souvent traverser dans les mondes de Bowser ?")
+fix(S, "Quel est le nom du boss récurrent de chaque monde dans la série Mario 2D classique ?",
+    q="Quel boss garde les forteresses de Super Mario Bros. 3 ?")
+
+
+# ---------------------------------------------------------------- Friends
+S = 'friends'
+drop(S, "Quel running gag implique Chandler et une blague sur sa carrière professionnelle ?")
+drop(S, "Quel épisode iconique montre Ross coinçant un sofa dans les escaliers ?")
+fix(S, "Qui épouse qui dans la finale de Friends ?", q="Comment se termine la série Friends ?")
+drop(S, "Comment s'appelle la chanson que Phoebe joue le plus souvent à Central Perk ?")
+fix(S, "Quel épisode de Noël est souvent cité comme le plus drôle de la série ?",
+    q="Dans quel épisode Ross se déguise-t-il en tatou pour fêter Hanoukka avec son fils ?")
+drop(S, "Combien de fois Ross s'est-il marié au total dans la série ?")
+fix(S, "Quel est le prénom du fils de Ross et Carol ?",
+    fb="Ben est le fils de Ross et Carol. Il naît pendant la première saison et est élevé par Carol et sa compagne Susan.")
+fix(S, "Dans quelle saison Monica et Chandler révèlent-ils leur relation secrète ?",
+    fb="Monica et Chandler se mettent ensemble à la fin de la saison 4. Leur histoire, longtemps cachée, éclate au grand jour au milieu de la saison 5, après que Phoebe les a surpris par la fenêtre.")
+drop(S, "Quelle est la signature vocale de Joey dans la série ?")
+fix(S, "Dans quel appartement habitent Joey et Chandler ?", c=2,
+    fb="Après un changement de numérotation au cours de la série, l'appartement de Joey et Chandler porte le numéro 19, en face de celui de Monica, le 20.")
+drop(S, "Dans quel épisode les filles perdent leur appartement contre Joey et Chandler ?")
+drop(S, "Quelle est la durée totale de la série Friends en heures approximatives ?")
+drop(S, "Combien de fois Ross dit-il le mauvais prénom lors de son mariage avec Emily ?")
+fix(S, "Quel est le prénom de la petite fille adoptée par Chandler et Monica ?",
+    q="Comment s'appellent les jumeaux adoptés par Monica et Chandler ?",
+    a=["Emma et Ben", "Jack et Erica", "Ben et Emily", "Jack et Judy"], c=1,
+    fb="Monica et Chandler pensaient adopter un seul bébé : Erica, la mère biologique, accouche de jumeaux. Ils les appellent Jack et Erica, puis partent s'installer dans la banlieue de New York.")
+fix(S, "Quel autre nom porte Monica quand elle essaie de coacher Chandler lors d'entretiens ?",
+    q="Quel nom mal orthographié figure sur le magazine télé livré à Chandler ?",
+    a=["Miss Chanandler Bong", "Mister Chandeleur Bing", "Chandler Bang", "Miss Chandra Bong"], c=0,
+    fb="Le magazine télé de Chandler arrive au nom de « Miss Chanandler Bong », une erreur qui devient un running gag.")
+fix(S, "Quel acteur joue le personnage de Ross Geller ?",
+    fb="David Schwimmer joue Ross Geller, paléontologue qui enseigne à l'université. Il est le frère aîné de Monica.")
+drop(S, "Quel acteur joue Ross Geller dans la série Friends ?")
+drop(S, "Quel est le vrai prénom de Phoebe Buffay dans la série ?")
+fix(S, "Comment s'appelle le chien en peluche géant que Joey et Chandler gardent dans leur appartement ?",
+    q="Comment s'appelle la grande statue de chien blanc de Joey ?",
+    a=["Rex", "Pat", "Spot", "Cecil"], c=1,
+    fb="Pat est la statue de chien en céramique blanche que Joey adore et garde dans l'appartement.")
+drop(S, "Quel personnage dit souvent 'Oh my eyes!' en voyant quelque chose de gênant ?")
+drop(S, "Quel épisode voit Joey accidentellement se fiancer à Rachel ?")
+drop(S, "Quel emploi Monica occupe-t-elle dans la dernière saison ?")
+drop(S, "Quel personnage secondaire récurrent est le père biologique de Emma ?")
+fix(S, "Quel personnage adore les sandwichs à la dinde de Noël plus que tout au monde ?",
+    q="Quel personnage adore le sandwich aux restes de dinde de Thanksgiving ?",
+    fb="Ross adore le « Moist Maker », son sandwich aux restes de dinde de Thanksgiving. Quand un collègue le lui mange au bureau, il pique une colère mémorable.")
+fix(S, "Comment s'appelle le patron/ex-patron de Rachel dans la mode ?",
+    q="Pour quelle grande marque de mode Rachel travaille-t-elle dans les dernières saisons ?",
+    fb="Rachel travaille chez Ralph Lauren. À la fin de la série, elle reçoit une offre de Louis Vuitton à Paris.")
+drop(S, "Quel est le surnom affectueux de Chandler que sa mère utilise ?")
+drop(S, "Quel est le vrai prénom de l'actrice qui joue Lisa Kudrow dans Friends ?")
+drop(S, "Comment Joey prépare-t-il ses sandwichs préférés dans la série ?")
+fix(S, "Quel personnage récurrent de Friends est la mère extravagante de Chandler ?",
+    fb="Nora Tyler Bing, jouée par Morgan Fairchild, est la mère de Chandler, une romancière extravagante. Elle embarrasse son fils en embrassant Ross.")
+drop(S, "Quel personnage dit souvent des choses sages mais completement inexactes factuelment ?")
+fix(S, "Quel épisode est diffusé en direct sur NBC en 2020 pour les 25 ans de Friends ?",
+    q="Comment s'appelle l'émission de retrouvailles des acteurs diffusée en 2021 ?",
+    a=["The One Where They Say Goodbye", "Friends Forever", "Friends: The Reunion", "The Last One"], c=2)
+fix(S, "Quel est le nom du canard que Joey et Chandler achètent impulsivment ?",
+    q="Comment Joey et Chandler appellent-ils leur canard ?",
+    fb="Joey et Chandler adoptent un poussin puis un canard, qu'ils appellent simplement « le Poussin » et « le Canard ».")
+fix(S, "Quel est le problème récurrent de Monica avec la propreté et l'ordre ?",
+    fb="Monica est obsédée par la propreté et l'ordre. Le moindre désordre la stresse, ce qui fait d'elle la cible de nombreuses blagues de ses amis.")
+drop(S, "Dans quelle ville Ross et Rachel se marient-ils accidentellement ?")
+drop(S, "Quel personnage dit la réplique 'I'm fine!' (avec un sous-texte évident qu'il ne l'est pas) ?")
+drop(S, "Comment s'appelle la sonnerie du téléphone chez Joey et Chandler à la façon d'une sitcom ?")
+fix(S, "Quel acteur joue le père de Ross et Monica ?",
+    a=["Ron Leibman", "James Lesure", "Tom Selleck", "Elliott Gould"], c=3,
+    fb="Elliott Gould joue Jack Geller, le père de Ross et Monica. Sa femme Judy est jouée par Christina Pickles.")
+drop(S, "Quel personnage raconte souvent des 'fun facts' ennuyeux pour tout le monde sauf lui ?")
+drop(S, "Comment s'appelle le café du bloc Ugly Naked Guy (l'homme nu laid) dans Friends ?")
+fix(S, "Quel est le nom du colocataire de Joey dans les saisons tardives après que Chandler parte ?",
+    q="Avec quel colocataire étrange Chandler vit-il quand Joey déménage, en saison 2 ?",
+    a=["Gunther", "Chuck", "Eddie", "Danny"], c=2,
+    fb="Quand Joey part vivre seul, Chandler se retrouve avec Eddie, joué par Adam Goldberg, un colocataire de plus en plus inquiétant.")
+drop(S, "Comment s'appelle la série télévisée fictive dans laquelle Rachel est fan dans les premières saisons ?")
+fix(S, "Comment s'appelle le singe de Ross qu'il doit finalement donner à un zoo ?",
+    fb="Marcel, le capucin de Ross, finit par lui poser trop de problèmes. Ross le confie à un zoo de San Diego.")
+drop(S, "Quel épisode see les six amis bloqués à la campagne avant le mariage de Ross et Emily ?")
+drop(S, "Combien de fois Chandler Bing rompt-il avec une petite amie avant Monica ?")
+fix(S, "Quel est le nom de la mère biologique de Phoebe avec qui elle se reconnecte dans la série ?",
+    a=["Frances", "Lily", "Phoebe Abbott", "Ursula"], c=2,
+    fb="Phoebe découvre que sa mère biologique est Phoebe Abbott, une amie de ses parents qui porte le même prénom qu'elle.")
+fix(S, "Quel pays Rachel visite-t-elle pour un stage de mode dans une saison intermédiaire ?",
+    q="Dans quelle ville Rachel doit-elle partir travailler à la fin de la série ?",
+    a=["Paris", "Milan", "Londres", "Los Angeles"], c=0)
+drop(S, "Comment s'appelle le chant à plusieurs voix que Joey et Chandler font pour se 'défier' ?")
+fix(S, "Quel est le dernier dialogue de la série Friends dans le dernier épisode ?",
+    fb="Rachel propose d'aller boire un café une dernière fois, et Chandler répond « Where? » (« Où ça ? »), clin d'œil au Central Perk tout proche.")
+
+
+# ---------------------------------------------------------------- La Casa de Papel
+S = 'casapapel'
+fix(S, "Quelle institution est attaquée dans le premier braquage (saisons 1-2) ?",
+    fb="La bande s'enferme dans la Maison de la Monnaie d'Espagne pour y imprimer ses propres billets : selon le Professeur, ils ne volent l'argent de personne.")
+drop(S, "Quelle est la signification des noms de villes choisis par le Professeur pour la bande ?")
+drop(S, "Quel pays produit La Casa de Papel ?")
+fix(S, "Quel est le plan de diversion du Professeur pour le braquage de la Monnaie ?",
+    q="Quel est le plan du Professeur pour le braquage de la Maison de la Monnaie ?",
+    fb="Le plan consiste à tenir le bâtiment avec des otages pendant plusieurs jours pour imprimer environ 2,4 milliards d'euros.")
+drop(S, "Quel est le montant total imprimé lors du premier braquage de la Maison de la Monnaie ?")
+drop(S, "Quel personnage porte le numéro tatouage '2000' sur le cou ?")
+drop(S, "Qui joue Tokyo, la narratrice de la série ?")
+drop(S, "Quel personnage joue Úrsula Corberó dans La Casa de Papel ?")
+fix(S, "Quel personnage porte le nom de ville 'Helsinki' ?",
+    q="Qui est Helsinki dans la bande ?",
+    a=["Un ancien soldat serbe, colosse au grand cœur", "Le hacker du groupe", "L'expert en explosifs", "La conductrice des véhicules"], c=0,
+    fb="Helsinki est un ancien soldat serbe, cousin d'Oslo. Ce colosse sert de « muscle » à la bande, mais se montre très protecteur avec ses camarades.")
+fix(S, "Quelle est la nationalité du personnage 'Helsinki' dans la série ?", c=2,
+    fb="Malgré leurs noms de villes nordiques, Helsinki et Oslo sont deux cousins serbes, anciens soldats.")
+fix(S, "Quel est le vrai nom du Professeur dans la série ?",
+    fb="Le Professeur s'appelle Sergio Marquina. Son père, braqueur, est mort pendant un braquage, et Sergio a passé des années à préparer le plan de la Maison de la Monnaie.")
+drop(S, "Quel est le plan de diversion du Professeur quand les forces spéciales encerclent la Banque d'Espagne ?")
+drop(S, "Quel acteur joue le Professeur dans La Casa de Papel ?")
+drop(S, "Quel acteur joue Berlin dans la série ?")
+drop(S, "Dans quelle ville se situe la Banque d'Espagne, cible du second braquage ?")
+drop(S, "Dans quelle ville espagnole a été principalement tournée la série ?")
+drop(S, "Quelle série dérivée de La Casa de Papel se concentre sur le frère du Professeur avant les braquages ?")
+drop(S, "Comment la bande neutralise-t-elle les caméras de surveillance lors du premier braquage ?")
+drop(S, "Quel est le lien entre Moscow et Denver dans la série ?")
+fix(S, "Quel est l'emploi de Monica Gaztambide avant d'être prise en otage ?", c=2,
+    fb="Mónica Gaztambide est la secrétaire d'Arturo Román, le directeur de la Maison de la Monnaie, dont elle attend un enfant.")
+drop(S, "Pourquoi Nairobi est-elle particulièrement populaire auprès du public ?")
+drop(S, "Quelle est la devise de résistance qui symbolise le mouvement dans la série ?")
+drop(S, "Combien de membres compte la bande originale pour le premier braquage de la Monnaie ?")
+drop(S, "Quel est le plan du Professeur quand il dit 'avoir un plan Z' ?")
+drop(S, "Quelle technique visuelle distinctive identifie les flashbacks dans La Casa de Papel ?")
+drop(S, "Quel est le signal que les membres utilisent pour indiquer qu'ils doivent annuler l'opération ?")
+fix(S, "Comment Nairobi meurt-elle dans la série ?",
+    a=["Elle s'échappe", "Elle est exécutée par Gandía, le chef de la sécurité de la banque", "Elle se sacrifie", "Elle est arrêtée"], c=1,
+    fb="Pendant le braquage de la Banque d'Espagne, Gandía, le chef de la sécurité, parvient à s'emparer de Nairobi et l'abat. Sa mort, dans la partie 4, bouleverse la bande.")
+drop(S, "Quel message politique le Professeur revendique-t-il lors du premier braquage via les médias ?")
+drop(S, "Quel est le pays depuis lequel le Professeur dirige les opérations à distance ?")
+fix(S, "Quel est le lien entre Berlin et le Professeur révélé dans la série ?",
+    a=["Ils sont collègues", "Ils sont frères", "Ils sont père et fils", "Ils sont amis d'enfance"], c=1,
+    fb="Berlin, Andrés de Fonollosa, est le frère aîné du Professeur. Ce lien explique la confiance que Sergio lui accorde malgré son comportement imprévisible.")
+drop(S, "Comment s'appelle le mode de communication utilisé par le Professeur avec la bande ?")
+fix(S, "Quel événement traumatisant dans le passé de Berlin est révélé dans ses flashbacks ?",
+    q="De quelle maladie Berlin souffre-t-il ?",
+    a=["Il n'est pas malade", "Une maladie incurable, la myopathie de Helmer", "Une maladie cardiaque", "Il est devenu aveugle"], c=1,
+    fb="Berlin est atteint d'une maladie dégénérative incurable, la myopathie de Helmer. Se sachant condamné, il affronte la mort avec un étrange détachement.")
+drop(S, "Quel élément du plan du Professeur implique le gouvernement espagnol directement ?")
+fix(S, "Comment s'appelle le policier qui remplace Raquel Murillo comme négociateur dans la saison 3 ?",
+    q="Quelle policière remplace Raquel Murillo comme négociatrice lors du braquage de la Banque d'Espagne ?",
+    a=["Alicia Sierra", "Mónica Gaztambide", "Ariadna Cascales", "Amanda"], c=0)
+fix(S, "Quel membre de la bande est un expert en moteurs et mécanique ?",
+    q="Quel membre de la bande, ancien mineur, creuse le tunnel de la Maison de la Monnaie ?",
+    fb="Moscou, ancien mineur et père de Denver, creuse le tunnel d'évasion pendant le premier braquage. Il est mortellement touché au moment de la fuite.")
+drop(S, "Quel est le plan secret que Berlin avait en cas d'assaut policier dans la Monnaie ?")
+drop(S, "Qui découvre que le Professeur et Raquel Murillo sont en couple pendant le premier braquage ?")
+drop(S, "Quel est l'objet symbolique que Tokyo laisse à Rio avant sa mort ?")
+drop(S, "Quel objet symbolique Tokyo conserve-t-elle de Rio tout au long de la série ?")
+drop(S, "Qui révèle l'identité du Professeur aux autorités en trahissant la bande ?")
+drop(S, "Quel est le vrai objectif philosophique du Professeur selon sa propre déclaration ?")
+fix(S, "Quel est le prénom du fils de Denver et Monica dans la série ?",
+    q="Comment s'appelle le fils de Mónica, élevé par Denver ?",
+    fb="Mónica, devenue Stockholm, a un fils, Cincinnati, dont le père biologique est Arturo Román. Denver l'élève comme son propre fils.")
+drop(S, "Que signifie le fait que la bande porte des masques de Salvador Dalí spécifiquement ?")
+drop(S, "Dans quel pays se retrouvent les membres de la bande après le premier braquage réussi ?")
+drop(S, "Combien de jours dure environ le premier braquage de la Maison de la Monnaie ?")
+drop(S, "Quel est le dernier plan du Professeur si toute la bande est capturée ou tuée ?")
+drop(S, "Quel crime Alicia Sierra commet-elle contre le Professeur quand elle le retrouve seul ?")
+drop(S, "Quel est le nom de code utilisé par la bande pour identifier chaque membre dans les communications radio ?")
+drop(S, "Quel est le geste symbolique que la bande et les supporters font les bras en croix ?")
+
+
+# ---------------------------------------------------------------- Squid Game
+S = 'squidgame'
+drop(S, "Quel est le nombre total de wons gagnés par round d'élimination dans Squid Game ?")
+fix(S, "Quel uniforme portent les Gardiens ?",
+    fb="Les gardes portent une combinaison rose et un masque marqué d'une forme : le cercle pour les ouvriers, le triangle pour les soldats armés et le carré pour les responsables.")
+fix(S, "Quel est le symbole sur les costumes des Gardiens indiquant le rang de superviseur ?",
+    q="Quelle forme figure sur le masque des responsables, les plus hauts gradés parmi les gardes ?",
+    fb="Le carré désigne les responsables, au-dessus des soldats (triangle) et des ouvriers (cercle). Le Front Man, lui, porte un masque noir.")
+fix(S, "Quel symbole géométrique représente chaque grade dans la hiérarchie des Gardiens ?",
+    a=["Cercle = ouvrier, triangle = soldat, carré = responsable", "Carré = soldat, triangle = responsable, cercle = ouvrier", "Cercle = responsable, triangle = ouvrier, carré = soldat", "Étoile = chef, cercle = garde, triangle = recruteur"], c=0,
+    fb="Le cercle désigne les ouvriers, le triangle les soldats armés et le carré les responsables. Le Front Man est au-dessus de tous.")
+fix(S, "Combien de joueurs participent en saison 1 ?",
+    fb="456 joueurs, tous lourdement endettés, participent aux jeux. Le dernier numéro est celui de Gi-hun, qui finira par gagner.")
+drop(S, "Quel jeu implique traverser des plaques de verre au-dessus du vide ?")
+drop(S, "Quel jeu implique des partenaires où l'un doit marcher sur un planche de verre au-dessus du vide ?")
+drop(S, "Quel est le résultat final du vote pour arrêter ou continuer les jeux en saison 1 ?")
+drop(S, "Dans quelle saison Gi-hun affronte-t-il les organisateurs directement ?")
+drop(S, "Quelle est la nationalité de Gi-hun dans la saison 2 quand il décide de ne pas rentrer aux USA ?")
+drop(S, "Qui est le vrai 'joueur 001' dans la saison 2 de Squid Game ?")
+drop(S, "Qui recrute les candidats pour Squid Game en leur faisant jouer au Ddakji dans les lieux publics ?")
+fix(S, "Quel est l'enjeu de la scène post-crédit de la saison 1 qui setup la saison 2 ?",
+    q="Que voit Gi-hun à la fin de la saison 1, juste avant de prendre l'avion ?",
+    a=["Une nouvelle invitation dans sa poche", "Le recruteur du métro en train de piéger un autre homme au ddakji", "Le Front Man sans son masque", "Sang-woo vivant"], c=1,
+    fb="Dans le métro, Gi-hun aperçoit le recruteur qui joue au ddakji avec un nouvel homme. Il comprend que les jeux continuent, renonce à son avion et décide d'agir.")
+fix(S, "Quel type de costume porte le Frontman dans Squid Game ?",
+    a=["Une combinaison rose", "Une tenue noire et un masque noir anguleux", "Une combinaison dorée", "Des vêtements civils"], c=1,
+    fb="Le Front Man porte une tenue noire et un masque noir anguleux, qui le distinguent des gardes en rose.")
+drop(S, "Comment se nomme le VIP numéro 1 aux masques d'animaux dans Squid Game ?")
+drop(S, "Comment s'appelle la chanson que les poupées géante chante lors du premier jeu ?")
+drop(S, "Comment s'appelle l'acteur principal coréen qui joue Gi-hun (joueur 456) ?")
+drop(S, "Quel est le jeu coréen traditionnel avec une corde où les deux équipes tirent ?")
+drop(S, "Quelle est la règle principale qui force les joueurs à rester dans le jeu selon leur contrat signé ?")
+drop(S, "Quel acteur américain est apparu brièvement comme VIP dans Squid Game saison 1 ?")
+fix(S, "Comment s'appelle la petite fille qui joue 1, 2, 3 Soleil avec Gi-hun lors d'un flashback ?",
+    q="Comment s'appelle la fille de Gi-hun ?",
+    a=["Ga-yeong", "Sae-byeok", "Ji-yeong", "Mi-nyeo"], c=0)
+drop(S, "Quel est le rôle du policier Hwang Jun-ho tout au long de la saison 1 ?")
+drop(S, "Quel est le rapport entre les vêtements roses des Gardiens et le vert des joueurs ?")
+drop(S, "Que se passe-t-il quand un participant touche la ligne d'arrivée dans le jeu 1,2,3 Soleil ?")
+fix(S, "Comment Gi-hun parvient-il à gagner le jeu de billes contre Oh Il-nam ?",
+    a=["Par la force", "En trichant ouvertement", "En profitant de l'apparente confusion du vieil homme", "Par chance pure"], c=2,
+    fb="Gi-hun profite de la confusion apparente d'Oh Il-nam pour lui prendre ses billes. On comprendra plus tard que le vieil homme savait parfaitement ce qu'il faisait.")
+fix(S, "Quelle est la profession originale de Gi-hun avant les jeux ?",
+    a=["Vendeur ambulant", "Ancien ouvrier automobile licencié", "Ouvrier de chantier", "Chauffeur de taxi"], c=1)
+fix(S, "Quelle est la réaction de Gi-hun quand il reçoit son argent et retourne dans le monde réel ?",
+    fb="Traumatisé, Gi-hun ne touche presque pas à l'argent pendant un an et vit rongé par la culpabilité. Sa mère est morte pendant son absence.")
+drop(S, "Dans quelle mer fictive ou réelle se situe l'île secrète des Squid Games ?")
+fix(S, "Quel est le symbole de la série Squid Game représentant une poupée géante ?",
+    q="Comment s'appelle la poupée géante du jeu 1, 2, 3 Soleil ?",
+    a=["Young-hee", "Mi-nyeo", "Danbi", "Ji-yeong"], c=0,
+    fb="La poupée géante s'appelle Young-hee, un prénom tiré de vieux manuels scolaires coréens. Elle est devenue l'emblème visuel de la série.")
+drop(S, "Quel est le nom de la figurine géante coréenne qui détecte les participants en mouvement dans le premier jeu de Squid Game ?")
+fix(S, "Quel est le 3ème jeu joué en saison 1 après 1,2,3 Soleil et Dalgona Cookie ?",
+    fb="Le troisième jeu est le tir à la corde, au-dessus du vide. L'équipe de Gi-hun gagne grâce aux conseils d'Oh Il-nam et à l'idée de Sang-woo de faire trois pas en avant.")
+drop(S, "Pourquoi le joueur 001 (Oh Il-nam) est-il révélé comme fondateur et non simple participant ?")
+fix(S, "Quel est le jeu du premier round en saison 2 de Squid Game ?",
+    a=["1, 2, 3 Soleil, à nouveau", "Le Dalgona", "Le tir à la corde", "Les billes"], c=0)
+drop(S, "Comment le plateau de jeux est-il organisé physiquement selon les révélations de la série ?")
+fix(S, "Combien de saisons de Squid Game ont été produites ou annoncées jusqu'en 2025 ?",
+    q="Combien de saisons compte Squid Game ?", a=["1", "2", "3", "4"], c=2,
+    fb="Squid Game compte trois saisons : la première en 2021, la deuxième en décembre 2024 et la dernière en juin 2025.")
+fix(S, "Quelle technique Gi-hun utilise-t-il pour le jeu Dalgona Cookie avec l'étoile ?",
+    q="Quelle astuce Gi-hun utilise-t-il pour découper le parapluie de son Dalgona ?",
+    a=["Il mange le caramel", "Il lèche le dos du biscuit pour le ramollir", "Il souffle dessus", "Il utilise une épingle à cheveux"], c=1,
+    fb="Gi-hun a tiré la forme la plus difficile, le parapluie. En léchant le dos du biscuit, il fait fondre le sucre et parvient à détacher la forme.")
+drop(S, "Quel est le lien entre les Squid Games et la société fictive du VIP numéro 1 ?")
+drop(S, "Dans quelle circonstance le joueur 001 est-il révélé comme n'étant pas soumis au danger ?")
+drop(S, "Quel son caractéristique s'entend quand la poupée Young-hee détecte un mouvement ?")
+fix(S, "Quel est le budget de production estimé par épisode pour Squid Game saison 1 ?",
+    fb="La saison 1 aurait coûté environ 21 millions de dollars, soit un peu plus de 2 millions par épisode, un budget modeste pour la série la plus regardée de Netflix.")
+
+
+# ---------------------------------------------------------------- Musique
+S = 'musique'
+drop(S, "Quel artiste français est le plus streamé au monde parmi les francophones ?")
+fix(S, "Quel groupe de rock a sorti 'Dark Side of the Moon' en 1973 ?",
+    fb="The Dark Side of the Moon (1973) est resté plus de 900 semaines au classement Billboard 200, un record. On y trouve « Money » et « Time ».")
+fix(S, "Quel est le vrai prénom d'Aya Nakamura ?",
+    q="Quel est le vrai nom d'Aya Nakamura ?",
+    fb="Aya Nakamura s'appelle Aya Danioko. Née à Bamako, elle a grandi à Aulnay-sous-Bois et a emprunté son nom de scène à un personnage de la série Heroes.")
+drop(S, "Quel rappeur de Marseille est connu comme le 'Duc de Boulogne' mais vient de Boulogne-Billancourt ?")
+fix(S, "Quel rappeur français est surnommé 'Le Duc de Boulogne' ?",
+    fb="Booba (Élie Yaffa), originaire de Boulogne-Billancourt, est surnommé le « Duc de Boulogne ». Révélé dans les années 1990 avec le duo Lunatic, il a marqué durablement le rap français.")
+fix(S, "Quel festival de metal se tient à Clisson chaque été en France ?",
+    fb="Le Hellfest, à Clisson (Loire-Atlantique), est le plus grand festival de metal de France. Il accueille chaque été les grands noms du genre.")
+fix(S, "Quel rappeur français de Sevran est connu pour son style brut et ses albums 'Réel'?",
+    q="Quel rappeur de Sevran a sorti l'album « Réelle Vie » ?",
+    fb="Maes, rappeur de Sevran, s'est imposé avec « Réelle Vie » puis « Les Derniers Salopards ».")
+fix(S, "Quel rappeur français a sorti l'album 'Civilisation' et est connu pour sa rime multisyllabique ?",
+    q="Quel rappeur caennais a sorti l'album « Civilisation » en 2021 ?",
+    fb="Orelsan, originaire de Caen, a sorti « Civilisation » en 2021, récompensé aux Victoires de la Musique. « L'odeur de l'essence » en est l'un des titres phares.")
+drop(S, "Quel chanteur français est connu pour ses albums 'Civilisation' et 'Perdu d'avance' ?")
+fix(S, "Quel est l'album considéré comme le meilleur de Damso ?",
+    q="Quel album de Damso, sorti en 2017, contient « Macarena » ?",
+    fb="« Ipséité » (2017) est le deuxième album de Damso. Il contient « Macarena » et a été salué pour son introspection.")
+fix(S, "Quel groupe de hip-hop français des années 90 est considéré comme pionnier ?",
+    q="Quel groupe de rap de Seine-Saint-Denis est formé par JoeyStarr et Kool Shen ?",
+    a=["Arsenik", "Sniper", "Psy 4 de la Rime", "Suprême NTM"], c=3,
+    fb="Suprême NTM, formé par JoeyStarr et Kool Shen, est avec IAM l'un des groupes fondateurs du rap français. « Paris sous les bombes » est un album culte.")
+fix(S, "Quel est le vrai prénom du rappeur connu sous le nom de 'SCH' ?",
+    q="Quel est le vrai nom du rappeur SCH ?",
+    fb="SCH s'appelle Julien Schwarzer. Ce rappeur marseillais est l'auteur d'« A7 », d'« Anarchie » et de « JVLIVS ».")
+fix(S, "Quel groupe américain a sorti 'Bohemian Rhapsody', l'une des chansons les plus complètes de l'histoire ?",
+    q="Quel groupe britannique a sorti « Bohemian Rhapsody » en 1975 ?")
+fix(S, "Quel est le vrai nom de l'artiste connu sous le pseudonyme 'Drake' ?",
+    fb="Drake s'appelle Aubrey Drake Graham. Né à Toronto en 1986, il a débuté comme acteur dans la série Degrassi avant de devenir l'un des rappeurs les plus écoutés au monde.")
+drop(S, "Quel artiste a popularisé le style 'trap music' en France avec ses 'tapes' ?")
+drop(S, "Quel artiste a popularisé le genre 'trap' en France avec ses 'street tape' au milieu des années 2010 ?")
+fix(S, "Quel est le vrai nom de l'artiste connu sous le pseudonyme 'Stromae' ?",
+    a=["Paul Van Haver", "Tom Van Haver", "Luc Vandamme", "Léo Schivers"], c=0)
+fix(S, "Quel groupe français des années 2000 a sorti 'Je veux te voir' et 'Safari Disco Club' ?",
+    fb="Yelle est un groupe d'électropop français mené par la chanteuse Julie Budet. « Je veux te voir » (2006) les a révélés, et « Safari Disco Club » (2011) les a fait connaître à l'étranger.")
+drop(S, "Quel rappeur québécois a popularisé le rap francophone au Canada ?")
+drop(S, "Quel est le nom du collectif de rap belge dont Damso fait partie ?")
+fix(S, "Quel festival de musique électronique éco-responsable se tient au Bois de Vincennes à Paris ?",
+    q="Quel festival éco-responsable se tient chaque année au bois de Vincennes, à Paris ?",
+    fb="We Love Green, créé en 2011, se déroule au bois de Vincennes. Il met l'accent sur l'environnement et accueille des têtes d'affiche du rap, de la pop et de l'électro.")
+fix(S, "Quel artiste a vendu le plus de singles physiques en France selon le SNEP ?",
+    q="Quel chanteur est souvent présenté comme l'artiste ayant vendu le plus de disques en France ?",
+    fb="Johnny Hallyday aurait vendu plus de 100 millions de disques au cours de sa carrière. « Allumer le feu » et « Je te promets » font partie de ses grands succès.")
+drop(S, "Quel est l'artiste qui a le plus de disques certifiés en France (singles + albums combinés) ?")
+fix(S, "Quel groupe de metal français a sorti 'Sepultura Style' et est mondialement reconnu ?",
+    q="Quel groupe de metal français, originaire des Landes, est reconnu dans le monde entier ?",
+    a=["Gojira", "Trust", "Mass Hysteria", "Mastodon"], c=0,
+    fb="Gojira, formé dans les Landes par les frères Duplantier, est le groupe de metal français le plus connu au monde. Il a joué lors de la cérémonie d'ouverture des Jeux de Paris 2024.")
+drop(S, "Quel est le premier album de rap français à être certifié disque d'or en France ?")
+drop(S, "Quel est le genre musical créé par Afrika Bambaataa dans le Bronx dans les années 70 ?")
+drop(S, "Quel chanteur belge est connu pour 'Quand c'est ?' et 'Fils de joie' dans les années 90 ?")
+fix(S, "Quel duo français de musique électronique, masqué de casques robotiques, a révolutionné la house music dans les années 2000 ?",
+    q="Quel duo français de musique électronique se produisait caché sous des casques de robots ?")
+fix(S, "Quel est le nom du groupe de rock alternatif français connu pour 'Le vent nous portera' ?",
+    fb="Noir Désir, groupe bordelais, est l'un des groupes de rock français les plus marquants. « Le vent nous portera », « Tostaky » et « Un jour en France » font partie de ses titres emblématiques.")
+drop(S, "Quel rappeur français a sorti le premier album rap certifié disque de diamant en France ?")
+fix(S, "Quel est le nom de l'archipel d'îles où est né le style musical reggae ?",
+    q="Dans quel pays est né le reggae ?")
+fix(S, "Quel chanteur africain a popularisé le genre 'Afrobeats' dans le monde entier dans les années 2010 ?",
+    q="Quel chanteur nigérian a remporté en 2021 le Grammy du meilleur album de musique du monde avec « Twice as Tall » ?",
+    a=["Burna Boy", "Wizkid", "Davido", "Youssou N'Dour"], c=0,
+    fb="Burna Boy a remporté le Grammy du meilleur album de musique du monde en 2021 avec « Twice as Tall ». Il est l'une des grandes figures de l'afrobeats.")
+drop(S, "Quel terme désigne une chanson dont la durée est spécifiquement adaptée à la radio (3-4 minutes) ?")
+fix(S, "Quel est le nom du prix de musique américain équivalent français des Victoires de la Musique ?",
+    q="Quels prix américains sont l'équivalent des Victoires de la Musique ?")
+drop(S, "Quel artiste a popularisé le genre 'Lo-fi hip-hop' sur YouTube dans les années 2010 ?")
+drop(S, "Quel est le nom de l'artiste qui a popularisé le 'drill' en France avec ses BM ?")
+fix(S, "Quel album de Kanye West est souvent cité comme son chef-d'œuvre ?",
+    q="Quel album de Kanye West, sorti en 2010, contient « Power » et « Runaway » ?")
+drop(S, "Quel est le premier artiste français à avoir eu un numéro 1 aux USA en musique populaire ?")
+drop(S, "Quel est le record mondial de streams en 24h sur Spotify détenu en 2024 ?")
+drop(S, "Quel est le nom de l'artiste nigériane qui a popularisé l'Afropop avec 'Dangerous Love' ?")
+drop(S, "Quel groupe de pop coréenne a popularisé la K-Pop en Occident en premier ?")
+drop(S, "Quel est le mouvement musical des années 60 associé à des artistes comme Joan Baez et Pete Seeger ?")
+fix(S, "Quel est le nom du producteur français qui a produit des albums pour Jay-Z et Kanye West ?",
+    q="Quel producteur français a coproduit « Black Skinhead », sur l'album « Yeezus » de Kanye West ?",
+    a=["Busy P", "DJ Snake", "Gesaffelstein", "Cassius"], c=2,
+    fb="Gesaffelstein (Mike Lévy) a coproduit plusieurs titres de « Yeezus » (2013), dont « Black Skinhead ». Son électro sombre est sa signature.")
+fix(S, "Quel est l'album de Rosalía qui a fusionné flamenco traditionnel et production moderne ?",
+    fb="« El Mal Querer » (2018) mêle flamenco et production moderne. Cet album-concept s'inspire d'un roman occitan du XIIIe siècle et a valu à Rosalía deux Latin Grammy.")
+fix(S, "Quel groupe de rock progressif britannique est connu pour 'Stairway to Heaven' ?",
+    q="Quel groupe de rock britannique est connu pour « Stairway to Heaven » ?")
+fix(S, "Quel est le nom du label de musique indépendant français qui a signé Daft Punk, Justice et Cassius ?",
+    q="Quel label parisien, fondé par Pedro Winter, a révélé le duo Justice ?",
+    fb="Ed Banger Records, fondé en 2003 par Pedro Winter (Busy P), a révélé Justice, SebastiAn et Breakbot.")
+fix(S, "Quel artiste brésilienest connu pour avoir popularisé la Bossa Nova dans les années 60 ?",
+    q="Quel artiste brésilien est considéré comme le père de la bossa nova ?")
+fix(S, "Quel rappeur de la région parisienne est connu pour ses punchlines incisives et ses diss tracks ?",
+    q="Quel rappeur d'Aulnay-sous-Bois est connu pour son humour décalé et l'album « Xeu » ?",
+    fb="Vald, originaire d'Aulnay-sous-Bois, s'est fait connaître par son humour absurde et ses textes décalés, notamment avec « Agartha » et « Xeu ».")
+
+
+# ---------------------------------------------------------------- Cinéma
+S = 'cinema'
+drop(S, "Quel film de Christopher Nolan mélange rêve et réalité avec Leonardo DiCaprio ?")
+drop(S, "Quel film de 1975 de Steven Spielberg a fondé le genre 'summer blockbuster' ?")
+drop(S, "Quel acteur a le plus d'apparitions dans le Marvel Cinematic Universe ?")
+fix(S, "Qui détient le record du plus grand nombre de nominations aux Oscars (meilleure actrice) ?",
+    q="Quelle actrice détient le record de nominations aux Oscars ?",
+    fb="Meryl Streep compte 21 nominations aux Oscars et trois statuettes. Katharine Hepburn détient le record de victoires avec quatre Oscars.")
+fix(S, "Quel réalisateur a créé la saga Star Wars originale ?",
+    fb="George Lucas a créé Star Wars et réalisé le premier film en 1977. Il a vendu Lucasfilm à Disney en 2012 pour environ 4 milliards de dollars.")
+drop(S, "Quel film de science-fiction de 1968 est considéré comme le plus influent du genre ?")
+drop(S, "Quel film sud-coréen a remporté la Palme d'Or à Cannes en 2019 ?")
+fix(S, "Quel réalisateur français est connu pour 'Le Fabuleux Destin d'Amélie Poulain' ?",
+    fb="Jean-Pierre Jeunet a réalisé « Le Fabuleux Destin d'Amélie Poulain » (2001) avec Audrey Tautou, l'un des plus grands succès du cinéma français à l'étranger.")
+fix(S, "Quel réalisateur est connu pour ses films à retournements de situation (M. Night Shyamalan) ?",
+    q="Quels films ont été réalisés par M. Night Shyamalan ?")
+fix(S, "Quel studio d'animation japonais a produit 'Le Voyage de Chihiro' et 'Mon Voisin Totoro' ?",
+    fb="Le studio Ghibli a été fondé par Hayao Miyazaki, Isao Takahata et Toshio Suzuki. « Le Voyage de Chihiro » a remporté l'Oscar du meilleur film d'animation en 2003.")
+drop(S, "Quel est le film de Pixar dans lequel un robot découvre la Terre abandonnée des siècles plus tard ?")
+drop(S, "Quel film de Bong Joon-ho avec Song Kang-ho a marqué le cinéma coréen avant Parasite ?")
+fix(S, "Quel film d'animation japonais met en scène un enfant qui découvre qu'il est le seul vrai humain dans un monde d'esprits ?",
+    q="Dans quel film de Miyazaki une fillette voit-elle ses parents transformés en cochons ?",
+    fb="Dans « Le Voyage de Chihiro » (2001), Chihiro se retrouve dans un monde d'esprits après la transformation de ses parents en cochons. Le film a reçu l'Ours d'or et l'Oscar du meilleur film d'animation.")
+fix(S, "Quel réalisateur américain est connu pour ses films 'Dunkirk', 'Oppenheimer' et 'Inception' ?",
+    q="Quel réalisateur britannique est connu pour « Dunkerque », « Inception » et « Oppenheimer » ?")
+fix(S, "Quel film de James Cameron (2009) est resté le film le plus rentable de l'histoire pendant 11 ans ?",
+    q="Quel film de James Cameron, sorti en 2009, est le plus gros succès de l'histoire du box-office ?",
+    fb="Avatar a rapporté environ 2,9 milliards de dollars. Brièvement dépassé par Avengers: Endgame en 2019, il a retrouvé la première place grâce à une ressortie en 2021.")
+fix(S, "Quel film de Ridley Scott (1979) a fondé le genre horreur science-fiction ?",
+    q="Quel film de Ridley Scott, sorti en 1979, oppose l'officier Ripley à une créature dans un vaisseau ?")
+fix(S, "Quel acteur a joué James Bond le plus longtemps dans l'histoire de la franchise ?",
+    q="Quel acteur a incarné James Bond dans sept films officiels, de 1973 à 1985 ?",
+    fb="Roger Moore a joué James Bond dans sept films, de « Vivre et laisser mourir » (1973) à « Dangereusement vôtre » (1985).")
+fix(S, "Quel cinéaste japonais est souvent surnommé 'le Dieu du cinéma' et a créé 'Rashomon' ?",
+    q="Quel cinéaste japonais a réalisé « Rashōmon » et « Les Sept Samouraïs » ?")
+fix(S, "Quel film de Tim Burton (1988) a lancé la carrière de Michael Keaton avec une créature chaos ?",
+    q="Quel film de Tim Burton, sorti en 1988, met en scène un « bio-exorciste » joué par Michael Keaton ?",
+    fb="Dans « Beetlejuice » (1988), Michael Keaton joue un bio-exorciste déjanté. Une suite, « Beetlejuice Beetlejuice », est sortie en 2024.")
+drop(S, "Quel est le budget estimé du film le plus cher jamais produit (en 2023) ?")
+fix(S, "Quel est le nom du festival de cinéma espagnol le plus important après Cannes et Venise ?",
+    q="Quel est le plus prestigieux festival de cinéma d'Espagne ?")
+fix(S, "Quel film d'animation japonais (2013) de Makoto Shinkai a précédé 'Your Name' ?",
+    q="Quel moyen-métrage de Makoto Shinkai, sorti en 2013, se déroule sous la pluie dans un jardin de Tokyo ?",
+    fb="« The Garden of Words » (2013) raconte la rencontre d'un lycéen et d'une jeune femme qui se retrouvent les jours de pluie dans un jardin de Tokyo.")
+fix(S, "Quel film franco-belge de 2011 a connu un succès phénoménal en France et a été adapté en USA ?",
+    q="Quel film français de 2011 a été adapté aux États-Unis sous le titre « The Upside » ?",
+    fb="« Intouchables » d'Olivier Nakache et Éric Toledano a attiré plus de 19 millions de spectateurs en France. Il raconte l'amitié entre Philippe, tétraplégique, et Driss, son auxiliaire de vie.")
+fix(S, "Quel acteur américain est connu pour ses transformations physiques extrêmes ('The Machinist', 'American Hustle') ?",
+    q="Quel acteur est connu pour ses transformations physiques extrêmes dans « The Machinist » et « American Hustle » ?",
+    fb="Christian Bale a perdu près de 30 kg pour « The Machinist » (2004), avant de reprendre beaucoup de poids pour jouer Batman, puis pour « American Hustle ».")
+fix(S, "Quel film espagnol de Guillermo del Toro (2006) se déroule pendant la guerre civile espagnole ?",
+    q="Quel film de Guillermo del Toro, sorti en 2006, se déroule dans l'Espagne franquiste ?")
+fix(S, "Quel film d'animation de Pixar met en scène un rat rêvant de devenir cuisinier à Paris ?",
+    fb="Dans « Ratatouille » (2007), Rémy, un rat passionné de cuisine, s'associe à Linguini, un jeune commis maladroit du restaurant Gusteau.")
+fix(S, "Quel film de Francis Ford Coppola est souvent cité comme le meilleur film américain jamais réalisé ?",
+    q="Quel film de Francis Ford Coppola, sorti en 1972, met en scène la famille Corleone ?",
+    fb="« Le Parrain » (1972) est régulièrement cité parmi les plus grands films de l'histoire. Sa suite, « Le Parrain, 2e partie », a aussi remporté l'Oscar du meilleur film.")
+fix(S, "Quel film d'animation japonais de 2016 sur un garçon sourd a pleuré des millions de spectateurs ?",
+    q="Quel film d'animation japonais de 2016 raconte la rédemption d'un garçon qui a harcelé une camarade sourde ?",
+    fb="« A Silent Voice » (2016), réalisé par Naoko Yamada d'après le manga de Yoshitoki Ōima, suit Shōya, qui cherche à se faire pardonner d'avoir harcelé Shōko, une élève sourde.")
+fix(S, "Quel acteur américain a joué dans 'Léon' et est devenu une légende du cinéma d'action français ?",
+    q="Quel acteur français, né à Casablanca, joue le rôle-titre de « Léon » ?",
+    fb="Jean Reno, né à Casablanca, est devenu une star internationale avec « Léon » (1994). Il a ensuite tourné dans « Mission impossible » et « Da Vinci Code ».")
+
+
+# ---------------------------------------------------------------- Géographie
+S = 'geo'
+fix(S, "Quel est le pays le plus long du monde du nord au sud ?",
+    q="Quel pays très étroit s'étire sur plus de 4 000 km du nord au sud, le long du Pacifique ?")
+fix(S, "Quelle est la plus grande île du monde ?",
+    fb="Le Groenland est la plus grande île du monde, avec environ 2,1 millions de km². Ce territoire autonome rattaché au Danemark est recouvert à 80 % de glace. L'Australie, plus grande, est considérée comme un continent.")
+drop(S, "Quel est le pays qui a la plus grande longueur de côtes au monde ?")
+fix(S, "Quelle est la montagne la plus haute d'Afrique ?",
+    fb="Le Kilimandjaro, en Tanzanie, culmine à 5 895 m. Ce volcan endormi est couronné de glaciers qui reculent avec le réchauffement climatique.")
+fix(S, "Quelle est la capitale du Kazakhstan, plus grande ville d'Asie centrale ?",
+    q="Quelle est la capitale du Kazakhstan ?",
+    fb="Astana est la capitale du Kazakhstan depuis 1997. Elle s'est appelée Nour-Soultan de 2019 à 2022. Almaty reste la plus grande ville du pays.")
+drop(S, "Quel est le nom du plus long fleuve d'Europe ?")
+drop(S, "Quelle est la capitale de la Nouvelle-Zélande (souvent confondue avec Auckland) ?")
+fix(S, "Quel est le pays le plus densément peuplé d'Afrique ?",
+    q="Quel est le pays le plus densément peuplé d'Afrique continentale ?")
+fix(S, "Quel est le seul pays d'Amérique du Sud à avoir le français comme langue officielle ?",
+    q="Quel territoire d'Amérique du Sud a le français comme langue officielle ?")
+fix(S, "Quelle est la capitale de la Thaïlande ?",
+    fb="Bangkok est la capitale de la Thaïlande. Son nom officiel complet en thaï est l'un des plus longs noms de ville au monde.")
+fix(S, "Quelle est la seule mer fermée (sans accès à l'océan) de la planète ?",
+    q="Quel est le plus grand plan d'eau fermé de la planète, bien qu'on l'appelle « mer » ?")
+fix(S, "Quel est le pays européen avec le plus de frontières terrestres ?",
+    q="Quel pays de l'Union européenne a le plus de voisins terrestres ?",
+    a=["Allemagne", "France", "Italie", "Autriche"], c=0,
+    fb="L'Allemagne partage ses frontières avec neuf pays : Danemark, Pays-Bas, Belgique, Luxembourg, France, Suisse, Autriche, Tchéquie et Pologne.")
+fix(S, "Quel est le pays avec le plus d'îles dans le monde ?",
+    q="Quel est le plus grand archipel du monde ?",
+    a=["Philippines", "Indonésie", "Japon", "Maldives"], c=1)
+drop(S, "Quel est le détroit le plus étroit habituellement navigable entre deux pays ?")
+fix(S, "Quel est le pays le plus petit du monde reconnu par l'ONU ?",
+    q="Quel est le plus petit État du monde ?")
+fix(S, "Quel est le désert le plus froid du monde (contrairement à son nom de désert chaud) ?",
+    q="Quel est le désert le plus froid du monde ?")
+fix(S, "Quelle est la capitale de l'Éthiopie ?",
+    fb="Addis-Abeba, perchée à plus de 2 300 m d'altitude, est la capitale de l'Éthiopie. Elle accueille le siège de l'Union africaine.")
+fix(S, "Quel est le nom de l'archipel portugais dans l'Atlantique Nord proche des Açores ?",
+    q="Quel archipel portugais de l'Atlantique a pour capitale Funchal ?")
+fix(S, "Quel est le seul pays d'Afrique qui n'a jamais été colonisé par une puissance européenne ?",
+    q="Quels pays d'Afrique ont échappé à la colonisation européenne ?",
+    a=["L'Éthiopie seule", "Le Liberia seul", "L'Éthiopie et le Liberia", "L'Afrique du Sud"], c=2,
+    fb="L'Éthiopie, victorieuse de l'Italie à Adoua en 1896, et le Liberia, indépendant depuis 1847, ont échappé à la colonisation. L'Éthiopie a toutefois été occupée par l'Italie de 1936 à 1941.")
+fix(S, "Quel pays possède le plus grand nombre de patrimoines UNESCO en 2024 ?",
+    q="Quel pays compte le plus de sites inscrits au patrimoine mondial de l'UNESCO ?",
+    fb="L'Italie compte le plus de sites inscrits au patrimoine mondial, juste devant la Chine.")
+drop(S, "Quel est le pays d'Europe qui possède le plus long réseau ferroviaire ?")
+fix(S, "Quel est le nom de la vaste plaine herbeuse qui s'étend en Amérique du Sud ?",
+    q="Comment s'appellent les grandes plaines herbeuses d'Argentine ?")
+fix(S, "Quel est le pays d'Asie du Sud dont la capitale est Sri Jayawardenepura Kotte ?",
+    fb="Sri Jayawardenepura Kotte est la capitale administrative du Sri Lanka, tandis que Colombo reste la capitale commerciale et la plus grande ville.")
+drop(S, "Quel est le seul pays arabe sans désert Sahara ?")
+drop(S, "Quel pays d'Europe a le plus bas taux de natalité actuellement ?")
+drop(S, "Quel est le nom de la chaîne de montagnes qui sépare l'Asie de l'Europe en Russie ?")
+fix(S, "Quel est le nom de la fissure africaine qui divise le continent et crée un nouveau futur océan ?",
+    q="Quelle immense faille de l'est de l'Afrique pourrait un jour donner naissance à un nouvel océan ?",
+    fb="Le rift est-africain écarte lentement la plaque africaine. Dans des dizaines de millions d'années, la Corne de l'Afrique pourrait s'en détacher, séparée par un nouvel océan.")
