@@ -1,0 +1,20 @@
+# Relance chaque matin la construction du site sur Cloudflare Pages,
+# pour publier automatiquement les séries et les guides arrivés à leur date.
+# Nécessite le secret CF_DEPLOY_HOOK (Settings > Secrets and variables > Actions).
+name: Reconstruction quotidienne
+
+on:
+  schedule:
+    - cron: '7 5 * * *'   # 5 h 07 UTC, soit 1 h 07 à Montréal (heure d'été) ou 0 h 07 (heure normale)
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Déclencher Cloudflare Pages
+        env:
+          HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "Secret CF_DEPLOY_HOOK absent : rien à faire."; exit 0; fi
+          curl -fsS -X POST "$HOOK"
