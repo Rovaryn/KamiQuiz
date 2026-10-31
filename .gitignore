@@ -1,0 +1,11 @@
+dist/
+releases/
+social/posts/
+social/videos/
+social/longues/
+social/narrees/
+social/legendes.md
+tools/voix/
+__pycache__/
+*.pyc
+.DS_Store

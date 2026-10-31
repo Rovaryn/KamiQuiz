@@ -1,0 +1,401 @@
+{
+ "naruto": {
+  "tab": "anime",
+  "name": "NARUTO",
+  "desc": "Ninjas, Bijuu, Akatsuki — du Genin au Hokage à travers les deux parties.",
+  "tags": [
+   "100+ questions",
+   "Naruto & Shippuden"
+  ]
+ },
+ "fairytail": {
+  "tab": "anime",
+  "name": "FAIRY TAIL",
+  "desc": "La guilde de Mavis Vermillion — magie, nakama et aventures dans le Royaume de Fiore.",
+  "tags": [
+   "100+ questions",
+   "Série complète"
+  ]
+ },
+ "onepiece": {
+  "tab": "anime",
+  "name": "ONE PIECE",
+  "desc": "Pirates, Fruits du Démon, Quatre Empereurs — sur la route de Laugh Tale.",
+  "tags": [
+   "90+ questions",
+   "Du Pays de l'Est à Wano"
+  ]
+ },
+ "inazuma": {
+  "tab": "anime",
+  "name": "INAZUMA 11",
+  "desc": "Raimon, techniques spéciales et tournois légendaires — le football version shōnen.",
+  "tags": [
+   "75+ questions",
+   "Saisons 1 à 3"
+  ]
+ },
+ "hxh": {
+  "tab": "anime",
+  "name": "HUNTER × HUNTER",
+  "desc": "Gon, Killua, le Nen et les Chasseurs — un univers d'une profondeur légendaire.",
+  "tags": [
+   "80+ questions",
+   "Manga + Anime 2011"
+  ]
+ },
+ "deathnote": {
+  "tab": "anime",
+  "name": "DEATH NOTE",
+  "desc": "Light, L, Ryuk et les règles du Carnet — êtes-vous capable de défier Kira ?",
+  "tags": [
+   "75+ questions",
+   "Manga complet"
+  ]
+ },
+ "dragonball": {
+  "tab": "anime",
+  "name": "DRAGON BALL",
+  "desc": "Goku, Végéta, les Saiyajins — des transformations épiques et des combats qui secouent les planètes.",
+  "tags": [
+   "80+ questions",
+   "DBZ & DBS"
+  ]
+ },
+ "aot": {
+  "tab": "anime",
+  "name": "ATTACK ON TITAN",
+  "desc": "Eren, Mikasa, les Titans et les murs — l'humanité au bord de l'extinction.",
+  "tags": [
+   "80+ questions",
+   "Manga complet"
+  ]
+ },
+ "mha": {
+  "tab": "anime",
+  "name": "MY HERO ACADEMIA",
+  "desc": "Deku, All Might, les Quirks — un monde de super-héros et de super-vilains.",
+  "tags": [
+   "75+ questions",
+   "U.A. & League"
+  ]
+ },
+ "fmab": {
+  "tab": "anime",
+  "name": "FULLMETAL ALCHEMIST",
+  "desc": "Ed et Al Elric, l'alchimie et la Pierre Philosophale — pour obtenir, il faut sacrifier.",
+  "tags": [
+   "75+ questions",
+   "Brotherhood"
+  ]
+ },
+ "jjk": {
+  "tab": "anime",
+  "name": "JUJUTSU KAISEN",
+  "desc": "Yuji, Gojo, Sukuna — l'énergie maudite et les Domaines dans le Japon moderne.",
+  "tags": [
+   "75+ questions",
+   "Manga & Anime"
+  ]
+ },
+ "onepunchman": {
+  "tab": "anime",
+  "name": "ONE PUNCH MAN",
+  "desc": "Saitama, Genos et l'Association des Héros — vaincre n'importe quel ennemi d'un seul coup.",
+  "tags": [
+   "70+ questions",
+   "Saisons 1 & 2"
+  ]
+ },
+ "bleach": {
+  "tab": "anime",
+  "name": "BLEACH",
+  "desc": "Ichigo, les Soul Reapers, les Zanpakuto — entre le monde des vivants et Soul Society.",
+  "tags": [
+   "75+ questions",
+   "TYBW inclus"
+  ]
+ },
+ "demonslayer": {
+  "tab": "anime",
+  "name": "DEMON SLAYER",
+  "desc": "Tanjiro, Nezuko, le Corps des Pourfendeurs — maîtrisez les Arts de la Respiration.",
+  "tags": [
+   "80+ questions",
+   "Kimetsu no Yaiba"
+  ]
+ },
+ "bluelock": {
+  "tab": "anime",
+  "name": "BLUE LOCK",
+  "desc": "300 égoïstes pour créer le meilleur buteur du monde — Isagi, Kaiser et l'arme ultime.",
+  "tags": [
+   "80 questions",
+   "Football",
+   "Psychologie"
+  ]
+ },
+ "soloLeveling": {
+  "tab": "anime",
+  "name": "SOLO LEVELING",
+  "desc": "Le chasseur le plus faible du monde devient le Monarque des Ombres — seul contre tous.",
+  "tags": [
+   "71 questions",
+   "Manhwa",
+   "Ombres"
+  ]
+ },
+ "harrypotter": {
+  "tab": "films",
+  "name": "HARRY POTTER",
+  "desc": "Poudlard, Gryffondor, Voldemort — la saga du sorcier au regard vert.",
+  "tags": [
+   "70+ questions",
+   "Saga complète"
+  ]
+ },
+ "lotr": {
+  "tab": "films",
+  "name": "SEIGNEUR DES ANNEAUX",
+  "desc": "Frodon, Gandalf, la Terre du Milieu — l'épopée fondatrice du fantasy.",
+  "tags": [
+   "65+ questions",
+   "Trilogie + Hobbit"
+  ]
+ },
+ "starwars": {
+  "tab": "films",
+  "name": "STAR WARS",
+  "desc": "Dark Vador, Luke Skywalker, la Force — la saga galactique de George Lucas.",
+  "tags": [
+   "65+ questions",
+   "Épisodes I à IX"
+  ]
+ },
+ "marvel": {
+  "tab": "films",
+  "name": "MARVEL — MCU",
+  "desc": "Avengers, Thanos, les Pierres de l'Infini — l'univers cinématographique Marvel.",
+  "tags": [
+   "60+ questions",
+   "MCU Phase 1 à 4"
+  ]
+ },
+ "got": {
+  "tab": "series",
+  "name": "GAME OF THRONES",
+  "desc": "Le Trône de Fer, Westeros, les Stark et les Lannister — la guerre des couronnes.",
+  "tags": [
+   "70+ questions",
+   "8 saisons"
+  ]
+ },
+ "vikings": {
+  "tab": "series",
+  "name": "VIKINGS",
+  "desc": "Ragnar Lothbrok, Lagertha et les raids nordiques — la saga des guerriers du Nord.",
+  "tags": [
+   "60+ questions",
+   "Saisons 1 à 6"
+  ]
+ },
+ "strangerthings": {
+  "tab": "series",
+  "name": "STRANGER THINGS",
+  "desc": "Hawkins, le Monde à l'Envers, Eleven et ses amis contre les forces des ténèbres.",
+  "tags": [
+   "55+ questions",
+   "Saisons 1 à 4"
+  ]
+ },
+ "friends": {
+  "tab": "series",
+  "name": "FRIENDS",
+  "desc": "Rachel, Monica, Phoebe, Ross, Chandler, Joey — 10 saisons à Central Perk.",
+  "tags": [
+   "70+ questions",
+   "10 saisons"
+  ]
+ },
+ "casapapel": {
+  "tab": "series",
+  "name": "LA CASA DE PAPEL",
+  "desc": "Le Professeur, les masques Dalí et Bella Ciao — le braquage du siècle.",
+  "tags": [
+   "70+ questions",
+   "Parties 1 à 5"
+  ]
+ },
+ "squidgame": {
+  "tab": "series",
+  "name": "SQUID GAME",
+  "desc": "456 joueurs, 6 épreuves mortelles, 45,6 milliards — le phénomène Netflix coréen.",
+  "tags": [
+   "65+ questions",
+   "Saisons 1 & 2"
+  ]
+ },
+ "breakingbad": {
+  "tab": "series",
+  "name": "BREAKING BAD",
+  "desc": "Walter White, Jesse Pinkman et la transformation d'un prof de chimie en Heisenberg.",
+  "tags": [
+   "55+ questions",
+   "5 saisons"
+  ]
+ },
+ "peakyBlinders": {
+  "tab": "series",
+  "name": "PEAKY BLINDERS",
+  "desc": "Birmingham, 1919. La famille Shelby règne par la peur — Par ordre des Peaky Blinders.",
+  "tags": [
+   "77 questions",
+   "BBC",
+   "Gangsters"
+  ]
+ },
+ "histoire": {
+  "tab": "culture",
+  "name": "HISTOIRE",
+  "desc": "Antiquité, Moyen Âge, Révolutions, Guerres — les grands moments de l'Histoire mondiale.",
+  "tags": [
+   "70+ questions",
+   "Histoire mondiale"
+  ]
+ },
+ "culture": {
+  "tab": "culture",
+  "name": "CULTURE GÉN.",
+  "desc": "Sciences, Géographie, Littérature, Art, Cinéma — la culture générale dans tous ses domaines.",
+  "tags": [
+   "70+ questions",
+   "Tous domaines"
+  ]
+ },
+ "musique": {
+  "tab": "culture",
+  "name": "MUSIQUE",
+  "desc": "Rap FR, pop mondiale, rock légendaire — des Beatles à Jul, des Grammys à la scène française.",
+  "tags": [
+   "75+ questions",
+   "Tous genres"
+  ]
+ },
+ "cinema": {
+  "tab": "culture",
+  "name": "CINÉMA",
+  "desc": "Oscars, réalisateurs cultes, box-office mondial — le 7e art de Kubrick à Nolan.",
+  "tags": [
+   "75+ questions",
+   "Films & Réalisateurs"
+  ]
+ },
+ "geo": {
+  "tab": "culture",
+  "name": "GÉOGRAPHIE",
+  "desc": "Capitales, records naturels, pays et continents — explorez le monde en questions.",
+  "tags": [
+   "75+ questions",
+   "Monde entier"
+  ]
+ },
+ "sport": {
+  "tab": "culture",
+  "name": "SPORT",
+  "desc": "Football, Tennis, Jeux Olympiques, Formule 1 — testez vos connaissances sportives.",
+  "tags": [
+   "65+ questions",
+   "Sports populaires"
+  ]
+ },
+ "pokemon": {
+  "tab": "jeux",
+  "name": "POKÉMON",
+  "desc": "Pokédex, types, légendaires et champions — attrapez-les tous depuis Kanto jusqu'à Paldea.",
+  "tags": [
+   "80+ questions",
+   "Gen 1 à 9"
+  ]
+ },
+ "minecraft": {
+  "tab": "jeux",
+  "name": "MINECRAFT",
+  "desc": "Survie, construction, mobs et biomes — le jeu le plus vendu de tous les temps.",
+  "tags": [
+   "70+ questions",
+   "Java & Bedrock"
+  ]
+ },
+ "gta": {
+  "tab": "jeux",
+  "name": "GTA V",
+  "desc": "Michael, Trevor, Franklin à Los Santos — le monde ouvert de Rockstar Games.",
+  "tags": [
+   "70+ questions",
+   "Story & Online"
+  ]
+ },
+ "zelda": {
+  "tab": "jeux",
+  "name": "THE LEGEND OF ZELDA",
+  "desc": "Link, Zelda, Ganon et la Triforce — 40 ans d'aventures légendaires de Nintendo.",
+  "tags": [
+   "70+ questions",
+   "Toute la saga"
+  ]
+ },
+ "valorant": {
+  "tab": "jeux",
+  "name": "VALORANT",
+  "desc": "Agents, Spike, Vandal — le FPS tactique de Riot Games et ses secrets compétitifs.",
+  "tags": [
+   "65+ questions",
+   "Agents & Maps"
+  ]
+ },
+ "eafc": {
+  "tab": "jeux",
+  "name": "EA SPORTS FC",
+  "desc": "FUT, Ultimate Team, joueurs et clubs — le football virtuel après la rupture avec FIFA.",
+  "tags": [
+   "65+ questions",
+   "FC 24 & FC 25"
+  ]
+ },
+ "mario": {
+  "tab": "jeux",
+  "name": "SUPER MARIO",
+  "desc": "Mushroom Kingdom, Bowser, power-ups — 40 ans d'aventures du plombier moustachu.",
+  "tags": [
+   "70+ questions",
+   "Toute la saga"
+  ]
+ },
+ "lol": {
+  "tab": "jeux",
+  "name": "LEAGUE OF LEGENDS",
+  "desc": "Champions, rôles, objectifs et lore — prouvez votre maîtrise de la Faille de l'Invocateur.",
+  "tags": [
+   "80+ questions",
+   "Stratégie & Lore"
+  ]
+ },
+ "__mix__": {
+  "tab": "mix",
+  "name": "TOUT MÉLANGER",
+  "desc": "Questions piochées dans toutes les séries — l'épreuve ultime de culture générale.",
+  "tags": [
+   "Toutes séries",
+   "Questions mixtes"
+  ]
+ },
+ "__duel__": {
+  "tab": "mix",
+  "name": "MODE DUEL",
+  "desc": "Deux joueurs, même téléphone — chacun répond à son tour, le meilleur score gagne !",
+  "tags": [
+   "2 joueurs",
+   "Local"
+  ]
+ }
+}
