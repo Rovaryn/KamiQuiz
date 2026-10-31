@@ -1,8 +1,8 @@
 # Calendrier de mise en ligne
 
-Chaque dossier `releases/` contient le site complet tel qu'il doit être en ligne à cette date. Le lundi indiqué, déploie le zip correspondant sur Cloudflare Pages (Create deployment, puis tu déposes le zip), exactement comme d'habitude. Chaque zip contient tout ce qui a été publié avant lui : si tu rates une semaine, déploie simplement le plus récent.
+Il n'y a plus rien à déployer à la main. Chaque nuit vers 1 h (heure de Montréal), la tâche GitHub « Reconstruction quotidienne » relance la construction du site sur Cloudflare Pages, et les séries et guides datés apparaissent seuls le jour prévu. Le tableau sert à savoir quoi publier sur les réseaux, et quelles pages faire indexer dans Search Console. La colonne « Fichier » indique l'ancien zip correspondant, qui ne sert plus.
 
-| Date | Fichier | Nouveauté | À publier sur les réseaux le même jour |
+| Date | Ancien zip (inutile) | Nouveauté | À publier sur les réseaux le même jour |
 |---|---|---|---|
 | Dès maintenant | `00-2026-10-27-kamiquiz.zip` | Correction du robots.txt et de l'image de partage, lancement du Kamidle (4 jeux du jour) | Annonce du Kamidle (voir plus bas) |
 | Lundi 2 novembre | `01-2026-11-02-kamiquiz.zip` | Quiz Frieren (58 questions) et son guide | `videos/01-frieren.mp4` |
