@@ -101,6 +101,8 @@ def main():
     import sys
     sys.path.insert(0, str(ROOT / 'content'))
     from corrections import FIX as CORR_ALL
+    global EXTRA
+    from extra_questions import EXTRA
     global CORR, used_fix
     CORR, used_fix = CORR_ALL, set()
     src = json.loads(SRC.read_text(encoding='utf-8'))
@@ -144,6 +146,18 @@ def main():
                 report['corrigees_relecture'].append(f'{slug}: {key[:90]}')
             corrected.append(q)
         pool = corrected
+
+        # Nouvelles questions vérifiées (content/extra_questions.py)
+        if slug in EXTRA:
+            import random
+            rng = random.Random('extra-' + slug)
+            for cat, d, text, answers, fb in EXTRA[slug]:
+                if cat not in serie.get('cats', {}) and cat not in {q.get('cat') for q in pool} and cat != 'Divers':
+                    raise SystemExit(f'extra_questions : catégorie inconnue « {cat} » pour {slug}')
+                order = list(range(4))
+                rng.shuffle(order)
+                pool.append({'q': text, 'a': [answers[i] for i in order], 'c': order.index(0), 'cat': cat, 'd': d, 'fb': fb})
+                report['ajoutees'].append(f'{slug}: {text[:90]}')
 
         for q in pool:
             if q.get('q', '').strip() in REWORD:
