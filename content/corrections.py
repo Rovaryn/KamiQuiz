@@ -2614,3 +2614,227 @@ drop(S, "Quel est le nom de la chaîne de montagnes qui sépare l'Asie de l'Euro
 fix(S, "Quel est le nom de la fissure africaine qui divise le continent et crée un nouveau futur océan ?",
     q="Quelle immense faille de l'est de l'Afrique pourrait un jour donner naissance à un nouvel océan ?",
     fb="Le rift est-africain écarte lentement la plaque africaine. Dans des dizaines de millions d'années, la Corne de l'Afrique pourrait s'en détacher, séparée par un nouvel océan.")
+
+
+# ---------------------------------------------------------------- League of Legends
+S = 'lol'
+drop(S, "Comment s'appelle la victoire par destruction de la base adverse ?")
+fix(S, "Comment s'appelle le grand champion dragon invincible apparaissant en fin de partie ?",
+    q="Comment s'appelle le dragon de fin de partie qui permet d'exécuter les ennemis affaiblis ?",
+    a=["Méga Dragon", "Dragon Hextech", "Dragon ancestral (Elder Dragon)", "Dragon infernal"], c=2,
+    fb="Le Dragon ancestral apparaît en fin de partie. Son buff permet d'exécuter les ennemis qui passent sous un certain seuil de points de vie.")
+fix(S, "Quel champion LoL est connu pour sa capacité 'Saut Cosmique' et son rôle d'assassin ?",
+    q="Quelle championne assassin réinitialise ses compétences à chaque élimination ?")
+fix(S, "Quel est le sort d'invocateur le plus utilisé, donnant un boost de vitesse ?",
+    q="Quel sort d'invocateur, le plus utilisé du jeu, téléporte le champion sur une courte distance ?")
+drop(S, "Quel champion est surnommé 'La Lame Non Brisée' ?")
+drop(S, "Comment s'appelle le poste de joueur qui est aussi le caster de la carte ?")
+drop(S, "Comment s'appelle la monnaie in-game principale de League of Legends ?")
+fix(S, "Qui est Faker dans l'univers esport de League of Legends ?",
+    fb="Lee « Faker » Sang-hyeok, mid laner de T1, est considéré comme le meilleur joueur de l'histoire de LoL. Il détient le record de titres de champion du monde.")
+drop(S, "Quel est le nom du personnage dans le lore LoL qui a fondé les Gardiens ?")
+fix(S, "Quel champion LoL est un ninja avec des étoiles de lancer ?",
+    q="Quel ninja yordle manie l'électricité et lance des shurikens ?")
+fix(S, "Comment s'appelle la carte 2v2v2v2 de League of Legends ?",
+    q="Quel jeu dérivé de LoL est un auto-battler pour huit joueurs ?")
+fix(S, "Quel champion LoL est célèbre pour son rire maniaque et ses sorts de feu ?",
+    q="Quel champion est un être de feu dont les sorts embrasent ses cibles ?")
+drop(S, "Quel est le champion LoL le plus populaire / joué en compétitif historiquement ?")
+drop(S, "Quel est le championnat le plus important de la LCK (Corée) ?")
+fix(S, "Quel champion LoL parle du 'joug de la mortalité' et est un mage d'ombre ?",
+    q="Quelle liche peut toucher tous les ennemis de la carte avec son ultime ?")
+fix(S, "Quel champion LoL est un support enchanteresse avec des soins et des boucliers ?",
+    q="Quelle support peut soigner tous ses alliés, partout sur la carte, avec son ultime ?")
+drop(S, "Comment s'appelle le mode compétitif principal de League of Legends ?")
+drop(S, "Quel est le terme pour un champion avec beaucoup de résistances et de vie ?")
+drop(S, "Quel est le titre du premier champion LoL jamais conçu ?")
+fix(S, "Comment s'appelle le continent fictif où se déroule le lore de LoL ?",
+    q="Comment s'appelle le monde où se déroule l'histoire de League of Legends ?")
+drop(S, "Quel est le nom de la capacité passive universelle des champions LoL qui régénère en base ?")
+drop(S, "Comment s'appelle le duo de support et ADC le plus populaire compétitivement en 2023 ?")
+fix(S, "Comment s'appelle le système de classement juste en dessous de Challenger ?",
+    q="Quel rang se trouve juste en dessous de Challenger ?",
+    a=["Master", "Grandmaster", "Diamant I", "Émeraude"], c=1)
+fix(S, "Quel champion LoL peut se diviser en plusieurs copies de lui-même ?",
+    q="Quel champion clown crée une copie de lui-même avec son ultime, Hallucination ?")
+fix(S, "Comment s'appelle la mécanique permettant à un champion de réduire les dégâts entrants ?",
+    q="Quelle statistique réduit les dégâts physiques reçus ?",
+    a=["L'armure", "La résistance magique", "La ténacité", "La vitesse d'attaque"], c=0)
+fix(S, "Comment s'appelle la zone de réapparition des champions après leur mort ?",
+    q="Comment s'appelle la zone de la base où les champions réapparaissent ?",
+    a=["Le Nexus", "L'inhibiteur", "La Fontaine", "La Faille"], c=2)
+drop(S, "Comment s'appelle la technique pour capitaliser sur un avantage en nombre (5v4) ?")
+drop(S, "Comment s'appelle le personnage principal de la série Arcane (LoL) ?")
+drop(S, "Comment s'appelle la mécanique de LoL qui accélère les champions à faible vie ?")
+drop(S, "Comment s'appelle l'objet mythique le plus utilisé par les ADC en 2023 ?")
+drop(S, "Comment s'appelle la fonction de chat entre alliés pendant une partie LoL ?")
+
+
+# ---------------------------------------------------------------- Blue Lock
+S = 'bluelock'
+fix(S, "Quel est le talent naturel de Nagi Seishiro ?",
+    fb="Nagi est un génie du contrôle de balle : il amortit n'importe quel ballon parfaitement. Il ne jouait au football que depuis quelques mois quand il est entré à Blue Lock.")
+drop(S, "Quelle est la nationalité mixte de Kaiser Michael ?")
+drop(S, "Comment Bachira résume-t-il pourquoi il est doué au football ?")
+fix(S, "Pourquoi Sae Itoshi a-t-il brisé Rin émotionnellement dans le passé ?",
+    a=["Il l'a blessé physiquement", "Il a renié leur rêve commun et lui a dit qu'il ne lui servait plus à rien", "Il a quitté le pays sans lui dire au revoir", "Il l'a humilié en public"], c=1,
+    fb="De retour d'Espagne, Sae annonce à Rin qu'il abandonne leur rêve de devenir ensemble les meilleurs attaquants du monde, et le rejette durement. Depuis, Rin veut prouver qu'il peut le surpasser.")
+drop(S, "Quel est l'arc de développement principal d'Isagi Yoichi ?")
+drop(S, "Quel joueur de Blue Lock développe une technique basée sur l'anticipation des passes adverses ?")
+drop(S, "Comment Rin Itoshi se distingue-t-il visuellement dans le manga ?")
+fix(S, "Qui est le personnage qui enseigne à Isagi lors de la Neo Egoist League ?",
+    q="Auprès de quel entraîneur, présenté comme le meilleur attaquant du monde, Isagi veut-il apprendre lors de la Neo Egoist League ?",
+    a=["Rin Itoshi", "Noel Noa", "Bachira Meguru", "Barou Shouei"], c=1,
+    fb="Isagi choisit Bastard München pour apprendre auprès de Noel Noa, l'attaquant considéré comme le meilleur du monde.")
+drop(S, "Que se passe-t-il lors d'un 'duel direct' dans Blue Lock ?")
+drop(S, "Quelle décision radicale Ego Jinpachi prend-il si un joueur ne développe pas son arme ?")
+drop(S, "Quel aspect psychologique Blue Lock met-il en avant que peu de shōnens explorent ?")
+drop(S, "Quelle est la caractéristique du style de frappe de Nagi une fois évolué ?")
+drop(S, "Quelle philosophie s'oppose directement à celle d'Ego dans Blue Lock ?")
+fix(S, "Quel club fictif Isagi Yoichi rejoint-il lors de la Neo Egoist League ?", c=1,
+    fb="Isagi rejoint Bastard München, le club allemand entraîné par Noel Noa, où évolue Michael Kaiser. Leur rivalité y prend toute son ampleur.")
+drop(S, "Comment l'anime Blue Lock est-il généralement classé parmi les animes sportifs ?")
+drop(S, "Combien d'équipes sont formées dans la phase initiale des sélections de Blue Lock ?")
+drop(S, "Combien de séries/arcs principaux compte Blue Lock environ ?")
+fix(S, "Contre quelle équipe les Blue Lock All-Stars s'affrontent-ils dans un match clé ?",
+    q="Contre quelle sélection les meilleurs joueurs de Blue Lock disputent-ils un match décisif pour l'avenir du programme ?",
+    a=["L'équipe nationale japonaise A", "L'équipe nationale U-20 du Japon", "Bastard München", "Une sélection mondiale"], c=1,
+    fb="Les joueurs de Blue Lock affrontent l'équipe nationale U-20 du Japon. Une défaite signerait la fin du programme.")
+drop(S, "Que prouve le match Blue Lock All-Stars contre l'équipe nationale U-18 ?")
+drop(S, "Quel est le contexte du premier match clé d'Isagi en duel contre Rin ?")
+drop(S, "Quel élément rend les matchs de Blue Lock uniques par rapport aux autres mangas sportifs ?")
+drop(S, "Quel résultat provoque la progression d'Isagi vers sa Meta-Vision complète ?")
+drop(S, "Dans quel match Chigiri libère-t-il enfin sa vitesse sans retenue ?")
+drop(S, "Quelle est la citation fondamentale d'Ego Jinpachi sur le football japonais ?")
+drop(S, "Que dit Ego Jinpachi aux joueurs sur leur rôle en équipe ?")
+drop(S, "Quelle citation d'Isagi résume son évolution ?")
+drop(S, "Quelle maxime Barou Shouei se répète-t-il constamment ?")
+drop(S, "Pourquoi Ego Jinpachi choisit-il des attaquants spécifiquement et non des joueurs polyvalents ?")
+drop(S, "Quel est le sens du geste typique de Barou quand il marque un but ?")
+drop(S, "Quel est l'arc émotionnel de Reo Mikage au fil du manga ?")
+drop(S, "Qu'est-ce que Blue Lock cherche à détruire dans la mentalité japonaise du football ?")
+drop(S, "Quel élément technique unique développe Isagi contre Kaiser ?")
+drop(S, "Quel est le paradoxe central de Blue Lock comme programme national ?")
+drop(S, "Quelle réaction mondiale a eu l'adaptation anime de Blue Lock ?")
+drop(S, "Quel est l'ennemi intérieur principal d'Isagi au début de Blue Lock ?")
+drop(S, "Comment se nomme la structure dans laquelle se déroule le programme Blue Lock ?")
+drop(S, "Qu'est-ce qui rend le football de Blue Lock fondamentalement différent du football normal ?")
+drop(S, "Quelle est la durée approximative du programme Blue Lock selon l'histoire ?")
+drop(S, "Quel joueur de Blue Lock représente le mieux le concept de 'génie travailleur' par opposition au talent pur ?")
+drop(S, "Quel personnage de Blue Lock incarne le mieux l'idée de 'football comme art' ?")
+drop(S, "Quel est le message final du manga Blue Lock sur l'égoïsme ?")
+drop(S, "Quelle technique Bachira développe-t-il pour surpasser ses limites physiques ?")
+drop(S, "Qui est considéré comme le 'second Ego Jinpachi' dans les phases tardives de Blue Lock ?")
+drop(S, "Quel aspect de l'arc d'Isagi dans la Neo Egoist League est le plus développé ?")
+drop(S, "Quel personnage de Blue Lock symbolise le 'talent gâché par la peur' ?")
+drop(S, "Quelle est la première victoire symbolique d'Isagi dans le programme ?")
+drop(S, "Quel est le score général des mangas sportifs Blue Lock selon les charts japonais ?")
+
+
+# ---------------------------------------------------------------- Solo Leveling
+S = 'soloLeveling'
+fix(S, "Qui est Yoo Jin-Ho dans Solo Leveling ?",
+    a=["Un chasseur de rang S ennemi", "Un chasseur de rang D, fils de riche, qui devient le vice-président de la guilde de Jin-Woo", "Le directeur de l'Association des chasseurs", "Le frère de Sung Jin-Woo"], c=1,
+    fb="Yoo Jin-Ho, chasseur de rang D et fils du patron d'une grande guilde, devient le fidèle bras droit de Jin-Woo et le vice-président de la guilde Ahjin.")
+drop(S, "Quel Monarque se retrouve lié à Sung Il-Hwan (le père de Jin-Woo) ?")
+drop(S, "Quel est le seul moment où Jin-Woo montre de la vraie peur ?")
+drop(S, "Quel est le surnom international de Sung Jin-Woo une fois son pouvoir reconnu ?")
+fix(S, "Quel est l'incident qui permet à Jin-Woo de recevoir le Système ?",
+    a=["Un accident de voiture", "L'attaque d'un chasseur jaloux", "L'incident du Double Donjon", "L'ouverture d'un portail rouge"], c=2)
+fix(S, "Comment s'appelle le premier et plus fidèle soldat-ombre de Jin-Woo ?",
+    fb="Igris, le chevalier rouge, est l'un des premiers soldats-ombres de Jin-Woo. Vaincu lors de la quête de changement de classe, il le sert ensuite avec une loyauté absolue.")
+fix(S, "Comment s'appellent les entités maléfiques qui veulent détruire l'humanité dans Solo Leveling ?",
+    a=["Les Démons", "Les Monarques", "Les Portails maudits", "Les Chasseurs corrompus"], c=1,
+    fb="Les Monarques, souverains des monstres, veulent anéantir l'humanité. Ils s'opposent aux Souverains, des êtres de lumière.")
+fix(S, "Qui sont les Rulers dans Solo Leveling ?",
+    q="Qui sont les Souverains (Rulers) dans Solo Leveling ?",
+    a=["Les meilleurs chasseurs du monde", "Des êtres de lumière opposés aux Monarques", "Les ancêtres des chasseurs", "Les dirigeants de l'Association"], c=1,
+    fb="Les Souverains sont des êtres de lumière en guerre contre les Monarques depuis des temps immémoriaux.")
+drop(S, "Comment les Rulers communiquent-ils avec certains humains choisis ?")
+drop(S, "Quel est le don particulier de Jin-Woo que les Rulers ont intégré dans le Système ?")
+drop(S, "Quel titre Jin-Woo reçoit-il après avoir vaincu de nombreux Monarques ?")
+drop(S, "Comment s'appelle l'événement qui a provoqué l'apparition des donjons et chasseurs sur Terre ?")
+drop(S, "Quel est le rang minimum d'un donjon qui peut causer des victimes importantes ?")
+fix(S, "Qu'est-ce qu'un 'donjon rogue' dans Solo Leveling ?",
+    q="Que se passe-t-il quand un donjon n'est pas vidé à temps dans Solo Leveling ?",
+    a=["Il se referme pour toujours", "Ses monstres sortent et envahissent la ville", "Il devient un donjon de rang S", "Rien de particulier"], c=1,
+    fb="Si un donjon n'est pas nettoyé à temps, il « déborde » : les monstres sortent du portail et attaquent la ville.")
+drop(S, "Qu'est-ce qu'un 'Portail Rogue' dans Solo Leveling ?")
+drop(S, "Quel est l'arc considéré comme le plus intense de Solo Leveling ?")
+drop(S, "Quel pays a une île entièrement envahie par des fourmis géantes dans Solo Leveling ?")
+drop(S, "Quelle est la première grande victoire de la Ahjin Guild qui établit sa réputation ?")
+drop(S, "Quel est le manhwa original dont Solo Leveling est l'adaptation ?")
+fix(S, "Quel est le destin final de Sung Jin-Woo dans la conclusion de Solo Leveling ?",
+    fb="Après avoir vaincu les Monarques, Jin-Woo utilise la Coupe de la réincarnation pour remonter le temps et offrir à tous une vie où la catastrophe n'a pas eu lieu.")
+drop(S, "Quel événement final résout le conflit entre Monarques et Rulers dans Solo Leveling ?")
+drop(S, "Quelle phrase résume la philosophie de Jin-Woo face aux obstacles ?")
+drop(S, "Que répond Jin-Woo quand on lui demande pourquoi il risque sa vie dans les donjons ?")
+drop(S, "Comment Jin-Woo est-il perçu par les autres chasseurs au début ?")
+drop(S, "Que représente le Système pour Sung Jin-Woo par rapport aux autres chasseurs ?")
+drop(S, "Quelle est la réaction d'Igris quand Jin-Woo le soumet pour la première fois ?")
+drop(S, "Quelle est la récompense principale que Jin-Woo obtient en complétant des quêtes difficiles ?")
+drop(S, "Comment Jin-Woo peut-il progresser alors que les autres chasseurs sont bloqués à leur rang ?")
+drop(S, "Quel est le principe du 'Shadow Extraction' de Jin-Woo ?")
+drop(S, "Quel est le niveau maximum que Jin-Woo peut atteindre avec le Système ?")
+drop(S, "Quelle est la particularité de l'odorat de Cha Hae-In ?")
+drop(S, "Quelle est la signification du titre 'Solo Leveling' ?")
+drop(S, "Comment Jin-Woo finance ses activités de chasseur au début ?")
+fix(S, "Quelle est la condition de la mère de Jin-Woo au début de l'histoire ?",
+    a=["Elle est en bonne santé", "Elle est plongée dans un sommeil sans fin à cause d'une maladie liée à la magie", "Elle est morte avant l'histoire", "Elle est chasseuse à la retraite"], c=1,
+    fb="La mère de Jin-Woo est atteinte du « sommeil éternel », une maladie liée à la magie qui la maintient endormie. Payer son hospitalisation est la première motivation de Jin-Woo.")
+drop(S, "Quel est le rang du donjon où Jin-Woo obtient son premier vrai test physique après l'activation du Système ?")
+drop(S, "Quelle est la popularité mondiale de Solo Leveling ?")
+drop(S, "Comment appelle-t-on la capacité de Jin-Woo à percevoir les monstres à travers les murs et l'obscurité ?")
+drop(S, "Comment la société coréenne traite-t-elle les chasseurs de rang E au début ?")
+drop(S, "Quel est l'impact mondial des révélations sur Jin-Woo dans la communauté internationale des chasseurs ?")
+drop(S, "Que représente l'armée des ombres de Jin-Woo symboliquement ?")
+drop(S, "Quel est l'unique objet qui peut blesser sérieusement Jin-Woo à son pic de puissance ?")
+drop(S, "Que font les autres chasseurs S-rank quand ils réalisent la vraie puissance de Jin-Woo ?")
+drop(S, "Quelle nation est la plus agressive dans sa tentative de recruter Jin-Woo ?")
+fix(S, "Comment se conclut la quête de Jin-Woo pour sauver sa mère hospitalisée ?",
+    a=["Elle meurt avant de guérir", "Grâce à l'Élixir de vie obtenu dans le Château du démon", "Grâce à un soigneur de rang S", "Elle guérit naturellement"], c=1,
+    fb="Jin-Woo gravit le Château du démon pour réunir les ingrédients de l'Élixir de vie, qui réveille enfin sa mère.")
+drop(S, "Quel aspect du système de classement des chasseurs Solo Leveling critique-t-il implicitement ?")
+fix(S, "Quelle est la relation entre Cha Hae-In et Jin-Woo à la fin de l'histoire ?",
+    fb="Cha Hae-In et Jin-Woo finissent par former un couple et se marier. Elle est l'une des rares personnes à voir l'humain derrière sa puissance.")
+
+
+# ---------------------------------------------------------------- Peaky Blinders
+S = 'peakyBlinders'
+drop(S, "Quel est le destin de la 'Shelby Company Limited' dans la série ?")
+fix(S, "Combien de saisons compte Peaky Blinders ?",
+    fb="Peaky Blinders compte six saisons, diffusées de 2013 à 2022. Un film prolonge ensuite l'histoire de Tommy Shelby.")
+drop(S, "Quel événement historique traumatise Tommy Shelby ?")
+drop(S, "Quel est le symbole/emblème visuel des Peaky Blinders ?")
+fix(S, "Qui est Billy Kimber dans la saison 1 ?",
+    a=["Un inspecteur de police", "Le chef d'un gang qui contrôle les champs de courses", "Un rival de la famille Lee", "Un fournisseur d'armes irlandais"], c=1)
+fix(S, "Quelle maladie fatale Tommy apprend-il avoir dans la saison 6 ?",
+    q="Quel diagnostic un médecin annonce-t-il à Tommy dans la saison 6 ?",
+    fb="Un médecin annonce à Tommy un tuberculome au cerveau, censé être mortel. On découvrira à la fin que ce diagnostic était un mensonge.")
+fix(S, "Quelle faction politique britannique Tommy soutient-il lors des saisons 2-3 ?",
+    q="Pour quel parti Tommy Shelby devient-il député ?")
+drop(S, "Quelle est la philosophie de Tommy Shelby face aux ennemis ?")
+drop(S, "Quelle est la relation de Peaky Blinders avec la culture pop actuelle ?")
+drop(S, "Quelle est la couleur associée à la garde-robe des Shelby ?")
+drop(S, "Que représente les chevaux dans Peaky Blinders ?")
+drop(S, "Quel personnage d'Alfie Solomons dit-il à Tommy lors de leur première rencontre ?")
+drop(S, "Que représente Small Heath pour Tommy Shelby psychologiquement ?")
+drop(S, "Quel est le vrai nom de naissance des Shelby ?")
+drop(S, "Quel est le plan final de Tommy Shelby dans la saison 6 ?")
+drop(S, "Quel est le rang social que Tommy cherche à atteindre au fil des saisons ?")
+drop(S, "Quelle est la signature musicale caractéristique de la série ?")
+drop(S, "Quel facteur psychologique Tommy ne peut-il jamais surmonter complètement ?")
+drop(S, "Comment les Shelby gèrent-ils leur transition entre crime et politique ?")
+drop(S, "Quel est l'impact cultural de Peaky Blinders sur la mode masculine ?")
+drop(S, "Quel est l'héritage criminel exact de la famille Shelby à la fin de la série ?")
+drop(S, "En quelle saison John Shelby est-il absent pour la première fois (mort) ?")
+drop(S, "Quelle est la relation de Tommy Shelby avec la religion ?")
+drop(S, "Quelle phrase Tommy dit-il quand quelqu'un le menace de mort ?")
+drop(S, "Qu'est-ce qui distingue Peaky Blinders des autres drames criminels britanniques ?")
+drop(S, "Quel personnage féminin est la principale voix de raison et de modération dans la famille Shelby ?")
+drop(S, "Quel est le rapport de Tommy Shelby avec les courses de chevaux au-delà du business ?")
+drop(S, "Quel sport Tommy pratique-t-il pour maintenir sa forme physique ?")
+drop(S, "Quel est le paradoxe central de Tommy Shelby comme personnage ?")
+drop(S, "Quel est le genre de la série Peaky Blinders ?")
+drop(S, "Quelle est la progression de statut social des Shelby de la saison 1 à la fin ?")
+drop(S, "Quel est le lien entre Peaky Blinders et le mouvement ouvrier de l'époque ?")
