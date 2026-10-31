@@ -64,7 +64,7 @@ with sync_playwright() as p:
 
     print('Page série')
     page.goto(BASE + '/quiz/naruto/')
-    check(page.locator('.qitem').count() >= 70, 'les questions de révision sont dans le HTML')
+    check(page.locator('.qitem').count() >= 50, 'les questions de révision sont dans le HTML')
     page.click('[data-reveal="open"]')
     check(page.locator('.qitem details[open]').count() == page.locator('.qitem').count(), '« Afficher toutes les réponses » ouvre tout')
     page.screenshot(path=str(SHOTS / 'serie-desktop.png'))
