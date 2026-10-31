@@ -18,6 +18,8 @@ sys.path.insert(0, str(ROOT / 'content'))
 import datetime  # noqa: E402
 from series import SERIES as ALL_SERIES, CATEGORIES, POPULAR, NEW_FALLBACK  # noqa: E402
 import dle as DLE  # noqa: E402
+from visuals import visual_svg  # noqa: E402
+from trailers import TRAILERS  # noqa: E402
 
 DIST = ROOT / 'dist'
 SITE = 'https://kamiquiz.com'
@@ -201,15 +203,37 @@ def crumbs_html(items):
     return f'<nav class="crumbs" aria-label="Fil d\'Ariane"><ol>{lis}</ol></nav>'
 
 
+_ART = {}
+
+
+def art(s):
+    """URL du visuel maison de la série (SVG écrit dans dist/, empreinte de contenu pour le cache d'un an)."""
+    if s['key'] not in _ART:
+        import hashlib
+        svg = visual_svg(s['key'], s['color'])
+        out = DIST / 'assets' / 'img' / 'series' / f'{s["key"]}.svg'
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(svg, encoding='utf-8')
+        _ART[s['key']] = f'/assets/img/series/{s["key"]}.svg?v={hashlib.sha256(svg.encode()).hexdigest()[:10]}'
+    return _ART[s['key']]
+
+
+def art_img(s, cls, eager=False):
+    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    return f'<img class="{cls}" src="{art(s)}" alt="" width="1600" height="900" decoding="async" {load}>'
+
+
 def series_row(s):
     return (f'<li class="series-row"><a href="/quiz/{s["slug"]}/" style="--c:{s["color"]}">'
+            f'<span class="thumb">{art_img(s, "thumb-art")}</span>'
             f'<span><span class="nm">{e(s["name"])}</span><span class="ds">{e(s["tag"])}</span></span>'
             f'<span class="ct">{s["n"]} questions</span></a></li>')
 
 
 def tile(s, badge='', big=False):
     b = f'<span class="badge">{e(badge)}</span>' if badge else ''
-    return (f'<a class="tile{" tile-lg" if big else ""}" href="/quiz/{s["slug"]}/" style="--c:{s["color"]}">{b}'
+    return (f'<a class="tile{" tile-lg" if big else ""}" href="/quiz/{s["slug"]}/" style="--c:{s["color"]}">'
+            f'{art_img(s, "tile-art")}{b}'
             f'<span class="nm">{e(s["name"])}</span><p>{e(s["tag"])}</p></a>')
 
 
@@ -484,10 +508,23 @@ def build_serie(s):
         'provider': {'@type': 'Organization', 'name': 'KamiQuiz', 'url': SITE + '/'}}]
 
     intro = ''.join(f'<p>{e(p)}</p>' for p in s['intro'])
+    trailer_html = ''
+    if s['key'] in TRAILERS:
+        yt, ttl, chan = TRAILERS[s['key']]
+        trailer_html = f'''<h2>La bande-annonce</h2>
+      <figure class="trailer" data-yt="{e(yt)}" data-title="{e(ttl)}" style="--c:{s["color"]}">
+        <button class="trailer-play" type="button" aria-label="Lire la bande-annonce : {e(ttl)} (vidéo YouTube)">
+          {art_img(s, "trailer-art")}
+          <span class="trailer-btn" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="trailer-cap"><span class="trailer-kicker">Bande-annonce officielle</span><span class="trailer-ttl">{e(ttl)}</span></span>
+        </button>
+        <figcaption>Vidéo publiée par {e(chan)} sur YouTube. Elle ne se charge que si vous lancez la lecture. <a href="https://www.youtube.com/watch?v={e(yt)}" target="_blank" rel="noopener">Ouvrir sur YouTube</a></figcaption>
+      </figure>'''
     lv_items = ''.join(f'<li><span>{LEVELS[k]}</span><span>{lv[k]}</span></li>' for k in (1, 2, 3, 4) if lv[k])
     cat_items = ''.join(f'<li><span>{e(d["cats"][c].get("i", ""))} {e(c)}</span><span>{len(by_cat[c])}</span></li>' for c in cats)
 
     body = f'''<section class="serie-head">
+  <div class="serie-art" aria-hidden="true">{art_img(s, "serie-art-img", eager=True)}</div>
   <div class="wrap">
     {crumbs_html(crumbs)}
     <h1 class="h1">Quiz <em>{e(s["name"])}</em></h1>
@@ -509,6 +546,7 @@ def build_serie(s):
     <article class="article">
       <h2 style="margin-top:0">À propos de ce quiz</h2>
       {intro}
+      {trailer_html}
       <h2>Les modes de jeu</h2>
       <div class="modes">{modes}</div>
       <h2 id="questions">Les {s["n"]} questions et leurs réponses</h2>
@@ -954,7 +992,7 @@ def build_static_pages():
 
     simple('/confidentialite/', 'Politique de confidentialité et cookies — KamiQuiz',
            'Quelles données KamiQuiz collecte, comment fonctionne la publicité Google AdSense, la gestion du consentement et vos droits.',
-           'Confidentialité et cookies', 'Dernière mise à jour : 16 octobre 2026.', '''
+           'Confidentialité et cookies', 'Dernière mise à jour : 31 octobre 2026.', '''
 <h2>Qui sommes-nous</h2>
 <p>KamiQuiz (kamiquiz.com) est un site de quiz gratuit et indépendant. Pour toute question sur cette politique, écrivez à <a href="mailto:contact@kamiquiz.com">contact@kamiquiz.com</a>.</p>
 <h2>Ce que nous collectons</h2>
@@ -970,7 +1008,9 @@ def build_static_pages():
 <p><button class="btn btn-sm" type="button" data-privacy-choices>Modifier mes choix de confidentialité</button></p>
 <p>Pour en savoir plus sur la façon dont Google utilise les données, consultez la page <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">Comment Google utilise les informations des sites qui utilisent ses services</a>. Vous pouvez aussi gérer la personnalisation des annonces sur <a href="https://myadcenter.google.com/" rel="noopener" target="_blank">Mon Centre de publicités</a>.</p>
 <h2>Polices et ressources</h2>
-<p>Les polices de caractères et les scripts du site sont hébergés sur nos propres serveurs : votre navigateur ne contacte aucun service tiers pour les charger, en dehors de Google AdSense.</p>
+<p>Les polices de caractères, les scripts et les visuels du site sont hébergés sur nos propres serveurs : votre navigateur ne contacte aucun service tiers pour les charger, en dehors de Google AdSense.</p>
+<h2>Bandes-annonces YouTube</h2>
+<p>Certaines pages de quiz proposent la bande-annonce officielle de l'œuvre. Tant que vous ne cliquez pas sur le bouton de lecture, rien n'est chargé depuis YouTube : vous voyez seulement une image hébergée chez nous. Si vous lancez la vidéo, elle est lue dans un lecteur YouTube en mode de confidentialité renforcée (youtube-nocookie.com) ; Google peut alors traiter des données de lecture selon sa propre <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">politique de confidentialité</a>.</p>
 <h2>Durée de conservation</h2>
 <p>Les scores du classement mondial sont conservés tant que le classement existe, sauf demande de suppression. Les données techniques de l'hébergeur sont conservées pour une durée limitée, selon sa propre politique.</p>
 <h2>Vos droits</h2>
@@ -978,20 +1018,21 @@ def build_static_pages():
 <h2>Prestataires</h2>
 <ul>
 <li><a href="https://www.cloudflare.com/privacypolicy/" rel="noopener" target="_blank">Cloudflare</a> : hébergement, distribution des pages et classement mondial.</li>
-<li><a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google</a> : publicité (AdSense) et gestion du consentement.</li>
+<li><a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google</a> : publicité (AdSense), gestion du consentement et lecture des bandes-annonces YouTube, uniquement si vous les lancez.</li>
 </ul>
 <h2>Modifications</h2>
 <p>Cette politique peut évoluer. La date de dernière mise à jour figure en haut de la page.</p>
 ''', '', '0.3')
 
     simple('/conditions/', "Conditions d'utilisation — KamiQuiz", "Les conditions d'utilisation du site KamiQuiz : usage du service, classement mondial, propriété intellectuelle.",
-           "Conditions d'utilisation", 'Dernière mise à jour : 16 octobre 2026.', '''
+           "Conditions d'utilisation", 'Dernière mise à jour : 31 octobre 2026.', '''
 <h2>Le service</h2>
 <p>KamiQuiz propose gratuitement des quiz en ligne. Le site est fourni tel quel : nous faisons notre possible pour que les questions soient exactes et le service disponible, sans pouvoir le garantir en permanence.</p>
 <h2>Classement mondial</h2>
 <p>En enregistrant un score, vous acceptez que votre pseudo apparaisse publiquement. Les pseudos injurieux, discriminatoires, à caractère publicitaire ou reprenant l'identité d'une autre personne sont interdits et peuvent être supprimés sans préavis, tout comme les scores obtenus de manière automatisée ou frauduleuse.</p>
 <h2>Propriété intellectuelle</h2>
 <p>Les textes, questions, explications et guides de KamiQuiz sont protégés. Vous pouvez partager librement les liens vers le site et vos résultats ; la reproduction massive des questions ou des guides sur un autre site n'est pas autorisée sans accord écrit.</p>
+<p>Les visuels des pages de quiz sont des illustrations originales créées pour KamiQuiz. Les bandes-annonces appartiennent à leurs ayants droit : elles sont intégrées avec le lecteur officiel de YouTube, depuis la chaîne du diffuseur ou de l'éditeur.</p>
 <p>KamiQuiz n'est affilié à aucun des éditeurs, studios ou ayants droit des œuvres évoquées. Les marques et noms cités appartiennent à leurs propriétaires et sont utilisés à titre de référence.</p>
 <h2>Contact</h2>
 <p>Pour toute question sur ces conditions : <a href="mailto:contact@kamiquiz.com">contact@kamiquiz.com</a>.</p>

@@ -38,6 +38,8 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
 - `data/questions.src.json` : banque d'origine, **ne jamais modifier** ; `tools/clean_data.py` produit `data/questions.json`.
 - `content/corrections.py` : corrections et retraits de questions de la banque (relecture d'octobre 2026, `fix()` / `drop()`).
 - `content/extra_questions.py` : nouvelles questions vérifiées ajoutées aux séries existantes (bonne réponse écrite en premier, mélangée ensuite).
+- `content/visuals.py` : visuels maison des séries (SVG abstraits générés au build dans `dist/assets/img/series/`, aucun personnage ni logo).
+- `content/trailers.py` : bandes-annonces YouTube, uniquement depuis la chaîne officielle du diffuseur ou de l'éditeur ; chargées au clic seulement (youtube-nocookie).
 - `static/` : CSS, JS (`site.js`, `quiz.js`, `dle.js`), polices auto-hébergées, images.
 - `tools/` : vérifications, images, kit réseaux sociaux, vidéos (longues et narrées).
 - `docs/` : documents de travail que les scripts ne touchent pas (promotion…).

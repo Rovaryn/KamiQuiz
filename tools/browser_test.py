@@ -69,6 +69,27 @@ with sync_playwright() as p:
     check(page.locator('.qitem details[open]').count() == page.locator('.qitem').count(), '« Afficher toutes les réponses » ouvre tout')
     page.screenshot(path=str(SHOTS / 'serie-desktop.png'))
     page.click('[data-reveal="close"]')
+    check(page.evaluate("[...document.querySelectorAll('.serie-art img, .series-row img')].every(i => i.complete ? i.naturalWidth > 0 : true)"),
+          'les visuels maison de la série se chargent')
+    check(page.locator('.trailer').count() == 0, 'pas de bande-annonce sans vidéo officielle vérifiée')
+
+    print('Bande-annonce')
+    yt_requests = []
+    ctx.route('**/*youtube*/**', lambda r: (yt_requests.append(r.request.url), r.abort()))
+    page.goto(BASE + '/quiz/stranger-things/')
+    page.wait_for_load_state('load')
+    check(page.locator('.trailer-play').count() == 1, 'façade de bande-annonce présente')
+    check(not yt_requests, 'aucune requête YouTube avant le clic')
+    check(page.evaluate("document.querySelector('.trailer-art').naturalWidth > 0"), 'la vignette maison de la bande-annonce se charge')
+    page.click('.trailer-play')
+    src = page.get_attribute('.trailer-frame iframe', 'src') or ''
+    check(src.startswith('https://www.youtube-nocookie.com/embed/'), 'lecteur YouTube sans cookie inséré au clic')
+    page.set_viewport_size({'width': 390, 'height': 844})
+    page.goto(BASE + '/quiz/stranger-things/')
+    sw = page.evaluate('document.documentElement.scrollWidth')
+    check(sw <= 390, f'page série sans défilement horizontal à 390 px ({sw})')
+    page.set_viewport_size({'width': 1366, 'height': 900})
+    ctx.unroute('**/*youtube*/**')
 
     for mode, label in [('libre', 'mode libre'), ('maitre', 'ascension'), ('expert', 'expert')]:
         print('Jeu :', label)
