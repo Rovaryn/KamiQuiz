@@ -144,6 +144,29 @@
     });
   });
 
+  /* ---------- Bande-annonce : le lecteur YouTube n'est chargé qu'au clic ---------- */
+  document.querySelectorAll('.trailer[data-yt]').forEach(function (fig) {
+    var play = fig.querySelector('.trailer-play');
+    var id = fig.getAttribute('data-yt');
+    if (!play || !/^[\w-]{11}$/.test(id)) return;
+    play.addEventListener('click', function () {
+      var box = document.createElement('div');
+      box.className = 'trailer-frame';
+      var art = play.querySelector('img');
+      if (art) box.appendChild(art.cloneNode());
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
+      f.title = fig.getAttribute('data-title') || 'Bande-annonce';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.addEventListener('load', function () { box.classList.add('ready'); });
+      box.appendChild(f);
+      play.replaceWith(box);
+      f.focus();
+    });
+  });
+
   /* ---------- Préférences de confidentialité (CMP Google) ---------- */
   document.querySelectorAll('[data-privacy-choices]').forEach(function (b) {
     b.addEventListener('click', function () {
