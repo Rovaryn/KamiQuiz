@@ -28,6 +28,17 @@ if '--date' in sys.argv:
     TODAY = sys.argv[sys.argv.index('--date') + 1]
 datetime.date.fromisoformat(TODAY)
 VERSION = TODAY.replace('-', '')
+
+
+def asset_v(path):
+    """Empreinte du contenu d'un fichier statique : elle change dès que le fichier change.
+    Indispensable car /assets/* est servi avec un cache d'un an (voir _headers)."""
+    import hashlib
+    return hashlib.sha256((ROOT / 'static' / path.lstrip('/')).read_bytes()).hexdigest()[:10]
+
+
+def asset(path):
+    return f'{path}?v={asset_v(path)}'
 MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
 
 
@@ -109,8 +120,8 @@ def head(title, desc, path, jsonld=None, robots='index, follow', og_type='websit
 <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="preload" href="/assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/fonts.css?v={VERSION}">
-<link rel="stylesheet" href="/assets/css/site.css?v={VERSION}">
+<link rel="stylesheet" href="{asset('/assets/css/fonts.css')}">
+<link rel="stylesheet" href="{asset('/assets/css/site.css')}">
 {style}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={PUB}" crossorigin="anonymous"></script>
 {ld}</head>
 <body>
@@ -142,7 +153,7 @@ def header(current=''):
 
 def footer(scripts=('/assets/js/site.js',)):
     cats = ''.join(f'<li><a href="/quiz/#{cid}">{name}</a></li>' for cid, name, _ in CATEGORIES)
-    js = ''.join(f'<script src="{s}?v={VERSION}" defer></script>\n' for s in scripts)
+    js = ''.join(f'<script src="{asset(s)}" defer></script>\n' for s in scripts)
     return f'''</main>
 <footer class="site-foot">
   <div class="wrap">
@@ -1066,11 +1077,14 @@ def build_tech():
         '<circle cx="16" cy="16" r="11.5" fill="none" stroke="#d4a843" stroke-width="2.2"/><circle cx="16" cy="16" r="4.2" fill="#d4a843"/></svg>\n',
         encoding='utf-8')
 
-    (DIST / 'sw.js').write_text(f'''// KamiQuiz — service worker v{VERSION}
+    import hashlib
+    sw_v = hashlib.sha256(''.join(asset(x) for x in ('/assets/css/site.css', '/assets/css/fonts.css', '/assets/js/site.js',
+                                                     '/assets/js/quiz.js', '/assets/js/dle.js')).encode()).hexdigest()[:10]
+    (DIST / 'sw.js').write_text(f'''// KamiQuiz — service worker v{sw_v}
 // Réseau d'abord pour les pages et les données (toujours à jour), cache en secours hors ligne.
-const CACHE = 'kamiquiz-{VERSION}';
-const CORE = ['/', '/quiz/', '/jouer/', '/dle/', '/assets/css/site.css?v={VERSION}', '/assets/css/fonts.css?v={VERSION}',
-  '/assets/js/site.js?v={VERSION}', '/assets/js/quiz.js?v={VERSION}', '/favicon.svg'];
+const CACHE = 'kamiquiz-{sw_v}';
+const CORE = ['/', '/quiz/', '/jouer/', '/dle/', '{asset('/assets/css/site.css')}', '{asset('/assets/css/fonts.css')}',
+  '{asset('/assets/js/site.js')}', '{asset('/assets/js/quiz.js')}', '{asset('/assets/js/dle.js')}', '/favicon.svg'];
 
 self.addEventListener('install', e => {{
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(CORE.map(u => c.add(u).catch(() => {{}})))).then(() => self.skipWaiting()));

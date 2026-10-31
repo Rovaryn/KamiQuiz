@@ -142,6 +142,15 @@ for line in (DIST / '_redirects').read_text().splitlines():
     if (DIST / src.lstrip('/')).exists():
         errors.append(f'_redirects: la source {src} existe encore comme fichier')
 
+# versions des fichiers statiques : ?v= doit être l'empreinte du contenu (sinon les navigateurs gardent l'ancien fichier un an)
+import hashlib
+for f in pages:
+    for ref, v in re.findall(r'(/assets/[\w./-]+)\?v=([\w]+)', f.read_text(encoding='utf-8')):
+        real = hashlib.sha256((DIST / ref.lstrip('/')).read_bytes()).hexdigest()[:10]
+        if v != real:
+            errors.append(f'{f.relative_to(DIST)}: {ref}?v={v} ne correspond pas au contenu ({real})')
+            break
+
 # données
 for jf in (DIST / 'data').glob('*.json'):
     d = json.loads(jf.read_text(encoding='utf-8'))
