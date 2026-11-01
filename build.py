@@ -108,6 +108,7 @@ def head(title, desc, path, jsonld=None, robots='index, follow', og_type='websit
 <meta name="robots" content="{robots}">
 <meta name="theme-color" content="#07080f">
 <meta name="google-adsense-account" content="{PUB}">
+<meta name="alldle-verify" content="zeH2tpvyQl3QIQMFda8JTGnZePXWWPus">
 <meta property="og:site_name" content="KamiQuiz">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:type" content="{og_type}">
