@@ -281,4 +281,16 @@ SERIES = {
             "Tatsuya Endo's Spy × Family has been published on Shōnen Jump+ since 2019. To get close to a dangerous politician, the spy Twilight has to enroll a child in an elite school. He adopts Anya, unaware that she can read minds, and marries Yor, unaware that she is an assassin. The adaptation by Wit Studio and CloverWorks made the Forger family one of the most popular in recent anime.",
             "The quiz covers the Forger family and their dog Bond, the spy agencies of Westalis and Ostania, Eden Academy and its system of Stellas and Tonitrus Bolts, and the making of the manga, the anime and the film Code: White.",
         ]),
+    'haikyu': dict(slug='haikyu', name='Haikyu!!',
+        tag="The Karasuno Crows on their way to conquer national volleyball.",
+        intro=[
+            "Haruichi Furudate's Haikyu!! ran in Weekly Shōnen Jump from 2012 to 2020, in 45 volumes. Shoyo Hinata, too short for volleyball but gifted with a phenomenal jump, enters Karasuno High to follow in the footsteps of his idol, the Little Giant. There he meets Tobio Kageyama, a genius setter who beat him in middle school. Together, they invent a quick attack that wakes up a team that had fallen into obscurity. Production I.G's adaptation made the manga one of the biggest sports successes on screen.",
+            "The quiz covers the Karasuno players, their great rivals from Aoba Johsai, Nekoma, Shiratorizawa and Inarizaki, the matches that defined the series, the rules of volleyball and the making of the work. A few hard questions are about what becomes of the characters after high school.",
+        ]),
+    'arcane': dict(slug='arcane', name='Arcane',
+        tag="Vi, Jinx and the war between Piltover and Zaun.",
+        intro=[
+            "Arcane, created by Christian Linke and Alex Yee, is an animated series by Riot Games, made by the French studio Fortiche and streamed on Netflix in two seasons, in 2021 and 2024. It is set in the world of League of Legends, between Piltover, the rich City of Progress, and Zaun, the undercity that spreads out beneath it. At the heart of the story are two sisters, Vi and Powder, whom tragedy turns into enemies, and two inventors, Jayce and Viktor, who give birth to hextech. The series won the Emmy for Outstanding Animated Program in 2022.",
+            "The quiz covers the characters, the two cities and their tensions, hextech and Shimmer, the great moments of the story and the making of the series. Be warned: some hard questions mention events from the second season.",
+        ]),
 }

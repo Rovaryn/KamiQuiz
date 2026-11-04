@@ -1,0 +1,509 @@
+{
+ "cats": {
+  "Personnages": "Characters",
+  "Piltover et Zaun": "Piltover and Zaun",
+  "Hextech": "Hextech",
+  "Histoire": "Story",
+  "Œuvre": "The Series"
+ },
+ "ranks": [
+  "Zaunite",
+  "Runner",
+  "Firelight",
+  "Enforcer",
+  "Piltover Councilor",
+  "Hero of Runeterra"
+ ],
+ "q": {
+  "910778b1": [
+   "How are Vi and Jinx related?",
+   [
+    "They are sisters",
+    "They are cousins",
+    "They are childhood friends",
+    "They are unrelated rivals"
+   ],
+   "Vi and Powder, who will become Jinx, are two orphaned sisters raised in Zaun by Vander."
+  ],
+  "28474ecd": [
+   "What was Jinx's name as a child?",
+   [
+    "Powder",
+    "Violet",
+    "Sky",
+    "Isha"
+   ],
+   "As a child, Jinx is called Powder. The name Jinx, meaning someone who brings bad luck, comes from the tragedy that separates her from Vi."
+  ],
+  "70dbacad": [
+   "What weapon does Vi use?",
+   [
+    "Blades",
+    "A hammer",
+    "A sniper rifle",
+    "Gauntlets"
+   ],
+   "Vi fights with her bare hands, then with huge gauntlets that multiply the power of her punches."
+  ],
+  "19c2ce94": [
+   "Who is Caitlyn Kiramman?",
+   [
+    "A Noxian councilor",
+    "The leader of the Firelights",
+    "A young Piltover enforcer from a prominent family",
+    "A Zaunite chemist"
+   ],
+   "Caitlyn, the daughter of an influential Piltover family, is an investigator and sharpshooter who teams up with Vi."
+  ],
+  "2fa35095": [
+   "Who raised Vi and Powder after their parents died?",
+   [
+    "Singed",
+    "Vander",
+    "Silco",
+    "Heimerdinger"
+   ],
+   "Vander, the owner of The Last Drop bar, took in the two sisters after their parents died during an uprising against Piltover."
+  ],
+  "64bfee62": [
+   "Who becomes Jinx's father figure in Zaun?",
+   [
+    "Ekko",
+    "Jayce",
+    "Vander",
+    "Silco"
+   ],
+   "Silco, Vander's former friend turned enemy, takes Powder in and raises her as his own daughter."
+  ],
+  "fe179d91": [
+   "How did Silco get the scar around his eye?",
+   [
+    "Vander tried to drown him",
+    "In a fight against Vi",
+    "In an explosion",
+    "One of Singed's experiments"
+   ],
+   "Vander tried to drown Silco in the river, which ended their friendship and scarred his face."
+  ],
+  "45091860": [
+   "Which scientist creates hextech with Viktor?",
+   [
+    "Heimerdinger",
+    "Singed",
+    "Jayce Talis",
+    "Mel Medarda"
+   ],
+   "Jayce Talis, a young Piltover inventor, develops hextech with Viktor, his partner from Zaun."
+  ],
+  "fd54c226": [
+   "Where does Viktor come from?",
+   [
+    "The wealthy districts of Piltover",
+    "Noxus",
+    "The Freljord",
+    "Zaun"
+   ],
+   "Viktor grew up in the undercity of Zaun. In poor health, he sees science as a way to improve the lives of his people."
+  ],
+  "7b7b364c": [
+   "Who is Heimerdinger?",
+   [
+    "A Noxian general",
+    "The leader of a Zaun gang",
+    "A yordle, a councilor and scholar of Piltover",
+    "Caitlyn's father"
+   ],
+   "Heimerdinger, a very long-lived yordle, sits on Piltover's council and urges caution about hextech."
+  ],
+  "7132ea35": [
+   "Who leads the Firelights, the Zaunite rebel group?",
+   [
+    "Ekko",
+    "Sevika",
+    "Vi",
+    "Finn"
+   ],
+   "Ekko, Powder's childhood friend, leads the Firelights, who oppose Silco from their hideout around a giant tree."
+  ],
+  "45874654": [
+   "What position does Cassandra Kiramman, Caitlyn's mother, hold?",
+   [
+    "Professor at the Academy",
+    "Chemist",
+    "Piltover councilor",
+    "Sheriff"
+   ],
+   "Cassandra Kiramman sits on Piltover's council, which places Caitlyn at the heart of power in the upper city."
+  ],
+  "3b9aae56": [
+   "Which Piltover councilor comes from Noxus?",
+   [
+    "Mel Medarda",
+    "Salo",
+    "Shoola",
+    "Cassandra Kiramman"
+   ],
+   "Mel Medarda, a skillful and ambitious councilor, comes from a powerful Noxian family."
+  ],
+  "f943adb6": [
+   "Who is Ambessa Medarda?",
+   [
+    "Mel's mother, a Noxian warlord",
+    "Jinx's sister",
+    "Piltover's sheriff",
+    "A Zaunite chemist"
+   ],
+   "Ambessa Medarda, Mel's mother, is a formidable Noxian warlord who plays a major role in the second season."
+  ],
+  "689c1302": [
+   "Who is Silco's right hand, with her mechanical arm?",
+   [
+    "Sevika",
+    "Isha",
+    "Mel",
+    "Caitlyn"
+   ],
+   "Sevika, a fighter with a mechanical arm, enforces Silco's order in the undercity."
+  ],
+  "223cd7bb": [
+   "What are the names of the two boys who live with Vi and Powder at Vander's?",
+   [
+    "Deckard and Sky",
+    "Jayce and Viktor",
+    "Mylo and Claggor",
+    "Ekko and Finn"
+   ],
+   "Mylo and Claggor are part of Vander's little gang. Their death, in the third episode, changes everything for Powder."
+  ],
+  "1f325c57": [
+   "Who is Singed?",
+   [
+    "Jayce's lawyer",
+    "A professor at the Academy",
+    "Vander's brother",
+    "A chemist who works for Silco"
+   ],
+   "Singed, an unscrupulous scientist, creates Shimmer for Silco and carries out disturbing experiments."
+  ],
+  "4857ab05": [
+   "What is the name of the little girl Jinx takes under her wing in the second season?",
+   [
+    "Ren",
+    "Isha",
+    "Powder",
+    "Sky"
+   ],
+   "Isha, a mute little girl from Zaun, becomes attached to Jinx in the second season."
+  ],
+  "5dad0e7d": [
+   "Who was Viktor's assistant, killed in a hextech accident?",
+   [
+    "Sevika",
+    "Caitlyn Kiramman",
+    "Sky Young",
+    "Mel Medarda"
+   ],
+   "Sky Young, Viktor's devoted assistant, dies while trying to help him master hextech."
+  ],
+  "cda71f9e": [
+   "What is Piltover's nickname?",
+   [
+    "The City of Iron",
+    "The City of Shadows",
+    "The City of Winds",
+    "The City of Progress"
+   ],
+   "Piltover, rich and brilliant, presents itself as the City of Progress."
+  ],
+  "79c32af9": [
+   "Where is Zaun in relation to Piltover?",
+   [
+    "On top of the mountains",
+    "On a distant island",
+    "Across the ocean",
+    "In the undercity, below Piltover"
+   ],
+   "Zaun spreads out in the depths, below Piltover: the poor, polluted undercity faces the city above."
+  ],
+  "82e3b253": [
+   "Which drug does Silco spread in Zaun?",
+   [
+    "Shimmer",
+    "The Fluid",
+    "The Mist",
+    "The Light"
+   ],
+   "Shimmer, a purple substance, multiplies the strength of those who take it but slowly destroys them."
+  ],
+  "ebe07d34": [
+   "What is Silco's dream for Zaun?",
+   [
+    "To destroy it",
+    "To make it a nation independent from Piltover",
+    "To leave it forever",
+    "To join it to Noxus"
+   ],
+   "Silco wants Zaun to become a free nation, released from Piltover's domination."
+  ],
+  "c36feded": [
+   "What is the name of the bar run by Vander?",
+   [
+    "The Raven",
+    "The Golden Gear",
+    "The Last Drop",
+    "The River"
+   ],
+   "The Last Drop, Vander's bar, is at the heart of Vi and Powder's childhood."
+  ],
+  "21b00633": [
+   "In which prison is Vi locked up for years?",
+   [
+    "Stillwater",
+    "The Abyss",
+    "The Bastion",
+    "Impel Down"
+   ],
+   "Vi spends years in Stillwater prison before Caitlyn comes to get her."
+  ],
+  "ec273fea": [
+   "What body governs Piltover?",
+   [
+    "The Academy",
+    "A king",
+    "A council",
+    "The army"
+   ],
+   "Piltover is run by a council on which the great families and Heimerdinger sit."
+  ],
+  "5efe9ef3": [
+   "Which day does Piltover celebrate with a big festival?",
+   [
+    "Progress Day",
+    "The Festival of Lights",
+    "Hextech Day",
+    "Union Day"
+   ],
+   "Progress Day celebrates Piltover's inventions. It is during this festival that Jayce unveils his hextech gates."
+  ],
+  "25fb4efa": [
+   "What is hextech?",
+   [
+    "A technology that channels magic",
+    "A Noxian weapon",
+    "A drug",
+    "An ancient language"
+   ],
+   "Hextech combines science and magic: it channels the energy of magic crystals into machines."
+  ],
+  "8bc83f49": [
+   "What serves as hextech's power source?",
+   [
+    "Shimmer",
+    "A star",
+    "Steam",
+    "A magic gem"
+   ],
+   "Hextech inventions run on gems charged with magic, like the one in Vi's gauntlets or Jayce's hammer."
+  ],
+  "5cd45587": [
+   "What weapon does Jayce use?",
+   [
+    "A sword",
+    "A hextech hammer",
+    "Gauntlets",
+    "A rifle"
+   ],
+   "Jayce wields a hextech hammer, his signature weapon."
+  ],
+  "16c5a6fd": [
+   "Which invention by Jayce and Viktor allows instant travel?",
+   [
+    "Hextech gates",
+    "The gauntlets",
+    "Airships",
+    "Shimmer"
+   ],
+   "The hextech gates, unveiled on Progress Day, allow almost instant transport."
+  ],
+  "3f242096": [
+   "What is the name of the living hextech core Viktor works on?",
+   [
+    "The Hexcore",
+    "Shimmer",
+    "The Mother Gem",
+    "The Arcane"
+   ],
+   "The Hexcore, a version of hextech that can evolve, both fascinates and worries Viktor."
+  ],
+  "6989b815": [
+   "Why does Heimerdinger oppose the rapid development of hextech?",
+   [
+    "He wants to sell it to Noxus",
+    "He prefers Shimmer",
+    "He does not believe it works",
+    "He fears the dangers of poorly controlled magic"
+   ],
+   "Heimerdinger, who has seen many generations come and go, considers hextech too dangerous to be developed in a hurry."
+  ],
+  "aa48f653": [
+   "What does Powder accidentally cause during the battle against Silco?",
+   [
+    "The destruction of Piltover",
+    "Vi's arrest",
+    "An explosion that kills Mylo and Claggor",
+    "A fire at the Academy"
+   ],
+   "Trying to help, Powder sets off an explosion that kills Mylo and Claggor, and Vander disappears in the same battle. The tragedy separates her from Vi."
+  ],
+  "498a52ee": [
+   "What does Jinx do at the end of the first season?",
+   [
+    "She fires a rocket at Piltover's council chamber",
+    "She flees to Noxus",
+    "She makes up with Vi",
+    "She becomes a councilor"
+   ],
+   "At the end of the first season, Jinx fires on the council chamber, an act that opens the war between the two cities."
+  ],
+  "5a8fd17d": [
+   "Who does Vi team up with after getting out of prison?",
+   [
+    "Caitlyn",
+    "Mel",
+    "Silco",
+    "Sevika"
+   ],
+   "Caitlyn gets Vi out of Stillwater so that she can help her investigate in the undercity."
+  ],
+  "197f4006": [
+   "In how many acts was each season released?",
+   [
+    "Three",
+    "All at once",
+    "Four",
+    "Two"
+   ],
+   "Each nine-episode season was released in three acts of three episodes, one week apart."
+  ],
+  "6d8e0ff7": [
+   "Why does Heimerdinger leave the council?",
+   [
+    "He retires",
+    "The other councilors vote him out",
+    "He is arrested",
+    "He leaves for Noxus"
+   ],
+   "The council, pushed by Jayce and Mel, removes Heimerdinger, considered too timid about hextech."
+  ],
+  "3ef6efb3": [
+   "Which childhood friend does Jinx fight on a bridge in the first season?",
+   [
+    "Jayce",
+    "Finn",
+    "Mylo",
+    "Ekko"
+   ],
+   "Jinx and Ekko, once inseparable, come face to face in a moving fight."
+  ],
+  "2ebb7834": [
+   "What becomes of Vander in the second season?",
+   [
+    "A Piltover councilor",
+    "The leader of the Firelights",
+    "A Noxian general",
+    "A creature, Warwick"
+   ],
+   "Vander, thought to be dead, reappears transformed into Warwick, a creature born of Singed's experiments."
+  ],
+  "eba850f3": [
+   "On which platform is Arcane streamed?",
+   [
+    "Crunchyroll",
+    "Netflix",
+    "Disney+",
+    "Amazon Prime Video"
+   ],
+   "Arcane has been streaming on Netflix since November 2021."
+  ],
+  "351d8253": [
+   "Which video game is Arcane based on?",
+   [
+    "Overwatch",
+    "League of Legends",
+    "Dota 2",
+    "Valorant"
+   ],
+   "Arcane is set in the world of League of Legends, Riot Games' game. Vi, Jinx, Caitlyn, Jayce, Viktor and Ekko are champions in it."
+  ],
+  "54ff9210": [
+   "Which studio animated Arcane?",
+   [
+    "Fortiche",
+    "Ufotable",
+    "Pixar",
+    "Sony Pictures Animation"
+   ],
+   "The French studio Fortiche, founded in Paris, animated Arcane with Riot Games."
+  ],
+  "e7fb13f0": [
+   "Which band performs “Enemy”, Arcane's theme song?",
+   [
+    "Twenty One Pilots",
+    "Imagine Dragons",
+    "Coldplay",
+    "Linkin Park"
+   ],
+   "“Enemy” is performed by Imagine Dragons, with the rapper JID."
+  ],
+  "1ada2f4d": [
+   "How many seasons does Arcane have?",
+   [
+    "One",
+    "Three",
+    "Two",
+    "Four"
+   ],
+   "Arcane has two seasons, released in 2021 and 2024. The second season concludes the story."
+  ],
+  "61325719": [
+   "How many episodes does each season have?",
+   [
+    "10",
+    "9",
+    "12",
+    "6"
+   ],
+   "Each season has nine episodes, split into three acts."
+  ],
+  "2da0e29c": [
+   "Which major American television award did Arcane win in 2022?",
+   [
+    "An Oscar",
+    "A Palme d'Or",
+    "An Emmy Award",
+    "A Golden Globe"
+   ],
+   "Arcane won the Emmy for Outstanding Animated Program, a first for a streaming series."
+  ],
+  "523adda9": [
+   "Who are the two creators of the series?",
+   [
+    "Christian Linke and Alex Yee",
+    "Vince Gilligan and Peter Gould",
+    "Matt and Ross Duffer",
+    "Dan Harmon and Justin Roiland"
+   ],
+   "Christian Linke and Alex Yee, of Riot Games, conceived and directed the series."
+  ],
+  "ed67244c": [
+   "What is visually original about Arcane?",
+   [
+    "It is filmed in live action",
+    "It is made in clay animation",
+    "It is entirely in black and white",
+    "It mixes computer graphics with hand-painted textures"
+   ],
+   "Fortiche combines 3D characters with backgrounds and textures that imitate painting, a style that has become its signature."
+  ]
+ }
+}
