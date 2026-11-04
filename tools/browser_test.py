@@ -319,6 +319,60 @@ with sync_playwright() as p:
     mp.click('.menu-btn')
     check(mp.is_visible('#nav a[href="/guides/"]'), 'le menu mobile s\'ouvre')
     check(mp.is_visible('#nav a.nav-ext'), 'menu mobile : lien Letsdle visible')
+
+    if Path('dist/en/index.html').exists():
+        print('Version anglaise')
+        import re as _re
+        en = b.new_context(viewport={'width': 1366, 'height': 900})
+        en.route('**/pagead2.googlesyndication.com/**', block_external)
+        en.route('**/*.workers.dev/**', block_external)
+        ep = en.new_page()
+        en_errors = []
+        ep.on('pageerror', lambda e: en_errors.append(str(e)))
+        FR_WORDS = _re.compile(r"\b(les|des|une|avec|pour|dans|réponses?|jouer|personnage|essais?|aujourd'hui)\b", _re.I)
+
+        def no_french(label):
+            txt = ep.inner_text('main')
+            found = sorted(set(m.lower() for m in FR_WORDS.findall(txt)))
+            check(not found, f'{label} : aucun reste de français' + (f' ({", ".join(found[:5])})' if found else ''))
+
+        ep.goto(BASE + '/en/')
+        check(ep.get_attribute('html', 'lang') == 'en', 'accueil anglais : lang="en"')
+        check(ep.locator('link[rel=alternate][hreflang=fr]').count() == 1, 'accueil anglais : lien hreflang vers le français')
+        no_french('accueil anglais')
+        ep.goto(BASE + '/en/quiz/naruto/')
+        n_en = ep.locator('.qitem').count()
+        check(n_en >= 50, f'série anglaise : {n_en} questions de révision dans le HTML')
+        no_french('série anglaise')
+        ep.goto(BASE + '/en/play/?s=naruto&m=libre')
+        ep.wait_for_selector('#q-answers .answer', timeout=5000)
+        n = play_through(ep)
+        check(ep.is_visible('#s-result') and n == 20, 'partie anglaise : 20 questions puis résultat')
+        ep.goto(BASE + '/en/guides/')
+        check(ep.locator('a[href^="/en/guides/"]').count() >= 5, 'guides anglais listés')
+        ep.click('main a[href^="/en/guides/"] >> nth=0')
+        check(ep.locator('article h2').count() >= 4, 'guide anglais : intertitres présents')
+        no_french('guide anglais')
+        ED = _j.loads(Path('dist/data/en/dle.json').read_text(encoding='utf-8'))
+        for mode in ('character', 'power', 'emoji', 'universe', 'word'):
+            ep.goto(f'{BASE}/en/dle/{mode}/')
+            ep.wait_for_selector('.dle-board' if mode == 'word' else '#dle-in', timeout=5000)
+            no_french(f'Kamidle anglais ({mode})')
+        ep.goto(BASE + '/en/dle/character/')
+        ep.wait_for_selector('#dle-in')
+        ep.fill('#dle-in', 'Krill')
+        ep.wait_for_selector('#dle-list li[role=option]')
+        check('Krillin' in ep.inner_text('#dle-list'), 'Kamidle anglais : nom officiel anglais proposé (Krillin)')
+        ep.keyboard.press('Enter')
+        row = ep.locator('.dle-table tbody tr >> nth=0').inner_text()
+        check('Human' in row and 'Adult' in row, 'Kamidle anglais : critères traduits (Human, Adult)')
+        ep.goto(BASE + '/en/dle/word/')
+        ep.wait_for_selector('.dle-board')
+        check(ep.locator('.dle-key[data-key="Q"]').count() == 1 and
+              ep.evaluate("document.querySelector('.dle-kb').innerText.replace(/\\s/g,'').startsWith('QWERTY')"),
+              'Mot mystère anglais : clavier QWERTY')
+        check(all(m.isalpha() and m.isascii() for m in ED['mots']), 'Mot mystère anglais : mots sans accent')
+        check(not en_errors, 'version anglaise : aucune erreur JavaScript' + (f' ({en_errors[:3]})' if en_errors else ''))
     b.close()
 
 print()
