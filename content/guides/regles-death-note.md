@@ -37,7 +37,7 @@ La première sert à innocenter Light et Misa : ils ont passé bien plus de 13 j
 
 ## Quelques règles moins connues
 
-Le cahier n'a aucun effet sur les enfants de moins de 780 jours. Si l'on écrit quatre fois un nom de façon erronée, la personne concernée devient immunisée contre le cahier. Enfin, un simple fragment de page suffit : Light cache un morceau de papier dans sa montre pour pouvoir tuer discrètement, une astuce qui joue un rôle dans le dernier affrontement.
+Le cahier n'a aucun effet sur les enfants de moins de 780 jours. Si le nom d'une personne est mal orthographié quatre fois par erreur, elle ne peut plus être tuée par le cahier. Enfin, un simple fragment de page suffit : Light cache un morceau de papier dans sa montre pour pouvoir tuer discrètement, une astuce qui joue un rôle dans le dernier affrontement.
 
 ## Les pièges classiques du quiz
 
