@@ -697,6 +697,9 @@ def dle_schedule():
             q += [(c['id'], c['u']) for c in extra]
         elif m == 'pouvoir':
             q += [(c['id'], c['u']) for c in extra if c['p']]
+            # pouvoirs donnés après coup à des personnages de SCHED_V1 : en fin de file, après les nouveaux personnages
+            v1_no_p = {i for i, _, has_p, _ in DLE.SCHED_V1 if not has_p}
+            q += [(c['id'], c['u']) for c in DLE.CHARS if c['id'] in v1_no_p and c['p']]
         elif m == 'emoji':
             q += [(c['id'], c['u']) for c in extra if len(c['emo']) >= 2]
         queues[m] = q
@@ -732,9 +735,11 @@ def dle_schedule():
 
     # Remplacement des personnages retirés, jour par jour, sans toucher aux autres jours.
     for m in ('personnage', 'pouvoir', 'emoji'):
+        late = {i for i, _, has_p, _ in DLE.SCHED_V1 if not has_p} if m == 'pouvoir' else set()
         ok = [c['id'] for c in DLE.CHARS
-              if (m != 'pouvoir' or c['p']) and (m != 'emoji' or len(c['emo']) >= 2)]
+              if (m != 'pouvoir' or c['p']) and (m != 'emoji' or len(c['emo']) >= 2) and c['id'] not in late]
         random.Random('kamidle-remplacement-' + m).shuffle(ok)
+        ok += [c['id'] for c in DLE.CHARS if c['id'] in late and c['p']]   # pouvoirs ajoutés : après le tirage d'origine
         k = 0
         for d, iid in enumerate(sched[m]):
             if iid in live:
