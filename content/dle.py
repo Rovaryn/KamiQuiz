@@ -355,6 +355,16 @@ CHARS = [
     C('oikawa', 'Toru Oikawa', 'haikyu', 'M', H, 'Rival', ('Sport',), '👽 🍞 🏐', ('Oikawa',)),
     C('kenma', 'Kenma Kozume', 'haikyu', 'M', H, 'Rival', ('Sport', 'Ruse'), '🎮 🐱 🥧', ('Kenma',)),
     C('bokuto', 'Kotaro Bokuto', 'haikyu', 'M', H, 'Rival', ('Sport',), '🦉 🍖 💪', ('Bokuto',)),
+    # Arcane (28 décembre 2026)
+    C('vi', 'Vi', 'arcane', 'F', H, 'Protagoniste', ('Corps à corps',), '👊 🥊 💗', ('Violet',),
+      ("Des gantelets géants qui décuplent la force de ses coups de poing.", '')),
+    C('jinx', 'Jinx', 'arcane', 'F', H, 'Antagoniste', ('Arme',), '💣 🐒 🚀 💙', ('Powder',)),
+    C('caitlyn', 'Caitlyn Kiramman', 'arcane', 'F', H, 'Allié', ('Arme', 'Ruse'), '🎯 🎩 🔍', ('Caitlyn', 'Cait')),
+    C('jayce', 'Jayce Talis', 'arcane', 'M', H, 'Allié', ('Arme',), '🔨 💠 🌀', ('Jayce',),
+      ("Un marteau alimenté par une gemme magique, capable de frapper à distance.", '')),
+    C('viktor', 'Viktor', 'arcane', 'M', H, 'Neutre', ('Magie', 'Ruse'), '🦯 💠 ⚙️', ()),
+    C('ekko', 'Ekko', 'arcane', 'M', H, 'Allié', ('Arme', 'Ruse'), '🛹 🌳 ⏱️', ()),
+    C('silco', 'Silco', 'arcane', 'M', H, 'Antagoniste', ('Ruse',), '👁️ 🧪 💜', ()),
 ]
 
 
@@ -499,6 +509,8 @@ UNIVERS = {
                   "Un espion, une tueuse et une télépathe", "Anya"],
     'haikyu': ["Un sport où l'on n'a droit qu'à trois touches", "Un club de lycée tombé dans l'oubli", "Des corbeaux contre des chats",
                "Un passeur surnommé le Roi du terrain", "Hinata et Kageyama"],
+    'arcane': ["Une ville riche bâtie au-dessus d'une ville pauvre", "Une drogue violette qui décuple la force",
+               "Une technologie qui canalise la magie", "Deux sœurs devenues ennemies", "Vi et Jinx"],
 }
 # Ordre figé des univers au 4 novembre 2026 : le tirage du jeu Univers part de cette liste,
 # les univers ajoutés ensuite passent en fin de file (les énigmes déjà passées ne changent pas).
@@ -615,6 +627,9 @@ EXTRA = {
     # Haikyu!!
     'shoyo': (T, 'Roux'), 'kageyama': (T, 'Noir'), 'tsukishima': (T, 'Blond'), 'oikawa': (T, 'Brun'),
     'kenma': (T, ('Blond', 'Noir')), 'bokuto': (T, ('Blanc', 'Noir')),
+    # Arcane
+    'vi': (AD, 'Rose'), 'jinx': (T, 'Bleu'), 'caitlyn': (AD, 'Bleu'), 'jayce': (AD, 'Brun'), 'viktor': (AD, 'Brun'),
+    'ekko': (T, 'Blanc'), 'silco': (AD, 'Noir'),
 }
 
 # Année de sortie : début de l'œuvre originale (premier tome, premier épisode, premier film ou premier jeu).
@@ -624,7 +639,7 @@ YEARS = {
     'inazuma': 2008, 'bluelock': 2018, 'soloLeveling': 2016, 'got': 1996, 'breakingbad': 2008, 'peakyBlinders': 2013,
     'casapapel': 2017, 'strangerthings': 2016, 'squidgame': 2021, 'friends': 1994, 'vikings': 2013, 'harrypotter': 1997,
     'lotr': 1954, 'starwars': 1977, 'marvel': 2008, 'pokemon': 1996, 'minecraft': 2009, 'gta': 2013, 'zelda': 1986,
-    'mario': 1985, 'frieren': 2020, 'chainsawman': 2018, 'spyfamily': 2019, 'haikyu': 2012,
+    'mario': 1985, 'frieren': 2020, 'chainsawman': 2018, 'spyfamily': 2019, 'haikyu': 2012, 'arcane': 2021,
 }
 YEAR_NOTES = {
     'got': 'premier roman', 'harrypotter': 'premier roman', 'lotr': 'premier tome du roman', 'soloLeveling': 'roman en ligne',

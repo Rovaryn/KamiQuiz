@@ -752,6 +752,32 @@ def m_net(c):
     return out
 
 
+def m_twin_cities(c):
+    """Arcane : la ville haute dorée et sa ville basse en miroir, reliées par une gemme."""
+    out = ''
+    mid = CY + 20
+    up = [(-470, 90, 150), (-370, 70, 230), (-290, 110, 180), (-170, 60, 290), (-100, 120, 210), (30, 80, 260), (120, 130, 190), (260, 90, 240), (360, 110, 170)]
+    for dx, w, h in up:
+        h *= .7
+        out += f'<rect x="{f(CX+dx)}" y="{f(mid-h)}" width="{w}" height="{h}" fill="#0c0e18" stroke="{PAPER}" stroke-width="3"/>'
+        out += f'<line x1="{f(CX+dx+8)}" y1="{f(mid-h+14)}" x2="{f(CX+dx+w-8)}" y2="{f(mid-h+14)}" stroke="{GOLD}" stroke-width="3" opacity=".8"/>'
+    rng = random.Random('zaun')
+    for i in range(14):
+        dx = -480 + i * 68 + rng.uniform(-10, 10)
+        h = rng.uniform(80, 250)
+        w = rng.uniform(40, 70)
+        out += f'<rect x="{f(CX+dx)}" y="{f(mid+12)}" width="{f(w)}" height="{f(h)}" fill="currentColor" stroke="none" opacity="{f(rng.uniform(.25, .6))}"/>'
+    for i in range(9):
+        x = CX - 430 + i * 105
+        out += path(f'M{f(x)},{f(mid+40)} q30,-40 0,-80 q-30,-40 0,-80', stroke=PAPER, stroke_width=3, opacity=.15)
+    out += f'<line x1="{f(CX-520)}" y1="{f(mid+6)}" x2="{f(CX+520)}" y2="{f(mid+6)}" stroke="{PAPER}" stroke-width="5"/>'
+    gx, gy = CX + 190, mid - 255
+    out += poly([(gx, gy - 70), (gx + 42, gy), (gx, gy + 70), (gx - 42, gy)], fill='currentColor', stroke=PAPER, stroke_width=5)
+    out += poly([(gx, gy - 70), (gx + 14, gy), (gx, gy + 70), (gx - 14, gy)], fill='none', stroke=PAPER, stroke_width=2, opacity=.6)
+    out += circle(95, cx=gx, cy=gy, stroke=GOLD, stroke_width=3, opacity=.5)
+    return out
+
+
 MOTIFS = {
     'naruto': m_spiral, 'onepiece': m_waves, 'aot': m_walls, 'demonslayer': m_checker, 'bleach': m_crescent,
     'jjk': m_seal, 'mha': m_burst, 'fairytail': m_flames, 'hxh': m_suits, 'deathnote': m_apple,
@@ -761,7 +787,7 @@ MOTIFS = {
     'harrypotter': m_wand, 'lotr': m_ring, 'starwars': m_hyperspace, 'marvel': m_gems, 'pokemon': m_elements,
     'minecraft': m_cubes, 'gta': m_sunset, 'zelda': m_sword, 'mario': m_pipe, 'lol': m_hextech, 'valorant': m_shards,
     'eafc': m_pitch, 'culture': m_bulb, 'histoire': m_hourglass, 'geo': m_globe, 'sport': m_track,
-    'musique': m_wave, 'cinema': m_film, 'frieren': m_flowers, 'chainsawman': m_saw, 'spyfamily': m_scope, 'haikyu': m_net,
+    'musique': m_wave, 'cinema': m_film, 'frieren': m_flowers, 'chainsawman': m_saw, 'spyfamily': m_scope, 'haikyu': m_net, 'arcane': m_twin_cities,
 }
 
 
