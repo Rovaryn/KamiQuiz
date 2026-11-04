@@ -287,6 +287,18 @@ SERIES = [
              "Spy × Family, de Tatsuya Endo, est publié sur Shōnen Jump+ depuis 2019. Pour approcher un homme politique dangereux, l'espion Twilight doit inscrire un enfant dans une école d'élite. Il adopte Anya, sans savoir qu'elle lit dans les pensées, et épouse Yor, sans savoir qu'elle est tueuse à gages. L'adaptation de Wit Studio et CloverWorks a fait de la famille Forger l'une des plus populaires de l'animation récente.",
              "Le quiz couvre la famille Forger et son chien Bond, les agences d'espionnage de Westalis et d'Ostania, l'école Eden et son système de Stella et de Tonitrus, ainsi que les coulisses du manga, de l'animé et du film Code: White.",
          ]),
+    dict(key='haikyu', slug='haikyu', name='Haikyu!!', cat='anime', date='2026-12-14',
+         tag="Les Corbeaux de Karasuno à la conquête du volley national.",
+         intro=[
+             "Haikyu!!, de Haruichi Furudate, a paru dans le Weekly Shōnen Jump de 2012 à 2020, en 45 tomes. Shoyo Hinata, trop petit pour le volley mais doté d'une détente phénoménale, entre au lycée Karasuno pour suivre les traces de son idole, le Petit Géant. Il y retrouve Tobio Kageyama, passeur de génie qui l'avait battu au collège. Ensemble, ils inventent une attaque rapide qui va réveiller une équipe tombée dans l'oubli. L'adaptation de Production I.G a fait du manga l'un des plus grands succès du sport à l'écran.",
+             "Le quiz couvre les joueurs de Karasuno, leurs grands rivaux d'Aoba Johsai, Nekoma, Shiratorizawa ou Inarizaki, les matchs qui ont marqué la série, les règles du volley et les coulisses de l'œuvre. Quelques questions difficiles portent sur ce que deviennent les personnages après le lycée.",
+         ]),
+    dict(key='arcane', slug='arcane', name='Arcane', cat='series', date='2026-12-28',
+         tag="Vi, Jinx et la guerre de Piltover et de Zaun.",
+         intro=[
+             "Arcane, créée par Christian Linke et Alex Yee, est une série d'animation de Riot Games réalisée par le studio français Fortiche et diffusée sur Netflix en deux saisons, en 2021 et 2024. Elle se déroule dans l'univers de League of Legends, entre Piltover, la riche Cité du progrès, et Zaun, la ville basse qui s'étend sous ses pieds. Au centre de l'histoire, deux sœurs, Vi et Powder, que la tragédie transforme en ennemies, et deux inventeurs, Jayce et Viktor, qui donnent naissance à la hextech. La série a reçu l'Emmy du meilleur programme d'animation en 2022.",
+             "Le quiz couvre les personnages, les deux villes et leurs tensions, la hextech et le Shimmer, les grands moments de l'histoire et les coulisses de la série. Attention : certaines questions difficiles évoquent des événements de la deuxième saison.",
+         ]),
 ]
 
 CATEGORIES = [

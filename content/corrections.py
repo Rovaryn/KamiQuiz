@@ -2848,3 +2848,28 @@ fix('fmab', "Quel est le Quirk défensif de Greed, l'homuncule de la Convoitise 
 fix('fairytail', "Quel est le nom de la monture de Natsu ?",
     q="Comment s'appelle le chat bleu qui accompagne Natsu ?")
 drop('fairytail', "Quel est le nom du livre dans lequel vit Natsu ?")
+
+
+# ---------------------------------------------------------------- Relecture pendant la traduction anglaise (4 novembre 2026)
+fix('demonslayer', "Quel est le lien entre Shinobu Kocho et Kanao Tsuyuri ?",
+    fb="Kanao est l'élève et la sœur adoptive de Shinobu : les sœurs Kanae et Shinobu Kocho l'ont recueillie alors qu'elle était vendue comme esclave. Elle utilise le Souffle de la Fleur, celui de Kanae.")
+fix('hxh', "Quel est le nom du secrétaire du Président de l'Association des Hunters qui gère la logistique des examens ?",
+    fb="Beans est le secrétaire du Président Netero, qui dirige l'Association des Hunters. Hanzo, lui, est un candidat de l'examen, un ninja.")
+fix('gta', "Quel est le nom du réseau social fictif de GTA V parodiant Facebook ?",
+    fb="Lifeinvader est le réseau social fictif de GTA V, parodie directe de Facebook. Dans une mission, Michael infiltre ses locaux pour piéger le prototype de téléphone que le PDG, Jay Norris, présente en direct : l'appareil explose pendant la démonstration.")
+fix('vikings', "Comment s'appelle le fils du dieu Loki qui est le serpent mondial ?",
+    fb="Jormungand, le Serpent de Midgard, encercle le monde en se mordant la queue. Au Ragnarök, Thor et lui s'entretuent.")
+fix('vikings', "Quelle est la deuxième femme de Ragnar, mère d'Ivar ?",
+    fb="Aslaug est une princesse que Ragnar rencontre lors de ses voyages. Elle devient sa seconde épouse et la mère d'Ivar.")
+fix('breakingbad', "Quel personnage de Better Call Saul apparaît brièvement dans Breaking Bad ?",
+    q="Quel personnage principal de Better Call Saul joue aussi un grand rôle dans Breaking Bad ?",
+    fb="Mike Ehrmantraut est, avec Saul lui-même, le personnage principal de Better Call Saul le plus présent dans Breaking Bad, où il est l'homme de main de Gus Fring avant de travailler avec Walt.")
+fix('mario', "Quelle série spin-off de Mario implique des courses de kart ?",
+    fb="Mario Kart est la série de courses lancée en 1992 sur Super Nintendo. Mario Kart 8 Deluxe, sur Switch, est le jeu Mario le plus vendu, avec plus de 60 millions d'exemplaires. Chaque opus ajoute de nouveaux circuits et personnages.")
+fix('lol', "Quel champion LoL peut voler l'ult d'un ennemi avec Mimic ?",
+    q="Quel champion LoL peut voler l'ultime d'un ennemi pour l'utiliser lui-même ?",
+    fb="Sylas, le mage déchaîné, peut voler l'ultime de n'importe quel champion ennemi et l'utiliser à son tour, une mécanique unique dans le jeu.")
+fix('lol', "Quel champion LoL est connu pour utiliser des chaînes et des ancres ?",
+    fb="Nautilus, le titan des profondeurs, combat avec une ancre et des chaînes : son crochet attrape les ennemis, et son ultime envoie une onde de choc qui projette en l'air sa cible et les ennemis sur son passage.")
+fix('sport', "En quelle discipline Thomas Bach est-il champion olympique ?",
+    fb="Thomas Bach, président du CIO de 2013 à 2025, est champion olympique de fleuret par équipes aux Jeux de Montréal en 1976.")

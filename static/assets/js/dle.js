@@ -1,17 +1,19 @@
 /* KamiQuiz — Kamidle : personnage, pouvoir, emoji, univers et mot mystère du jour */
 (function () {
   'use strict';
-  var esc = KQ.esc, store = KQ.store;
+  var esc = KQ.esc, store = KQ.store, T = KQ.t, U = KQ.url;
+  /* singulier ou pluriel selon n (à la française : 0 et 1 au singulier) */
+  function P(n, one, many, vars) { vars = vars || {}; vars.n = n; return T(n > 1 ? many : one, vars); }
   var MODES = {
-    personnage: { label: 'Personnage', ico: '🎯', max: 0 },
-    pouvoir: { label: 'Pouvoir', ico: '⚡', max: 6 },
-    emoji: { label: 'Emoji', ico: '😶', max: 6 },
-    univers: { label: 'Univers', ico: '🌍', max: 6 },
-    mot: { label: 'Mot mystère', ico: '🔤', max: 6 }
+    personnage: { label: T('Personnage'), ico: '🎯', max: 0 },
+    pouvoir: { label: T('Pouvoir'), ico: '⚡', max: 6 },
+    emoji: { label: T('Emoji'), ico: '😶', max: 6 },
+    univers: { label: T('Univers'), ico: '🌍', max: 6 },
+    mot: { label: T('Mot mystère'), ico: '🔤', max: 6 }
   };
-  var GENRE = { M: 'Masculin', F: 'Féminin', N: 'Aucun' };
-  var COLS = ['Univers', 'Catégorie', 'Genre', 'Espèce', 'Rôle', 'Style', 'Âge', 'Cheveux', 'Année'];
-  var KB = ['AZERTYUIOP', 'QSDFGHJKLM', '<WXCVBN>'];
+  var GENRE = { M: T('Masculin'), F: T('Féminin'), N: T('Aucun') };
+  var COLS = ['Univers', 'Catégorie', 'Genre', 'Espèce', 'Rôle', 'Style', 'Âge', 'Cheveux', 'Année'].map(function (c) { return T(c); });
+  var KB = KQ.lang === 'fr' ? ['AZERTYUIOP', 'QSDFGHJKLM', '<WXCVBN>'] : ['QWERTYUIOP', 'ASDFGHJKL', '<ZXCVBNM>'];
 
   /* ---------- dates : le jeu change à minuit, heure locale ---------- */
   function iso(d) {
@@ -30,7 +32,7 @@
   var dataP = null;
   function load() {
     if (!dataP) {
-      dataP = fetch('/data/dle.json').then(function (r) {
+      dataP = fetch(KQ.data('dle.json')).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
       }).then(function (d) {
@@ -102,17 +104,17 @@
       if (s && s.done) {
         done++;
         card.classList.add(s.win ? 'is-won' : 'is-lost');
-        el.textContent = s.win ? 'Trouvé en ' + s.guesses.length + ' essai' + (s.guesses.length > 1 ? 's' : '') : 'Raté, retente demain';
+        el.textContent = s.win ? P(s.guesses.length, 'Trouvé en {n} essai', 'Trouvé en {n} essais') : T('Raté, retente demain');
       } else if (s && s.guesses && s.guesses.length) {
-        el.textContent = 'En cours : ' + s.guesses.length + ' essai' + (s.guesses.length > 1 ? 's' : '');
+        el.textContent = P(s.guesses.length, 'En cours : {n} essai', 'En cours : {n} essais');
       }
       var k = currentStreak(m);
-      if (k > 1) el.textContent += ' · série de ' + k;
+      if (k > 1) el.textContent += T(' · série de {k}', { k: k });
     });
     var sum = document.querySelector('[data-dle-summary]');
     if (sum) {
-      sum.textContent = done === total ? 'Toutes les énigmes du jour sont terminées. Rendez-vous demain à minuit !'
-        : done ? done + ' énigme' + (done > 1 ? 's' : '') + ' sur ' + total + ' terminée' + (done > 1 ? 's' : '') + " aujourd'hui."
+      sum.textContent = done === total ? T('Toutes les énigmes du jour sont terminées. Rendez-vous demain à minuit !')
+        : done ? P(done, "{n} énigme sur {t} terminée aujourd'hui.", "{n} énigmes sur {t} terminées aujourd'hui.", { t: total })
         : '';
     }
   }
@@ -125,7 +127,7 @@
   var CONF = MODES[MODE];
 
   load().then(function (data) { start(data); }).catch(function () {
-    root.innerHTML = '<p class="empty">Impossible de charger l\'énigme du jour. Vérifie ta connexion puis recharge la page.</p>';
+    root.innerHTML = '<p class="empty">' + T("Impossible de charger l'énigme du jour. Vérifie ta connexion puis recharge la page.") + '</p>';
   });
 
   function start(data) {
@@ -139,7 +141,7 @@
     var yEl = document.querySelector('[data-dle-yesterday]');
     if (yEl && idx > 0) {
       var yid = targetFor(data, MODE, idx - 1);
-      yEl.innerHTML = "Réponse d'hier : <b>" + esc(nameOf(yid)) + '</b>';
+      yEl.innerHTML = T("Réponse d'hier : <b>{a}</b>", { a: esc(nameOf(yid)) });
     }
 
     function nameOf(id) { return MODE === 'univers' ? data.series[id].n : MODE === 'mot' ? id : data.byId[id].name; }
@@ -168,8 +170,8 @@
     function render() {
       if (MODE === 'mot') return renderMot();
       var n = state.guesses.length;
-      var head = '<div class="dle-top"><strong>' + (practice ? 'Entraînement' : 'Kamidle n°' + (idx + 1)) + '</strong>' +
-        '<span>' + CONF.ico + ' ' + CONF.label + (CONF.max ? ' · ' + Math.min(n, CONF.max) + '/' + CONF.max : (n ? ' · ' + n + ' essai' + (n > 1 ? 's' : '') : '')) + '</span></div>';
+      var head = '<div class="dle-top"><strong>' + (practice ? T('Entraînement') : T('Kamidle n°{n}', { n: idx + 1 })) + '</strong>' +
+        '<span>' + CONF.ico + ' ' + CONF.label + (CONF.max ? ' · ' + Math.min(n, CONF.max) + '/' + CONF.max : (n ? ' · ' + P(n, '{n} essai', '{n} essais') : '')) + '</span></div>';
       root.innerHTML = head + '<div class="dle-clue">' + clueHTML() + '</div>' +
         (state.done ? '' : inputHTML()) + '<div class="dle-end" id="dle-end"></div>' + guessesHTML();
       if (state.done) renderEnd(); else bindInput();
@@ -181,57 +183,57 @@
       var w = wrongCount(), t, s, html = '';
       if (MODE === 'personnage') {
         var c = data.byId[target];
-        html = '<p class="dle-ask">Qui est le personnage du jour ?</p>';
+        html = '<p class="dle-ask">' + T('Qui est le personnage du jour ?') + '</p>';
         var n = state.guesses.length;
         var h1 = n >= 4 || state.done, h2 = n >= 7 || state.done;
         html += '<div class="dle-hints">' +
-          '<div class="dle-hint' + (h1 ? ' on' : '') + '"><small>Indice 1' + (h1 ? '' : ' · dans ' + (4 - n) + ' essai' + (4 - n > 1 ? 's' : '')) + '</small>' +
-          (h1 ? '<b>Initiale : ' + esc(c.name.charAt(0)) + '</b>' : '<b>Initiale</b>') + '</div>' +
-          '<div class="dle-hint' + (h2 ? ' on' : '') + '"><small>Indice 2' + (h2 ? '' : ' · dans ' + (7 - n) + ' essai' + (7 - n > 1 ? 's' : '')) + '</small>' +
-          (h2 ? '<b class="dle-emo">' + esc(c.emo.join(' ')) + '</b>' : '<b>Emojis</b>') + '</div></div>';
+          '<div class="dle-hint' + (h1 ? ' on' : '') + '"><small>' + T('Indice 1') + (h1 ? '' : P(4 - n, ' · dans {n} essai', ' · dans {n} essais')) + '</small>' +
+          (h1 ? '<b>' + T('Initiale : {l}', { l: esc(c.name.charAt(0)) }) + '</b>' : '<b>' + T('Initiale') + '</b>') + '</div>' +
+          '<div class="dle-hint' + (h2 ? ' on' : '') + '"><small>' + T('Indice 2') + (h2 ? '' : P(7 - n, ' · dans {n} essai', ' · dans {n} essais')) + '</small>' +
+          (h2 ? '<b class="dle-emo">' + esc(c.emo.join(' ')) + '</b>' : '<b>' + T('Emojis') + '</b>') + '</div></div>';
         return html;
       }
       if (MODE === 'pouvoir') {
         t = data.byId[target]; s = data.series[t.u];
-        html = '<p class="dle-ask">À qui appartient ce pouvoir ?</p><blockquote class="dle-quote">' + esc(t.p[0]) + '</blockquote>';
+        html = '<p class="dle-ask">' + T('À qui appartient ce pouvoir ?') + '</p><blockquote class="dle-quote">' + esc(t.p[0]) + '</blockquote>';
         html += '<div class="dle-hints">' +
-          hint(w >= 2, 'Famille', data.cats[s.c], 2 - w) + hint(w >= 4, 'Univers', s.n, 4 - w) + hint(w >= 5, 'Initiale', t.name.charAt(0), 5 - w) + '</div>';
-        if (state.done && t.p[1]) html += '<p class="muted" style="margin-top:12px">Nom du pouvoir : <b>' + esc(t.p[1]) + '</b></p>';
+          hint(w >= 2, T('Famille'), data.cats[s.c], 2 - w) + hint(w >= 4, T('Univers'), s.n, 4 - w) + hint(w >= 5, T('Initiale'), t.name.charAt(0), 5 - w) + '</div>';
+        if (state.done && t.p[1]) html += '<p class="muted" style="margin-top:12px">' + T('Nom du pouvoir : <b>{p}</b>', { p: esc(t.p[1]) }) + '</p>';
         return html;
       }
       if (MODE === 'emoji') {
         t = data.byId[target];
         var shown = state.done ? t.emo.length : Math.min(t.emo.length, 1 + w);
-        html = '<p class="dle-ask">Quel personnage se cache derrière ces emojis ?</p><div class="dle-emojis">';
+        html = '<p class="dle-ask">' + T('Quel personnage se cache derrière ces emojis ?') + '</p><div class="dle-emojis">';
         t.emo.forEach(function (em, i) {
           html += i < shown ? '<span class="dle-e on">' + esc(em) + '</span>' : '<span class="dle-e">?</span>';
         });
         html += '</div>';
-        html += '<div class="dle-hints">' + hint(w >= t.emo.length, 'Univers', data.series[t.u].n, t.emo.length - w) + '</div>';
+        html += '<div class="dle-hints">' + hint(w >= t.emo.length, T('Univers'), data.series[t.u].n, t.emo.length - w) + '</div>';
         return html;
       }
       // univers
       var clues = data.univers[target];
       var k = state.done ? clues.length : Math.min(clues.length, 1 + w);
-      html = '<p class="dle-ask">De quel univers parle-t-on ?</p><ol class="dle-clues">';
+      html = '<p class="dle-ask">' + T('De quel univers parle-t-on ?') + '</p><ol class="dle-clues">';
       clues.forEach(function (cl, i) {
-        html += i < k ? '<li class="on">' + esc(cl) + '</li>' : '<li>Indice ' + (i + 1) + ' : à débloquer</li>';
+        html += i < k ? '<li class="on">' + esc(cl) + '</li>' : '<li>' + T('Indice {n} : à débloquer', { n: i + 1 }) + '</li>';
       });
-      html += '</ol><div class="dle-hints">' + hint(w >= 5, 'Famille', data.cats[data.series[target].c], 5 - w) + '</div>';
+      html += '</ol><div class="dle-hints">' + hint(w >= 5, T('Famille'), data.cats[data.series[target].c], 5 - w) + '</div>';
       return html;
     }
     function hint(open, label, value, left) {
       open = open || state.done;
-      return '<div class="dle-hint' + (open ? ' on' : '') + '"><small>' + label + (open ? '' : ' · dans ' + left + ' erreur' + (left > 1 ? 's' : '')) + '</small><b>' +
+      return '<div class="dle-hint' + (open ? ' on' : '') + '"><small>' + label + (open ? '' : P(left, ' · dans {n} erreur', ' · dans {n} erreurs')) + '</small><b>' +
         (open ? esc(value) : '?') + '</b></div>';
     }
 
     function inputHTML() {
-      var ph = MODE === 'univers' ? 'Tape le nom d\'un univers…' : 'Tape le nom d\'un personnage…';
+      var ph = MODE === 'univers' ? T("Tape le nom d'un univers…") : T("Tape le nom d'un personnage…");
       return '<form class="dle-form" autocomplete="off"><label class="sr-only" for="dle-in">' + ph + '</label>' +
         '<div class="dle-field"><input id="dle-in" placeholder="' + ph + '" role="combobox" aria-expanded="false" aria-controls="dle-list" aria-autocomplete="list">' +
         '<ul class="dle-list" id="dle-list" role="listbox" hidden></ul></div>' +
-        '<button class="btn btn-gold" type="submit">Valider</button></form>';
+        '<button class="btn btn-gold" type="submit">' + T('Valider') + '</button></form>';
     }
 
     /* ----- propositions ----- */
@@ -258,7 +260,7 @@
           if (best >= 0) out.push({ id: c.id, sc: best, label: c.name, sub: data.series[c.u].n });
         });
       }
-      out.sort(function (a, b) { return a.sc - b.sc || a.label.localeCompare(b.label, 'fr'); });
+      out.sort(function (a, b) { return a.sc - b.sc || a.label.localeCompare(b.label, KQ.lang); });
       return out.slice(0, 8);
     }
 
@@ -272,7 +274,7 @@
         active = 0;
         if (!items.length) {
           list.hidden = true; input.setAttribute('aria-expanded', 'false');
-          if (norm(input.value)) { list.innerHTML = '<li class="none">Aucun résultat</li>'; list.hidden = false; }
+          if (norm(input.value)) { list.innerHTML = '<li class="none">' + T('Aucun résultat') + '</li>'; list.hidden = false; }
           return;
         }
         list.innerHTML = items.map(function (it, i) {
@@ -302,7 +304,7 @@
       form.addEventListener('submit', function (ev) {
         ev.preventDefault();
         if (items.length) guess(items[active].id);
-        else if (norm(input.value)) KQ.toast('Choisis un nom dans la liste proposée.');
+        else if (norm(input.value)) KQ.toast(T('Choisis un nom dans la liste proposée.'));
       });
       input.focus({ preventScroll: true });
     }
@@ -355,11 +357,11 @@
           var g = data.byId[id];
           var cells = cmpPerso(g, t).map(function (c, i) {
             return '<td class="c-' + c[1] + '" data-label="' + COLS[i] + '">' + esc(c[0]) +
-              (c[2] ? ' <span class="dle-arrow" aria-label="' + (c[2] === '↑' ? 'la cible est au-dessus' : 'la cible est en dessous') + '">' + c[2] + '</span>' : '') + '</td>';
+              (c[2] ? ' <span class="dle-arrow" aria-label="' + (c[2] === '↑' ? T('la cible est au-dessus') : T('la cible est en dessous')) + '">' + c[2] + '</span>' : '') + '</td>';
           }).join('');
           return '<tr><th scope="row" class="' + (id === target ? 'c-ok' : '') + '">' + esc(g.name) + '</th>' + cells + '</tr>';
         }).join('');
-        return '<div class="dle-table-wrap"><table class="dle-table"><thead><tr><th scope="col">Personnage</th>' +
+        return '<div class="dle-table-wrap"><table class="dle-table"><thead><tr><th scope="col">' + T('Personnage') + '</th>' +
           COLS.map(function (c) { return '<th scope="col">' + c + '</th>'; }).join('') + '</tr></thead><tbody>' + rows + '</tbody></table></div>';
       }
       return '<ul class="dle-guesses">' + list.map(function (id) {
@@ -372,32 +374,32 @@
           sub = data.series[id].c === data.series[target].c ? 'même famille' : '';
         }
         return '<li class="' + (ok ? 'c-ok' : sub === 'bon univers' ? 'c-near' : 'c-no') + '"><b>' + esc(nameOf(id)) + '</b>' +
-          (sub ? '<span>' + sub + '</span>' : '') + '</li>';
+          (sub ? '<span>' + T(sub) + '</span>' : '') + '</li>';
       }).join('') + '</ul>';
     }
 
     /* ----- fin de partie ----- */
     function shareText() {
       var n = state.guesses.length;
-      var lines = [CONF.ico + ' Kamidle n°' + (idx + 1) + ' : ' + CONF.label];
+      var lines = [CONF.ico + ' ' + T('Kamidle n°{n} : {m}', { n: idx + 1, m: CONF.label })];
       if (MODE === 'personnage') {
-        lines.push(state.win ? 'Trouvé en ' + n + ' essai' + (n > 1 ? 's' : '') : 'Pas trouvé');
+        lines.push(state.win ? P(n, 'Trouvé en {n} essai', 'Trouvé en {n} essais') : T('Pas trouvé'));
         var t = data.byId[target];
         var em = { ok: '🟩', near: '🟨', no: '🟥' };
         var rows = state.guesses.map(function (id) {
           return cmpPerso(data.byId[id], t).map(function (c) { return em[c[1]]; }).join('');
         });
-        if (rows.length > 8) { lines = lines.concat(rows.slice(0, 3)); lines.push('⋯ ' + (rows.length - 6) + ' de plus'); lines = lines.concat(rows.slice(-3)); }
+        if (rows.length > 8) { lines = lines.concat(rows.slice(0, 3)); lines.push('⋯ ' + T('{n} de plus', { n: rows.length - 6 })); lines = lines.concat(rows.slice(-3)); }
         else lines = lines.concat(rows);
       } else if (MODE === 'mot') {
-        lines.push((state.win ? n : 'X') + '/' + CONF.max + ' · ' + target.length + ' lettres');
+        lines.push((state.win ? n : 'X') + '/' + CONF.max + ' · ' + T('{n} lettres', { n: target.length }));
         var emm = { ok: '🟩', near: '🟨', no: '⬛' };
         state.guesses.forEach(function (gw) { lines.push(scoreWord(gw, target).map(function (x) { return emm[x]; }).join('')); });
       } else {
         lines.push(state.guesses.map(function (id) { return id === target ? '🟩' : '🟥'; }).join('') +
           (state.win ? ' ' + n + '/' + CONF.max : ' X/' + CONF.max));
       }
-      lines.push('https://kamiquiz.com/dle/' + MODE + '/');
+      lines.push('https://kamiquiz.com' + U('/dle/' + MODE + '/'));
       return lines.join('\n');
     }
 
@@ -407,20 +409,18 @@
       var n = state.guesses.length;
       var st = practice ? null : store.get(statsKey(MODE), null);
       var html = '<div class="dle-result ' + (state.win ? 'win' : 'lose') + '">' +
-        '<p class="dle-verdict">' + (state.win ? (n === 1 ? 'Du premier coup ! ' : 'Bien joué ! ') + 'C\'était' : 'Perdu… C\'était') + '</p>' +
+        '<p class="dle-verdict">' + (state.win ? (n === 1 ? T("Du premier coup ! C'était") : T("Bien joué ! C'était")) : T("Perdu… C'était")) + '</p>' +
         '<p class="dle-answer">' + esc(nameOf(target)) + '</p>' +
         (MODE === 'mot' ? '<p class="dle-def">' + esc(data.mots[target]) + '</p>' : MODE !== 'univers' ? '<p class="muted">' + esc(s.n) + '</p>' : '') +
-        (state.win ? '<p>Trouvé en <b>' + n + '</b> essai' + (n > 1 ? 's' : '') + '.</p>' : '');
+        (state.win ? '<p>' + P(n, 'Trouvé en <b>{n}</b> essai.', 'Trouvé en <b>{n}</b> essais.') + '</p>' : '');
       if (st) {
-        html += '<div class="dle-stats"><div><b>' + st.played + '</b><small>parties</small></div><div><b>' + (st.played ? Math.round(st.wins * 100 / st.played) : 0) + ' %</b><small>réussite</small></div>' +
-          '<div><b>' + st.streak + '</b><small>série</small></div><div><b>' + st.best + '</b><small>record</small></div></div>' +
-          '<p class="dle-next">Prochaine énigme dans <b data-countdown></b></p>';
+        html += '<div class="dle-stats"><div><b>' + st.played + '</b><small>' + T('parties') + '</small></div><div><b>' + (st.played ? Math.round(st.wins * 100 / st.played) : 0) + T(' %') + '</b><small>' + T('réussite') + '</small></div>' +
+          '<div><b>' + st.streak + '</b><small>' + T('série') + '</small></div><div><b>' + st.best + '</b><small>' + T('record') + '</small></div></div>' +
+          '<p class="dle-next">' + T('Prochaine énigme dans <b data-countdown></b>') + '</p>';
       }
       html += '<div class="btn-row" style="justify-content:center">' +
-        (practice ? '' : '<button class="btn btn-gold" type="button" data-act="share">Partager mon résultat</button>') +
-        (s ? '<a class="btn" href="/quiz/' + s.s + '/">Quiz ' + esc(s.n) + '</a>' : '') +
-        '<button class="btn" type="button" data-act="practice">' + (practice ? 'Encore une' : 'Entraînement illimité') + '</button>' +
-        (practice ? '<button class="btn" type="button" data-act="daily">Revenir à l\'énigme du jour</button>' : '') +
+        (practice ? '' : '<button class="btn btn-gold" type="button" data-act="share">' + T('Partager mon résultat') + '</button>') +
+        (s ? '<a class="btn" href="' + U('/quiz/' + s.s + '/') + '">' + T('Quiz {n}', { n: esc(s.n) }) + '</a>' : '') +
         '</div>';
       if (!practice) {
         var next = Object.keys(MODES).filter(function (m) {
@@ -429,11 +429,11 @@
           return !(s2 && s2.done);
         });
         if (next.length) {
-          html += '<p class="dle-more">Encore à jouer aujourd\'hui : ' + next.map(function (m) {
-            return '<a href="/dle/' + m + '/">' + MODES[m].ico + ' ' + MODES[m].label + '</a>';
+          html += '<p class="dle-more">' + T("Encore à jouer aujourd'hui : ") + next.map(function (m) {
+            return '<a href="' + U('/dle/' + m + '/') + '">' + MODES[m].ico + ' ' + MODES[m].label + '</a>';
           }).join(' · ') + '</p>';
         } else {
-          html += '<p class="dle-more">Toutes les énigmes du jour sont terminées. Tu mérites ton rang de Kami.</p>';
+          html += '<p class="dle-more">' + T('Toutes les énigmes du jour sont terminées. Tu mérites ton rang de Kami.') + '</p>';
         }
       }
       html += '</div>';
@@ -443,8 +443,6 @@
         if (!b) return;
         var act = b.getAttribute('data-act');
         if (act === 'share') share();
-        if (act === 'practice') newGame(true);
-        if (act === 'daily') newGame(false);
       });
       tick();
     }
@@ -456,10 +454,10 @@
         return;
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(txt).then(function () { KQ.toast('Résultat copié, colle-le où tu veux !'); },
-          function () { prompt('Copie ton résultat :', txt); });
+        navigator.clipboard.writeText(txt).then(function () { KQ.toast(T('Résultat copié, colle-le où tu veux !')); },
+          function () { prompt(T('Copie ton résultat :'), txt); });
       } else {
-        prompt('Copie ton résultat :', txt);
+        prompt(T('Copie ton résultat :'), txt);
       }
     }
 
@@ -473,7 +471,7 @@
         m.setHours(24, 0, 0, 0);
         var s = Math.max(0, Math.floor((m - n) / 1000));
         if (s === 0 && !practice) { location.reload(); return; }
-        el.textContent = String(Math.floor(s / 3600)).padStart(2, '0') + ' h ' + String(Math.floor(s / 60) % 60).padStart(2, '0') + ' min ' + String(s % 60).padStart(2, '0') + ' s';
+        el.textContent = T('{h} h {m} min {s} s', { h: String(Math.floor(s / 3600)).padStart(2, '0'), m: String(Math.floor(s / 60) % 60).padStart(2, '0'), s: String(s % 60).padStart(2, '0') });
       }
       upd();
       timer = setInterval(upd, 1000);
@@ -482,7 +480,7 @@
     /* ----- Mot mystère ----- */
     var dict = null;
     if (MODE === 'mot') {
-      fetch('/data/mots.txt').then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
+      fetch(KQ.data('mots.txt')).then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
         dict = new Set(t.split('\n'));
       }).catch(function () { dict = null; });
     }
@@ -509,7 +507,7 @@
     }
     function renderMot() {
       var L = target.length, n = state.guesses.length, w = wrongCount();
-      var head = '<div class="dle-top"><strong>' + (practice ? 'Entraînement' : 'Kamidle n°' + (idx + 1)) + '</strong>' +
+      var head = '<div class="dle-top"><strong>' + (practice ? T('Entraînement') : T('Kamidle n°{n}', { n: idx + 1 })) + '</strong>' +
         '<span>' + CONF.ico + ' ' + CONF.label + ' · ' + Math.min(n, CONF.max) + '/' + CONF.max + '</span></div>';
       var rows = '';
       for (var r = 0; r < CONF.max; r++) {
@@ -523,19 +521,19 @@
         rows += '</div>';
       }
       var hints = '<div class="dle-hints" style="margin-top:18px">' +
-        hint(w >= 3, 'Première lettre', target.charAt(0), 3 - w) + hint(w >= 5, 'Définition', data.mots[target], 5 - w) + '</div>';
+        hint(w >= 3, T('Première lettre'), target.charAt(0), 3 - w) + hint(w >= 5, T('Définition'), data.mots[target], 5 - w) + '</div>';
       var kb = '';
       if (!state.done) {
         var ks = keyStates();
-        kb = '<div class="dle-kb" role="group" aria-label="Clavier">' + KB.map(function (line) {
+        kb = '<div class="dle-kb" role="group" aria-label="' + T('Clavier') + '">' + KB.map(function (line) {
           return '<div>' + line.split('').map(function (k) {
-            if (k === '<') return '<button type="button" class="dle-key wide" data-key="Backspace" aria-label="Effacer">⌫</button>';
-            if (k === '>') return '<button type="button" class="dle-key wide" data-key="Enter">Valider</button>';
+            if (k === '<') return '<button type="button" class="dle-key wide" data-key="Backspace" aria-label="' + T('Effacer') + '">⌫</button>';
+            if (k === '>') return '<button type="button" class="dle-key wide" data-key="Enter">' + T('Valider') + '</button>';
             return '<button type="button" class="dle-key' + (ks[k] ? ' c-' + ks[k] : '') + '" data-key="' + k + '">' + k + '</button>';
           }).join('') + '</div>';
         }).join('') + '</div>';
       }
-      root.innerHTML = head + '<div class="dle-clue"><p class="dle-ask">Trouve le mot du jour : <b>' + L + ' lettres</b></p>' +
+      root.innerHTML = head + '<div class="dle-clue"><p class="dle-ask">' + T('Trouve le mot du jour : <b>{n} lettres</b>', { n: L }) + '</p>' +
         '<div class="dle-board">' + rows + '</div>' + hints + '</div>' + kb + '<div class="dle-end" id="dle-end"></div>';
       justPlayed = false;
       if (state.done) renderEnd();
@@ -545,10 +543,10 @@
       var L = target.length;
       if (k === 'Backspace') { cur = cur.slice(0, -1); renderMot(); return; }
       if (k === 'Enter') {
-        if (cur.length < L) { KQ.toast('Le mot fait ' + L + ' lettres.'); return; }
-        if (!dict) { KQ.toast('Chargement du dictionnaire, réessaie dans une seconde.'); return; }
-        if (!dict.has(cur) && !data.mots[cur]) { KQ.toast('« ' + cur + ' » n\'est pas dans notre dictionnaire.'); return; }
-        if (state.guesses.indexOf(cur) >= 0) { KQ.toast('Tu as déjà essayé ce mot.'); return; }
+        if (cur.length < L) { KQ.toast(T('Le mot fait {n} lettres.', { n: L })); return; }
+        if (!dict) { KQ.toast(T('Chargement du dictionnaire, réessaie dans une seconde.')); return; }
+        if (!dict.has(cur) && !data.mots[cur]) { KQ.toast(T("« {w} » n'est pas dans notre dictionnaire.", { w: cur })); return; }
+        if (state.guesses.indexOf(cur) >= 0) { KQ.toast(T('Tu as déjà essayé ce mot.')); return; }
         var gw = cur; cur = ''; justPlayed = true;
         guess(gw);
         return;

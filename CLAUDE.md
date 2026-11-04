@@ -34,6 +34,8 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
 - `content/dle.py` : données du Kamidle (personnages, pouvoirs, emojis, univers, mots, âges, cheveux, années).
   Le calendrier part de l'ordre figé `SCHED_V1` : ne jamais le modifier, sinon les énigmes passées et du jour changent.
   Pour retirer un personnage, le supprimer de `CHARS` (il est remplacé seul les jours où il tombait) ; un nouveau va en fin de file.
+  Un pouvoir donné après coup à un personnage existant va dans `POUVOIRS_AJOUTES` ; un nouvel univers s'ajoute à `UNIVERS`
+  (jamais à `UNIVERS_V1`, qui fige l'ordre d'origine). Les deux passent en fin de file : vérifier que le calendrier des jours passés ne change pas.
 - `data/mots-fr.txt` : dictionnaire des essais du Mot mystère (licence MIT, voir `data/mots-fr.LICENSE.txt`).
 - `data/questions.src.json` : banque d'origine, **ne jamais modifier** ; `tools/clean_data.py` produit `data/questions.json`.
 - `content/corrections.py` : corrections et retraits de questions de la banque (relecture d'octobre 2026, `fix()` / `drop()`).
@@ -44,6 +46,22 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
 - `tools/` : vérifications, images, kit réseaux sociaux, vidéos (longues et narrées).
 - `docs/` : documents de travail que les scripts ne touchent pas (promotion…).
 - `.github/workflows/` : « Vérifications » sur chaque pull request, « Reconstruction quotidienne » chaque nuit.
+
+## Langues (français, puis anglais ; espagnol et portugais prévus)
+
+Le français reste la langue d'origine, servie à la racine (`/`). Chaque autre langue est servie sous son préfixe (`/en/`).
+`KQ_LANGS` (par défaut `fr,en`) choisit les langues générées ; `KQ_LANGS=fr python3 build.py` doit donner exactement le site français.
+
+- `content/i18n.py` : `T("texte français", **variables)` traduit via `content/<langue>/ui.py` (clé = empreinte du texte français),
+  `U(chemin)` donne l'URL dans la langue en cours. Un texte sans traduction est listé dans `data/i18n_missing.json` et fait échouer le build.
+- `content/<langue>/questions/<série>.json` : traduction des questions, par identifiant (réponses dans l'ordre français).
+  `python3 tools/i18n_status.py` montre l'avancement et exporte une série à traduire.
+- `content/<langue>/guides/*.md` : guides traduits, avec `fr: <slug français>` en tête et la même `date:`.
+- `content/<langue>/dle.py` : `localize(DLE)` traduit les données du Kamidle (noms officiels, critères, pouvoirs, indices)
+  et fournit ses propres `MOTS` et `word_schedule()`. Les quatre autres jeux gardent le calendrier `SCHED_V1`.
+  Les nouveaux mots vont en fin de liste. Dictionnaire des essais : `data/mots-<langue>.txt`.
+- `static/assets/js/i18n-<langue>.js` : textes du JavaScript, utilisés par `KQ.t()`, `KQ.url()`, `KQ.data()`.
+- Toute correction d'une question française doit être reportée dans les traductions.
 
 ## Liens partenaires
 

@@ -91,6 +91,11 @@ p { margin: 0 0 1em; }
 .nav a[aria-current="page"] { color: var(--gold); background: rgba(212, 168, 67, .1); }
 .nav a.nav-ext { color: var(--gold); }
 .nav a.nav-ext:hover { color: var(--gold-2); }
+.nav a.nav-lang {
+  font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+  padding: 8px 10px; border: 1px solid var(--line-2); display: inline-flex; align-items: center;
+}
+.nav a.nav-lang:hover { border-color: var(--gold); color: var(--gold); background: none; }
 .nav-cta {
   background: var(--gold) !important;
   color: var(--gold-ink) !important;
@@ -113,6 +118,7 @@ p { margin: 0 0 1em; }
   }
   .nav.open { display: flex; }
   .nav a { padding: 12px 8px; border-radius: var(--r-s); }
+  .nav a.nav-lang { align-self: flex-start; margin: 6px 0; padding: 7px 12px; border-radius: 999px; }
 }
 
 /* ---------- Pied de page ---------- */
