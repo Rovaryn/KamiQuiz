@@ -115,7 +115,7 @@ with sync_playwright() as p:
             check(page.is_visible('#s-play'), 'Rejouer relance une partie')
 
     print('Nouveaux univers')
-    for slug, key, n in [('frieren', 'frieren', 58), ('chainsaw-man', 'chainsawman', 54), ('spy-x-family', 'spyfamily', 54)]:
+    for slug, key, n in [('frieren', 'frieren', 58), ('chainsaw-man', 'chainsawman', 54), ('spy-x-family', 'spyfamily', 54), ('haikyu', 'haikyu', 56)]:
         if not Path(f'dist/data/{key}.json').exists():
             print(f'  · {slug} : pas encore publié à cette date, ignoré')
             continue

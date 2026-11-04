@@ -346,6 +346,15 @@ CHARS = [
       ("Elle lit dans les pensées des personnes autour d'elle.", 'Télépathie')),
     C('bond', 'Bond Forger', 'spyfamily', 'M', ('Chien',), 'Allié', ('Pouvoir inné',), '🤍 🐕 🔮', ('Bond',),
       ("Il voit des images de l'avenir.", 'Précognition')),
+    # Haikyu!! (14 décembre 2026)
+    C('shoyo', 'Shoyo Hinata', 'haikyu', 'M', H, 'Protagoniste', ('Sport',), '🏐 🍊 🦘 ⚡', ('Hinata', 'Shoyo'),
+      ("Une détente phénoménale qui lui permet de frapper par-dessus des blocs bien plus grands que lui.", '')),
+    C('kageyama', 'Tobio Kageyama', 'haikyu', 'M', H, 'Protagoniste', ('Sport',), '👑 🥛 🏐', ('Kageyama', 'Tobio'),
+      ("Des passes d'une précision au millimètre, déposées exactement dans la main de l'attaquant, même les yeux fermés.", '')),
+    C('tsukishima', 'Kei Tsukishima', 'haikyu', 'M', H, 'Allié', ('Sport', 'Ruse'), '🌙 👓 🍰', ('Tsukishima', 'Tsukki')),
+    C('oikawa', 'Toru Oikawa', 'haikyu', 'M', H, 'Rival', ('Sport',), '👽 🍞 🏐', ('Oikawa',)),
+    C('kenma', 'Kenma Kozume', 'haikyu', 'M', H, 'Rival', ('Sport', 'Ruse'), '🎮 🐱 🥧', ('Kenma',)),
+    C('bokuto', 'Kotaro Bokuto', 'haikyu', 'M', H, 'Rival', ('Sport',), '🦉 🍖 💪', ('Bokuto',)),
 ]
 
 
@@ -488,7 +497,15 @@ UNIVERS = {
                     "Les chasseurs de démons de la Sécurité publique", "Un petit chien-tronçonneuse", "Denji"],
     'spyfamily': ["Deux pays voisins en pleine guerre froide", "Une famille formée pour une mission", "L'école d'élite Eden",
                   "Un espion, une tueuse et une télépathe", "Anya"],
+    'haikyu': ["Un sport où l'on n'a droit qu'à trois touches", "Un club de lycée tombé dans l'oubli", "Des corbeaux contre des chats",
+               "Un passeur surnommé le Roi du terrain", "Hinata et Kageyama"],
 }
+# Ordre figé des univers au 4 novembre 2026 : le tirage du jeu Univers part de cette liste,
+# les univers ajoutés ensuite passent en fin de file (les énigmes déjà passées ne changent pas).
+UNIVERS_V1 = ['naruto', 'onepiece', 'aot', 'demonslayer', 'bleach', 'jjk', 'mha', 'fairytail', 'hxh', 'deathnote', 'fmab',
+              'dragonball', 'onepunchman', 'inazuma', 'bluelock', 'soloLeveling', 'got', 'breakingbad', 'peakyBlinders',
+              'casapapel', 'strangerthings', 'squidgame', 'friends', 'vikings', 'harrypotter', 'lotr', 'starwars', 'marvel',
+              'pokemon', 'minecraft', 'gta', 'zelda', 'mario', 'lol', 'valorant', 'eafc', 'frieren', 'chainsawman', 'spyfamily']
 
 MODES = [
     ('personnage', 'Personnage', '🎯', "Devine le personnage du jour. Chaque essai révèle ce qu'il a en commun avec la cible."),
@@ -595,6 +612,9 @@ EXTRA = {
     'denji': (T, 'Blond'), 'power': (SA, ('Blond', 'Rose')), 'kobeni': (AD, 'Brun'),
     # Spy × Family
     'loid': (AD, 'Blond'), 'yor': (AD, 'Noir'), 'anya': (A, 'Rose'), 'bond': (SA, 'Aucun'),
+    # Haikyu!!
+    'shoyo': (T, 'Roux'), 'kageyama': (T, 'Noir'), 'tsukishima': (T, 'Blond'), 'oikawa': (T, 'Brun'),
+    'kenma': (T, ('Blond', 'Noir')), 'bokuto': (T, ('Blanc', 'Noir')),
 }
 
 # Année de sortie : début de l'œuvre originale (premier tome, premier épisode, premier film ou premier jeu).
@@ -604,7 +624,7 @@ YEARS = {
     'inazuma': 2008, 'bluelock': 2018, 'soloLeveling': 2016, 'got': 1996, 'breakingbad': 2008, 'peakyBlinders': 2013,
     'casapapel': 2017, 'strangerthings': 2016, 'squidgame': 2021, 'friends': 1994, 'vikings': 2013, 'harrypotter': 1997,
     'lotr': 1954, 'starwars': 1977, 'marvel': 2008, 'pokemon': 1996, 'minecraft': 2009, 'gta': 2013, 'zelda': 1986,
-    'mario': 1985, 'frieren': 2020, 'chainsawman': 2018, 'spyfamily': 2019,
+    'mario': 1985, 'frieren': 2020, 'chainsawman': 2018, 'spyfamily': 2019, 'haikyu': 2012,
 }
 YEAR_NOTES = {
     'got': 'premier roman', 'harrypotter': 'premier roman', 'lotr': 'premier tome du roman', 'soloLeveling': 'roman en ligne',

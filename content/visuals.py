@@ -731,6 +731,27 @@ def m_scope(c):
     return out
 
 
+def m_net(c):
+    """Haikyu!! : un filet de volley et un ballon en pleine ascension."""
+    out = ''
+    nx, ny, nw, nh = CX - 520, CY - 40, 1040, 120
+    out += f'<line x1="{f(nx)}" y1="{f(ny)}" x2="{f(nx + nw)}" y2="{f(ny)}" stroke="{PAPER}" stroke-width="10"/>'
+    out += f'<line x1="{f(nx)}" y1="{f(ny + nh)}" x2="{f(nx + nw)}" y2="{f(ny + nh)}" stroke-width="4"/>'
+    for i in range(27):
+        x = nx + i * nw / 26
+        out += f'<line x1="{f(x)}" y1="{f(ny)}" x2="{f(x)}" y2="{f(ny + nh)}" stroke-width="2" opacity=".5"/>'
+    for j in range(1, 4):
+        out += f'<line x1="{f(nx)}" y1="{f(ny + j * nh / 4)}" x2="{f(nx + nw)}" y2="{f(ny + j * nh / 4)}" stroke-width="2" opacity=".5"/>'
+    for x in (nx, nx + nw):
+        out += f'<line x1="{f(x)}" y1="{f(ny - 30)}" x2="{f(x)}" y2="{f(CY + 330)}" stroke="{PAPER}" stroke-width="8"/>'
+    bx, by, r = CX + 170, CY - 190, 72
+    out += circle(r, cx=bx, cy=by, fill='currentColor', stroke=PAPER, stroke_width=6)
+    out += path(f'M{f(bx - r)},{f(by)} C{f(bx - 30)},{f(by - 60)} {f(bx + 30)},{f(by + 60)} {f(bx + r)},{f(by)}', stroke=PAPER, stroke_width=5)
+    out += path(f'M{f(bx)},{f(by - r)} C{f(bx - 60)},{f(by - 20)} {f(bx - 50)},{f(by + 40)} {f(bx - 30)},{f(by + r - 6)}', stroke=PAPER, stroke_width=5)
+    out += path(f'M{f(CX - 420)},{f(CY + 260)} Q{f(CX - 150)},{f(CY - 420)} {f(bx - r - 20)},{f(by + 30)}', stroke=GOLD, stroke_width=6, stroke_linecap='round', stroke_dasharray='4 22')
+    return out
+
+
 MOTIFS = {
     'naruto': m_spiral, 'onepiece': m_waves, 'aot': m_walls, 'demonslayer': m_checker, 'bleach': m_crescent,
     'jjk': m_seal, 'mha': m_burst, 'fairytail': m_flames, 'hxh': m_suits, 'deathnote': m_apple,
@@ -740,7 +761,7 @@ MOTIFS = {
     'harrypotter': m_wand, 'lotr': m_ring, 'starwars': m_hyperspace, 'marvel': m_gems, 'pokemon': m_elements,
     'minecraft': m_cubes, 'gta': m_sunset, 'zelda': m_sword, 'mario': m_pipe, 'lol': m_hextech, 'valorant': m_shards,
     'eafc': m_pitch, 'culture': m_bulb, 'histoire': m_hourglass, 'geo': m_globe, 'sport': m_track,
-    'musique': m_wave, 'cinema': m_film, 'frieren': m_flowers, 'chainsawman': m_saw, 'spyfamily': m_scope,
+    'musique': m_wave, 'cinema': m_film, 'frieren': m_flowers, 'chainsawman': m_saw, 'spyfamily': m_scope, 'haikyu': m_net,
 }
 
 
