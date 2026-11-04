@@ -346,7 +346,88 @@ CHARS = [
       ("Elle lit dans les pensées des personnes autour d'elle.", 'Télépathie')),
     C('bond', 'Bond Forger', 'spyfamily', 'M', ('Chien',), 'Allié', ('Pouvoir inné',), '🤍 🐕 🔮', ('Bond',),
       ("Il voit des images de l'avenir.", 'Précognition')),
+    # Haikyu!! (14 décembre 2026)
+    C('shoyo', 'Shoyo Hinata', 'haikyu', 'M', H, 'Protagoniste', ('Sport',), '🏐 🍊 🦘 ⚡', ('Hinata', 'Shoyo'),
+      ("Une détente phénoménale qui lui permet de frapper par-dessus des blocs bien plus grands que lui.", '')),
+    C('kageyama', 'Tobio Kageyama', 'haikyu', 'M', H, 'Protagoniste', ('Sport',), '👑 🥛 🏐', ('Kageyama', 'Tobio'),
+      ("Des passes d'une précision au millimètre, déposées exactement dans la main de l'attaquant, même les yeux fermés.", '')),
+    C('tsukishima', 'Kei Tsukishima', 'haikyu', 'M', H, 'Allié', ('Sport', 'Ruse'), '🌙 👓 🍰', ('Tsukishima', 'Tsukki')),
+    C('oikawa', 'Toru Oikawa', 'haikyu', 'M', H, 'Rival', ('Sport',), '👽 🍞 🏐', ('Oikawa',)),
+    C('kenma', 'Kenma Kozume', 'haikyu', 'M', H, 'Rival', ('Sport', 'Ruse'), '🎮 🐱 🥧', ('Kenma',)),
+    C('bokuto', 'Kotaro Bokuto', 'haikyu', 'M', H, 'Rival', ('Sport',), '🦉 🍖 💪', ('Bokuto',)),
+    # Arcane (28 décembre 2026)
+    C('vi', 'Vi', 'arcane', 'F', H, 'Protagoniste', ('Corps à corps',), '👊 🥊 💗', ('Violet',),
+      ("Des gantelets géants qui décuplent la force de ses coups de poing.", '')),
+    C('jinx', 'Jinx', 'arcane', 'F', H, 'Antagoniste', ('Arme',), '💣 🐒 🚀 💙', ('Powder',)),
+    C('caitlyn', 'Caitlyn Kiramman', 'arcane', 'F', H, 'Allié', ('Arme', 'Ruse'), '🎯 🎩 🔍', ('Caitlyn', 'Cait')),
+    C('jayce', 'Jayce Talis', 'arcane', 'M', H, 'Allié', ('Arme',), '🔨 💠 🌀', ('Jayce',),
+      ("Un marteau alimenté par une gemme magique, capable de frapper à distance.", '')),
+    C('viktor', 'Viktor', 'arcane', 'M', H, 'Neutre', ('Magie', 'Ruse'), '🦯 💠 ⚙️', ()),
+    C('ekko', 'Ekko', 'arcane', 'M', H, 'Allié', ('Arme', 'Ruse'), '🛹 🌳 ⏱️', ()),
+    C('silco', 'Silco', 'arcane', 'M', H, 'Antagoniste', ('Ruse',), '👁️ 🧪 💜', ()),
 ]
+
+
+# ---------------------------------------------------------------- pouvoirs ajoutés le 4 novembre 2026
+# Personnages déjà présents qui reçoivent un pouvoir à deviner. Ils passent en fin de file du jeu Pouvoir
+# (voir dle_schedule dans build.py) : les énigmes déjà passées ne changent pas.
+# Règle : une description sans aucun nom, qui ne désigne qu'un seul personnage ; technique laissée vide en cas de doute sur son nom français.
+POUVOIRS_AJOUTES = {
+    'sasuke': ("Il fait tomber la foudre d'un orage qu'il a lui-même provoqué avec ses flammes.", 'Kirin'),
+    'kakashi': ("Une main chargée d'électricité, si rapide qu'on raconte qu'elle a tranché un éclair.", 'Raikiri'),
+    'jiraiya': ("Ses longs cheveux se durcissent en aiguilles pour former une carapace autour de lui.", 'Hari Jizô'),
+    'orochimaru': ("Il prend possession du corps d'un autre pour échapper à la vieillesse.", 'Fushi Tensei'),
+    'hinata': ("Deux têtes de lion faites de chakra enveloppent ses poings.", ''),
+    'sakura': ("Elle accumule du chakra pendant des années dans un losange sur son front.", 'Sceau de Byakugô'),
+    'nami': ("Un bâton qui fabrique des nuages, de la pluie et de la foudre.", 'Clima-Tact'),
+    'sanji': ("Sa jambe s'enflamme à force de tourner sur elle-même, et ses coups de pied brûlent.", 'Diable Jambe'),
+    'usopp': ("Des graines tirées au lance-pierre qui deviennent des plantes de combat.", 'Pop Greens'),
+    'chopper': ("Une petite pilule qui lui donne accès à de nouvelles formes pendant trois minutes.", 'Rumble Ball'),
+    'brook': ("Revenu à la vie après sa mort, il peut détacher son âme de son corps.", 'Fruit du Yomi Yomi'),
+    'franky': ("Un corps de cyborg qui fonctionne au cola.", ''),
+    'jinbe': ("Il manipule l'eau de la mer et celle contenue dans le corps de ses adversaires.", 'Karaté des hommes-poissons'),
+    'eren': ("En se blessant, il se transforme en un géant de quinze mètres.", 'Titan Assaillant'),
+    'giyu': ("Une forme qu'il a créée lui-même : toute attaque qui entre dans son rayon est neutralisée.", 'Calme plat'),
+    'rengoku': ("La forme ultime de son souffle porte son propre nom de famille.", ''),
+    'muzan': ("Son sang transforme les humains en démons.", ''),
+    'kenpachi': ("Il porte un cache-œil qui dévore son énergie spirituelle, pour que ses combats durent plus longtemps.", ''),
+    'urahara': ("Un sabre caché dans une canne, dont la lame libérée est d'un rouge vif.", 'Benihime'),
+    'itadori': ("Son énergie frappe une fraction de seconde après son poing, en un second impact.", 'Poing divergent'),
+    'gray': ("Il façonne la glace pour créer des armes, des boucliers et des objets.", 'Ice Make'),
+    'happy': ("Des ailes apparaissent dans son dos pour voler en portant son ami.", 'Aera'),
+    'alphonse': ("Son âme est attachée à une armure vide par un sceau de sang.", ''),
+    'vegeta': ("Une vague d'énergie lancée bras tendus, les deux mains ouvertes devant lui.", 'Final Flash'),
+    'genos': ("Un corps de cyborg qui projette des flammes depuis ses paumes.", ''),
+    'axel': ("Un tir de feu frappé en plein saut, en tournoyant dans les airs.", 'Tornade de feu'),
+    'bachira': ("Il dribble en écoutant le « monstre » qu'il imagine dans sa tête.", ''),
+    'roidelanuit': ("Il relève les morts d'un simple geste des bras.", ''),
+    'harry': ("Une cicatrice en forme d'éclair qui le relie à l'esprit de son pire ennemi.", ''),
+    'dumbledore': ("Un objet qui éteint et rallume les lumières de toute une rue.", 'Déluminateur'),
+    'voldemort': ("Il a divisé son âme en plusieurs fragments cachés dans des objets.", 'Horcruxes'),
+    'rogue': ("Il a inventé un sort qui taille de profondes entailles, « pour les ennemis ».", 'Sectumsempra'),
+    'dobby': ("Il transplane à l'intérieur de l'école, là où les sorciers ne le peuvent pas.", ''),
+    'sauron': ("Il a forgé en secret un anneau pour dominer tous les autres.", 'Anneau unique'),
+    'vador': ("Il étrangle ses propres officiers à distance, d'un simple geste de la main.", 'Étranglement de Force'),
+    'yoda': ("Il sort un vaisseau enlisé dans un marais par la seule force de son esprit.", ''),
+    'ironman': ("Une armure alimentée par un petit réacteur placé dans sa poitrine.", 'Réacteur Arc'),
+    'cap': ("Un sérum a fait d'un soldat frêle un combattant au sommet des capacités humaines.", 'Sérum du super-soldat'),
+    'thor': ("Seuls ceux qui en sont dignes peuvent soulever son marteau.", 'Mjolnir'),
+    'hulk': ("La colère le transforme en un géant vert presque indestructible.", ''),
+    'spiderman': ("Une piqûre lui a donné un sixième sens qui l'avertit du danger.", 'Spider-sens'),
+    'strange': ("Il remonte le temps grâce à une pierre cachée dans son amulette.", "Œil d'Agamotto"),
+    'thanos': ("Un claquement de doigts, six pierres, et la moitié de la vie disparaît.", "Gant de l'Infini"),
+    'loki': ("Il crée des illusions et des doubles de lui-même pour tromper ses adversaires.", ''),
+    'pikachu': ("Des joues rouges qui stockent l'électricité.", ''),
+    'mewtwo': ("Créé en laboratoire à partir d'un autre Pokémon, il écrase ses adversaires par la télékinésie.", ''),
+    'creeper': ("Il approche sans bruit, siffle, puis explose.", ''),
+    'enderman': ("Il se téléporte et attaque quand on le regarde dans les yeux.", ''),
+    'link': ("Une épée qui repousse le mal et que seul le héros peut tirer de son socle.", 'Épée de légende'),
+    'mario': ("Un champignon qui le fait grandir.", 'Super champignon'),
+    'yoshi': ("Il avale ses ennemis avec sa longue langue et les transforme en œufs.", ''),
+}
+for _c in CHARS:
+    if _c['id'] in POUVOIRS_AJOUTES and not _c['p']:
+        _c['p'] = POUVOIRS_AJOUTES[_c['id']]
 
 # ---------------------------------------------------------------- Devine l'univers : 5 indices, du plus vague au plus précis
 UNIVERS = {
@@ -426,7 +507,17 @@ UNIVERS = {
                     "Les chasseurs de démons de la Sécurité publique", "Un petit chien-tronçonneuse", "Denji"],
     'spyfamily': ["Deux pays voisins en pleine guerre froide", "Une famille formée pour une mission", "L'école d'élite Eden",
                   "Un espion, une tueuse et une télépathe", "Anya"],
+    'haikyu': ["Un sport où l'on n'a droit qu'à trois touches", "Un club de lycée tombé dans l'oubli", "Des corbeaux contre des chats",
+               "Un passeur surnommé le Roi du terrain", "Hinata et Kageyama"],
+    'arcane': ["Une ville riche bâtie au-dessus d'une ville pauvre", "Une drogue violette qui décuple la force",
+               "Une technologie qui canalise la magie", "Deux sœurs devenues ennemies", "Vi et Jinx"],
 }
+# Ordre figé des univers au 4 novembre 2026 : le tirage du jeu Univers part de cette liste,
+# les univers ajoutés ensuite passent en fin de file (les énigmes déjà passées ne changent pas).
+UNIVERS_V1 = ['naruto', 'onepiece', 'aot', 'demonslayer', 'bleach', 'jjk', 'mha', 'fairytail', 'hxh', 'deathnote', 'fmab',
+              'dragonball', 'onepunchman', 'inazuma', 'bluelock', 'soloLeveling', 'got', 'breakingbad', 'peakyBlinders',
+              'casapapel', 'strangerthings', 'squidgame', 'friends', 'vikings', 'harrypotter', 'lotr', 'starwars', 'marvel',
+              'pokemon', 'minecraft', 'gta', 'zelda', 'mario', 'lol', 'valorant', 'eafc', 'frieren', 'chainsawman', 'spyfamily']
 
 MODES = [
     ('personnage', 'Personnage', '🎯', "Devine le personnage du jour. Chaque essai révèle ce qu'il a en commun avec la cible."),
@@ -533,6 +624,12 @@ EXTRA = {
     'denji': (T, 'Blond'), 'power': (SA, ('Blond', 'Rose')), 'kobeni': (AD, 'Brun'),
     # Spy × Family
     'loid': (AD, 'Blond'), 'yor': (AD, 'Noir'), 'anya': (A, 'Rose'), 'bond': (SA, 'Aucun'),
+    # Haikyu!!
+    'shoyo': (T, 'Roux'), 'kageyama': (T, 'Noir'), 'tsukishima': (T, 'Blond'), 'oikawa': (T, 'Brun'),
+    'kenma': (T, ('Blond', 'Noir')), 'bokuto': (T, ('Blanc', 'Noir')),
+    # Arcane
+    'vi': (AD, 'Rose'), 'jinx': (T, 'Bleu'), 'caitlyn': (AD, 'Bleu'), 'jayce': (AD, 'Brun'), 'viktor': (AD, 'Brun'),
+    'ekko': (T, 'Blanc'), 'silco': (AD, 'Noir'),
 }
 
 # Année de sortie : début de l'œuvre originale (premier tome, premier épisode, premier film ou premier jeu).
@@ -542,7 +639,7 @@ YEARS = {
     'inazuma': 2008, 'bluelock': 2018, 'soloLeveling': 2016, 'got': 1996, 'breakingbad': 2008, 'peakyBlinders': 2013,
     'casapapel': 2017, 'strangerthings': 2016, 'squidgame': 2021, 'friends': 1994, 'vikings': 2013, 'harrypotter': 1997,
     'lotr': 1954, 'starwars': 1977, 'marvel': 2008, 'pokemon': 1996, 'minecraft': 2009, 'gta': 2013, 'zelda': 1986,
-    'mario': 1985, 'frieren': 2020, 'chainsawman': 2018, 'spyfamily': 2019,
+    'mario': 1985, 'frieren': 2020, 'chainsawman': 2018, 'spyfamily': 2019, 'haikyu': 2012, 'arcane': 2021,
 }
 YEAR_NOTES = {
     'got': 'premier roman', 'harrypotter': 'premier roman', 'lotr': 'premier tome du roman', 'soloLeveling': 'roman en ligne',
