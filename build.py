@@ -812,8 +812,6 @@ def build_dle():
       <p>Les indices s'en tiennent à ce qu'on apprend dans les premiers arcs de chaque œuvre. Les grandes révélations, l'identité cachée d'un personnage ou la fin d'une série ne servent jamais d'indice.</p>
       <h2 class="h2" style="margin-top:32px">Partager sans rien dévoiler</h2>
       <p>À la fin de chaque partie, le bouton « Partager » copie une grille de carrés colorés qui montre ton parcours sans révéler la réponse. Colle-la sur Discord, X ou dans ton groupe de discussion.</p>
-      <h2 class="h2" style="margin-top:32px">Entraînement illimité</h2>
-      <p>Une fois l'énigme du jour terminée, le mode entraînement te propose des parties au hasard, autant que tu veux. Elles ne comptent pas dans tes statistiques.</p>
       <h2 class="h2" style="margin-top:32px">Encore envie de jouer ?</h2>
       <p>Letsdle, un site ami, rassemble d'autres petits jeux à une partie par jour : quiz sur les films d'animation, associations de mots, géographie et plateformes piégées. <a href="{LETSDLE}" target="_blank" rel="noopener">Découvrir Letsdle</a>.</p>
     </article>

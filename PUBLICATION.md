@@ -22,7 +22,6 @@ Après chaque déploiement, dans Search Console : colle l'adresse de la nouvelle
 | 16 novembre | https://kamiquiz.com/quiz/chainsaw-man/ et https://kamiquiz.com/guides/demons-chainsaw-man/ |
 | 23 novembre | https://kamiquiz.com/guides/energie-occulte-jujutsu-kaisen/ |
 | 30 novembre | https://kamiquiz.com/quiz/spy-x-family/ et https://kamiquiz.com/guides/secrets-famille-forger-spy-x-family/ |
-| 7 décembre | https://kamiquiz.com/guides/comment-nous-ecrivons-les-questions/ |
 
 ## Le Kamidle
 
