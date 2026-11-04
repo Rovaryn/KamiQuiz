@@ -421,8 +421,6 @@
       html += '<div class="btn-row" style="justify-content:center">' +
         (practice ? '' : '<button class="btn btn-gold" type="button" data-act="share">' + T('Partager mon résultat') + '</button>') +
         (s ? '<a class="btn" href="' + U('/quiz/' + s.s + '/') + '">' + T('Quiz {n}', { n: esc(s.n) }) + '</a>' : '') +
-        '<button class="btn" type="button" data-act="practice">' + (practice ? T('Encore une') : T('Entraînement illimité')) + '</button>' +
-        (practice ? '<button class="btn" type="button" data-act="daily">' + T("Revenir à l'énigme du jour") + '</button>' : '') +
         '</div>';
       if (!practice) {
         var next = Object.keys(MODES).filter(function (m) {
@@ -445,8 +443,6 @@
         if (!b) return;
         var act = b.getAttribute('data-act');
         if (act === 'share') share();
-        if (act === 'practice') newGame(true);
-        if (act === 'daily') newGame(false);
       });
       tick();
     }
