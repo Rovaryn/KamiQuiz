@@ -252,4 +252,6 @@ UI = {
     "5345add5": "About",
     "ad64c4a7": "About KamiQuiz",
     "34d3d6a0": "About this quiz",
+    "b9676c8f": "New",
+    "a1df19c7": "Free {name} quiz: {n} questions with answers and explanations. Six game modes, no sign-up, with every answer to review.",
 }
