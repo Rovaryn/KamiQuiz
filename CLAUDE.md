@@ -34,6 +34,8 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
 - `content/dle.py` : données du Kamidle (personnages, pouvoirs, emojis, univers, mots, âges, cheveux, années).
   Le calendrier part de l'ordre figé `SCHED_V1` : ne jamais le modifier, sinon les énigmes passées et du jour changent.
   Pour retirer un personnage, le supprimer de `CHARS` (il est remplacé seul les jours où il tombait) ; un nouveau va en fin de file.
+  Un pouvoir donné après coup à un personnage existant va dans `POUVOIRS_AJOUTES` ; un nouvel univers s'ajoute à `UNIVERS`
+  (jamais à `UNIVERS_V1`, qui fige l'ordre d'origine). Les deux passent en fin de file : vérifier que le calendrier des jours passés ne change pas.
 - `data/mots-fr.txt` : dictionnaire des essais du Mot mystère (licence MIT, voir `data/mots-fr.LICENSE.txt`).
 - `data/questions.src.json` : banque d'origine, **ne jamais modifier** ; `tools/clean_data.py` produit `data/questions.json`.
 - `content/corrections.py` : corrections et retraits de questions de la banque (relecture d'octobre 2026, `fix()` / `drop()`).
