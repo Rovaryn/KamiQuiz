@@ -146,15 +146,34 @@ def lang_links(path):
 
 
 def lang_switch():
-    others = [l for l in i18n.LANGS if l != i18n.LANG and AVAIL.get(l)]
-    if not others:
+    """Sélecteur FR | EN toujours visible en haut de page (la langue en cours est mise en avant)."""
+    langs = [l for l in i18n.LANGS if AVAIL.get(l)]
+    if len(langs) < 2:
         return ''
-    names = {'fr': ('FR', 'Version française'), 'en': ('EN', 'English version')}
+    names = {'fr': ('FR', 'Version française', 'Français'), 'en': ('EN', 'English version', 'English')}
     out = ''
-    for l in others:
-        target = U(CUR_PATH, l) if CUR_PATH in AVAIL[l] else U('/', l)
-        out += f'<a class="nav-lang" href="{target}" hreflang="{l}" lang="{l}" title="{names[l][1]}">{names[l][0]}</a>'
-    return out
+    for l in langs:
+        if l == i18n.LANG:
+            out += f'<span class="lang-cur" lang="{l}" aria-current="true" title="{names[l][2]}">{names[l][0]}</span>'
+        else:
+            target = U(CUR_PATH, l) if CUR_PATH in AVAIL[l] else U('/', l)
+            out += (f'<a href="{target}" hreflang="{l}" lang="{l}" data-lang="{l}" '
+                    f'title="{names[l][1]}">{names[l][0]}</a>')
+    return f'<div class="lang-sw" role="group" aria-label="{T("Langue")}">{out}</div>'
+
+
+# Langue choisie automatiquement à l'arrivée sur le site : la langue principale du navigateur
+# (français -> FR, toute autre langue -> EN), ou la langue choisie avec le sélecteur (mémorisée).
+# Uniquement à l'arrivée depuis un autre site, jamais pour les robots (Google indexe chaque langue
+# à son adresse, voir hreflang), et seulement si la page existe dans l'autre langue.
+LANG_REDIRECT = ("<script>(function(){try{var d=document,h=d.documentElement.lang,n=navigator,"
+                 "u=n.userAgent||'';if(/bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|facebook|"
+                 "lighthouse|headless|preview|inspect/i.test(u))return;"
+                 "if(d.referrer&&d.referrer.indexOf(location.origin+'/')===0)return;"
+                 "var p=null;try{p=localStorage.getItem('kq-lang')}catch(x){}"
+                 "var w=p||(((n.languages&&n.languages[0])||n.language||'fr').slice(0,2).toLowerCase()==='fr'?'fr':'en');"
+                 "if(w===h)return;var l=d.querySelector('link[rel=alternate][hreflang=\"'+w+'\"]');"
+                 "if(l)location.replace(new URL(l.href).pathname+location.search+location.hash)}catch(x){}})()</script>\n")
 
 
 # --------------------------------------------------------------------------- gabarit
@@ -179,7 +198,7 @@ def head(title, desc, path, jsonld=None, robots='index, follow', og_type='websit
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{canonical}">
-{lang_links(path)}<meta name="robots" content="{robots}">
+{lang_links(path)}{LANG_REDIRECT if lang_links(path) else ''}<meta name="robots" content="{robots}">
 <meta name="theme-color" content="#07080f">
 <meta name="google-adsense-account" content="{PUB}">
 <meta name="alldle-verify" content="zeH2tpvyQl3QIQMFda8JTGnZePXWWPus">
@@ -223,7 +242,8 @@ def header(current=''):
   <div class="wrap">
     <a class="brand" href="{U('/')}" aria-label="{T('KamiQuiz, accueil')}">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">{T('Menu')}</button>
-    <nav class="nav" id="nav" aria-label="{T('Navigation principale')}">{links}{letsdle}{lang_switch()}<a class="nav-cta" href="{U('/jouer/')}">{T('Jouer')}</a></nav>
+    <nav class="nav" id="nav" aria-label="{T('Navigation principale')}">{links}{letsdle}<a class="nav-cta" href="{U('/jouer/')}">{T('Jouer')}</a></nav>
+    {lang_switch()}
   </div>
 </header>
 <main id="contenu">
@@ -248,7 +268,7 @@ def footer(scripts=('/assets/js/site.js',)):
       <div>
         <a class="brand" href="{U('/')}">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
         <p style="margin-top:14px;max-width:34ch">{T('Des quiz gratuits sur les animés, les séries, les films, les jeux vidéo et la culture générale. Sans inscription.')}</p>
-        <a class="foot-badge" href="https://www.alldle.net/game/kamiquiz?ref=badge" target="_blank" rel="noopener" aria-label="Play on Alldle"><img src="https://www.alldle.net/badge.svg?g=eqqfouhthy68vr5qt4k7sjca&amp;variant=dark&amp;size=compact&amp;content=text" alt="Play on Alldle" width="180" height="48" loading="lazy" style="border:0"></a>
+        <a class="foot-badge" href="https://www.alldle.net/game/kamiquiz?ref=badge" target="_blank" rel="noopener" aria-label="Play on Alldle"><img src="https://www.alldle.net/badge.svg?g=eqqfouhthy68vr5qt4k7sjca&amp;variant=dark&amp;size=compact&amp;content=text" alt="Play on Alldle" width="180" height="48" loading="lazy" style="border:0" onerror="var a=this.parentNode;a.classList.add('foot-badge-txt');a.textContent='{T("Jouer sur Alldle")} ↗'"></a>
       </div>
       <div><h2>{T('Quiz')}</h2><ul>{cats}</ul></div>
       <div><h2>KamiQuiz</h2><ul>{extra}<li><a href="{U('/a-propos/')}">{T('À propos')}</a></li><li><a href="{U('/contact/')}">{T('Contact')}</a></li><li><a href="{U('/jouer/')}">{T('Quiz tout mélangé')}</a></li><li><a href="{LETSDLE}" target="_blank" rel="noopener">{T('Plus de jeux sur Letsdle ↗')}</a></li></ul></div>

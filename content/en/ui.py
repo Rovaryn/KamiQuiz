@@ -300,4 +300,6 @@ UI = {
     "304298cc": "{n} explained questions are waiting for you, from the simplest to the trickiest.",
     "9536ff22": "Pick a universe and put the method into practice right now.",
     "6680cbce": "Your turn to play",
+    "6619264a": "Language",
+    "7bc5228d": "Play on Alldle",
 }

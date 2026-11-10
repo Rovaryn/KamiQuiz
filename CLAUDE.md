@@ -61,6 +61,9 @@ Le français reste la langue d'origine, servie à la racine (`/`). Chaque autre 
   et fournit ses propres `MOTS` et `word_schedule()`. Les quatre autres jeux gardent le calendrier `SCHED_V1`.
   Les nouveaux mots vont en fin de liste. Dictionnaire des essais : `data/mots-<langue>.txt`.
 - `static/assets/js/i18n-<langue>.js` : textes du JavaScript, utilisés par `KQ.t()`, `KQ.url()`, `KQ.data()`.
+- Sélecteur FR | EN toujours visible en haut (`lang_switch()`). À l'arrivée depuis un autre site, `LANG_REDIRECT` envoie le visiteur
+  vers la langue de son navigateur (français -> FR, toute autre langue -> EN) ou vers celle choisie au sélecteur (`localStorage` `kq-lang`).
+  Jamais pour les robots (Googlebot, AdSense…) ni pendant la navigation interne : chaque langue reste indexée à son adresse.
 - Toute correction d'une question française doit être reportée dans les traductions.
 
 ## Liens partenaires

@@ -370,6 +370,26 @@ with sync_playwright() as p:
               ep.evaluate("document.querySelector('.dle-kb').innerText.replace(/\\s/g,'').startsWith('QWERTY')"),
               'Mot mystère anglais : clavier QWERTY')
         check(all(m.isalpha() and m.isascii() for m in ED['mots']), 'Mot mystère anglais : mots sans accent')
+        print('Choix de la langue')
+        check(ep.locator('.lang-sw .lang-cur').inner_text() == 'EN' and ep.locator('.lang-sw a[data-lang=fr]').count() == 1,
+              'sélecteur FR | EN en haut de page')
+        UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
+        for loc, start, want in (('en-US', '/quiz/naruto/', '/en/quiz/naruto/'), ('es-ES', '/', '/en/'),
+                                 ('fr-CA', '/en/quiz/naruto/', '/quiz/naruto/'), ('fr-FR', '/quiz/naruto/', '/quiz/naruto/')):
+            lc = b.new_context(locale=loc, user_agent=UA)
+            lc.route('**/pagead2.googlesyndication.com/**', block_external)
+            lc.route('**/*.workers.dev/**', block_external)
+            lp = lc.new_page(); lp.goto(BASE + start); lp.wait_for_load_state()
+            check(lp.url == BASE + want, f'navigateur {loc} arrivant sur {start} : {want}')
+            if loc == 'en-US':
+                lp.click('.lang-sw a[data-lang=fr]'); lp.wait_for_load_state()
+                lp.goto(BASE + '/quiz/bleach/'); lp.wait_for_load_state()
+                check(lp.url == BASE + '/quiz/bleach/', 'langue choisie avec le sélecteur mémorisée (FR)')
+            lc.close()
+        bc = b.new_context(locale='en-US', user_agent='Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')
+        bp = bc.new_page(); bp.goto(BASE + '/quiz/naruto/')
+        check(bp.url == BASE + '/quiz/naruto/', 'Googlebot : jamais redirigé')
+        bc.close()
         check(not en_errors, 'version anglaise : aucune erreur JavaScript' + (f' ({en_errors[:3]})' if en_errors else ''))
     b.close()
 

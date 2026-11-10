@@ -25,6 +25,12 @@
   KQ.data = function (file) { return (KQ.lang === 'fr' ? '/data/' : '/data/' + KQ.lang + '/') + file; };
   var T = KQ.t;
 
+  /* Langue choisie avec le sélecteur FR | EN : mémorisée pour les prochaines visites */
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('.lang-sw a[data-lang]');
+    if (a) { try { localStorage.setItem('kq-lang', a.getAttribute('data-lang')); } catch (x) {} }
+  });
+
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
