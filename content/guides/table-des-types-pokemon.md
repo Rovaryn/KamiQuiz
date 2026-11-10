@@ -49,7 +49,7 @@ Certains talents ajoutent d'autres immunités. Le plus connu est Lévitation, qu
 
 ## Les cas particuliers
 
-Le **Dragon** est le seul type super efficace contre lui-même, ce qui rend les duels entre dragons particulièrement brutaux. Le **Spectre** est dans une situation proche : il est super efficace contre le Spectre.
+Le **Dragon** est super efficace contre lui-même, ce qui rend les duels entre dragons particulièrement brutaux. Le **Spectre** est dans la même situation : il est super efficace contre le Spectre. Ce sont les deux seuls types dans ce cas.
 
 L'**Acier** est le type défensif par excellence : il résiste à dix types et n'est sensible qu'au Feu, au Combat et au Sol. La **Fée** a pour rôle de contrer le Dragon et le Combat, mais elle craint l'Acier et le Poison.
 

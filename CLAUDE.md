@@ -47,6 +47,25 @@ Chimie, DCE (Défis de création d'équipe), EDSM (Équipe de la semaine), Pièc
 - `docs/` : documents de travail que les scripts ne touchent pas (promotion…).
 - `.github/workflows/` : « Vérifications » sur chaque pull request, « Reconstruction quotidienne » chaque nuit.
 
+## Langues (français, puis anglais ; espagnol et portugais prévus)
+
+Le français reste la langue d'origine, servie à la racine (`/`). Chaque autre langue est servie sous son préfixe (`/en/`).
+`KQ_LANGS` (par défaut `fr,en`) choisit les langues générées ; `KQ_LANGS=fr python3 build.py` doit donner exactement le site français.
+
+- `content/i18n.py` : `T("texte français", **variables)` traduit via `content/<langue>/ui.py` (clé = empreinte du texte français),
+  `U(chemin)` donne l'URL dans la langue en cours. Un texte sans traduction est listé dans `data/i18n_missing.json` et fait échouer le build.
+- `content/<langue>/questions/<série>.json` : traduction des questions, par identifiant (réponses dans l'ordre français).
+  `python3 tools/i18n_status.py` montre l'avancement et exporte une série à traduire.
+- `content/<langue>/guides/*.md` : guides traduits, avec `fr: <slug français>` en tête et la même `date:`.
+- `content/<langue>/dle.py` : `localize(DLE)` traduit les données du Kamidle (noms officiels, critères, pouvoirs, indices)
+  et fournit ses propres `MOTS` et `word_schedule()`. Les quatre autres jeux gardent le calendrier `SCHED_V1`.
+  Les nouveaux mots vont en fin de liste. Dictionnaire des essais : `data/mots-<langue>.txt`.
+- `static/assets/js/i18n-<langue>.js` : textes du JavaScript, utilisés par `KQ.t()`, `KQ.url()`, `KQ.data()`.
+- Sélecteur FR | EN toujours visible en haut (`lang_switch()`). À l'arrivée depuis un autre site, `LANG_REDIRECT` envoie le visiteur
+  vers la langue de son navigateur (français -> FR, toute autre langue -> EN) ou vers celle choisie au sélecteur (`localStorage` `kq-lang`).
+  Jamais pour les robots (Googlebot, AdSense…) ni pendant la navigation interne : chaque langue reste indexée à son adresse.
+- Toute correction d'une question française doit être reportée dans les traductions.
+
 ## Liens partenaires
 
 Le menu et le pied de page renvoient vers Letsdle (https://letsdle.com/), le site d'un ami de Nano : lien simple, non payé, ouvert dans un nouvel onglet.

@@ -6,6 +6,31 @@
   window.KQ = window.KQ || {};
   KQ.LB_API = LB_API;
 
+  /* ---------- Langue : textes écrits en français, traduits par /assets/js/i18n-<langue>.js ---------- */
+  KQ.lang = document.documentElement.lang || 'fr';
+  var DICT = window.KQ_I18N || {};
+  KQ.t = function (s, vars) {
+    var r = Object.prototype.hasOwnProperty.call(DICT, s) ? DICT[s] : s;
+    if (vars) r = r.replace(/\{(\w+)\}/g, function (m, k) { return vars[k] != null ? vars[k] : m; });
+    return r;
+  };
+  /* Chemin logique (français) -> chemin dans la langue de la page */
+  KQ.url = function (p) {
+    var R = window.KQ_ROUTES;
+    if (!R) return p;
+    var keys = Object.keys(R).sort(function (a, b) { return b.length - a.length; });
+    for (var i = 0; i < keys.length; i++) if (p.indexOf(keys[i]) === 0) return R[keys[i]] + p.slice(keys[i].length);
+    return p;
+  };
+  KQ.data = function (file) { return (KQ.lang === 'fr' ? '/data/' : '/data/' + KQ.lang + '/') + file; };
+  var T = KQ.t;
+
+  /* Langue choisie avec le sélecteur FR | EN : mémorisée pour les prochaines visites */
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('.lang-sw a[data-lang]');
+    if (a) { try { localStorage.setItem('kq-lang', a.getAttribute('data-lang')); } catch (x) {} }
+  });
+
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -37,7 +62,7 @@
   var cache = {};
   KQ.loadSerie = function (key) {
     if (!cache[key]) {
-      cache[key] = fetch('/data/' + key + '.json').then(function (r) {
+      cache[key] = fetch(KQ.data(key + '.json')).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
       });
@@ -89,8 +114,8 @@
         });
         var fb = slot.querySelector('.feedback');
         fb.hidden = false;
-        fb.innerHTML = '<strong>' + (choice === q.c ? 'Bonne réponse.' : 'Raté : la réponse était « ' + esc(q.a[q.c]) + ' ».') + '</strong> ' + esc(q.fb) +
-          ' <a href="/jouer/?s=' + encodeURIComponent(key) + '">Enchaîner sur ce quiz</a>';
+        fb.innerHTML = '<strong>' + (choice === q.c ? T('Bonne réponse.') : T('Raté : la réponse était « {a} ».', { a: esc(q.a[q.c]) })) + '</strong> ' + esc(q.fb) +
+          ' <a href="' + KQ.url('/jouer/') + '?s=' + encodeURIComponent(key) + '">' + T('Enchaîner sur ce quiz') + '</a>';
       }
 
       slot.addEventListener('click', function (e) {
@@ -103,21 +128,21 @@
       });
       if (answered[today] !== undefined) reveal(answered[today]);
     }).catch(function () {
-      qdj.querySelector('[data-slot]').innerHTML = '<p class="muted">La question du jour n\'a pas pu se charger. Rechargez la page pour réessayer.</p>';
+      qdj.querySelector('[data-slot]').innerHTML = '<p class="muted">' + T('La question du jour n\'a pas pu se charger. Rechargez la page pour réessayer.') + '</p>';
     });
   }
 
   /* ---------- Classement mondial ---------- */
   KQ.renderBoard = function (el, entries, names) {
     if (!entries || !entries.length) {
-      el.innerHTML = '<li class="board-empty"><span class="empty">Aucun score pour l\'instant. Terminez un quiz pour ouvrir le classement.</span></li>';
+      el.innerHTML = '<li class="board-empty"><span class="empty">' + T('Aucun score pour l\'instant. Terminez un quiz pour ouvrir le classement.') + '</span></li>';
       return;
     }
     el.innerHTML = entries.map(function (e, i) {
       var serie = names && names[e.series] ? names[e.series] : '';
-      var sub = [serie, e.mode].filter(Boolean).join(', ');
+      var sub = [serie, e.mode && T(e.mode)].filter(Boolean).join(', ');
       return '<li><span class="pos">' + (i + 1) + '</span>' +
-        '<span class="who">' + esc(e.name || 'Anonyme') + '<small>' + esc(sub) + '</small></span>' +
+        '<span class="who">' + esc(e.name || T('Anonyme')) + '<small>' + esc(sub) + '</small></span>' +
         '<span class="pts">' + esc(e.pct) + '%<small>' + esc(e.sc) + '/' + esc(e.tot) + '</small></span></li>';
     }).join('');
   };
@@ -132,7 +157,7 @@
     fetch(url).then(function (r) { return r.json(); }).then(function (rows) {
       KQ.renderBoard(board, Array.isArray(rows) ? rows : [], bNames);
     }).catch(function () {
-      board.innerHTML = '<li class="board-empty"><span class="empty">Le classement est momentanément indisponible.</span></li>';
+      board.innerHTML = '<li class="board-empty"><span class="empty">' + T('Le classement est momentanément indisponible.') + '</span></li>';
     });
   }
 
@@ -156,7 +181,7 @@
       if (art) box.appendChild(art.cloneNode());
       var f = document.createElement('iframe');
       f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
-      f.title = fig.getAttribute('data-title') || 'Bande-annonce';
+      f.title = fig.getAttribute('data-title') || T('Bande-annonce');
       f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       f.allowFullscreen = true;
       f.referrerPolicy = 'strict-origin-when-cross-origin';
@@ -176,7 +201,7 @@
         window.googlefc.showRevocationMessage();
       } else {
         window.googlefc.callbackQueue.push(function () { window.googlefc.showRevocationMessage(); });
-        KQ.toast('Le gestionnaire de consentement se charge…');
+        KQ.toast(T('Le gestionnaire de consentement se charge…'));
       }
     });
   });

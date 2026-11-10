@@ -1,0 +1,580 @@
+{
+ "cats": {
+  "Karasuno": "Karasuno",
+  "Rivaux": "Rivals",
+  "Matchs": "Matches",
+  "Volley": "Volleyball",
+  "Après": "After High School",
+  "Œuvre": "The Series"
+ },
+ "ranks": [
+  "Benchwarmer",
+  "Pinch Server",
+  "Starter",
+  "Karasuno Pillar",
+  "Ace",
+  "Little Giant"
+ ],
+ "q": {
+  "dfa2dddc": [
+   "What is the name of Shoyo Hinata's high school?",
+   [
+    "Nekoma",
+    "Karasuno",
+    "Aoba Johsai",
+    "Shiratorizawa"
+   ],
+   "Hinata joins Karasuno High, in Miyagi Prefecture, the former school of his idol, the Little Giant."
+  ],
+  "66217bb6": [
+   "Which animal is the symbol of the Karasuno team?",
+   [
+    "The cat",
+    "The eagle",
+    "The crow",
+    "The owl"
+   ],
+   "Karasuno means “field of crows”, and the team is nicknamed the Crows."
+  ],
+  "4a183f78": [
+   "What position does Tobio Kageyama play?",
+   [
+    "Libero",
+    "Wing spiker",
+    "Setter",
+    "Middle blocker"
+   ],
+   "Kageyama is a setter. His precision lets him send the ball exactly where Hinata will hit it."
+  ],
+  "607fbf2f": [
+   "What nickname did Kageyama's former teammates give him in middle school?",
+   [
+    "The Monster",
+    "The King of the Court",
+    "The Genius",
+    "The Little Giant"
+   ],
+   "At Kitagawa Daiichi middle school, his teammates called him “the King of the Court” because of his tyrannical play: they ended up refusing to follow his sets."
+  ],
+  "06fc926e": [
+   "Why did Hinata take up volleyball?",
+   [
+    "His father was a player",
+    "He wanted to grow taller",
+    "Kageyama recruited him",
+    "He saw the Little Giant play on TV"
+   ],
+   "As a child, Hinata saw Karasuno's Little Giant on TV, a short spiker who soared over the blockers."
+  ],
+  "b4ee3f87": [
+   "What number does Hinata wear at Karasuno?",
+   [
+    "5",
+    "10",
+    "1",
+    "9"
+   ],
+   "Hinata wears number 10, the number the Little Giant wore when he played for Karasuno."
+  ],
+  "f9f4650b": [
+   "What is Hinata's position?",
+   [
+    "Middle blocker",
+    "Outside hitter",
+    "Libero",
+    "Setter"
+   ],
+   "Despite his small size, Hinata plays middle blocker: his jump and his speed make up for his lack of height."
+  ],
+  "4a943977": [
+   "Who is Karasuno's captain at the start of the series?",
+   [
+    "Daichi Sawamura",
+    "Ryunosuke Tanaka",
+    "Asahi Azumane",
+    "Koshi Sugawara"
+   ],
+   "Daichi Sawamura, number 1, is Karasuno's captain and the backbone of its receive."
+  ],
+  "4ab74d3e": [
+   "Who is Karasuno's ace, who stopped coming to practice for a while?",
+   [
+    "Kei Tsukishima",
+    "Asahi Azumane",
+    "Chikara Ennoshita",
+    "Ryunosuke Tanaka"
+   ],
+   "Asahi Azumane lost his confidence after being blocked again and again by Date Tech. He comes back thanks to his teammates."
+  ],
+  "9abdb489": [
+   "Which Karasuno player is the libero?",
+   [
+    "Hisashi Kinoshita",
+    "Yu Nishinoya",
+    "Tadashi Yamaguchi",
+    "Koshi Sugawara"
+   ],
+   "Yu Nishinoya, small but spectacular, is Karasuno's libero."
+  ],
+  "21f51228": [
+   "What is Nishinoya's nickname?",
+   [
+    "The Little Giant",
+    "The Guess Monster",
+    "The King of the Court",
+    "Karasuno's Guardian Deity"
+   ],
+   "Nishinoya is called “Karasuno's Guardian Deity” for his impossible digs."
+  ],
+  "33395352": [
+   "What is special about Kei Tsukishima?",
+   [
+    "He is left-handed",
+    "He is the libero",
+    "He is tall, wears glasses and plays middle blocker with cold intelligence",
+    "He is the shortest on the team"
+   ],
+   "Tsukishima is a tall, calculating middle blocker, often sarcastic, whose blocking becomes decisive against Shiratorizawa."
+  ],
+  "76fdc6b6": [
+   "Which lie told by Tsukishima's older brother left a mark on him?",
+   [
+    "He said he had quit volleyball",
+    "He said he had been picked for the national team",
+    "He said he was captain",
+    "He said he was a starter at Karasuno"
+   ],
+   "Akiteru Tsukishima claimed to be a starter at Karasuno when he was actually a substitute. Kei found out when he came to watch him play."
+  ],
+  "b2e9f39e": [
+   "What is Tadashi Yamaguchi's role in important matches?",
+   [
+    "Libero",
+    "Captain",
+    "Pinch server",
+    "Starting setter"
+   ],
+   "Yamaguchi comes on to serve. He learned the jump float serve from Makoto Shimada, a former player."
+  ],
+  "67481522": [
+   "Who is Karasuno's coach?",
+   [
+    "Yasufumi Nekomata",
+    "Keishin Ukai",
+    "Tanji Washijo",
+    "Ittetsu Takeda"
+   ],
+   "Keishin Ukai, grandson of the famous coach Ukai, agrees to coach the team. He runs his family's shop near the school."
+  ],
+  "d3faf717": [
+   "Who is Ittetsu Takeda?",
+   [
+    "The captain",
+    "The club's faculty adviser, who knows nothing about volleyball",
+    "A former player",
+    "Nekoma's coach"
+   ],
+   "Takeda, a teacher at the school, is the club's adviser. He knows nothing about volleyball, but works hard to arrange practice matches."
+  ],
+  "0dfccc77": [
+   "Who are Karasuno's two managers?",
+   [
+    "Alisa Haiba and Kiyoko Shimizu",
+    "Hitoka Yachi and Yui Michimiya",
+    "Saeko Tanaka and Natsu Hinata",
+    "Kiyoko Shimizu and Hitoka Yachi"
+   ],
+   "Kiyoko Shimizu, a third-year, recruits Hitoka Yachi, a first-year who will succeed her."
+  ],
+  "05520d5c": [
+   "Which third-year setter gives up his starting spot to Kageyama?",
+   [
+    "Koshi Sugawara",
+    "Daichi Sawamura",
+    "Chikara Ennoshita",
+    "Kazuhito Narita"
+   ],
+   "Koshi Sugawara, number 2, remains a valuable substitute, able to change the rhythm of a match."
+  ],
+  "45c13593": [
+   "What is the name of Ryunosuke Tanaka's sister, who plays taiko in the stands?",
+   [
+    "Saeko",
+    "Natsu",
+    "Akane",
+    "Kiyoko"
+   ],
+   "Saeko Tanaka plays the Japanese drum with a group of supporters at Karasuno's big matches."
+  ],
+  "66572284": [
+   "Who introduced Kageyama to volleyball?",
+   [
+    "Keishin Ukai",
+    "His grandfather Kazuyo",
+    "His father",
+    "Toru Oikawa"
+   ],
+   "Kazuyo, Kageyama's grandfather, coached children and passed his love of volleyball on to him."
+  ],
+  "c3444146": [
+   "In which challenge do Hinata and Kageyama have to face each other and then team up as soon as they join the club?",
+   [
+    "A match against the teachers",
+    "A serving contest",
+    "A jumping contest",
+    "A three-on-three match against first-years"
+   ],
+   "After a fight, they have to win a three-on-three match against Tsukishima and Yamaguchi to be accepted into the club."
+  ],
+  "39b76331": [
+   "How does the first version of Hinata and Kageyama's quick attack work?",
+   [
+    "They swap positions",
+    "Hinata serves from the back",
+    "Hinata jumps with his eyes closed and Kageyama sends the ball into his hand",
+    "Kageyama spikes instead of Hinata"
+   ],
+   "Hinata jumps with all his strength without looking at the ball: it is Kageyama who places it in his hand, to the millimeter."
+  ],
+  "4a42ed3d": [
+   "Which high school does Toru Oikawa play for?",
+   [
+    "Aoba Johsai",
+    "Inarizaki",
+    "Date Tech",
+    "Shiratorizawa"
+   ],
+   "Oikawa, setter and captain, leads Aoba Johsai. He was Kageyama's senior in middle school."
+  ],
+  "55b1e088": [
+   "Who is Oikawa's childhood friend and teammate?",
+   [
+    "Takanobu Aone",
+    "Hajime Iwaizumi",
+    "Tetsuro Kuroo",
+    "Satori Tendo"
+   ],
+   "Hajime Iwaizumi, Aoba Johsai's ace, has known Oikawa since childhood and is one of the few who can put him in his place."
+  ],
+  "b9f77bcc": [
+   "Which Tokyo high school is Karasuno's great historic rival?",
+   [
+    "Ubugawa",
+    "Itachiyama",
+    "Fukurodani",
+    "Nekoma"
+   ],
+   "Karasuno and Nekoma, the crows and the cats, have been rivals since the days when their former coaches faced each other."
+  ],
+  "67205d20": [
+   "What position does Kenma Kozume play?",
+   [
+    "Setter",
+    "Ace",
+    "Middle blocker",
+    "Libero"
+   ],
+   "Kenma, who loves video games, is Nekoma's setter and its “brain”."
+  ],
+  "101e20f8": [
+   "Who is Nekoma's captain?",
+   [
+    "Taketora Yamamoto",
+    "Tetsuro Kuroo",
+    "Lev Haiba",
+    "Morisuke Yaku"
+   ],
+   "Tetsuro Kuroo is Nekoma's captain and middle blocker, and Kenma's childhood friend."
+  ],
+  "ed008fb1": [
+   "What does the Nekoma team compare itself to in its pre-match chant?",
+   [
+    "A swarm",
+    "A fortress",
+    "The blood flowing through the veins",
+    "A pack"
+   ],
+   "The Nekoma players compare themselves to circulating blood, and their setter Kenma to the brain that keeps everything running."
+  ],
+  "826ce0fe": [
+   "Who is Shiratorizawa's left-handed ace?",
+   [
+    "Wakatoshi Ushijima",
+    "Eita Semi",
+    "Satori Tendo",
+    "Kenjiro Shirabu"
+   ],
+   "Wakatoshi Ushijima, a left-handed spiker of extraordinary power, is one of the best players in the country."
+  ],
+  "1ff2c5a1": [
+   "What is the nickname of Satori Tendo of Shiratorizawa?",
+   [
+    "The Owl",
+    "The Guess Monster",
+    "The Iron Wall",
+    "The King"
+   ],
+   "Tendo blocks by guessing attacks rather than reading them: he is called “the Guess Monster”."
+  ],
+  "0c999b18": [
+   "What is the Date Tech team famous for?",
+   [
+    "Its serves",
+    "Its defense",
+    "Its speed",
+    "Its block, nicknamed the Iron Wall"
+   ],
+   "Date Tech is known for its block, the Iron Wall, whose cornerstone is the middle blocker Takanobu Aone."
+  ],
+  "1a863397": [
+   "Who is Fukurodani's captain?",
+   [
+    "Keiji Akaashi",
+    "Kotaro Bokuto",
+    "Kiyoomi Sakusa",
+    "Tetsuro Kuroo"
+   ],
+   "Kotaro Bokuto, a spiker famous for his mood swings, leads Fukurodani with his setter Keiji Akaashi."
+  ],
+  "222749c1": [
+   "Who are the Inarizaki twins?",
+   [
+    "Lev and Alisa Haiba",
+    "Hajime and Toru Iwaizumi",
+    "Atsumu and Osamu Miya",
+    "Kenji and Koji Futakuchi"
+   ],
+   "Atsumu, the setter, and Osamu Miya are Inarizaki's star duo, whom Karasuno faces at Nationals."
+  ],
+  "77cbe95f": [
+   "Which Kamomedai player reminds people of Hinata because of his small size?",
+   [
+    "Yuji Terushima",
+    "Korai Hoshiumi",
+    "Sachiro Hirugami",
+    "Kiyoomi Sakusa"
+   ],
+   "Korai Hoshiumi, a short spiker with an exceptional jump, is often presented as the successor to the Little Giant."
+  ],
+  "17a79f0d": [
+   "Who coached Nekoma during the great rivalry with the old coach Ukai?",
+   [
+    "Yasufumi Nekomata",
+    "Tanji Washijo",
+    "Ikkei Ukai",
+    "Nobuyuki Kai"
+   ],
+   "Yasufumi Nekomata, still Nekoma's coach, dreamed of playing Karasuno again on the national stage."
+  ],
+  "fa4a89ae": [
+   "Against which team did Hinata play his very first official match in middle school?",
+   [
+    "Kitagawa Daiichi, Kageyama's team",
+    "Aoba Johsai",
+    "Date Tech",
+    "Nekoma"
+   ],
+   "Hinata's Yukigaoka middle school team, cobbled together from whoever was available, lost in the first round to Kitagawa Daiichi, where Kageyama played."
+  ],
+  "7cab940a": [
+   "What is a match between Karasuno and Nekoma called?",
+   [
+    "The war of the birds",
+    "The Battle at the Garbage Dump",
+    "The duel of kings",
+    "The clash of titans"
+   ],
+   "Crows and cats fight over garbage: their match is nicknamed the Battle at the Garbage Dump."
+  ],
+  "8d7c4483": [
+   "Which team does Karasuno beat in the prefectural final to reach Nationals?",
+   [
+    "Shiratorizawa",
+    "Aoba Johsai",
+    "Wakutani South",
+    "Date Tech"
+   ],
+   "Karasuno beats Ushijima's Shiratorizawa in five sets, a match that takes up the whole third season of the anime."
+  ],
+  "23a9eb8c": [
+   "Why does Hinata have to leave the court against Kamomedai at Nationals?",
+   [
+    "He has a fever",
+    "He sprains his ankle",
+    "He passes out after a collision",
+    "He gets a red card"
+   ],
+   "Hinata, running a fever, is taken off by his coach. Karasuno loses this quarterfinal, and Hinata learns a lesson about preparation."
+  ],
+  "34171757": [
+   "Which team does Karasuno lose to at the Inter-High tournament, before its big comeback in the spring?",
+   [
+    "Nekoma",
+    "Shiratorizawa",
+    "Date Tech",
+    "Aoba Johsai"
+   ],
+   "Karasuno falls to Oikawa's Aoba Johsai, a defeat that pushes Hinata and Kageyama to rethink their attack."
+  ],
+  "cfb08ec4": [
+   "In which match does Tsukishima make his decisive block on Ushijima?",
+   [
+    "The match against Nekoma",
+    "The practice match in Tokyo",
+    "The prefectural final against Shiratorizawa",
+    "The first match against Aoba Johsai"
+   ],
+   "Tsukishima's block on Ushijima, in the prefectural final, is one of the most famous moments of the series."
+  ],
+  "5420a266": [
+   "How many players does each team have on the court?",
+   [
+    "5",
+    "6",
+    "7",
+    "11"
+   ],
+   "A volleyball team has six players on the court."
+  ],
+  "902c77cf": [
+   "How many touches can a team make before sending the ball back?",
+   [
+    "3",
+    "4",
+    "2",
+    "As many as it likes"
+   ],
+   "Three touches at most, usually receive, set and attack. A touch on the block does not count."
+  ],
+  "2da7c5de": [
+   "How many points is a set played to, apart from the deciding set?",
+   [
+    "25",
+    "15",
+    "30",
+    "21"
+   ],
+   "A set is won at 25 points with a two-point lead; the deciding set is played to 15 points."
+  ],
+  "14963453": [
+   "Why does the libero wear a different-colored jersey?",
+   [
+    "He is the captain",
+    "He is a substitute",
+    "He is a defensive player with special rules",
+    "He is the youngest"
+   ],
+   "The libero, a defensive specialist, comes on and off freely but cannot attack above the net: the jersey makes him easy to spot."
+  ],
+  "0b52f10a": [
+   "What is the main role of the setter?",
+   [
+    "Receiving serves",
+    "Blocking",
+    "Serving",
+    "Distributing the ball to the hitters"
+   ],
+   "The setter runs the attack by choosing who will hit and how, like Kageyama, Oikawa or Kenma."
+  ],
+  "697a48ac": [
+   "What is a float serve?",
+   [
+    "A serve with no spin and an unpredictable path",
+    "A very powerful serve with spin",
+    "A missed serve",
+    "An underhand serve"
+   ],
+   "Hit without spin, the ball floats and changes direction at the last moment: it is Yamaguchi's weapon."
+  ],
+  "3ac2cd59": [
+   "What sport does Hinata play in Brazil after high school?",
+   [
+    "Futsal",
+    "Football",
+    "Basketball",
+    "Beach volleyball"
+   ],
+   "Hinata spends two years in Rio playing beach volleyball to become a complete player. He runs into Oikawa there."
+  ],
+  "91b68cac": [
+   "Which Japanese professional team does Hinata play for with Bokuto and Atsumu?",
+   [
+    "Schweiden Adlers",
+    "Sendai Frogs",
+    "EJP Raijin",
+    "MSBY Black Jackals"
+   ],
+   "Hinata joins the MSBY Black Jackals and faces Kageyama, who plays for the Schweiden Adlers."
+  ],
+  "8e7aabe8": [
+   "Which national team does Oikawa play for as an adult?",
+   [
+    "Italy",
+    "Japan",
+    "Argentina",
+    "Brazil"
+   ],
+   "After moving to Argentina, Oikawa becomes a citizen and plays for the Argentine national team."
+  ],
+  "b4d4425f": [
+   "What career does Kenma choose after high school?",
+   [
+    "Professional player",
+    "Coach",
+    "YouTuber, professional gamer and business owner",
+    "Teacher"
+   ],
+   "Kenma becomes a successful YouTuber and founds his own company. He even backs Hinata as a sponsor."
+  ],
+  "58aacffe": [
+   "What job does Daichi Sawamura have as an adult?",
+   [
+    "Coach",
+    "Teacher",
+    "Police officer",
+    "Firefighter"
+   ],
+   "Karasuno's former captain becomes a police officer."
+  ],
+  "47142bf9": [
+   "Who is the author of Haikyu!!?",
+   [
+    "Yoichi Takahashi",
+    "Muneyuki Kaneshiro",
+    "Tadatoshi Fujimaki",
+    "Haruichi Furudate"
+   ],
+   "Haruichi Furudate published Haikyu!! in Weekly Shōnen Jump from 2012 to 2020."
+  ],
+  "939f8e70": [
+   "How many volumes does the manga have?",
+   [
+    "30",
+    "52",
+    "38",
+    "45"
+   ],
+   "Haikyu!! runs to 45 volumes."
+  ],
+  "62ad08d7": [
+   "Which studio made the anime adaptation?",
+   [
+    "Bones",
+    "Production I.G",
+    "Ufotable",
+    "MAPPA"
+   ],
+   "Production I.G has adapted Haikyu!! since 2014, up to the film about the Battle at the Garbage Dump released in 2024."
+  ],
+  "1d5cf8a3": [
+   "Which band performs “Imagination”, the anime's first opening theme?",
+   [
+    "Burnout Syndromes",
+    "SPYAIR",
+    "Sukima Switch",
+    "FLOW"
+   ],
+   "SPYAIR's “Imagination” opens the first season of the anime in 2014."
+  ]
+ }
+}

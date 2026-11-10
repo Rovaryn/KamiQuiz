@@ -16,8 +16,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / 'content'))
 import datetime  # noqa: E402
-from series import SERIES as ALL_SERIES, CATEGORIES, POPULAR, NEW_FALLBACK  # noqa: E402
+from series import SERIES as ALL_SERIES, CATEGORIES as FR_CATEGORIES, POPULAR, NEW_FALLBACK  # noqa: E402
 import dle as DLE  # noqa: E402
+import i18n  # noqa: E402
+from i18n import T, U, loc_date  # noqa: E402
 from visuals import visual_svg  # noqa: E402
 from trailers import TRAILERS  # noqa: E402
 
@@ -41,31 +43,18 @@ def asset_v(path):
 
 def asset(path):
     return f'{path}?v={asset_v(path)}'
-MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
-
-
-def fr_date(iso):
-    d = datetime.date.fromisoformat(iso)
-    return f'{"1er" if d.day == 1 else d.day} {MONTHS[d.month - 1]} {d.year}'
-
-
 for _s in ALL_SERIES:
     _s.setdefault('date', BASE_DATE)
-SERIES = [s for s in ALL_SERIES if s['date'] <= TODAY]
+FR_SERIES = [s for s in ALL_SERIES if s['date'] <= TODAY]
 
 DB = json.loads((ROOT / 'data' / 'questions.json').read_text(encoding='utf-8'))
-BY_KEY = {s['key']: s for s in SERIES}
-assert set(BY_KEY) <= set(DB), set(BY_KEY) - set(DB)
-for s in SERIES:
+assert {s['key'] for s in FR_SERIES} <= set(DB), {s['key'] for s in FR_SERIES} - set(DB)
+for s in FR_SERIES:
     s['data'] = DB[s['key']]
     s['n'] = len(DB[s['key']]['q'])
     s['color'] = DB[s['key']]['color']
-TOTAL_Q = sum(s['n'] for s in SERIES)
-NB_SERIES = len(SERIES)
-CAT_NAME = {c[0]: c[1] for c in CATEGORIES}
-LEVELS = {1: 'Facile', 2: 'Moyen', 3: 'Difficile', 4: 'Expert'}
 
-MODES = [
+FR_MODES = [
     ('libre', '🎲', 'Mode libre', "20 questions au hasard, sans chrono. Idéal pour découvrir."),
     ('chrono', '⚡', 'Contre la montre', "15 secondes par question et un multiplicateur de points pour les plus rapides."),
     ('survie', '🛡️', 'Survie', "Trois vies. Chaque erreur en coûte une. Jusqu'où tiendrez-vous ?"),
@@ -75,14 +64,116 @@ MODES = [
 ]
 
 e = html.escape
+fr_num = i18n.num
 
 
-def fr_num(n):
-    return f'{n:,}'.replace(',', '\u00a0')
+# --------------------------------------------------------------------------- langues
+EN_SERIES_META = __import__('en.series', fromlist=['SERIES']).SERIES
 
 
-def plural(n, one, many):
-    return f'{fr_num(n)} {one if n < 2 else many}'
+def en_questions(s):
+    """Questions traduites d'une série (content/en/questions/<clé>.json), dans l'ordre de la banque française.
+
+    Format : {"cats": {catégorie fr: catégorie en}, "ranks": [...], "q": {id: [question, [4 réponses], explication]}}
+    id = i18n.qid(texte français de la question) ; les réponses suivent l'ordre de la banque française.
+    Une question française modifiée change d'id : sa traduction n'est plus utilisée (voir tools/i18n_status.py)."""
+    f = ROOT / 'content' / 'en' / 'questions' / f'{s["key"]}.json'
+    if not f.exists():
+        return None
+    tr = json.loads(f.read_text(encoding='utf-8'))
+    d = s['data']
+    qs = []
+    for q in d['q']:
+        t = tr['q'].get(i18n.qid(q['q']))
+        if not t:
+            continue
+        text, answers, fb = t
+        assert len(answers) == 4 and len(set(answers)) == 4, (s['key'], text)
+        qs.append({**q, 'q': text, 'a': answers, 'fb': fb, 'cat': tr['cats'][q['cat']]})
+    cats = {tr['cats'][c]: v for c, v in d['cats'].items() if c in tr['cats']}
+    return {'name': EN_SERIES_META[s['key']]['name'], 'color': d['color'], 'ranks': tr.get('ranks', d.get('ranks', [])),
+            'sw': [], 'cats': cats, 'q': qs, 'total_fr': len(d['q'])}
+
+
+def localized_series(lang):
+    if lang == 'fr':
+        return FR_SERIES
+    out = []
+    for s in FR_SERIES:
+        meta = EN_SERIES_META.get(s['key'])
+        data = en_questions(s) if meta else None
+        if not data or not data['q']:
+            continue
+        out.append({**s, 'name': meta['name'], 'tag': meta['tag'], 'intro': meta['intro'], 'data': data, 'n': len(data['q'])})
+        i18n.QUIZ_SLUGS['en'][s['slug']] = meta['slug']
+    return out
+
+
+def setup(lang):
+    """Prépare toutes les données globales dans la langue demandée."""
+    global SERIES, BY_KEY, TOTAL_Q, NB_SERIES, CATEGORIES, CAT_NAME, LEVELS, MODES, NAMES_JSON, GUIDES, GUIDES_BY_SERIE
+    global DLE_MODES, DLE_INFO
+    i18n.set_lang(lang)
+    SERIES = localized_series(lang)
+    BY_KEY = {s['key']: s for s in SERIES}
+    TOTAL_Q = sum(s['n'] for s in SERIES)
+    NB_SERIES = len(SERIES)
+    CATEGORIES = [(c, T(n), T(d)) for c, n, d in FR_CATEGORIES]
+    CAT_NAME = {c[0]: c[1] for c in CATEGORIES}
+    LEVELS = {1: T('Facile'), 2: T('Moyen'), 3: T('Difficile'), 4: T('Expert')}
+    MODES = [(m, i, T(n), T(d)) for m, i, n, d in FR_MODES]
+    NAMES_JSON = e(json.dumps({s['key']: s['name'] for s in SERIES}, ensure_ascii=False))
+    GUIDES = load_guides(lang)
+    GUIDES_BY_SERIE = {}
+    for g in GUIDES:
+        if g.get('serie') and g['serie'] in BY_KEY:
+            GUIDES_BY_SERIE.setdefault(g['serie'], []).append(g)
+    DLE_MODES = [(m, T(label), ico, T(desc)) for m, label, ico, desc in DLE.MODES]
+    DLE_INFO = {m: (T(a), T(b)) for m, (a, b) in FR_DLE_INFO.items()}
+
+
+AVAIL = {}   # langue -> chemins logiques disponibles (pour hreflang et le sélecteur de langue)
+CUR_PATH = '/'
+
+
+def lang_links(path):
+    """Balises hreflang : seulement si la page existe dans plusieurs langues."""
+    langs = [l for l in i18n.LANGS if path in AVAIL.get(l, ())]
+    if len(langs) < 2:
+        return ''
+    out = ''.join(f'<link rel="alternate" hreflang="{l}" href="{SITE}{U(path, l)}">\n' for l in langs)
+    return out + f'<link rel="alternate" hreflang="x-default" href="{SITE}{path}">\n'
+
+
+def lang_switch():
+    """Sélecteur FR | EN toujours visible en haut de page (la langue en cours est mise en avant)."""
+    langs = [l for l in i18n.LANGS if AVAIL.get(l)]
+    if len(langs) < 2:
+        return ''
+    names = {'fr': ('FR', 'Version française', 'Français'), 'en': ('EN', 'English version', 'English')}
+    out = ''
+    for l in langs:
+        if l == i18n.LANG:
+            out += f'<span class="lang-cur" lang="{l}" aria-current="true" title="{names[l][2]}">{names[l][0]}</span>'
+        else:
+            target = U(CUR_PATH, l) if CUR_PATH in AVAIL[l] else U('/', l)
+            out += (f'<a href="{target}" hreflang="{l}" lang="{l}" data-lang="{l}" '
+                    f'title="{names[l][1]}">{names[l][0]}</a>')
+    return f'<div class="lang-sw" role="group" aria-label="{T("Langue")}">{out}</div>'
+
+
+# Langue choisie automatiquement à l'arrivée sur le site : la langue principale du navigateur
+# (français -> FR, toute autre langue -> EN), ou la langue choisie avec le sélecteur (mémorisée).
+# Uniquement à l'arrivée depuis un autre site, jamais pour les robots (Google indexe chaque langue
+# à son adresse, voir hreflang), et seulement si la page existe dans l'autre langue.
+LANG_REDIRECT = ("<script>(function(){try{var d=document,h=d.documentElement.lang,n=navigator,"
+                 "u=n.userAgent||'';if(/bot|crawl|spider|slurp|google|bing|yandex|baidu|duckduck|facebook|"
+                 "lighthouse|headless|preview|inspect/i.test(u))return;"
+                 "if(d.referrer&&d.referrer.indexOf(location.origin+'/')===0)return;"
+                 "var p=null;try{p=localStorage.getItem('kq-lang')}catch(x){}"
+                 "var w=p||(((n.languages&&n.languages[0])||n.language||'fr').slice(0,2).toLowerCase()==='fr'?'fr':'en');"
+                 "if(w===h)return;var l=d.querySelector('link[rel=alternate][hreflang=\"'+w+'\"]');"
+                 "if(l)location.replace(new URL(l.href).pathname+location.search+location.hash)}catch(x){}})()</script>\n")
 
 
 # --------------------------------------------------------------------------- gabarit
@@ -92,25 +183,27 @@ LOGO = ('<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="
 
 
 def head(title, desc, path, jsonld=None, robots='index, follow', og_type='website', accent=None):
-    canonical = SITE + path
+    global CUR_PATH
+    CUR_PATH = path
+    canonical = SITE + U(path)
     ld = ''
     for block in (jsonld or []):
         ld += '<script type="application/ld+json">' + json.dumps(block, ensure_ascii=False, separators=(',', ':')) + '</script>\n'
     style = f'<style>:root{{--accent:{accent}}}</style>\n' if accent else ''
     return f'''<!doctype html>
-<html lang="fr">
+<html lang="{i18n.LANG}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{canonical}">
-<meta name="robots" content="{robots}">
+{lang_links(path)}{LANG_REDIRECT if lang_links(path) else ''}<meta name="robots" content="{robots}">
 <meta name="theme-color" content="#07080f">
 <meta name="google-adsense-account" content="{PUB}">
 <meta name="alldle-verify" content="zeH2tpvyQl3QIQMFda8JTGnZePXWWPus">
 <meta property="og:site_name" content="KamiQuiz">
-<meta property="og:locale" content="fr_FR">
+<meta property="og:locale" content="{i18n.LOCALES[i18n.LANG]}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
@@ -128,26 +221,29 @@ def head(title, desc, path, jsonld=None, robots='index, follow', og_type='websit
 {style}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={PUB}" crossorigin="anonymous"></script>
 {ld}</head>
 <body>
-<a class="skip" href="#contenu">Aller au contenu</a>
+<a class="skip" href="#contenu">{T('Aller au contenu')}</a>
 '''
 
 
 CUR = ' aria-current="page"'
 LETSDLE = 'https://letsdle.com/'
-LETSDLE_NAV = (f'<a class="nav-ext" href="{LETSDLE}" target="_blank" rel="noopener" '
-               'title="Letsdle, d\'autres petits jeux quotidiens (nouvel onglet)">Plus de jeux<span aria-hidden="true"> ↗</span></a>')
 OK_CLS = ' class="ok"'
 NAV = [('/quiz/', 'Tous les quiz'), ('/dle/', 'Kamidle'), ('/guides/', 'Guides'), ('/a-propos/', 'À propos')]
 
 
 def header(current=''):
+    ttl = T("Letsdle, d'autres petits jeux quotidiens (nouvel onglet)")
+    letsdle = (f'<a class="nav-ext" href="{LETSDLE}" target="_blank" rel="noopener" '
+               f'title="{ttl}">{T("Plus de jeux")}<span aria-hidden="true"> ↗</span></a>')
     links = ''.join(
-        f'<a href="{href}"{CUR if current == href else ""}>{label}</a>' for href, label in NAV)
+        f'<a href="{U(href)}"{CUR if current == href else ""}>{T(label)}</a>' for href, label in NAV
+        if (href != '/dle/' or dle_ready()) and (href != '/guides/' or GUIDES))
     return f'''<header class="site-head">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="KamiQuiz, accueil">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">{links}{LETSDLE_NAV}<a class="nav-cta" href="/jouer/">Jouer</a></nav>
+    <a class="brand" href="{U('/')}" aria-label="{T('KamiQuiz, accueil')}">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">{T('Menu')}</button>
+    <nav class="nav" id="nav" aria-label="{T('Navigation principale')}">{links}{letsdle}<a class="nav-cta" href="{U('/jouer/')}">{T('Jouer')}</a></nav>
+    {lang_switch()}
   </div>
 </header>
 <main id="contenu">
@@ -155,22 +251,30 @@ def header(current=''):
 
 
 def footer(scripts=('/assets/js/site.js',)):
-    cats = ''.join(f'<li><a href="/quiz/#{cid}">{name}</a></li>' for cid, name, _ in CATEGORIES)
+    present = {s['cat'] for s in SERIES}
+    cats = ''.join(f'<li><a href="{U("/quiz/")}#{cid}">{name}</a></li>' for cid, name, _ in CATEGORIES if cid in present)
+    extra = ''
+    if dle_ready():
+        extra += f'<li><a href="{U("/dle/")}">{T("Kamidle, jeux du jour")}</a></li>'
+    if GUIDES:
+        extra += f'<li><a href="{U("/guides/")}">{T("Guides")}</a></li>'
+    if i18n.LANG != 'fr':
+        scripts = (f'/assets/js/i18n-{i18n.LANG}.js',) + tuple(scripts)
     js = ''.join(f'<script src="{asset(s)}" defer></script>\n' for s in scripts)
     return f'''</main>
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a class="brand" href="/">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
-        <p style="margin-top:14px;max-width:34ch">Des quiz gratuits sur les animés, les séries, les films, les jeux vidéo et la culture générale. Sans inscription.</p>
-        <a class="foot-badge" href="https://www.alldle.net/game/kamiquiz?ref=badge" target="_blank" rel="noopener" aria-label="Play on Alldle"><img src="https://www.alldle.net/badge.svg?g=eqqfouhthy68vr5qt4k7sjca&amp;variant=dark&amp;size=compact&amp;content=text" alt="Play on Alldle" width="180" height="48" loading="lazy" style="border:0"></a>
+        <a class="brand" href="{U('/')}">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
+        <p style="margin-top:14px;max-width:34ch">{T('Des quiz gratuits sur les animés, les séries, les films, les jeux vidéo et la culture générale. Sans inscription.')}</p>
+        <a class="foot-badge" href="https://www.alldle.net/game/kamiquiz?ref=badge" target="_blank" rel="noopener" aria-label="Play on Alldle"><img src="https://www.alldle.net/badge.svg?g=eqqfouhthy68vr5qt4k7sjca&amp;variant=dark&amp;size=compact&amp;content=text" alt="Play on Alldle" width="180" height="48" loading="lazy" style="border:0" onerror="var a=this.parentNode;a.classList.add('foot-badge-txt');a.textContent='{T("Jouer sur Alldle")} ↗'"></a>
       </div>
-      <div><h2>Quiz</h2><ul>{cats}</ul></div>
-      <div><h2>KamiQuiz</h2><ul><li><a href="/dle/">Kamidle, jeux du jour</a></li><li><a href="/guides/">Guides</a></li><li><a href="/a-propos/">À propos</a></li><li><a href="/contact/">Contact</a></li><li><a href="/jouer/">Quiz tout mélangé</a></li><li><a href="{LETSDLE}" target="_blank" rel="noopener">Plus de jeux sur Letsdle ↗</a></li></ul></div>
-      <div><h2>Informations</h2><ul><li><a href="/confidentialite/">Confidentialité et cookies</a></li><li><a href="/conditions/">Conditions d'utilisation</a></li><li><a href="/sitemap.xml">Plan du site</a></li></ul></div>
+      <div><h2>{T('Quiz')}</h2><ul>{cats}</ul></div>
+      <div><h2>KamiQuiz</h2><ul>{extra}<li><a href="{U('/a-propos/')}">{T('À propos')}</a></li><li><a href="{U('/contact/')}">{T('Contact')}</a></li><li><a href="{U('/jouer/')}">{T('Quiz tout mélangé')}</a></li><li><a href="{LETSDLE}" target="_blank" rel="noopener">{T('Plus de jeux sur Letsdle ↗')}</a></li></ul></div>
+      <div><h2>{T('Informations')}</h2><ul><li><a href="{U('/confidentialite/')}">{T('Confidentialité et cookies')}</a></li><li><a href="{U('/conditions/')}">{T("Conditions d'utilisation")}</a></li><li><a href="/sitemap.xml">{T('Plan du site')}</a></li></ul></div>
     </div>
-    <p class="foot-note">© 2026 KamiQuiz. KamiQuiz est un site indépendant, sans lien avec les ayants droit des œuvres citées. Les noms des œuvres appartiennent à leurs propriétaires respectifs.</p>
+    <p class="foot-note">{T('© 2026 KamiQuiz. KamiQuiz est un site indépendant, sans lien avec les ayants droit des œuvres citées. Les noms des œuvres appartiennent à leurs propriétaires respectifs.')}</p>
   </div>
 </footer>
 {js}<script>if('serviceWorker' in navigator){{addEventListener('load',function(){{navigator.serviceWorker.register('/sw.js').catch(function(){{}})}})}}</script>
@@ -180,6 +284,7 @@ def footer(scripts=('/assets/js/site.js',)):
 
 
 def write(path, content):
+    path = U(path)
     out = DIST / path.lstrip('/')
     if path.endswith('/'):
         out = out / 'index.html'
@@ -191,18 +296,19 @@ PAGES = []  # (path, priority, changefreq) pour le sitemap
 
 
 def page(path, prio='0.6', freq='monthly', lastmod=None):
-    PAGES.append((path, prio, freq, lastmod or TODAY))
+    PAGES.append((i18n.LANG, path, prio, freq, lastmod or TODAY))
 
 
 def crumbs_ld(items):
     return {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': SITE + p} for i, (n, p) in enumerate(items)]}
+        {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': SITE + U(p)} for i, (n, p) in enumerate(items)]}
 
 
 def crumbs_html(items):
-    lis = ''.join(f'<li><a href="{p}">{e(n)}</a></li>' if i < len(items) - 1 else f'<li aria-current="page">{e(n)}</li>'
+    lis = ''.join(f'<li><a href="{U(p)}">{e(n)}</a></li>' if i < len(items) - 1 else f'<li aria-current="page">{e(n)}</li>'
                   for i, (n, p) in enumerate(items))
-    return f'<nav class="crumbs" aria-label="Fil d\'Ariane"><ol>{lis}</ol></nav>'
+    label = T("Fil d'Ariane")
+    return f'<nav class="crumbs" aria-label="{label}"><ol>{lis}</ol></nav>'
 
 
 _ART = {}
@@ -226,20 +332,17 @@ def art_img(s, cls, eager=False):
 
 
 def series_row(s):
-    return (f'<li class="series-row"><a href="/quiz/{s["slug"]}/" style="--c:{s["color"]}">'
+    return (f'<li class="series-row"><a href="{U("/quiz/" + s["slug"] + "/")}" style="--c:{s["color"]}">'
             f'<span class="thumb">{art_img(s, "thumb-art")}</span>'
             f'<span><span class="nm">{e(s["name"])}</span><span class="ds">{e(s["tag"])}</span></span>'
-            f'<span class="ct">{s["n"]} questions</span></a></li>')
+            f'<span class="ct">{T("{n} questions", n=s["n"])}</span></a></li>')
 
 
 def tile(s, badge='', big=False):
     b = f'<span class="badge">{e(badge)}</span>' if badge else ''
-    return (f'<a class="tile{" tile-lg" if big else ""}" href="/quiz/{s["slug"]}/" style="--c:{s["color"]}">'
+    return (f'<a class="tile{" tile-lg" if big else ""}" href="{U("/quiz/" + s["slug"] + "/")}" style="--c:{s["color"]}">'
             f'{art_img(s, "tile-art")}{b}'
             f'<span class="nm">{e(s["name"])}</span><p>{e(s["tag"])}</p></a>')
-
-
-NAMES_JSON = e(json.dumps({s['key']: s['name'] for s in SERIES}, ensure_ascii=False))
 
 
 # --------------------------------------------------------------------------- guides
@@ -292,13 +395,19 @@ def md_to_html(md):
     return '\n'.join(out)
 
 
-def load_guides():
+def load_guides(lang='fr'):
+    """Guides publiés. En anglais, chaque fichier de content/en/guides/ indique son guide français (fr:) ;
+    le slug logique reste le slug français, U() donne le slug traduit."""
     guides = []
-    for f in sorted((ROOT / 'content' / 'guides').glob('*.md')):
+    folder = ROOT / 'content' / ('guides' if lang == 'fr' else f'{lang}/guides')
+    for f in sorted(folder.glob('*.md')):
         raw = f.read_text(encoding='utf-8')
         meta_txt, body = raw.split('\n\n', 1)
         meta = dict(line.split(': ', 1) if ': ' in line else (line.rstrip(':'), '') for line in meta_txt.splitlines())
         meta['slug'] = f.stem
+        if lang != 'fr':
+            i18n.GUIDE_SLUGS[lang][meta['fr']] = f.stem
+            meta['slug'] = meta['fr']
         meta['html'] = md_to_html(body)
         meta['words'] = len(re.sub(r'<[^>]+>', ' ', meta['html']).split())
         guides.append(meta)
@@ -311,86 +420,86 @@ def load_guides():
     return guides
 
 
-GUIDES = load_guides()
-GUIDES_BY_SERIE = {}
-for g in GUIDES:
-    if g.get('serie'):
-        GUIDES_BY_SERIE.setdefault(g['serie'], []).append(g)
 
 
 # --------------------------------------------------------------------------- accueil
 def build_home():
     keys = ','.join(s['key'] for s in SERIES)
     by_cat = Counter(s['cat'] for s in SERIES)
-    pop = [BY_KEY[k] for k in POPULAR]
+    pop = [BY_KEY[k] for k in POPULAR if k in BY_KEY]
     recent = [s['key'] for s in sorted(SERIES, key=lambda s: s['date'], reverse=True) if s['date'] > BASE_DATE]
-    new = [BY_KEY[k] for k in (recent + [k for k in NEW_FALLBACK if k not in recent])[:3]]
+    new = [BY_KEY[k] for k in (recent + [k for k in NEW_FALLBACK if k not in recent]) if k in BY_KEY][:3]
     cats_html = ''.join(
-        f'<a class="chip" href="/quiz/#{cid}">{name} <span class="muted">{by_cat[cid]}</span></a>' for cid, name, _ in CATEGORIES)
-    modes = ''.join(f'<a class="mode" href="/jouer/?m={m}"><span class="mode-ico" aria-hidden="true">{i}</span>'
+        f'<a class="chip" href="{U("/quiz/")}#{cid}">{name} <span class="muted">{by_cat[cid]}</span></a>' for cid, name, _ in CATEGORIES if by_cat[cid])
+    modes = ''.join(f'<a class="mode" href="{U("/jouer/")}?m={m}"><span class="mode-ico" aria-hidden="true">{i}</span>'
                     f'<span class="mode-name">{n}</span><p>{d}</p></a>' for m, i, n, d in MODES)
-    guides = ''.join(f'<li><a href="/guides/{g["slug"]}/"><span class="gt">{e(g["title"])}</span>'
+    guides = ''.join(f'<li><a href="{U("/guides/" + g["slug"] + "/")}"><span class="gt">{e(g["title"])}</span>'
                      f'<span class="gd">{e(g["description"])}</span></a></li>' for g in GUIDES[:4])
     ld = [
-        {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'KamiQuiz', 'url': SITE + '/', 'inLanguage': 'fr'},
+        {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'KamiQuiz', 'url': SITE + U('/'), 'inLanguage': i18n.LANG},
         {'@context': 'https://schema.org', '@type': 'Organization', 'name': 'KamiQuiz', 'url': SITE + '/',
          'logo': SITE + '/assets/img/icon-512.png', 'email': 'contact@kamiquiz.com'},
     ]
+    nq, ns = fr_num(TOTAL_Q), NB_SERIES
+    rows = ''.join(series_row(BY_KEY[k]) for k in ['onepiece', 'jjk', 'demonslayer', 'got', 'harrypotter', 'zelda', 'histoire', 'geo'] if k in BY_KEY)
+    tiles_pop = tile(pop[0], big=True) + ''.join(tile(s) for s in pop[1:5])
+    tiles_new = ''.join(tile(s, T('Nouveau')) for s in new)
+    guides_block = ''
+    if guides:
+        guides_block = f'''<div>
+      <h2 class="h2">{T('Guides et dossiers')}</h2>
+      <p class="muted">{T('Pour réviser avant de jouer, ou comprendre une réponse.')}</p>
+      <ul class="guide-list">{guides}</ul>
+      <p style="margin-top:16px"><a href="{U('/guides/')}">{T('Tous les guides')}</a></p>
+    </div>'''
     body = f'''<section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1 class="display">Le quiz qui t'élève <span>au rang de Kami</span></h1>
-      <p class="lede">{fr_num(TOTAL_Q)} questions sur {NB_SERIES} univers, des shōnen aux séries cultes. Chaque réponse est expliquée, pour apprendre autant que pour jouer.</p>
+      <h1 class="display">{T("Le quiz qui t'élève <span>au rang de Kami</span>")}</h1>
+      <p class="lede">{T('{nq} questions sur {ns} univers, des shōnen aux séries cultes. Chaque réponse est expliquée, pour apprendre autant que pour jouer.', nq=nq, ns=ns)}</p>
       <div class="btn-row">
-        <a class="btn btn-gold" href="/quiz/">Choisir un quiz</a>
-        <a class="btn" href="/jouer/">Tout mélanger</a>
+        <a class="btn btn-gold" href="{U('/quiz/')}">{T('Choisir un quiz')}</a>
+        <a class="btn" href="{U('/jouer/')}">{T('Tout mélanger')}</a>
       </div>
       <div class="hero-facts">
-        <div>{fr_num(TOTAL_Q)}<small>questions expliquées</small></div>
-        <div>{NB_SERIES}<small>univers</small></div>
-        <div>0 €<small>sans inscription</small></div>
+        <div>{nq}<small>{T('questions expliquées')}</small></div>
+        <div>{ns}<small>{T('univers')}</small></div>
+        <div>{T('0 €')}<small>{T('sans inscription')}</small></div>
       </div>
     </div>
     <div class="qcard" id="qdj" data-keys="{keys}" data-names="{NAMES_JSON}" aria-labelledby="qdj-title">
-      <div class="qcard-top"><strong id="qdj-title">Question du jour</strong><span class="chip" data-serie><i></i>…</span></div>
-      <div data-slot><p class="qtext">Chargement de la question du jour…</p></div>
+      <div class="qcard-top"><strong id="qdj-title">{T('Question du jour')}</strong><span class="chip" data-serie><i></i>…</span></div>
+      <div data-slot><p class="qtext">{T('Chargement de la question du jour…')}</p></div>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2 class="h2">Les plus joués</h2></div><p>Les univers favoris de la communauté, pour commencer en terrain connu.</p></div>
-    <div class="tiles">{tile(pop[0], big=True)}{''.join(tile(s) for s in pop[1:5])}</div>
+    <div class="section-head"><div><h2 class="h2">{T('Les plus joués')}</h2></div><p>{T('Les univers favoris de la communauté, pour commencer en terrain connu.')}</p></div>
+    <div class="tiles">{tiles_pop}</div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2 class="h2">Nouveaux univers</h2></div><p>Les derniers quiz arrivés sur le site.</p></div>
-    <div class="tiles">{''.join(tile(s, 'Nouveau') for s in new)}</div>
+    <div class="section-head"><div><h2 class="h2">{T('Nouveaux univers')}</h2></div><p>{T('Les derniers quiz arrivés sur le site.')}</p></div>
+    <div class="tiles">{tiles_new}</div>
   </div>
 </section>
-
+{dle_home_section()}
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2 class="h2">Kamidle, les jeux du jour</h2></div><p>Cinq énigmes par jour, les mêmes pour tout le monde. Trouve-les, garde ta série et partage ton résultat.</p></div>
-    <div class="dle-modes">{dle_cards()}</div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="section-head"><div><h2 class="h2">Tous les univers</h2></div><p>Cinq grandes familles, {NB_SERIES} quiz.</p></div>
+    <div class="section-head"><div><h2 class="h2">{T('Tous les univers')}</h2></div><p>{T('Cinq grandes familles, {ns} quiz.', ns=ns)}</p></div>
     <div class="cat-nav">{cats_html}</div>
-    <ul class="series-list">{''.join(series_row(BY_KEY[k]) for k in ['onepiece', 'jjk', 'demonslayer', 'got', 'harrypotter', 'zelda', 'histoire', 'geo'])}</ul>
-    <p style="margin-top:20px"><a href="/quiz/">Voir les {NB_SERIES} quiz</a></p>
+    <ul class="series-list">{rows}</ul>
+    <p style="margin-top:20px"><a href="{U('/quiz/')}">{T('Voir les {ns} quiz', ns=ns)}</a></p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2 class="h2">Six façons de jouer</h2></div><p>Chaque mode fonctionne avec tous les univers, ou avec toutes les questions mélangées.</p></div>
+    <div class="section-head"><div><h2 class="h2">{T('Six façons de jouer')}</h2></div><p>{T('Chaque mode fonctionne avec tous les univers, ou avec toutes les questions mélangées.')}</p></div>
     <div class="modes">{modes}</div>
   </div>
 </section>
@@ -398,31 +507,26 @@ def build_home():
 <section class="section">
   <div class="wrap two-col">
     <div>
-      <h2 class="h2">Classement mondial</h2>
-      <p class="muted">Les meilleurs scores, toutes séries confondues. Enregistrez le vôtre à la fin d'une partie.</p>
-      <ol class="board" data-board="global" data-names="{NAMES_JSON}"><li class="board-empty"><span class="empty">Chargement du classement…</span></li></ol>
+      <h2 class="h2">{T('Classement mondial')}</h2>
+      <p class="muted">{T("Les meilleurs scores, toutes séries confondues. Enregistrez le vôtre à la fin d'une partie.")}</p>
+      <ol class="board" data-board="global" data-names="{NAMES_JSON}"><li class="board-empty"><span class="empty">{T('Chargement du classement…')}</span></li></ol>
     </div>
-    <div>
-      <h2 class="h2">Guides et dossiers</h2>
-      <p class="muted">Pour réviser avant de jouer, ou comprendre une réponse.</p>
-      <ul class="guide-list">{guides}</ul>
-      <p style="margin-top:16px"><a href="/guides/">Tous les guides</a></p>
-    </div>
+    {guides_block}
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
     <div class="callout prose">
-      <h2 class="h2">Un quiz pour apprendre, pas seulement pour gagner</h2>
-      <p class="muted">KamiQuiz est né d'une idée simple : un bon quiz doit expliquer ses réponses. Chaque question est accompagnée d'une explication, chaque série a sa page de révision avec toutes ses questions classées par thème, et le jeu privilégie les questions que vous n'avez pas encore vues.</p>
-      <a href="/a-propos/">En savoir plus sur KamiQuiz</a>
+      <h2 class="h2">{T('Un quiz pour apprendre, pas seulement pour gagner')}</h2>
+      <p class="muted">{T("KamiQuiz est né d'une idée simple : un bon quiz doit expliquer ses réponses. Chaque question est accompagnée d'une explication, chaque série a sa page de révision avec toutes ses questions classées par thème, et le jeu privilégie les questions que vous n'avez pas encore vues.")}</p>
+      <a href="{U('/a-propos/')}">{T('En savoir plus sur KamiQuiz')}</a>
     </div>
   </div>
 </section>
 '''
-    write('/', head(f'KamiQuiz — {fr_num(TOTAL_Q)} questions de quiz sur les animés, séries, films et jeux',
-                    f'Quiz gratuits et sans inscription : {fr_num(TOTAL_Q)} questions expliquées sur {NB_SERIES} univers, de Naruto à Game of Thrones. Question du jour, six modes de jeu et classement mondial.',
+    write('/', head(T('KamiQuiz — {nq} questions de quiz sur les animés, séries, films et jeux', nq=nq),
+                    T('Quiz gratuits et sans inscription : {nq} questions expliquées sur {ns} univers, de Naruto à Game of Thrones. Question du jour, six modes de jeu et classement mondial.', nq=nq, ns=ns),
                     '/', ld) + header('/') + body + footer())
     page('/', '1.0', 'daily')
 
@@ -433,24 +537,28 @@ def build_index():
     for cid, name, desc in CATEGORIES:
         items = [s for s in SERIES if s['cat'] == cid]
         n = sum(s['n'] for s in items)
-        blocks += (f'<section class="cat-block" id="{cid}"><header><h2>{name}</h2><span>{len(items)} quiz, {fr_num(n)} questions</span></header>'
+        if not items:
+            continue
+        blocks += (f'<section class="cat-block" id="{cid}"><header><h2>{name}</h2><span>{T("{a} quiz, {b} questions", a=len(items), b=fr_num(n))}</span></header>'
                    f'<p class="muted" style="margin:12px 0 4px">{e(desc)}</p><ul class="series-list">{"".join(series_row(s) for s in items)}</ul></section>')
-    nav = ''.join(f'<a class="chip" href="#{cid}">{name}</a>' for cid, name, _ in CATEGORIES)
-    ld = [crumbs_ld([('Accueil', '/'), ('Tous les quiz', '/quiz/')]),
-          {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': 'Tous les quiz KamiQuiz', 'url': SITE + '/quiz/',
-           'hasPart': [{'@type': 'Quiz', 'name': f'Quiz {s["name"]}', 'url': f'{SITE}/quiz/{s["slug"]}/'} for s in SERIES]}]
+    present = {s['cat'] for s in SERIES}
+    nav = ''.join(f'<a class="chip" href="#{cid}">{name}</a>' for cid, name, _ in CATEGORIES if cid in present)
+    crumbs = [(T('Accueil'), '/'), (T('Tous les quiz'), '/quiz/')]
+    ld = [crumbs_ld(crumbs),
+          {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': T('Tous les quiz KamiQuiz'), 'url': SITE + U('/quiz/'),
+           'hasPart': [{'@type': 'Quiz', 'name': T('Quiz {n}', n=s["name"]), 'url': SITE + U('/quiz/' + s['slug'] + '/')} for s in SERIES]}]
     body = f'''<div class="wrap">
   <div class="page-head">
-    {crumbs_html([('Accueil', '/'), ('Tous les quiz', '/quiz/')])}
-    <h1 class="h1">Tous les quiz</h1>
-    <p class="lede">{NB_SERIES} univers et {fr_num(TOTAL_Q)} questions, rangés par famille. Chaque quiz a sa page avec les questions à réviser et six modes de jeu.</p>
+    {crumbs_html(crumbs)}
+    <h1 class="h1">{T('Tous les quiz')}</h1>
+    <p class="lede">{T('{ns} univers et {nq} questions, rangés par famille. Chaque quiz a sa page avec les questions à réviser et six modes de jeu.', ns=NB_SERIES, nq=fr_num(TOTAL_Q))}</p>
   </div>
-  <div class="cat-nav" style="margin-top:28px">{nav}<a class="chip" href="/jouer/">Tout mélanger</a></div>
+  <div class="cat-nav" style="margin-top:28px">{nav}<a class="chip" href="{U('/jouer/')}">{T('Tout mélanger')}</a></div>
   {blocks}
 </div>
 '''
-    write('/quiz/', head('Tous les quiz : animés, séries, films, jeux vidéo et culture — KamiQuiz',
-                         f'La liste complète des {NB_SERIES} quiz gratuits de KamiQuiz : Naruto, One Piece, Harry Potter, Game of Thrones, Pokémon, histoire, géographie et bien plus.',
+    write('/quiz/', head(T('Tous les quiz : animés, séries, films, jeux vidéo et culture — KamiQuiz'),
+                         T('La liste complète des {ns} quiz gratuits de KamiQuiz : Naruto, One Piece, Harry Potter, Game of Thrones, Pokémon, histoire, géographie et bien plus.', ns=NB_SERIES),
                          '/quiz/', ld) + header('/quiz/') + body + footer())
     page('/quiz/', '0.9', 'weekly')
 
@@ -463,7 +571,7 @@ def build_serie(s):
     by_cat = {c: [q for q in qs if q['cat'] == c] for c in cats}
     lv = Counter(q['d'] for q in qs)
     path = f'/quiz/{s["slug"]}/'
-    crumbs = [('Accueil', '/'), ('Tous les quiz', '/quiz/'), (s['name'], path)]
+    crumbs = [(T('Accueil'), '/'), (T('Tous les quiz'), '/quiz/'), (s['name'], path)]
 
     groups = ''
     for c in cats:
@@ -477,41 +585,42 @@ def build_serie(s):
             lis += (f'<li class="qitem"><details><summary><span>{e(q["q"])}</span><span class="lvl">{LEVELS[q["d"]]}</span></summary>'
                     f'<ul class="opts">{opts}</ul>{expl}</details></li>')
         icon = d['cats'][c].get('i', '')
-        groups += f'<section class="qgroup"><h3>{e(icon)} {e(c)} <small>{len(items)} questions</small></h3><ol class="qlist">{lis}</ol></section>'
+        groups += f'<section class="qgroup"><h3>{e(icon)} {e(c)} <small>{T("{n} questions", n=len(items))}</small></h3><ol class="qlist">{lis}</ol></section>'
 
-    modes = ''.join(f'<a class="mode" href="/jouer/?s={s["key"]}&amp;m={m}"><span class="mode-ico" aria-hidden="true">{i}</span>'
+    play = U('/jouer/')
+    modes = ''.join(f'<a class="mode" href="{play}?s={s["key"]}&amp;m={m}"><span class="mode-ico" aria-hidden="true">{i}</span>'
                     f'<span class="mode-name">{n}</span><p>{dsc}</p></a>' for m, i, n, dsc in MODES)
 
     ranks = d.get('ranks') or []
     rank_items = ''
     if ranks:
         step = 100 / len(ranks)
-        rank_items = ''.join(f'<li><span>{e(r)}</span><span>{round(i * step)} %+</span></li>' for i, r in enumerate(ranks))
+        rank_items = ''.join(f'<li><span>{e(r)}</span><span>{T("{p} %+", p=round(i * step))}</span></li>' for i, r in enumerate(ranks))
 
     related = [o for o in SERIES if o['cat'] == s['cat'] and o['key'] != s['key']][:6]
     related_html = ''.join(series_row(o) for o in related)
     guides = GUIDES_BY_SERIE.get(s['key'], [])
     guide_html = ''
     if guides:
-        guide_html = ('<h2>Pour aller plus loin</h2><ul class="guide-list">' + ''.join(
-            f'<li><a href="/guides/{g["slug"]}/"><span class="gt">{e(g["title"])}</span><span class="gd">{e(g["description"])}</span></a></li>'
+        guide_html = (f'<h2>{T("Pour aller plus loin")}</h2><ul class="guide-list">' + ''.join(
+            f'<li><a href="{U("/guides/" + g["slug"] + "/")}"><span class="gt">{e(g["title"])}</span><span class="gd">{e(g["description"])}</span></a></li>'
             for g in guides) + '</ul>')
 
-    themes = ', '.join(cats[:-1]) + (' et ' + cats[-1] if len(cats) > 1 else cats[0])
-    desc = (f'Quiz {s["name"]} gratuit : {s["n"]} questions corrigées et expliquées sur {themes.lower()}. '
-            f'Jouez en ligne sans inscription ou révisez toutes les réponses.')
+    themes = ', '.join(cats[:-1]) + (T(' et ') + cats[-1] if len(cats) > 1 else cats[0])
+    desc = T('Quiz {name} gratuit : {n} questions corrigées et expliquées sur {themes}. Jouez en ligne sans inscription ou révisez toutes les réponses.',
+             name=s['name'], n=s['n'], themes=themes.lower())
     if len(desc) > 165:
-        desc = f'Quiz {s["name"]} gratuit : {s["n"]} questions corrigées et expliquées. Six modes de jeu, sans inscription, avec toutes les réponses à réviser.'
+        desc = T('Quiz {name} gratuit : {n} questions corrigées et expliquées. Six modes de jeu, sans inscription, avec toutes les réponses à réviser.', name=s['name'], n=s['n'])
 
     ld = [crumbs_ld(crumbs), {
-        '@context': 'https://schema.org', '@type': 'Quiz', 'name': f'Quiz {s["name"]}', 'url': SITE + path,
-        'description': desc, 'inLanguage': 'fr', 'about': {'@type': 'Thing', 'name': s['name']},
-        'educationalLevel': 'Tous niveaux', 'isAccessibleForFree': True,
+        '@context': 'https://schema.org', '@type': 'Quiz', 'name': T('Quiz {n}', n=s['name']), 'url': SITE + U(path),
+        'description': desc, 'inLanguage': i18n.LANG, 'about': {'@type': 'Thing', 'name': s['name']},
+        'educationalLevel': T('Tous niveaux'), 'isAccessibleForFree': True,
         'provider': {'@type': 'Organization', 'name': 'KamiQuiz', 'url': SITE + '/'}}]
 
     intro = ''.join(f'<p>{e(p)}</p>' for p in s['intro'])
     trailer_html = ''
-    if s['key'] in TRAILERS:
+    if s['key'] in TRAILERS and i18n.LANG == 'fr':
         yt, ttl, chan = TRAILERS[s['key']]
         trailer_html = f'''<h2>La bande-annonce</h2>
       <figure class="trailer" data-yt="{e(yt)}" data-title="{e(ttl)}" style="--c:{s["color"]}">
@@ -525,84 +634,86 @@ def build_serie(s):
     lv_items = ''.join(f'<li><span>{LEVELS[k]}</span><span>{lv[k]}</span></li>' for k in (1, 2, 3, 4) if lv[k])
     cat_items = ''.join(f'<li><span>{e(d["cats"][c].get("i", ""))} {e(c)}</span><span>{len(by_cat[c])}</span></li>' for c in cats)
 
+    ranks_html = f"<h2 style='margin-top:22px'>{T('Rangs à décrocher')}</h2><ul class='ranks'>" + rank_items + "</ul>" if rank_items else ""
+    name = e(s['name'])
     body = f'''<section class="serie-head">
   <div class="serie-art" aria-hidden="true">{art_img(s, "serie-art-img", eager=True)}</div>
   <div class="wrap">
     {crumbs_html(crumbs)}
-    <h1 class="h1">Quiz <em>{e(s["name"])}</em></h1>
+    <h1 class="h1">{T('Quiz <em>{name}</em>', name=name)}</h1>
     <p class="lede">{e(s["tag"])}</p>
     <div class="btn-row">
-      <a class="btn btn-gold" href="/jouer/?s={s["key"]}&amp;m=libre">Jouer 20 questions</a>
-      <a class="btn" href="/jouer/?s={s["key"]}">Choisir un mode</a>
-      <a class="btn" href="#questions">Réviser les réponses</a>
+      <a class="btn btn-gold" href="{play}?s={s["key"]}&amp;m=libre">{T('Jouer 20 questions')}</a>
+      <a class="btn" href="{play}?s={s["key"]}">{T('Choisir un mode')}</a>
+      <a class="btn" href="#questions">{T('Réviser les réponses')}</a>
     </div>
     <div class="facts">
-      <span class="chip"><i></i>{s["n"]} questions</span>
-      <span class="chip">{len(cats)} thèmes</span>
-      <span class="chip">{lv[1] + lv[2]} faciles ou moyennes, {lv[3] + lv[4]} difficiles</span>
+      <span class="chip"><i></i>{T('{n} questions', n=s["n"])}</span>
+      <span class="chip">{T('{n} thèmes', n=len(cats))}</span>
+      <span class="chip">{T('{a} faciles ou moyennes, {b} difficiles', a=lv[1] + lv[2], b=lv[3] + lv[4])}</span>
     </div>
   </div>
 </section>
 <div class="wrap section" style="padding-top:48px">
   <div class="serie-body">
     <article class="article">
-      <h2 style="margin-top:0">À propos de ce quiz</h2>
+      <h2 style="margin-top:0">{T('À propos de ce quiz')}</h2>
       {intro}
       {trailer_html}
-      <h2>Les modes de jeu</h2>
+      <h2>{T('Les modes de jeu')}</h2>
       <div class="modes">{modes}</div>
-      <h2 id="questions">Les {s["n"]} questions et leurs réponses</h2>
-      <p>Toutes les questions du quiz {e(s["name"])}, classées par thème. Cliquez sur une question pour afficher la bonne réponse et son explication, ou tentez d'abord votre chance en jouant.</p>
-      <div class="revise-tools"><button class="btn btn-sm" type="button" data-reveal="open">Afficher toutes les réponses</button><button class="btn btn-sm" type="button" data-reveal="close">Tout masquer</button></div>
+      <h2 id="questions">{T('Les {n} questions et leurs réponses', n=s["n"])}</h2>
+      <p>{T("Toutes les questions du quiz {name}, classées par thème. Cliquez sur une question pour afficher la bonne réponse et son explication, ou tentez d'abord votre chance en jouant.", name=name)}</p>
+      <div class="revise-tools"><button class="btn btn-sm" type="button" data-reveal="open">{T('Afficher toutes les réponses')}</button><button class="btn btn-sm" type="button" data-reveal="close">{T('Tout masquer')}</button></div>
       {groups}
       {guide_html}
-      <h2>Autres quiz {e(CAT_NAME[s["cat"]].lower())}</h2>
+      <h2>{T('Autres quiz {cat}', cat=e(CAT_NAME[s["cat"]].lower()))}</h2>
       <ul class="series-list">{related_html}</ul>
     </article>
     <aside>
       <div class="aside-box">
-        <h2>Thèmes</h2><ul>{cat_items}</ul>
-        <h2 style="margin-top:22px">Difficulté</h2><ul>{lv_items}</ul>
-        {"<h2 style='margin-top:22px'>Rangs à décrocher</h2><ul class='ranks'>" + rank_items + "</ul>" if rank_items else ""}
-        <h2 style="margin-top:22px">Meilleurs scores</h2>
-        <ol class="board" data-board="{s["key"]}" data-names="{NAMES_JSON}" style="font-size:.9rem"><li class="board-empty"><span class="empty">Chargement…</span></li></ol>
+        <h2>{T('Thèmes')}</h2><ul>{cat_items}</ul>
+        <h2 style="margin-top:22px">{T('Difficulté')}</h2><ul>{lv_items}</ul>
+        {ranks_html}
+        <h2 style="margin-top:22px">{T('Meilleurs scores')}</h2>
+        <ol class="board" data-board="{s["key"]}" data-names="{NAMES_JSON}" style="font-size:.9rem"><li class="board-empty"><span class="empty">{T('Chargement…')}</span></li></ol>
       </div>
     </aside>
   </div>
 </div>
 '''
-    write(path, head(f'Quiz {s["name"]} : {s["n"]} questions avec réponses — KamiQuiz', desc, path, ld,
+    write(path, head(T('Quiz {name} : {n} questions avec réponses — KamiQuiz', name=s['name'], n=s['n']), desc, path, ld,
                      accent=s['color']) + header() + body + footer())
     page(path, '0.8', 'monthly', s['date'])
 
 
 # --------------------------------------------------------------------------- app de jeu
 def build_play():
-    series_js = json.dumps({s['key']: {'name': s['name'], 'slug': s['slug'], 'color': s['color']} for s in SERIES},
+    series_js = json.dumps({s['key']: {'name': s['name'], 'slug': U('/quiz/' + s['slug'] + '/').split('/')[-2], 'color': s['color']} for s in SERIES},
                            ensure_ascii=False, separators=(',', ':'))
     body = f'''<section class="app">
   <div class="wrap app-shell">
-    <div class="app-title"><h1>Quiz <em data-app-name>KamiQuiz</em></h1></div>
+    <div class="app-title"><h1>{T('Quiz <em data-app-name>KamiQuiz</em>')}</h1></div>
 
-    <div class="screen" id="s-loading"><p class="loading">Chargement des questions…</p></div>
+    <div class="screen" id="s-loading"><p class="loading">{T('Chargement des questions…')}</p></div>
 
     <div class="screen" id="s-setup" hidden>
-      <p class="lede" style="margin-bottom:24px">Choisissez votre façon de jouer.</p>
+      <p class="lede" style="margin-bottom:24px">{T('Choisissez votre façon de jouer.')}</p>
       <div class="pick-grid" id="mode-grid"></div>
       <div class="cat-picker" id="cat-picker" hidden>
-        <h2 class="h2">Choisissez vos thèmes</h2>
+        <h2 class="h2">{T('Choisissez vos thèmes')}</h2>
         <div class="chips" id="cat-chips"></div>
-        <button class="btn btn-gold" type="button" id="cat-go">Lancer le quiz</button>
+        <button class="btn btn-gold" type="button" id="cat-go">{T('Lancer le quiz')}</button>
       </div>
       <div class="cat-picker" id="duel-picker" hidden>
-        <h2 class="h2">Qui s'affronte ?</h2>
+        <h2 class="h2">{T("Qui s'affronte ?")}</h2>
         <div class="duel-names">
-          <label class="sr-only" for="p1">Nom du joueur 1</label><input id="p1" maxlength="20" placeholder="Joueur 1" autocomplete="off">
-          <label class="sr-only" for="p2">Nom du joueur 2</label><input id="p2" maxlength="20" placeholder="Joueur 2" autocomplete="off">
+          <label class="sr-only" for="p1">{T('Nom du joueur 1')}</label><input id="p1" maxlength="20" placeholder="{T('Joueur 1')}" autocomplete="off">
+          <label class="sr-only" for="p2">{T('Nom du joueur 2')}</label><input id="p2" maxlength="20" placeholder="{T('Joueur 2')}" autocomplete="off">
         </div>
-        <button class="btn btn-gold" type="button" id="duel-go">Commencer le duel</button>
+        <button class="btn btn-gold" type="button" id="duel-go">{T('Commencer le duel')}</button>
       </div>
-      <p class="muted" style="margin-top:28px">Envie d'un autre univers ? <a href="/quiz/">Voir tous les quiz</a>.</p>
+      <p class="muted" style="margin-top:28px">{T("Envie d'un autre univers ? <a href=\"{u}\">Voir tous les quiz</a>.", u=U('/quiz/'))}</p>
     </div>
 
     <div class="screen" id="s-play" hidden>
@@ -616,41 +727,41 @@ def build_play():
         <div class="feedback" id="q-feedback" hidden aria-live="polite"></div>
       </div>
       <div class="app-next">
-        <button class="btn btn-sm" type="button" id="quit">Arrêter</button>
-        <button class="btn btn-gold" type="button" id="next" hidden>Question suivante</button>
+        <button class="btn btn-sm" type="button" id="quit">{T('Arrêter')}</button>
+        <button class="btn btn-gold" type="button" id="next" hidden>{T('Question suivante')}</button>
       </div>
-      <p class="muted" style="font-size:.82rem;margin-top:14px">Astuce : répondez avec les touches A, B, C, D ou 1 à 4, puis Entrée pour continuer.</p>
+      <p class="muted" style="font-size:.82rem;margin-top:14px">{T('Astuce : répondez avec les touches A, B, C, D ou 1 à 4, puis Entrée pour continuer.')}</p>
     </div>
 
     <div class="screen result" id="s-result" hidden>
       <div id="result-main"></div>
       <div class="btn-row">
-        <button class="btn btn-gold" type="button" id="again">Rejouer</button>
-        <button class="btn" type="button" id="other-mode">Changer de mode</button>
-        <button class="btn" type="button" id="share">Partager mon score</button>
-        <a class="btn" id="to-revise" href="/quiz/">Réviser les réponses</a>
+        <button class="btn btn-gold" type="button" id="again">{T('Rejouer')}</button>
+        <button class="btn" type="button" id="other-mode">{T('Changer de mode')}</button>
+        <button class="btn" type="button" id="share">{T('Partager mon score')}</button>
+        <a class="btn" id="to-revise" href="{U('/quiz/')}">{T('Réviser les réponses')}</a>
       </div>
       <div class="save-score" id="save-box">
         <form id="save-form">
-          <label for="save-name">Entrer au classement mondial</label>
-          <div class="row"><input id="save-name" maxlength="20" placeholder="Votre pseudo" autocomplete="nickname"><button class="btn btn-gold btn-sm" id="save-btn" type="submit">Enregistrer</button></div>
+          <label for="save-name">{T('Entrer au classement mondial')}</label>
+          <div class="row"><input id="save-name" maxlength="20" placeholder="{T('Votre pseudo')}" autocomplete="nickname"><button class="btn btn-gold btn-sm" id="save-btn" type="submit">{T('Enregistrer')}</button></div>
         </form>
         <p id="save-msg"></p>
       </div>
-      <div class="review" id="review" hidden><h2>Les réponses à retenir</h2><ol id="review-list"></ol></div>
+      <div class="review" id="review" hidden><h2>{T('Les réponses à retenir')}</h2><ol id="review-list"></ol></div>
     </div>
   </div>
 </section>
 <script>window.KQ_SERIES={series_js};</script>
 '''
-    write('/jouer/', head('Jouer — KamiQuiz', 'Jouez aux quiz KamiQuiz : six modes de jeu, réponses expliquées et classement mondial.',
+    write('/jouer/', head(T('Jouer — KamiQuiz'), T('Jouez aux quiz KamiQuiz : six modes de jeu, réponses expliquées et classement mondial.'),
                           '/jouer/', robots='noindex, follow') + header() + body + footer(('/assets/js/site.js', '/assets/js/quiz.js')))
 
 
 # --------------------------------------------------------------------------- Kamidle (jeux du jour)
 DLE_START = '2026-10-27'          # Kamidle n°1
 DLE_DAYS = 800                    # calendrier calculé d'avance, identique dans tous les déploiements
-DLE_INFO = {
+FR_DLE_INFO = {
     'personnage': ('Devine le personnage du jour',
                    "Propose un personnage : chaque essai indique ce qu'il partage avec la cible (univers, catégorie, genre, espèce, rôle, style, âge, cheveux et année de sortie). Essais illimités, deux indices se débloquent en route."),
     'pouvoir': ('Devine le pouvoir du jour',
@@ -763,96 +874,130 @@ def dle_schedule():
 
 
 def dle_cards():
+    state = T("À jouer aujourd'hui")
     return ''.join(
-        f'<a class="dle-card" href="/dle/{m}/" data-dle-card="{m}"><span class="dle-ico" aria-hidden="true">{ico}</span>'
-        f'<span class="dle-name">{label}</span><p>{e(desc)}</p><span class="dle-state" data-state>À jouer aujourd\'hui</span></a>'
-        for m, label, ico, desc in DLE.MODES)
+        f'<a class="dle-card" href="{U("/dle/" + m + "/")}" data-dle-card="{m}"><span class="dle-ico" aria-hidden="true">{ico}</span>'
+        f'<span class="dle-name">{label}</span><p>{e(desc)}</p><span class="dle-state" data-state>{state}</span></a>'
+        for m, label, ico, desc in DLE_MODES)
+
+
+def dle_ready():
+    return i18n.LANG == 'fr' or (ROOT / 'content' / i18n.LANG / 'dle.py').exists()
+
+
+def dle_home_section():
+    if not dle_ready():
+        return ''
+    return f'''
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div><h2 class="h2">{T('Kamidle, les jeux du jour')}</h2></div><p>{T('Cinq énigmes par jour, les mêmes pour tout le monde. Trouve-les, garde ta série et partage ton résultat.')}</p></div>
+    <div class="dle-modes">{dle_cards()}</div>
+  </div>
+</section>
+'''
+
+
+def dle_source():
+    """Données du Kamidle dans la langue en cours : le module français, ou sa traduction (content/<langue>/dle.py)."""
+    if i18n.LANG == 'fr':
+        return DLE
+    return __import__(f'{i18n.LANG}.dle', fromlist=['localize']).localize(DLE)
 
 
 def build_dle():
+    D = dle_source()
     keys = {s['key'] for s in SERIES}
-    chars = [c for c in DLE.CHARS if c['u'] in keys]
-    series = {s['key']: {'n': s['name'], 's': s['slug'], 'c': s['cat']} for s in SERIES}
+    chars = [c for c in D.CHARS if c['u'] in keys]
+    series = {s['key']: {'n': s['name'], 's': U('/quiz/' + s['slug'] + '/').split('/')[-2], 'c': s['cat']} for s in SERIES}
+    sched = dle_schedule()
+    if i18n.LANG != 'fr':
+        sched['mot'] = D.word_schedule(DLE_START, DLE_DAYS)
     data = {
         'start': DLE_START,
         'cats': {cid: name for cid, name, _ in CATEGORIES},
         'series': series,
         'chars': chars,
-        'univers': {k: v for k, v in DLE.UNIVERS.items() if k in keys},
-        'mots': {m: d for m, d in DLE.MOTS},
-        'ages': DLE.AGES,
-        'hairNear': [sorted(g) for g in DLE.HAIR_NEAR],
-        'sched': dle_schedule(),
+        'univers': {k: v for k, v in D.UNIVERS.items() if k in keys},
+        'mots': {m: d for m, d in D.MOTS},
+        'ages': D.AGES,
+        'hairNear': [sorted(g) for g in D.HAIR_NEAR],
+        'sched': sched,
     }
-    # Liste des mots acceptés pour le Mot mystère : dictionnaire (licence MIT, voir data/mots-fr.LICENSE.txt)
+    out = DIST / 'data' if i18n.LANG == 'fr' else DIST / 'data' / i18n.LANG
+    out.mkdir(parents=True, exist_ok=True)
+    # Liste des mots acceptés pour le Mot mystère : dictionnaire (licence MIT, voir data/mots-<langue>.LICENSE.txt)
     # + mots du jeu + noms d'univers et de personnages d'un seul mot
-    valid = set((ROOT / 'data' / 'mots-fr.txt').read_text(encoding='utf-8').split())
-    valid |= {m for m, _ in DLE.MOTS}
+    valid = set((ROOT / 'data' / f'mots-{i18n.LANG}.txt').read_text(encoding='utf-8').split())
+    valid |= {m for m, _ in D.MOTS}
     for c in chars:
         for part in re.split(r'[^A-Za-zÀ-ÿ]+', c['name'] + ' ' + ' '.join(c['alias'])):
             w = ''.join(ch for ch in __import__('unicodedata').normalize('NFD', part) if ch.isalpha() and ord(ch) < 128).upper()
             if 5 <= len(w) <= 8:
                 valid.add(w)
-    (DIST / 'data' / 'mots.txt').write_text('\n'.join(sorted(valid)), encoding='utf-8')
-    (DIST / 'data' / 'dle.json').write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
+    (out / 'mots.txt').write_text('\n'.join(sorted(valid)), encoding='utf-8')
+    (out / 'dle.json').write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     n_chars, n_pow = len(chars), sum(1 for c in chars if c['p'])
     n_univ = len(data['univers'])
+    scripts = ('/assets/js/site.js', '/assets/js/dle.js')
 
     # ----- page d'accueil du Kamidle
-    crumbs = [('Accueil', '/'), ('Kamidle', '/dle/')]
+    crumbs = [(T('Accueil'), '/'), ('Kamidle', '/dle/')]
+    letsdle = T('Letsdle, un site ami, rassemble d\'autres petits jeux à une partie par jour : quiz sur les films d\'animation, associations de mots, géographie et plateformes piégées. <a href="{u}" target="_blank" rel="noopener">Découvrir Letsdle</a>.', u=LETSDLE)
     body = f'''<div class="wrap">
   <div class="page-head">
     {crumbs_html(crumbs)}
-    <h1 class="h1">Kamidle, les jeux du jour</h1>
-    <p class="lede">Cinq énigmes chaque jour, les mêmes pour tous les joueurs : un personnage, un pouvoir, des emojis, un univers et un mot mystère à deviner.</p>
+    <h1 class="h1">{T('Kamidle, les jeux du jour')}</h1>
+    <p class="lede">{T('Cinq énigmes chaque jour, les mêmes pour tous les joueurs : un personnage, un pouvoir, des emojis, un univers et un mot mystère à deviner.')}</p>
   </div>
   <div class="dle-modes" style="margin-top:32px">{dle_cards()}</div>
   <p class="dle-summary" data-dle-summary></p>
   <div class="two-col" style="margin-top:56px">
     <article class="prose">
-      <h2 class="h2">Comment ça marche</h2>
-      <p>Le Kamidle s'inspire des jeux en « -dle » nés avec Wordle : une énigme par jour, identique pour tout le monde, qui change à minuit (heure de ton appareil). Tu as le temps de réfléchir, de revenir plus tard dans la journée, et de comparer ton résultat avec tes amis le soir.</p>
-      <p>Les jeux puisent dans les mêmes univers que nos quiz : {n_chars} personnages, {n_pow} pouvoirs décrits sans les nommer, {n_univ} univers résumés en cinq indices et {len(DLE.MOTS)} mots du vocabulaire des animés, des séries et des jeux vidéo, chacun accompagné de sa définition. Une fois l'énigme trouvée, tu peux enchaîner sur le quiz complet de la série pour vérifier que tu la connais vraiment.</p>
-      <h2 class="h2" style="margin-top:32px">Ta série de victoires</h2>
-      <p>Chaque jeu garde ta série de jours gagnés d'affilée et ton record. Ces statistiques restent sur ton appareil : pas de compte, pas d'inscription. Si tu changes de navigateur, tu repars de zéro.</p>
+      <h2 class="h2">{T('Comment ça marche')}</h2>
+      <p>{T("Le Kamidle s'inspire des jeux en « -dle » nés avec Wordle : une énigme par jour, identique pour tout le monde, qui change à minuit (heure de ton appareil). Tu as le temps de réfléchir, de revenir plus tard dans la journée, et de comparer ton résultat avec tes amis le soir.")}</p>
+      <p>{T("Les jeux puisent dans les mêmes univers que nos quiz : {a} personnages, {b} pouvoirs décrits sans les nommer, {c} univers résumés en cinq indices et {d} mots du vocabulaire des animés, des séries et des jeux vidéo, chacun accompagné de sa définition. Une fois l'énigme trouvée, tu peux enchaîner sur le quiz complet de la série pour vérifier que tu la connais vraiment.", a=n_chars, b=n_pow, c=n_univ, d=len(D.MOTS))}</p>
+      <h2 class="h2" style="margin-top:32px">{T('Ta série de victoires')}</h2>
+      <p>{T("Chaque jeu garde ta série de jours gagnés d'affilée et ton record. Ces statistiques restent sur ton appareil : pas de compte, pas d'inscription. Si tu changes de navigateur, tu repars de zéro.")}</p>
     </article>
     <article class="prose">
-      <h2 class="h2">Sans spoiler majeur</h2>
-      <p>Les indices s'en tiennent à ce qu'on apprend dans les premiers arcs de chaque œuvre. Les grandes révélations, l'identité cachée d'un personnage ou la fin d'une série ne servent jamais d'indice.</p>
-      <h2 class="h2" style="margin-top:32px">Partager sans rien dévoiler</h2>
-      <p>À la fin de chaque partie, le bouton « Partager » copie une grille de carrés colorés qui montre ton parcours sans révéler la réponse. Colle-la sur Discord, X ou dans ton groupe de discussion.</p>
-      <h2 class="h2" style="margin-top:32px">Encore envie de jouer ?</h2>
-      <p>Letsdle, un site ami, rassemble d'autres petits jeux à une partie par jour : quiz sur les films d'animation, associations de mots, géographie et plateformes piégées. <a href="{LETSDLE}" target="_blank" rel="noopener">Découvrir Letsdle</a>.</p>
+      <h2 class="h2">{T('Sans spoiler majeur')}</h2>
+      <p>{T("Les indices s'en tiennent à ce qu'on apprend dans les premiers arcs de chaque œuvre. Les grandes révélations, l'identité cachée d'un personnage ou la fin d'une série ne servent jamais d'indice.")}</p>
+      <h2 class="h2" style="margin-top:32px">{T('Partager sans rien dévoiler')}</h2>
+      <p>{T("À la fin de chaque partie, le bouton « Partager » copie une grille de carrés colorés qui montre ton parcours sans révéler la réponse. Colle-la sur Discord, X ou dans ton groupe de discussion.")}</p>
+      <h2 class="h2" style="margin-top:32px">{T('Encore envie de jouer ?')}</h2>
+      <p>{letsdle}</p>
     </article>
   </div>
 </div>
 '''
     ld = [crumbs_ld(crumbs)]
-    write('/dle/', head('Kamidle — devine le personnage, le pouvoir et l\'univers du jour | KamiQuiz',
-                        f'Cinq jeux du jour gratuits sur les animés, séries, films et jeux vidéo : devine le personnage, le pouvoir, les emojis, l\'univers et le mot du jour. {n_chars} personnages, sans inscription.',
-                        '/dle/', ld) + header('/dle/') + body + footer(('/assets/js/site.js', '/assets/js/dle.js')))
+    write('/dle/', head(T("Kamidle — devine le personnage, le pouvoir et l'univers du jour | KamiQuiz"),
+                        T("Cinq jeux du jour gratuits sur les animés, séries, films et jeux vidéo : devine le personnage, le pouvoir, les emojis, l'univers et le mot du jour. {n} personnages, sans inscription.", n=n_chars),
+                        '/dle/', ld) + header('/dle/') + body + footer(scripts))
     page('/dle/', '0.9', 'daily')
 
     # ----- une page par jeu
-    legend_styles = ''.join(f'<li><b>{e(k)}</b> : {e(v)}</li>' for k, v in DLE.STYLE_HELP.items())
-    for m, label, ico, desc in DLE.MODES:
+    legend_styles = ''.join(f'<li><b>{e(k)}</b> : {e(v)}</li>' for k, v in D.STYLE_HELP.items())
+    for m, label, ico, desc in DLE_MODES:
         h1, rules = DLE_INFO[m]
-        crumbs = [('Accueil', '/'), ('Kamidle', '/dle/'), (label, f'/dle/{m}/')]
+        crumbs = [(T('Accueil'), '/'), ('Kamidle', '/dle/'), (label, f'/dle/{m}/')]
         legend = ''
         if m == 'personnage':
-            years = ', '.join(f'{e(BY_KEY[k]["name"])} {y}' + (f' ({DLE.YEAR_NOTES[k]})' if k in DLE.YEAR_NOTES else '')
+            years = ', '.join(f'{e(BY_KEY[k]["name"])} {y}' + (f' ({D.YEAR_NOTES[k]})' if k in D.YEAR_NOTES else '')
                               for k, y in sorted(DLE.YEARS.items(), key=lambda kv: (kv[1], kv[0])) if k in BY_KEY)
-            legend = f'''<h2 class="h2">Lire les indices</h2>
-      <p><span class="dle-sw ok"></span> Vert : identique à la cible. <span class="dle-sw near"></span> Jaune : en partie juste (une espèce, un style ou une couleur de cheveux en commun, ou une couleur proche comme noir et brun). <span class="dle-sw no"></span> Rouge : aucun point commun. Pour l'âge et l'année, la flèche indique si la cible est plus âgée (↑) ou plus jeune (↓), plus récente (↑) ou plus ancienne (↓).</p>
-      <p>Le <b>rôle</b> décrit la place du personnage dans l'histoire : protagoniste, allié, rival, mentor, antagoniste ou neutre. Le <b>style</b> décrit sa façon principale de combattre :</p>
+            legend = f'''<h2 class="h2">{T('Lire les indices')}</h2>
+      <p>{T("<span class=\"dle-sw ok\"></span> Vert : identique à la cible. <span class=\"dle-sw near\"></span> Jaune : en partie juste (une espèce, un style ou une couleur de cheveux en commun, ou une couleur proche comme noir et brun). <span class=\"dle-sw no\"></span> Rouge : aucun point commun. Pour l'âge et l'année, la flèche indique si la cible est plus âgée (↑) ou plus jeune (↓), plus récente (↑) ou plus ancienne (↓).")}</p>
+      <p>{T("Le <b>rôle</b> décrit la place du personnage dans l'histoire : protagoniste, allié, rival, mentor, antagoniste ou neutre. Le <b>style</b> décrit sa façon principale de combattre :")}</p>
       <ul class="dle-legend">{legend_styles}</ul>
-      <p>L'<b>âge</b> est l'âge réel du personnage pendant l'essentiel de l'histoire, pas son apparence : enfant (12 ans ou moins), ado (13 à 19 ans), adulte (20 à 59 ans), âgé (60 ans et plus) ou sans âge (immortels, espèces à très longue vie, créatures et animaux). Les <b>cheveux</b> sont ceux de son look le plus connu ; « aucun » veut dire chauve, casqué, ou couvert de fourrure.</p>
-      <p>L'<b>année</b> est celle du début de l'œuvre originale : premier tome, premier épisode, premier film ou premier jeu. {years}.</p>'''
+      <p>{T("L'<b>âge</b> est l'âge réel du personnage pendant l'essentiel de l'histoire, pas son apparence : enfant (12 ans ou moins), ado (13 à 19 ans), adulte (20 à 59 ans), âgé (60 ans et plus) ou sans âge (immortels, espèces à très longue vie, créatures et animaux). Les <b>cheveux</b> sont ceux de son look le plus connu ; « aucun » veut dire chauve, casqué, ou couvert de fourrure.")}</p>
+      <p>{T("L'<b>année</b> est celle du début de l'œuvre originale : premier tome, premier épisode, premier film ou premier jeu. {years}.", years=years)}</p>'''
         elif m == 'mot':
-            legend = f'''<h2 class="h2">Règles</h2>
-      <p>Le mot du jour compte entre cinq et huit lettres, sans accent. Tape un mot de la bonne longueur au clavier ou avec les touches à l'écran, puis valide. <span class="dle-sw ok"></span> Vert : la lettre est à la bonne place. <span class="dle-sw near"></span> Jaune : la lettre est dans le mot, mais ailleurs. <span class="dle-sw no"></span> Gris : la lettre n'y est pas.</p>
-      <p>Les essais doivent être de vrais mots français, ou des termes de l'univers des animés et des jeux vidéo. Le mot à trouver vient toujours de cet univers, et sa définition s'affiche à la fin de la partie.</p>'''
-        others = ''.join(f'<a class="chip" href="/dle/{m2}/">{i2} {l2}</a>' for m2, l2, i2, _ in DLE.MODES if m2 != m)
+            legend = f'''<h2 class="h2">{T('Règles')}</h2>
+      <p>{T("Le mot du jour compte entre cinq et huit lettres, sans accent. Tape un mot de la bonne longueur au clavier ou avec les touches à l'écran, puis valide. <span class=\"dle-sw ok\"></span> Vert : la lettre est à la bonne place. <span class=\"dle-sw near\"></span> Jaune : la lettre est dans le mot, mais ailleurs. <span class=\"dle-sw no\"></span> Gris : la lettre n'y est pas.")}</p>
+      <p>{T("Les essais doivent être de vrais mots français, ou des termes de l'univers des animés et des jeux vidéo. Le mot à trouver vient toujours de cet univers, et sa définition s'affiche à la fin de la partie.")}</p>'''
+        others = ''.join(f'<a class="chip" href="{U("/dle/" + m2 + "/")}">{i2} {l2}</a>' for m2, l2, i2, _ in DLE_MODES if m2 != m)
+        default_rules = T("<h2 class=\"h2\">Règles</h2><p>{rules}</p><p>Les réponses viennent des univers de nos quiz. Tape les premières lettres d'un nom pour voir les propositions, puis choisis dans la liste.</p>", rules=e(rules))
         body = f'''<div class="wrap">
   <div class="page-head">
     {crumbs_html(crumbs)}
@@ -860,79 +1005,85 @@ def build_dle():
     <p class="lede">{e(rules)}</p>
   </div>
   <section class="dle" id="dle" data-mode="{m}" aria-live="polite">
-    <p class="loading">Chargement de l'énigme du jour…</p>
+    <p class="loading">{T("Chargement de l'énigme du jour…")}</p>
   </section>
   <p class="dle-yesterday" data-dle-yesterday></p>
   <div class="two-col" style="margin-top:48px">
-    <article class="prose">{legend or f'<h2 class="h2">Règles</h2><p>{e(rules)}</p><p>Les réponses viennent des univers de nos quiz. Tape les premières lettres d\'un nom pour voir les propositions, puis choisis dans la liste.</p>'}</article>
+    <article class="prose">{legend or default_rules}</article>
     <aside class="prose">
-      <h2 class="h2">Les autres jeux du jour</h2>
+      <h2 class="h2">{T('Les autres jeux du jour')}</h2>
       <div class="chips" style="margin-top:12px">{others}</div>
-      <p class="muted" style="margin-top:20px">Une nouvelle énigme arrive chaque jour à minuit. Tes séries de victoires sont enregistrées sur ton appareil.</p>
+      <p class="muted" style="margin-top:20px">{T('Une nouvelle énigme arrive chaque jour à minuit. Tes séries de victoires sont enregistrées sur ton appareil.')}</p>
     </aside>
   </div>
 </div>
 '''
-        write(f'/dle/{m}/', head(f'{h1} — Kamidle | KamiQuiz', f'{rules} Jeu gratuit, une énigme par jour.',
-                                 f'/dle/{m}/', [crumbs_ld(crumbs)]) + header('/dle/') + body + footer(('/assets/js/site.js', '/assets/js/dle.js')))
+        write(f'/dle/{m}/', head(T('{h1} — Kamidle | KamiQuiz', h1=h1), T('{rules} Jeu gratuit, une énigme par jour.', rules=rules),
+                                 f'/dle/{m}/', [crumbs_ld(crumbs)]) + header('/dle/') + body + footer(scripts))
         page(f'/dle/{m}/', '0.8', 'daily')
 
 
 # --------------------------------------------------------------------------- guides
 def build_guides():
-    items = ''.join(f'<li><a href="/guides/{g["slug"]}/"><span class="gt">{e(g["title"])}</span><span class="gd">{e(g["description"])}</span></a></li>'
+    if not GUIDES:
+        return
+    items = ''.join(f'<li><a href="{U("/guides/" + g["slug"] + "/")}"><span class="gt">{e(g["title"])}</span><span class="gd">{e(g["description"])}</span></a></li>'
                     for g in GUIDES)
-    ld = [crumbs_ld([('Accueil', '/'), ('Guides', '/guides/')])]
+    crumbs = [(T('Accueil'), '/'), (T('Guides'), '/guides/')]
+    ld = [crumbs_ld(crumbs)]
     body = f'''<div class="wrap">
   <div class="page-head prose">
-    {crumbs_html([('Accueil', '/'), ('Guides', '/guides/')])}
-    <h1 class="h1">Guides et dossiers</h1>
-    <p class="lede">Des articles pour comprendre les univers des quiz, réviser les points qui font trébucher et mieux retenir ce que l'on apprend en jouant.</p>
+    {crumbs_html(crumbs)}
+    <h1 class="h1">{T('Guides et dossiers')}</h1>
+    <p class="lede">{T("Des articles pour comprendre les univers des quiz, réviser les points qui font trébucher et mieux retenir ce que l'on apprend en jouant.")}</p>
   </div>
   <ul class="guide-list prose" style="margin-top:24px">{items}</ul>
 </div>
 '''
-    write('/guides/', head('Guides et dossiers sur les animés, séries et jeux — KamiQuiz',
-                           'Dossiers originaux pour réviser avant de jouer : les Fruits du Démon, les maisons de Poudlard, les Piliers de Demon Slayer, la table des types Pokémon et bien d\'autres.',
+    write('/guides/', head(T('Guides et dossiers sur les animés, séries et jeux — KamiQuiz'),
+                           T("Dossiers originaux pour réviser avant de jouer : les Fruits du Démon, les maisons de Poudlard, les Piliers de Demon Slayer, la table des types Pokémon et bien d'autres."),
                            '/guides/', ld) + header('/guides/') + body + footer())
     page('/guides/', '0.7', 'weekly')
 
+    play = U('/jouer/')
     for g in GUIDES:
         path = f'/guides/{g["slug"]}/'
-        crumbs = [('Accueil', '/'), ('Guides', '/guides/'), (g['title'], path)]
+        crumbs = [(T('Accueil'), '/'), (T('Guides'), '/guides/'), (g['title'], path)]
         s = BY_KEY.get(g.get('serie') or '')
         accent = s['color'] if s else None
         cta = ''
         if s:
-            cta = (f'<div class="callout" style="margin-top:48px"><h2 class="h2">Testez-vous sur {e(s["name"])}</h2>'
-                   f'<p class="muted">{s["n"]} questions expliquées vous attendent, de la plus simple à la plus pointue.</p>'
-                   f'<div class="btn-row"><a class="btn btn-gold" href="/jouer/?s={s["key"]}&amp;m=libre">Jouer au quiz {e(s["name"])}</a>'
-                   f'<a class="btn" href="/quiz/{s["slug"]}/#questions">Réviser les réponses</a></div></div>')
+            name = e(s['name'])
+            cta = (f'<div class="callout" style="margin-top:48px"><h2 class="h2">{T("Testez-vous sur {name}", name=name)}</h2>'
+                   f'<p class="muted">{T("{n} questions expliquées vous attendent, de la plus simple à la plus pointue.", n=s["n"])}</p>'
+                   f'<div class="btn-row"><a class="btn btn-gold" href="{play}?s={s["key"]}&amp;m=libre">{T("Jouer au quiz {name}", name=name)}</a>'
+                   f'<a class="btn" href="{U("/quiz/" + s["slug"] + "/")}#questions">{T("Réviser les réponses")}</a></div></div>')
         else:
-            cta = ('<div class="callout" style="margin-top:48px"><h2 class="h2">À vous de jouer</h2>'
-                   '<p class="muted">Choisissez un univers et appliquez la méthode dès maintenant.</p>'
-                   '<div class="btn-row"><a class="btn btn-gold" href="/quiz/">Choisir un quiz</a></div></div>')
-        others = ''.join(f'<li><a href="/guides/{o["slug"]}/"><span class="gt">{e(o["title"])}</span></a></li>'
+            cta = (f'<div class="callout" style="margin-top:48px"><h2 class="h2">{T("À vous de jouer")}</h2>'
+                   f'<p class="muted">{T("Choisissez un univers et appliquez la méthode dès maintenant.")}</p>'
+                   f'<div class="btn-row"><a class="btn btn-gold" href="{U("/quiz/")}">{T("Choisir un quiz")}</a></div></div>')
+        others = ''.join(f'<li><a href="{U("/guides/" + o["slug"] + "/")}"><span class="gt">{e(o["title"])}</span></a></li>'
                          for o in GUIDES if o['slug'] != g['slug'])[:4000]
         ld = [crumbs_ld(crumbs), {
             '@context': 'https://schema.org', '@type': 'Article', 'headline': g['title'], 'description': g['description'],
-            'datePublished': g['date'], 'dateModified': g['date'], 'inLanguage': 'fr', 'mainEntityOfPage': SITE + path,
+            'datePublished': g['date'], 'dateModified': g['date'], 'inLanguage': i18n.LANG, 'mainEntityOfPage': SITE + U(path),
             'image': SITE + '/assets/img/og-image.png',
-            'author': {'@type': 'Organization', 'name': 'La rédaction de KamiQuiz', 'url': SITE + '/a-propos/'},
+            'author': {'@type': 'Organization', 'name': T('La rédaction de KamiQuiz'), 'url': SITE + U('/a-propos/')},
             'publisher': {'@type': 'Organization', 'name': 'KamiQuiz', 'logo': {'@type': 'ImageObject', 'url': SITE + '/assets/img/icon-512.png'}}}]
         minutes = max(3, round(g['words'] / 220))
+        meta = T('Par la rédaction de KamiQuiz, publié le {d}. Lecture : {m} minutes.', d=loc_date(g['date']), m=minutes)
         body = f'''<div class="wrap">
   <div class="page-head prose">
     {crumbs_html(crumbs)}
     <h1 class="h1" style="font-size:clamp(2.2rem,5vw,3.6rem)">{e(g["title"])}</h1>
     <p class="lede">{e(g["description"])}</p>
-    <p class="meta">Par la rédaction de KamiQuiz, publié le {fr_date(g['date'])}. Lecture : {minutes} minutes.</p>
+    <p class="meta">{meta}</p>
   </div>
   <article class="article prose" style="margin-top:32px">
     {g["html"]}
     {cta}
   </article>
-  <section class="prose" style="margin-top:56px"><h2 class="h2">Autres guides</h2><ul class="guide-list">{others}</ul></section>
+  <section class="prose" style="margin-top:56px"><h2 class="h2">{T('Autres guides')}</h2><ul class="guide-list">{others}</ul></section>
 </div>
 '''
         write(path, head(f'{g["title"]} — KamiQuiz', g['description'], path, ld, og_type='article', accent=accent)
@@ -941,8 +1092,9 @@ def build_guides():
 
 
 # --------------------------------------------------------------------------- pages simples
-def simple(path, title, desc, h1, lede, inner, current='', prio='0.4'):
-    crumbs = [('Accueil', '/'), (h1, path)]
+def simple(path, title, desc, h1, lede, inner, current='', prio='0.4', **kw):
+    title, desc, h1, lede, inner = T(title), T(desc), T(h1), T(lede) if lede else lede, T(inner, **kw)
+    crumbs = [(T('Accueil'), '/'), (h1, path)]
     body = f'''<div class="wrap">
   <div class="page-head prose">
     {crumbs_html(crumbs)}
@@ -959,9 +1111,9 @@ def simple(path, title, desc, h1, lede, inner, current='', prio='0.4'):
 def build_static_pages():
     nb = {cid: sum(1 for s in SERIES if s['cat'] == cid) for cid, _, _ in CATEGORIES}
     simple('/a-propos/', 'À propos de KamiQuiz', 'KamiQuiz est un site de quiz gratuit et indépendant consacré aux animés, séries, films, jeux vidéo et à la culture générale. Notre démarche et nos engagements.',
-           'À propos de KamiQuiz', 'Un site de quiz francophone, gratuit et indépendant, où chaque réponse est expliquée.', f'''
+           'À propos de KamiQuiz', 'Un site de quiz francophone, gratuit et indépendant, où chaque réponse est expliquée.', '''
 <h2>Ce qu'est KamiQuiz</h2>
-<p>KamiQuiz rassemble {fr_num(TOTAL_Q)} questions réparties sur {NB_SERIES} univers : {nb["anime"]} animés et mangas, {nb["series"]} séries télévisées, {nb["films"]} grandes sagas du cinéma, {nb["jeux"]} jeux vidéo et {nb["culture"]} quiz de culture générale. Le site est gratuit, sans inscription et fonctionne aussi bien sur téléphone que sur ordinateur.</p>
+<p>KamiQuiz rassemble {total} questions réparties sur {ns} univers : {anime} animés et mangas, {series} séries télévisées, {films} grandes sagas du cinéma, {jeux} jeux vidéo et {culture} quiz de culture générale. Le site est gratuit, sans inscription et fonctionne aussi bien sur téléphone que sur ordinateur.</p>
 <p>Le nom vient du japonais <em>kami</em>, que l'on retrouve dans de nombreux animés pour désigner une divinité. Atteindre le rang de Kami, c'est connaître un univers sur le bout des doigts.</p>
 <h2>Notre démarche</h2>
 <p>Nous pensons qu'un quiz réussi doit faire apprendre quelque chose, même quand on se trompe. C'est pourquoi :</p>
@@ -979,7 +1131,7 @@ def build_static_pages():
 <p>Le site est financé par de la publicité diffusée par Google AdSense. Elle nous permet de garder tous les quiz gratuits et sans compte. Les détails sur les cookies et vos choix sont expliqués dans notre <a href="/confidentialite/">politique de confidentialité</a>.</p>
 <h2>Nous écrire</h2>
 <p>Une erreur à signaler, un univers à proposer, une idée d'amélioration ? Toutes les façons de nous joindre sont sur la <a href="/contact/">page contact</a>.</p>
-''', '/a-propos/', '0.5')
+''', '/a-propos/', '0.5', total=fr_num(TOTAL_Q), ns=NB_SERIES, **nb)
 
     simple('/contact/', 'Contact — KamiQuiz', 'Contactez KamiQuiz pour signaler une erreur dans une question, proposer un nouvel univers ou poser une question sur le site.',
            'Contact', 'Une erreur, une idée, une question : nous lisons tous les messages.', '''
@@ -1047,22 +1199,24 @@ def build_static_pages():
 ''', '', '0.2')
 
     # 404 (Cloudflare Pages sert dist/404.html pour toute URL inconnue, avec un vrai code 404)
-    rows = ''.join(series_row(BY_KEY[k]) for k in POPULAR)
+    rows = ''.join(series_row(BY_KEY[k]) for k in POPULAR if k in BY_KEY)
     body = f'''<div class="wrap notfound">
   <p class="display">404</p>
-  <h1 class="h2" style="margin-top:12px">Cette page n'existe pas</h1>
-  <p class="muted">Le lien est peut-être ancien. Tous les quiz sont toujours là.</p>
-  <div class="btn-row" style="justify-content:center;margin-top:20px"><a class="btn btn-gold" href="/quiz/">Voir tous les quiz</a><a class="btn" href="/">Accueil</a></div>
+  <h1 class="h2" style="margin-top:12px">{T("Cette page n'existe pas")}</h1>
+  <p class="muted">{T('Le lien est peut-être ancien. Tous les quiz sont toujours là.')}</p>
+  <div class="btn-row" style="justify-content:center;margin-top:20px"><a class="btn btn-gold" href="{U('/quiz/')}">{T('Voir tous les quiz')}</a><a class="btn" href="{U('/')}">{T('Accueil')}</a></div>
 </div>
 <div class="wrap" style="max-width:760px"><ul class="series-list" style="grid-template-columns:1fr">{rows}</ul></div>
 '''
-    (DIST / '404.html').write_text(head('Page introuvable — KamiQuiz', 'Cette page n\'existe pas.', '/404', robots='noindex')
-                                   + header() + body + footer(), encoding='utf-8')
+    out404 = DIST / '404.html' if i18n.LANG == 'fr' else DIST / i18n.LANG / '404.html'
+    out404.parent.mkdir(parents=True, exist_ok=True)
+    out404.write_text(head(T('Page introuvable — KamiQuiz'), T("Cette page n'existe pas."), '/404', robots='noindex')
+                      + header() + body + footer(), encoding='utf-8')
 
 
 # --------------------------------------------------------------------------- données et fichiers techniques
 def build_data():
-    out = DIST / 'data'
+    out = DIST / 'data' if i18n.LANG == 'fr' else DIST / 'data' / i18n.LANG
     out.mkdir(parents=True, exist_ok=True)
     for s in SERIES:
         d = s['data']
@@ -1074,14 +1228,21 @@ def build_data():
         for q in s['data']['q']:
             allq.append({**q, 'cat': s['name'], 's': s['key']})
     (out / 'all.json').write_text(json.dumps({
-        'name': 'Tout mélanger', 'color': '#d4a843', 'ranks': [],
+        'name': T('Tout mélanger'), 'color': '#d4a843', 'ranks': [],
         'cats': {s['name']: {'i': ''} for s in SERIES}, 'q': allq}, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
 
 
 def build_tech():
-    urls = ''.join(f'<url><loc>{SITE}{p}</loc><lastmod>{lm}</lastmod><changefreq>{f}</changefreq><priority>{pr}</priority></url>\n'
-                   for p, pr, f, lm in PAGES)
-    (DIST / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    def alts(p):
+        langs = [l for l in i18n.LANGS if p in AVAIL.get(l, ())]
+        if len(langs) < 2:
+            return ''
+        return ''.join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{SITE}{U(p, l)}"/>' for l in langs) + \
+            f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{p}"/>'
+    urls = ''.join(f'<url><loc>{SITE}{U(p, l)}</loc>{alts(p)}<lastmod>{lm}</lastmod><changefreq>{f}</changefreq><priority>{pr}</priority></url>\n'
+                   for l, p, pr, f, lm in PAGES)
+    ns = ' xmlns:xhtml="http://www.w3.org/1999/xhtml"' if len(AVAIL) > 1 else ''
+    (DIST / 'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"{ns}>\n'
                                       + urls + '</urlset>\n', encoding='utf-8')
     (DIST / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n', encoding='utf-8')
     (DIST / 'ads.txt').write_text('google.com, pub-6970710961658841, DIRECT, f08c47fec0942fa0\n', encoding='utf-8')
@@ -1166,18 +1327,39 @@ def main():
     if DIST.exists():
         shutil.rmtree(DIST)
     shutil.copytree(ROOT / 'static', DIST)
-    build_data()
-    build_home()
-    build_index()
-    for s in SERIES:
-        build_serie(s)
-    build_play()
-    build_guides()
-    build_static_pages()
-    build_dle()
+    # Pages disponibles dans chaque langue (pour hreflang et le sélecteur de langue)
+    for lang in i18n.LANGS:
+        setup(lang)
+        av = {'/', '/quiz/', '/jouer/', '/a-propos/', '/contact/', '/confidentialite/', '/conditions/'}
+        av |= {f'/quiz/{s["slug"]}/' for s in SERIES}
+        if GUIDES:
+            av |= {'/guides/'} | {f'/guides/{g["slug"]}/' for g in GUIDES}
+        if dle_ready():
+            av |= {'/dle/'} | {f'/dle/{m}/' for m, *_ in DLE.MODES}
+        AVAIL[lang] = av
+    report = []
+    for lang in i18n.LANGS:
+        setup(lang)
+        build_data()
+        build_home()
+        build_index()
+        for s in SERIES:
+            build_serie(s)
+        build_play()
+        build_guides()
+        build_static_pages()
+        if dle_ready():
+            build_dle()
+        part = sum(s['n'] for s in SERIES)
+        report.append(f'{lang} : {NB_SERIES} séries, {fr_num(part)} questions, {len(GUIDES)} guides')
+    setup('fr')
+    if i18n.MISSING:
+        (ROOT / 'data' / 'i18n_missing.json').write_text(json.dumps({i18n.qid(m): m for m in sorted(i18n.MISSING)}, ensure_ascii=False, indent=1), encoding='utf-8')
+        raise SystemExit(f'{len(i18n.MISSING)} textes sans traduction : liste dans data/i18n_missing.json')
+    (ROOT / 'data' / 'i18n_missing.json').unlink(missing_ok=True)
     build_tech()
     n_html = len(list(DIST.rglob('*.html')))
-    print(f'[{TODAY}] Site généré : {n_html} pages HTML, {len(PAGES)} URLs dans le sitemap, {fr_num(TOTAL_Q)} questions, {len(GUIDES)} guides')
+    print(f'[{TODAY}] Site généré : {n_html} pages HTML, {len(PAGES)} URLs dans le sitemap ({" ; ".join(report)})')
 
 
 if __name__ == '__main__':
