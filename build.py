@@ -164,6 +164,7 @@ def footer(scripts=('/assets/js/site.js',)):
       <div>
         <a class="brand" href="/">{LOGO}<span>KAMI<b>QUIZ</b></span></a>
         <p style="margin-top:14px;max-width:34ch">Des quiz gratuits sur les animés, les séries, les films, les jeux vidéo et la culture générale. Sans inscription.</p>
+        <a class="foot-badge" href="https://www.alldle.net/game/kamiquiz?ref=badge" target="_blank" rel="noopener" aria-label="Play on Alldle"><img src="https://www.alldle.net/badge.svg?g=eqqfouhthy68vr5qt4k7sjca&amp;variant=dark&amp;size=compact&amp;content=text" alt="Play on Alldle" width="180" height="48" loading="lazy" style="border:0"></a>
       </div>
       <div><h2>Quiz</h2><ul>{cats}</ul></div>
       <div><h2>KamiQuiz</h2><ul><li><a href="/dle/">Kamidle, jeux du jour</a></li><li><a href="/guides/">Guides</a></li><li><a href="/a-propos/">À propos</a></li><li><a href="/contact/">Contact</a></li><li><a href="/jouer/">Quiz tout mélangé</a></li><li><a href="{LETSDLE}" target="_blank" rel="noopener">Plus de jeux sur Letsdle ↗</a></li></ul></div>
